@@ -1,8 +1,8 @@
-# [ZENA](#)
+# [AZENA](#)
 
 (*note: project is on-going and not yet functional*)
 
-Zena is a full-stack web application exercise that was inspired by Asana. The project will be built using Ruby on Rails with PostgreSQL and React/Redux.
+Azena is a full-stack web application exercise that was inspired by Asana. The project will be built using Ruby on Rails with PostgreSQL and React/Redux.
 
 ## Target Features
 * User accounts: Sign up and stay connected with token authentication

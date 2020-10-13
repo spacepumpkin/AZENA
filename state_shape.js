@@ -19,31 +19,31 @@ let sampleState =
         id: 5,
         name: "CentOS Integration",
         description: "Integrate all servers with CentOS",
-        teamId: 1
+        workspaceId: 1
       },
       85: {
         id: 85,
         name: "Go-Getter App Frontend",
         description: "Developing the frontend of our fantastic app",
-        teamId: 2
+        workspaceId: 2
       },
       101: {
         id: 101,
         name: "Go-Getter App Backend",
         description: "Developing the backend of our fantastic app",
-        teamId: 2
+        workspaceId: 2
       },
     },
     users: {
       13: {
         id: 13,
         username: "Julia-Go-Getter",
-        teamId: 2,
+        email: "julia@gogetters.com",
       },
       42: {
         id: 42,
         username: "Ryan-Go-Getter",
-        teamId: 2,
+        email: "ryan@gogetters.com",
       }
     },
     tasks: {
@@ -75,7 +75,7 @@ let sampleState =
         projectId: 101,
       },
     },
-    assignments: {
+    usersTasks: {
       2: {
         id: 2,
         userId: 13,
@@ -99,6 +99,18 @@ let sampleState =
         projectId: 101,
       },
     },
+    usersWorkspaces: {
+      1: {
+        id: 1,
+        userId: 13,
+        workspaceId: 2,
+      },
+      2: {
+        id: 2,
+        userId: 42,
+        workspaceId: 2,
+      }
+    }
   },
   ui: {
     loading: true,

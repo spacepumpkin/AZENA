@@ -36,6 +36,9 @@
     "redux-logger": "^3.0.6"
   },
   "devDependencies": {
+    "file-loader": "^6.1.1",
+    "image-webpack-loader": "^7.0.1",
+    "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

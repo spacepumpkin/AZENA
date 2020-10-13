@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   attr_reader :password
 
-  before_validation :ensure_session_token
+  after_initialize :ensure_session_token
 
   # USER AUTH
 
@@ -35,6 +35,7 @@ class User < ApplicationRecord
     return self.session_token
   end
 
+  private
   # Makes sure user has a session token before saving to DB
   def ensure_session_token
     self.session_token ||= SecureRandom::urlsafe_base64(16)

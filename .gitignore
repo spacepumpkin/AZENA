@@ -37,6 +37,7 @@
 .DS_Store
 npm-debug.log
 Gemfile.lock
+test_snippets.txt
 
 #workspace 
 *.code-workspace

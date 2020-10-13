@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from "redux";
-import { logger } from "redux-logger";
-import RootReducer from "../reducers/root_reducer";
+import logger from "redux-logger";
+import rootReducer from "../reducers/root_reducer";
 
 // thunk middleware
 const thunk = function({dispatch, getState}) {
@@ -16,7 +16,7 @@ const thunk = function({dispatch, getState}) {
 
 // generate store that can take in a preloadedState (like current session)
 const configureStore = function(preloadedState = {}) {
-  return createStore(RootReducer, preloadedState, applyMiddleware(thunk, logger))
+  return createStore(rootReducer, preloadedState, applyMiddleware(thunk, logger))
 };
 
 export default configureStore;

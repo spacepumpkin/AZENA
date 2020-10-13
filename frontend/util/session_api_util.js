@@ -1,21 +1,3 @@
-// this.state = user = {
-//   username: "",
-//   password: ""
-// }
-
-// State = {
-//   entities: {
-//     users: {
-//       1: {
-//         id: 1,
-//       },
-//     },
-//   },
-//   session: {
-//     currentUserId: 42
-//   },
-// }
-
 /*
 Export API Util functions with the specified parameters:
 
@@ -31,7 +13,7 @@ export const signup = (user) => {
   return $.ajax({
     url: "/api/users",
     method: "POST",
-    data: { user: { username: user.username, password: user.password } }
+    data: { user: { username: user.username, email: user.email, password: user.password } }
   })
 }
 
@@ -53,3 +35,24 @@ export const logout = () => {
     method: "DELETE"
   })
 }
+
+// for login
+// this.state = user = {
+//   username: "",
+//   password: ""
+// }
+
+// State = {
+//   entities: {
+//     users: {
+//       1: {
+//         id: 1,
+//         username: "test"
+//         email: "test@test.com"
+//       },
+//     },
+//   },
+//   session: {
+//     currentUserId: 42
+//   },
+// }

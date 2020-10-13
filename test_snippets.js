@@ -12,7 +12,15 @@
 // $.ajax({url: "api/users/1", method: "GET"})
 
 // FRONTEND SESSION
+// const testuser = {username: "testuser", email: "test@test.com", password: "password"};
+// const testuser2 = {username: "testuser2", email: "test2@test.com", password: "password"};
+
+// window.sessionSignUp(testuser2);
+// window.sessionLogin(testuser);
+// window.sessionLogout();
+
 // window.getState();
-// window.dispatch(login({username: "testuser", password: "password"}))
-// window.getState();
+// window.dispatch(signup({username: "testuser3", email: "test3@test.com", password: "password"}))
+// window.dispatch(login({ username: "testuser2", password: "password" }));
+// window.dispatch(logout());
 

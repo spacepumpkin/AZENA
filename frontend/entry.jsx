@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Setup store and render main React DOM
   const store = configureStore(preloadedState);
+  console.log(store);
   ReactDOM.render(<Root store={store} />, rootEl);
 
 

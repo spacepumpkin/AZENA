@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  helper_method :current_user, :logged_in?
   # Everything here is for a temporary ApplicationController instance that only
   #persists until the end of a request
 
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
   # Not necessary without views; renders message in case action accessed without being logged in.
   # 401 : Unauthorized
   def require_logged_in
-    (render json: "You need to be logged in for this.", status: 401) unless logged_in?
+    (render json: ["You need to be logged in for this."], status: 401) unless logged_in?
   end
 
   # Checks if browser's session token matches

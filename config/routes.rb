@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
   end
 
+  resource :test, only: [:new], path: "session"
+
   root to: "static_pages#root"
 end

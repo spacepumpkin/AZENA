@@ -44,24 +44,14 @@ export default class SessionForm extends React.Component {
     // this.setState(this._nullState);
   }
 
-  render() {
-    const { formType, sessionErrors } = this.props;
-    console.log(`rendering session form (${formType})...`);
+  demoLogin(e) {
+    e.preventDefault();
+    const demoUser = { username: "demo", email: "demo@demo.com", password: "demopass" }
+  }
 
-    const sessionAlternateText = formType === "Sign Up" ? (
-      <span>Already have an account?{" "}
-        <Link to="/login">
-          <button type="button"> Log In </button>
-        </Link>
-      </span>
-    ) : (
-      <span>Don't have an account?{" "}
-        <Link to="/signup">
-          <button type="button"> Sign Up </button>
-        </Link>
-      </span>
-    );
-    
+  render() {
+    console.log(`rendering session form (${formType})...`);
+    const { formType, sessionErrors } = this.props;
 
     return (
       <div className="session-page">
@@ -71,6 +61,12 @@ export default class SessionForm extends React.Component {
         </div>
 
         <div className="session-box">
+          <h1>{formType}</h1>
+          <div>
+            <h3>or try a
+              <button type="button" onClick={this.demoLogin}> DEMO </button>
+            </h3>
+          </div>
           {
             (sessionErrors !== undefined || sessionErrors.length !== 0) &&
             <div className="session-errors">
@@ -100,7 +96,21 @@ export default class SessionForm extends React.Component {
         </div>
 
         <div className="session-alternate">
-            {sessionAlternateText}
+            {
+              formType === "Sign Up" ? (
+                <span>Already have an account?{" "}
+                  <Link to="/login">
+                    <button type="button"> Log In </button>
+                  </Link>
+                </span>
+              ) : (
+                <span>Don't have an account?{" "}
+                  <Link to="/signup">
+                    <button type="button"> Sign Up </button>
+                  </Link>
+                </span>
+              )
+            }
         </div>
 
       </div>

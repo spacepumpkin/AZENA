@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :username, presence: true, uniqueness: true
+  validates :username, presence: true #, uniqueness: true
   validates :session_token, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :password, length: {minimum: 6}, allow_nil: true
@@ -11,9 +11,9 @@ class User < ApplicationRecord
 
   # USER AUTH
 
-  # Find user by username and password from form data
-  def self.find_by_credentials(username, pw)
-    user = self.find_by(username: username)
+  # Find user by login email and password from form data
+  def self.find_by_credentials(email, pw)
+    user = self.find_by(email: email)
     return nil if user.nil?
     user.is_password?(pw) ? user : nil
   end

@@ -4,7 +4,7 @@ class Api::SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(
-      params[:user][:username],
+      params[:user][:email],
       params[:user][:password]
     )
     if @user
@@ -13,8 +13,8 @@ class Api::SessionsController < ApplicationController
       p current_user
       render "api/users/show", status: 200
     else
-      # flash.now[:errors] = ["Invalid username or password"]
-      render json: ["Invalid username or password"], status: 422
+      # flash.now[:errors] = ["Invalid email or password"]
+      render json: ["Invalid email or password"], status: 422
     end
   end
 

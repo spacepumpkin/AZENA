@@ -22,8 +22,10 @@ export default class UserHome extends React.Component {
           <img src={window.logoMainURL} />
         </div>
         <h1>&#x2692; UserHomepage under construction &#x2692;</h1>
-        {window.currentUser && <button type="button" onClick={this.handleLogout}>Log Out</button>}
+        <button type="button" onClick={this.handleLogout}>Log Out</button>
       </div>
     )
   }
 }
+
+// recent changes: removed window.currentUser requirement for logout button after making it a protected route

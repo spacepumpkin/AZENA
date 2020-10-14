@@ -23,7 +23,7 @@ export const login = (user) => {
   return $.ajax({
     url: "/api/session",
     method: "POST",
-    data: { user: { username: user.username, password: user.password } }
+    data: { user: { email: user.email, password: user.password } }
   })
 }
 
@@ -38,7 +38,7 @@ export const logout = () => {
 
 // for login
 // this.state = user = {
-//   username: "",
+//   email: "",
 //   password: ""
 // }
 

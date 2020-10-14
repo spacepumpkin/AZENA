@@ -15,7 +15,7 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
 
-    # if user exists, return id, username, password; else 404 Not found
+    # if user exists, return id, username, email; else 404 Not found
     if @user
       render :show #, status: 200
     else

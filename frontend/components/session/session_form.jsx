@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { login } from "../../actions/session_actions";
 
 export default class SessionForm extends React.Component {
   constructor(props) {
@@ -12,6 +12,8 @@ export default class SessionForm extends React.Component {
     };
     this.state = Object.assign({}, this._nullState);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.switchForm = this.switchForm.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
     // this.handleChange = this.handleChange.bind(this);
   }
 
@@ -44,9 +46,31 @@ export default class SessionForm extends React.Component {
     // this.setState(this._nullState);
   }
 
+  switchForm(e) {
+    e.preventDefault();
+    this.props.formType === "Sign Up" ? (
+      this.props.history.push("/login")
+    ) : (
+      this.props.history.push("/signup")
+    );
+  }
+
   demoLogin(e) {
     e.preventDefault();
-    const demoUser = { username: "demo", email: "demo@demo.com", password: "demopass" }
+    if (this.props.formType === "Sign Up") this.props.history.push("/login");
+    const demoUser = "welcometo@azanademopass";
+    // types one char every 50ms
+    let that = this;
+    let count = 0, field;
+    this.demo = setInterval(() => {
+      field = count < 15 ? "email" : "password";
+      that.setState({[field]: that.state[field].concat(demoUser[count])})
+      count++;
+      if (count === 23) {
+        clearInterval(this.demo);
+        setTimeout(that.props.processForm(that.state), 100);
+      }
+    }, 65)
   }
 
   render() {
@@ -61,12 +85,16 @@ export default class SessionForm extends React.Component {
         </div>
 
         <div className="session-box">
+          <Link to="/"><button className="session-back" type="button">&lt; Back</button></Link>
+
           <h1>{formType}</h1>
-          <div>
-            <h3>or try a
+
+          <div className="session-demo">
+            <h3>or try a {" "}
               <button type="button" onClick={this.demoLogin}> DEMO </button>
             </h3>
           </div>
+
           {
             (sessionErrors !== undefined || sessionErrors.length !== 0) &&
             <div className="session-errors">
@@ -77,17 +105,23 @@ export default class SessionForm extends React.Component {
               })}
             </div>
           }
+
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="session-username"> Username <span>(required)</span> 
-              <input id="session-username" type="text" value={this.state.username} onChange={this.handleChange("username")} />
+
+            <label htmlFor="session-email"> Email{" "}
+              {formType === "Sign Up" && <span>(this will be your login)</span> }
+              <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
             </label>
+            
             {
               formType === "Sign Up" &&
-              <label htmlFor="session-email"> Email <span>(required for login)</span>
-                <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")}/>
+              <label htmlFor="session-username"> Username{" "}<span>(required)</span>
+                <input id="session-username" type="text" value={this.state.username} onChange={this.handleChange("username")} />
               </label>
             }
-            <label htmlFor="session-password" > Password <span>(required for login)</span>
+            
+            <label htmlFor="session-password" > Password{" "}
+            {formType === "Sign Up" && <span>(minimum 6 characters)</span>} 
               <input id="session-password" type="password" value={this.state.password} onChange={this.handleChange("password")}/>
             </label>
 
@@ -99,20 +133,19 @@ export default class SessionForm extends React.Component {
             {
               formType === "Sign Up" ? (
                 <span>Already have an account?{" "}
-                  <Link to="/login">
-                    <button type="button"> Log In </button>
-                  </Link>
+                  {/* <Link to="/login"> */}
+                  <button type="button" onClick={this.switchForm}> Log In </button>
+                  {/* </Link> */}
                 </span>
               ) : (
                 <span>Don't have an account?{" "}
-                  <Link to="/signup">
-                    <button type="button"> Sign Up </button>
-                  </Link>
+                  {/* <Link to="/signup"> */}
+                  <button type="button" onClick={this.switchForm}> Sign Up </button>
+                  {/* </Link> */}
                 </span>
               )
             }
         </div>
-
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from "react";
-
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default class SessionForm extends React.Component {
   constructor(props) {
@@ -16,6 +17,16 @@ export default class SessionForm extends React.Component {
 
   componentDidMount() {
     document.title = `azena - ${this.props.formType}`;
+    console.log(`Mounted ${this.props.formType} form`);
+  }
+
+  componentDidUpdate() {
+    // console.log(`Updated ${this.props.formType} form`);
+  }
+
+  componentWillUnmount() {
+    console.log(`Unmounting ${this.props.formType} form`);
+    this.props.receiveSessionErrors([]);
   }
 
   handleChange(field) {
@@ -26,24 +37,50 @@ export default class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.sessionAction(this.state);
-    this.setState(this._nullState);
-    this.props.history.push("/home");
+    this.props.processForm(this.state);
+
+    // Don't need with auth route
+    //.then(() => this.props.history.push("/home"));
+    // this.setState(this._nullState);
   }
 
   render() {
-    const { formType, sessionAction } = this.props;
+    const { formType, sessionErrors } = this.props;
     console.log(`rendering session form (${formType})...`);
+
+    const sessionAlternateText = formType === "Sign Up" ? (
+      <span>Already have an account?{" "}
+        <Link to="/login">
+          <button type="button"> Log In </button>
+        </Link>
+      </span>
+    ) : (
+      <span>Don't have an account?{" "}
+        <Link to="/signup">
+          <button type="button"> Sign Up </button>
+        </Link>
+      </span>
+    );
+    
 
     return (
       <div className="session-page">
         <h1>&#x2692; SessionForm under construction &#x2692;</h1>
+        <div id="logo" className="session-logo">
+          <img style={{ width: 200, height: 100 }} src={window.logoMainURL} />
+        </div>
 
         <div className="session-box">
-          <div id="logo" className="session-logo">
-            <img style={{width: 250, height: 100}} src={window.logoMainURL} />
-          </div>
-
+          {
+            (sessionErrors !== undefined || sessionErrors.length !== 0) &&
+            <div className="session-errors">
+              {sessionErrors.map((error, idx) => {
+                return (
+                <div key={`session-error-${idx}`} className="session-error">{error}</div>
+                )
+              })}
+            </div>
+          }
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="session-username"> Username <span>(required)</span> 
               <input id="session-username" type="text" value={this.state.username} onChange={this.handleChange("username")} />
@@ -63,7 +100,7 @@ export default class SessionForm extends React.Component {
         </div>
 
         <div className="session-alternate">
-
+            {sessionAlternateText}
         </div>
 
       </div>

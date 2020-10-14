@@ -37,7 +37,7 @@ const logoutCurrentUser = function () {
 };
 
 // accepts errors as array for errors slice
-const receiveSessionErrors = function (errors) {
+export const receiveSessionErrors = function (errors) {
   console.log("receiving session errors...");
   return {
     type: RECEIVE_SESSION_ERRORS,

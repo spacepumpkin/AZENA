@@ -1,18 +1,31 @@
 import { connect } from "react-redux";
 import SessionForm from "./session_form";
 
-import { login } from "../../actions/session_actions";
+import { login, receiveSessionErrors } from "../../actions/session_actions";
+
+// class LoginSessionForm extends React.Component {
+//   constructor (props) {
+//     super(props);
+//   }
+
+//   render() {
+//     <div>
+
+//     </div>
+//   }
+// }
 
 const mapStateToProps = function (state, ownProps) {
   return {
     formType: "Log In",
-    errors: state.errors
+    sessionErrors: state.errors.session
   };
 };
 
 const mapDispatchToProps = function (dispatch) {
   return {
-    sessionAction: (user) => dispatch(login(user))
+    processForm: (user) => dispatch(login(user)),
+    receiveSessionErrors: (errors) => dispatch(receiveSessionErrors(errors))
   };
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import { AuthRoute, ProtectedRoute } from "../util/route_util"; 
+import { AuthRoute as PreAuthRoute, ProtectedRoute as PostAuthRoute } from "../util/route_util"; 
 
 import SignupFormContainer from "./session/signup_form_container";
 import LoginFormContainer from "./session/login_form_container";
@@ -11,6 +11,8 @@ import UserHomeContainer from "./home/user_home_container";
 // import logo from "../../assets/images/FSPLogo-azena-blue-black.png"; // with import
 
 // ! use AuthRoute and ProtectedRoute later
+// AuthRoute / PreAuth - current user should not access - redirect to /home
+// ProtectedRoute - only current user can access - redirect to /
 
 const App = function (props) {
   console.log("rendering App...")
@@ -20,10 +22,11 @@ const App = function (props) {
         {/* <img src={"../../assets/images/fsp-logo-blue-black.png"} alt="azena logo" /> */}
       </header>
       <Switch>
-        <Route exact path="/signup" component={SignupFormContainer} />
-        <Route exact path="/login" component={LoginFormContainer} />
-        <Route exact path="/home" component={UserHomeContainer} />
-        <Route path="/" component={SplashContainer} />
+        <PostAuthRoute exact path="/home" component={UserHomeContainer} />
+        <PreAuthRoute exact path="/signup" component={SignupFormContainer} />
+        <PreAuthRoute exact path="/login" component={LoginFormContainer} />
+        <PreAuthRoute exact path="/" component={SplashContainer} />
+        <Redirect to="/">{console.log("redirecting to /")}</Redirect>
       </Switch>
     </>
   );

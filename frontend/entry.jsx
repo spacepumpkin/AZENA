@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.sessionLogin = SessionApiUtil.login; // PASS - user should be able to login in BE
   // window.sessionLogout = SessionApiUtil.logout; // PASS - user should be able to logout in BE
   // SessionActions
-  // window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
-  // window.login = login; // PASS - user should be able to login in BE/FE and be saved to state
-  // window.logout = logout; // PASS - clears session: id: null
+  window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
+  window.login = login; // PASS - user should be able to login in BE/FE and be saved to state
+  window.logout = logout; // PASS - clears session: id: null
 
   // TESTING END
 })

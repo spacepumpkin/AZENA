@@ -36,16 +36,15 @@
 # New
 .DS_Store
 npm-debug.log
-Gemfile.lock
-test_snippets.txt
+test_snippets.js
 
 #workspace 
 *.code-workspace
 npm_setup.sh
 #frontend
 node_modules
-./app/assets/javascripts/bundle.js
-./app/assets/javascripts/bundle.js.map
+bundle.js
+bundle.js.map
 # rails
 *.rbc
 capybara-*.html

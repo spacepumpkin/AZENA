@@ -3,9 +3,10 @@ import SessionForm from "./session_form";
 
 import { login } from "../../actions/session_actions";
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function (state, ownProps) {
   return {
-    formType: "Log In"
+    formType: "Log In",
+    errors: state.errors
   };
 };
 

@@ -118,11 +118,12 @@ Export the following thunk action creators with the specified parameters:
 */
 // REGULAR ACTIONS --------------------------------------------------
 
-var RECEIVE_CURRENT_USER = "LOGIN_CURRENT_USER";
+var RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 var LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 var RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS"; // For creating + logging in user (adds to users and session slices)
 
 var receiveCurrentUser = function receiveCurrentUser(user) {
+  console.log("receiving current user...");
   return {
     type: RECEIVE_CURRENT_USER,
     user: user
@@ -131,6 +132,7 @@ var receiveCurrentUser = function receiveCurrentUser(user) {
 
 
 var logoutCurrentUser = function logoutCurrentUser() {
+  console.log("logging out current user...");
   return {
     type: LOGOUT_CURRENT_USER
   };
@@ -138,6 +140,7 @@ var logoutCurrentUser = function logoutCurrentUser() {
 
 
 var receiveSessionErrors = function receiveSessionErrors(errors) {
+  console.log("receiving session errors...");
   return {
     type: RECEIVE_SESSION_ERRORS,
     errors: errors
@@ -147,6 +150,7 @@ var receiveSessionErrors = function receiveSessionErrors(errors) {
 
 var signup = function signup(user) {
   return function (dispatch) {
+    console.log("dispatching signup");
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }, function (errors) {
@@ -156,6 +160,7 @@ var signup = function signup(user) {
 };
 var login = function login(user) {
   return function (dispatch) {
+    console.log("dispatching login");
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }, function (errors) {
@@ -165,6 +170,7 @@ var login = function login(user) {
 };
 var logout = function logout() {
   return function (dispatch) {
+    console.log("dispatching logout");
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function () {
       return dispatch(logoutCurrentUser());
     }, function (errors) {
@@ -267,9 +273,13 @@ var UserHome = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(UserHome);
 
   function UserHome(props) {
+    var _this;
+
     _classCallCheck(this, UserHome);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.handleLogout = _this.handleLogout.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(UserHome, [{
@@ -282,13 +292,23 @@ var UserHome = /*#__PURE__*/function (_React$Component) {
       ;
     }
   }, {
+    key: "handleLogout",
+    value: function handleLogout(e) {
+      e.preventDefault();
+      this.props.logout();
+      this.props.history.push("/");
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "logo"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.logoMainURL
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u2692 UserHomepage under construction \u2692"));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u2692 UserHomepage under construction \u2692"), window.currentUser && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: this.handleLogout
+      }, "Log Out"));
     }
   }]);
 
@@ -310,6 +330,8 @@ var UserHome = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _user_home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user_home */ "./frontend/components/home/user_home.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
 
 
 
@@ -318,7 +340,11 @@ var mSTP = function mSTP(state) {
 };
 
 var mDTP = function mDTP(dispatch) {
-  return {};
+  return {
+    logout: function logout() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_user_home__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -372,9 +398,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    formType: "Log In"
+    formType: "Log In",
+    errors: state.errors
   };
 };
 
@@ -439,12 +466,12 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, SessionForm);
 
     _this = _super.call(this, props);
-    _this.state = Object.assign(_this.props.user); // {
-    //   username: "",
-    //   email: "",
-    //   password: ""
-    // }
-
+    _this._nullState = {
+      username: "",
+      email: "",
+      password: ""
+    };
+    _this.state = Object.assign({}, _this._nullState);
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this)); // this.handleChange = this.handleChange.bind(this);
 
     return _this;
@@ -468,7 +495,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      dispatch(this.props.sessionAction(this.state));
+      this.props.sessionAction(this.state);
+      this.setState(this._nullState);
+      this.props.history.push("/home");
     }
   }, {
     key: "render",
@@ -485,22 +514,35 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         id: "logo",
         className: "session-logo"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        style: {
+          width: 250,
+          height: 100
+        },
         src: window.logoMainURL
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Username ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(required)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "session-username"
+      }, " Username ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(required)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "session-username",
         type: "text",
         value: this.state.username,
         onChange: this.handleChange("username")
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), formType === "Sign Up" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Email ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(required for login)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), formType === "Sign Up" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "session-email"
+      }, " Email ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(required for login)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "session-email",
         type: "email",
         value: this.state.email,
         onChange: this.handleChange("email")
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Password ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(required for login)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "session-password"
+      }, " Password ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(required for login)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "session-password",
         type: "password",
         value: this.state.password,
         onChange: this.handleChange("password")
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, " ", formType, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-alternate"
       }));
     }
@@ -533,10 +575,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     formType: "Sign Up",
-    user: {
-      email: "",
-      password: ""
-    }
+    errors: state.errors
   };
 };
 
@@ -717,9 +756,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // window.sessionLogin = SessionApiUtil.login; // PASS - user should be able to login in BE
   // window.sessionLogout = SessionApiUtil.logout; // PASS - user should be able to logout in BE
   // SessionActions
-  // window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
-  // window.login = login; // PASS - user should be able to login in BE/FE and be saved to state
-  // window.logout = logout; // PASS - clears session: id: null
+
+  window.signup = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["signup"]; // PASS - user should be able to sign up and login in BE/FE and be saved to state
+
+  window.login = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["login"]; // PASS - user should be able to login in BE/FE and be saved to state
+
+  window.logout = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["logout"]; // PASS - clears session: id: null
   // TESTING END
 });
 

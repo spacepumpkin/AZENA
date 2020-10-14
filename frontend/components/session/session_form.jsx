@@ -4,12 +4,12 @@ import React from "react";
 export default class SessionForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.props.user);
-    // {
-    //   username: "",
-    //   email: "",
-    //   password: ""
-    // }
+    this._nullState = {
+      username: "",
+      email: "",
+      password: ""
+    };
+    this.state = Object.assign({}, this._nullState);
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleChange = this.handleChange.bind(this);
   }
@@ -26,7 +26,9 @@ export default class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    dispatch(this.props.sessionAction(this.state));
+    this.props.sessionAction(this.state);
+    this.setState(this._nullState);
+    this.props.history.push("/home");
   }
 
   render() {
@@ -39,24 +41,24 @@ export default class SessionForm extends React.Component {
 
         <div className="session-box">
           <div id="logo" className="session-logo">
-            <img src={window.logoMainURL} />
+            <img style={{width: 250, height: 100}} src={window.logoMainURL} />
           </div>
 
           <form onSubmit={this.handleSubmit}>
-            <label> Username <span>(required)</span>
-              <input type="text" value={this.state.username} onChange={this.handleChange("username")} />
+            <label htmlFor="session-username"> Username <span>(required)</span> 
+              <input id="session-username" type="text" value={this.state.username} onChange={this.handleChange("username")} />
             </label>
-            <br />
             {
               formType === "Sign Up" &&
-              <label> Email <span>(required for login)</span>
-                <input type="email" value={this.state.email} onChange={this.handleChange("email")}/>
+              <label htmlFor="session-email"> Email <span>(required for login)</span>
+                <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")}/>
               </label>
             }
-            <br />
-            <label> Password <span>(required for login)</span>
-              <input type="password" value={this.state.password} onChange={this.handleChange("password")}/>
+            <label htmlFor="session-password" > Password <span>(required for login)</span>
+              <input id="session-password" type="password" value={this.state.password} onChange={this.handleChange("password")}/>
             </label>
+
+            <button> {formType} </button>
           </form>
         </div>
 

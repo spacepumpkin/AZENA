@@ -64,24 +64,47 @@ export default class SessionForm extends React.Component {
     );
   }
 
-  demoLogin(e) {
-    e.preventDefault();
+  demoLogin() {
+    console.log("logging in demo user...");
 
-    // demo auto-login - fills in one char after each interval, then has delay before logging in
-    const demoUser = "welcometo@azanademopass";
+    // Method 1: Works but redundantly fills login state with username as well
+    const demoUser = "welcometo@azanademopassdemo";
     const login = this.props.login || this.props.processForm;
     let that = this;
     let count = 0, field;
     this.demo = setInterval(() => {
-      field = count < 15 ? "email" : "password";
-      that.setState({[field]: that.state[field].concat(demoUser[count])})
-      count++;
-      if (count === 23) {
+      if (count < 27) {
+        field = count < 15 ? "email" : (count < 23 ? "password" : "username");
+        that.setState({ [field]: that.state[field].concat(demoUser[count]) })
+        count++;
+      } else {
         clearInterval(this.demo);
-        // setTimeout(that.props.processForm(that.state), 200);
         setTimeout(login(that.state), 5000);
       }
-    }, 100)
+    }, 100);
+
+    // Method 2: Refactored to adjust to sign in form
+    // const login = this.props.login || this.props.processForm;
+    // const demoUser = "welcometo@azanademopassdemo";
+    // let that = this;
+    // let count = 0, field;
+
+    // let demoAutoFill = (user, emailCount, passwordCount, usernameCount) => {
+    //   if (count < (emailCount+passwordCount)) {
+    //     field = count < emailCount ? "email" : "password";
+    //     that.setState({ [field]: that.state[field].concat(user[count]) })
+    //     count++;
+    //   } else if (count < (emailCount+passwordCount+usernameCount) && that.props.formType === "Sign Up") {
+    //     field = "username";
+    //     that.setState({ [field]: that.state[field].concat(user[count]) })
+    //     count++;
+    //   } else {
+    //     clearInterval(this.demo);
+    //     setTimeout(login(that.state), 5000);
+    //   }
+    // };
+    // this.demo = setInterval(() => demoAutoFill(demoUser, 15, 8, 4), 100);
+
   }
 
   render() {

@@ -68,7 +68,7 @@ export default class SessionForm extends React.Component {
     console.log("logging in demo user...");
 
     // Method 1: Works but redundantly fills login state with username as well
-    const demoUser = "welcometo@azanademopassdemo";
+    const demoUser = "welcometo@azenademopassdemo";
     const login = this.props.login || this.props.processForm;
     let that = this;
     let count = 0, field;
@@ -85,7 +85,7 @@ export default class SessionForm extends React.Component {
 
     // Method 2: Refactored to adjust to sign in form
     // const login = this.props.login || this.props.processForm;
-    // const demoUser = "welcometo@azanademopassdemo";
+    // const demoUser = "welcometo@azenademopassdemo";
     // let that = this;
     // let count = 0, field;
 

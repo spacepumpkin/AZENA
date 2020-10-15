@@ -11,6 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch --mode=development",
+    "build": "webpack --mode=production",
     "postinstall": "webpack"
   },
   "engines": {
@@ -38,12 +39,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-logger": "^3.0.6"
-  },
-  "devDependencies": {
-    "file-loader": "^6.1.1",
-    "image-webpack-loader": "^7.0.1",
-    "url-loader": "^4.1.1",
+    "redux-logger": "^3.0.6",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

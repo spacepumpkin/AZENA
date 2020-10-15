@@ -43,8 +43,7 @@ test_snippets.js
 npm_setup.sh
 #frontend
 node_modules
-bundle.js
-bundle.js.map
+bundle.js*
 # rails
 *.rbc
 capybara-*.html

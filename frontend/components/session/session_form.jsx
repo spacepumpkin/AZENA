@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default class SessionForm extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this._nullState = {
       username: "",
@@ -85,9 +86,11 @@ export default class SessionForm extends React.Component {
         count++;
       } else {
         clearInterval(this.demo);
-        setTimeout(login(
-          { email: "welcometo@azena", password: "demopass", username: "demo" }
-        ), 5000);
+        // if (this.props.location.pathname === "/signup" || this.props.location.pathname === "/login") {
+          setTimeout(login(
+            { email: "welcometo@azena", password: "demopass", username: "demo" }
+          ), 5000); 
+        // }
       }
     }, 100);
 
@@ -132,18 +135,22 @@ export default class SessionForm extends React.Component {
       <div className="session-page">
         <h1>&#x2692; SessionForm under construction &#x2692;</h1>
         <div id="logo" className="session-logo">
-          <Link to="/"><img style={{ width: 200, height: 100 }} src={window.logoMainURL} /></Link>
+          <Link to="/" style={(this.state.disabled) ? { pointerEvents: 'none' } : {} } >
+            <img style={{ width: 200, height: 100 }} src={window.logoMainURL} />
+          </Link>
         </div>
 
         <div className="session-box">
-          <Link to="/"><button className="session-back" type="button">&lt; Back</button></Link>
+          <Link to="/">
+            <button disabled={this.state.disabled} className="session-back" type="button">&lt; Back</button>
+          </Link>
 
           <h1>{formType}</h1>
 
           <div className="session-demo">
             <h3>or try a {" "}
               {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> // ! Ryan's method for demologin */}
-              <button type="button" onClick={this.demoLogin}> DEMO </button>
+              <button type="button" onClick={this.demoLogin} disabled={this.state.disabled} > DEMO </button>
             </h3>
           </div>
 
@@ -190,23 +197,21 @@ export default class SessionForm extends React.Component {
         </div>
 
         <div className="session-alternate">
-          {/* <fieldset disable={this.state.disabled}> */}
             {
               formType === "Sign Up" ? (
                 <span>Already have an account?{" "}
                   {/* <Link to="/login"> */}
-                  <button type="button" onClick={this.switchForm}> Log In </button>
+                  <button type="button" onClick={this.switchForm} disabled={this.state.disabled}> Log In </button>
                   {/* </Link> */}
                 </span>
               ) : (
                 <span>Don't have an account?{" "}
                   {/* <Link to="/signup"> */}
-                  <button type="button" onClick={this.switchForm}> Sign Up </button>
+                  <button type="button" onClick={this.switchForm} disabled={this.state.disabled}> Sign Up </button>
                   {/* </Link> */}
                 </span>
               )
             }
-          {/* </fieldset> */}
         </div>
       </div>
     )

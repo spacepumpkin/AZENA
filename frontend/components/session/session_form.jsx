@@ -1,4 +1,3 @@
-import { verify } from "crypto";
 import React from "react";
 import { Link } from "react-router-dom";
 // import { login } from "../../actions/session_actions";
@@ -21,11 +20,12 @@ export default class SessionForm extends React.Component {
   componentDidMount() {
     document.title = `azena - ${this.props.formType}`;
     console.log(`Mounted ${this.props.formType} form`);
-    // if (this.props.demo === "demo") { this.demoLogin() }
+    // if (this.props.demo !== undefined && this.props.demo === "demo") { this.demoLogin() } // ! Ryan's method for demologin
   }
 
   componentDidUpdate() {
     // console.log(`Updated ${this.props.formType} form`);
+    // if (this.state.email === "" && this.props.demo !== undefined && this.props.demo === "demo") { this.demoLogin() } // ! Ryan's method for demologin
   }
 
   componentWillUnmount() {
@@ -125,7 +125,7 @@ export default class SessionForm extends React.Component {
 
           <div className="session-demo">
             <h3>or try a {" "}
-              {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> */}
+              {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> // ! Ryan's method for demologin */}
               <button type="button" onClick={this.demoLogin}> DEMO </button>
             </h3>
           </div>

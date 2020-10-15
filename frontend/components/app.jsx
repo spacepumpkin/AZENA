@@ -25,6 +25,7 @@ const App = function (props) {
         <PostAuthRoute exact path="/home" component={UserHomeContainer} />
         <PreAuthRoute exact path="/signup" component={SignupFormContainer} />
         <PreAuthRoute exact path="/login" component={LoginFormContainer} />
+        {/* <PreAuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> */}
         <PreAuthRoute exact path="/" component={SplashContainer} />
         <Redirect to="/">{console.log("redirecting to /")}</Redirect>
       </Switch>

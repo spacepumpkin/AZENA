@@ -9,7 +9,7 @@ const mSP = function(state) {
   }
 };
 
-// Auth Route
+// Auth Route / PreAuth Route
 
 const Auth = function ({ loggedIn, path, component: Component}) {
   console.log("in Auth route");
@@ -22,8 +22,9 @@ const Auth = function ({ loggedIn, path, component: Component}) {
       />
   );
 };
+// removed demo prop;
 
-// Protected Route
+// Protected Route / PostAuth Route
 
 const Protected = function ({ loggedIn, path, component: Component}) {
   console.log("in Protected route");

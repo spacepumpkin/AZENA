@@ -1,6 +1,7 @@
+import { verify } from "crypto";
 import React from "react";
 import { Link } from "react-router-dom";
-import { login } from "../../actions/session_actions";
+// import { login } from "../../actions/session_actions";
 
 export default class SessionForm extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class SessionForm extends React.Component {
   componentDidMount() {
     document.title = `azena - ${this.props.formType}`;
     console.log(`Mounted ${this.props.formType} form`);
+    // if (this.props.demo === "demo") { this.demoLogin() }
   }
 
   componentDidUpdate() {
@@ -33,12 +35,19 @@ export default class SessionForm extends React.Component {
 
   handleChange(field) {
     return (e) => {
+      // if (field === "password-verify") {
+      //   let verifyInput = document.getElementById("session-password-verification");
+        
+      // }
       this.setState({[field]: e.currentTarget.value })
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
+
+    // const verifyInput = document.getElementById("session-password-verification");
+    // if (verifyInput.value === )
     this.props.processForm(this.state);
 
     // Don't need with auth route
@@ -57,9 +66,10 @@ export default class SessionForm extends React.Component {
 
   demoLogin(e) {
     e.preventDefault();
-    if (this.props.formType === "Sign Up") this.props.history.push("/login");
+
+    // demo auto-login - fills in one char after each interval, then has delay before logging in
     const demoUser = "welcometo@azanademopass";
-    // types one char every 50ms
+    const login = this.props.login || this.props.processForm;
     let that = this;
     let count = 0, field;
     this.demo = setInterval(() => {
@@ -68,20 +78,21 @@ export default class SessionForm extends React.Component {
       count++;
       if (count === 23) {
         clearInterval(this.demo);
-        setTimeout(that.props.processForm(that.state), 100);
+        // setTimeout(that.props.processForm(that.state), 200);
+        setTimeout(login(that.state), 5000);
       }
-    }, 65)
+    }, 100)
   }
 
   render() {
-    console.log(`rendering session form (${formType})...`);
     const { formType, sessionErrors } = this.props;
+    console.log(`rendering session form (${formType})...`);
 
     return (
       <div className="session-page">
         <h1>&#x2692; SessionForm under construction &#x2692;</h1>
         <div id="logo" className="session-logo">
-          <img style={{ width: 200, height: 100 }} src={window.logoMainURL} />
+          <Link to="/"><img style={{ width: 200, height: 100 }} src={window.logoMainURL} /></Link>
         </div>
 
         <div className="session-box">
@@ -91,6 +102,7 @@ export default class SessionForm extends React.Component {
 
           <div className="session-demo">
             <h3>or try a {" "}
+              {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> */}
               <button type="button" onClick={this.demoLogin}> DEMO </button>
             </h3>
           </div>
@@ -108,22 +120,29 @@ export default class SessionForm extends React.Component {
 
           <form onSubmit={this.handleSubmit}>
 
-            <label htmlFor="session-email"> Email{" "}
+            <label> Email{" "}
               {formType === "Sign Up" && <span>(this will be your login)</span> }
               <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
             </label>
             
             {
               formType === "Sign Up" &&
-              <label htmlFor="session-username"> Username{" "}<span>(required)</span>
+              <label> Username{" "}<span>(required)</span>
                 <input id="session-username" type="text" value={this.state.username} onChange={this.handleChange("username")} />
               </label>
             }
             
-            <label htmlFor="session-password" > Password{" "}
-            {formType === "Sign Up" && <span>(minimum 6 characters)</span>} 
+            <label> Password{" "}
+              {formType === "Sign Up" && <span>(minimum 6 characters)</span>} 
               <input id="session-password" type="password" value={this.state.password} onChange={this.handleChange("password")}/>
             </label>
+
+            {/* {
+              formType === "Sign Up" &&
+              <label> Verify Password{" "}
+                <input id="session-password-verification" type="password" onChange={this.handleChange("password-verify")}/>
+              </label>
+            } */}
 
             <button> {formType} </button>
           </form>

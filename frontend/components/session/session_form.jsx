@@ -8,7 +8,8 @@ export default class SessionForm extends React.Component {
     this._nullState = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      disabled: false
     };
     this.state = Object.assign({}, this._nullState);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,7 +49,11 @@ export default class SessionForm extends React.Component {
 
     // const verifyInput = document.getElementById("session-password-verification");
     // if (verifyInput.value === )
-    this.props.processForm(this.state);
+    this.props.processForm({
+      email: this.state.email,
+      password: this.state.password,
+      username: this.state.username
+    });
 
     // Don't need with auth route
     //.then(() => this.props.history.push("/home"));
@@ -66,6 +71,7 @@ export default class SessionForm extends React.Component {
 
   demoLogin() {
     console.log("logging in demo user...");
+    this.setState({disabled: true}); // disable form when demouser is being entered
 
     // Method 1: Works but redundantly fills login state with username as well
     const demoUser = "welcometo@azenademopassdemo";
@@ -79,31 +85,42 @@ export default class SessionForm extends React.Component {
         count++;
       } else {
         clearInterval(this.demo);
-        setTimeout(login(that.state), 5000);
+        setTimeout(login(
+          { email: "welcometo@azena", password: "demopass", username: "demo" }
+        ), 5000);
       }
     }, 100);
 
     // Method 2: Refactored to adjust to sign in form
     // const login = this.props.login || this.props.processForm;
-    // const demoUser = "welcometo@azenademopassdemo";
+    // const autofillDemoUser = "welcometo@azenademopassdemo";
+    // // const demoUser = { 
+    // //   email: "welcometo@azena", password: "demopass", username: "demo"
+    // // };
     // let that = this;
     // let count = 0, field;
-
-    // let demoAutoFill = (user, emailCount, passwordCount, usernameCount) => {
-    //   if (count < (emailCount+passwordCount)) {
-    //     field = count < emailCount ? "email" : "password";
+    // let emailLength = 15, passwordLength = 8, usernameLength = 4;
+    // let loginLength = emailLength + passwordLength
+    // let signupLength = loginLength + usernameLength;
+    // const {formType} = this.props;
+    
+    // let demoAutoFill = (user, formType) => {
+    //   if ( (count < loginLength) && (formType === "Log In") ) {
+    //     field = count < emailLength ? "email" : "password";
     //     that.setState({ [field]: that.state[field].concat(user[count]) })
     //     count++;
-    //   } else if (count < (emailCount+passwordCount+usernameCount) && that.props.formType === "Sign Up") {
-    //     field = "username";
+    //   } else if ( (count < signupLength) && (formType === "Sign Up") ) {
+    //     field = (count < emailLength) ? "email" : (count < emailLength+passwordLength) ? "password" : "username";
     //     that.setState({ [field]: that.state[field].concat(user[count]) })
     //     count++;
     //   } else {
     //     clearInterval(this.demo);
-    //     setTimeout(login(that.state), 5000);
+    //     setTimeout(login(
+    //       { email: "welcometo@azena", password: "demopass", username: "demo" }
+    //     ), 5000);
     //   }
     // };
-    // this.demo = setInterval(() => demoAutoFill(demoUser, 15, 8, 4), 100);
+    // this.demo = setInterval(() => demoAutoFill(autofillDemoUser, formType), 100);
 
   }
 
@@ -142,7 +159,7 @@ export default class SessionForm extends React.Component {
           }
 
           <form onSubmit={this.handleSubmit}>
-
+            <fieldset disabled={this.state.disabled}>
             <label> Email{" "}
               {formType === "Sign Up" && <span>(this will be your login)</span> }
               <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
@@ -168,10 +185,12 @@ export default class SessionForm extends React.Component {
             } */}
 
             <button> {formType} </button>
+            </fieldset>
           </form>
         </div>
 
         <div className="session-alternate">
+          {/* <fieldset disable={this.state.disabled}> */}
             {
               formType === "Sign Up" ? (
                 <span>Already have an account?{" "}
@@ -187,6 +206,7 @@ export default class SessionForm extends React.Component {
                 </span>
               )
             }
+          {/* </fieldset> */}
         </div>
       </div>
     )

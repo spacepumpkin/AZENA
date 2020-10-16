@@ -8,14 +8,16 @@ Entry point file that renders the `Root` component, with a `store`
 prop passed in, inside the div with id 'root'.
 */
 
-// TESTING ONLY
+// ------------------------------ TESTING START -------------------------------
 // SessionApiUtil
 // import * as SessionApiUtil from "./util/session_api_util";
 // SessionActions
+// import { signup, login, logout } from "./actions/session_actions";
+// ------------------------------ TESTING END ---------------------------------
+
 import { signup, login, logout } from "./actions/session_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Hook onto root DOM element
   const rootEl = document.getElementById("root");
 
   // Bootstrap currentUser and currentUser info
@@ -38,9 +40,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const store = configureStore(preloadedState);
   console.log(store);
   ReactDOM.render(<Root store={store} />, rootEl);
+  
+  // Theme Switch - if theme saved on localStorage (can also save to State) -----
+  const applyTheme = function(theme) {
+    if (document.body.className !== theme) { 
+      document.body.className = theme;
+      console.log(`switched to ${theme}`);
+    }
+  };
+  
+  const savedTheme = localStorage.getItem("theme") || "theme-light";
+  applyTheme(savedTheme);
+
+  document.getElementById("theme-switch").addEventListener("click", function() {
+    let switchedTheme = (document.body.className === "theme-light") ? "theme-dark" : "theme-light";
+    applyTheme(switchedTheme);
+    localStorage.setItem("theme", switchedTheme);
+  })
+  // --------------------------------------------------------------
 
 
-  // TESTING START
+  // ------------------------------ TESTING START -------------------------------
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   // SessionApiUtil
@@ -51,6 +71,5 @@ document.addEventListener("DOMContentLoaded", () => {
   window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
   window.login = login; // PASS - user should be able to login in BE/FE and be saved to state
   window.logout = logout; // PASS - clears session: id: null
-
-  // TESTING END
+  // ------------------------------ TESTING END ---------------------------------
 })

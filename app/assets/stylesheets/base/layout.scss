@@ -1,6 +1,21 @@
+@import 'colors.scss';
+
 body {
   width: 80%;
   margin: 0 auto;
   // font-family: $sans-serif;
   font-size: 12px;
+}
+
+.theme-light {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.theme-dark {
+  background-color: $darkgrey;
+  color: white;
+  a {
+    color: $turquoise;
+  }
 }

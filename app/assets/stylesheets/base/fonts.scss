@@ -1,0 +1,34 @@
+// Method 1 - declare in each element
+// font-family: -apple-system,
+// system-ui,
+// BlinkMacSystemFont,
+// "Segoe UI",
+// "Roboto",
+// "Oxygen",
+// "Ubuntu",
+// "Cantarell",
+// "Fira Sans",
+// "Droid Sans",
+// "Helvetica Neue",
+// sans-serif;
+// "Apple Color Emoji",
+// "Segoe UI Emoji",
+// "Segoe UI Symbol"
+
+// Method 2 - preload first
+// @font-face {
+//   font-family: system;
+//   font-style : normal;
+//   font-weight: 300;
+//   src        :
+//     local(".SFNSText-Light"),
+//     local(".HelveticaNeueDeskInterface-Light"),
+//     local(".LucidaGrandeUI"),
+//     local("Ubuntu Light"),
+//     local("Segoe UI Light"),
+//     local("Roboto-Light"),
+//     local("DroidSans"),
+//     local("Tahoma");
+// }
+//   font-family: "system";
+

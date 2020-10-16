@@ -23,6 +23,8 @@ export default class Splash extends React.Component {
           or{" "}
           <Link className="session-button" to="/signup">Sign Up</Link>
         </div>
+        <br />
+        <button id="theme-switch"> Don't Press This Button </button>
       </div>
     )
   }

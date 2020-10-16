@@ -55,10 +55,6 @@ export default class SessionForm extends React.Component {
       password: this.state.password,
       username: this.state.username
     });
-
-    // Don't need with auth route
-    //.then(() => this.props.history.push("/home"));
-    // this.setState(this._nullState);
   }
 
   switchForm(e) {
@@ -71,60 +67,35 @@ export default class SessionForm extends React.Component {
   }
 
   demoLogin() {
-    console.log("logging in demo user...");
+    // console.log("logging in demo user...");
     this.setState({disabled: true}); // disable form when demouser is being entered
 
-    // Method 1: Works but redundantly fills login state with username as well
-    const demoUser = "welcometo@azenademopassdemo";
+    // Method 3 - iterate through demoUser object based on fields we want to fill
     const login = this.props.login || this.props.processForm;
+    const demoUser = { 
+      email: "welcometo@azena", password: "demopass", username: "demo"
+    };
     let that = this;
-    let count = 0, field;
-    this.demo = setInterval(() => {
-      if (count < 27) {
-        field = count < 15 ? "email" : (count < 23 ? "password" : "username");
-        that.setState({ [field]: that.state[field].concat(demoUser[count]) })
-        count++;
-      } else {
-        clearInterval(this.demo);
-        // if (this.props.location.pathname === "/signup" || this.props.location.pathname === "/login") {
-          setTimeout(login(
-            { email: "welcometo@azena", password: "demopass", username: "demo" }
-          ), 5000); 
-        // }
-      }
-    }, 100);
+    let count = 0, field = "email", done = false;
 
-    // Method 2: Refactored to adjust to sign in form
-    // const login = this.props.login || this.props.processForm;
-    // const autofillDemoUser = "welcometo@azenademopassdemo";
-    // // const demoUser = { 
-    // //   email: "welcometo@azena", password: "demopass", username: "demo"
-    // // };
-    // let that = this;
-    // let count = 0, field;
-    // let emailLength = 15, passwordLength = 8, usernameLength = 4;
-    // let loginLength = emailLength + passwordLength
-    // let signupLength = loginLength + usernameLength;
-    // const {formType} = this.props;
+    const {formType} = this.props;
     
-    // let demoAutoFill = (user, formType) => {
-    //   if ( (count < loginLength) && (formType === "Log In") ) {
-    //     field = count < emailLength ? "email" : "password";
-    //     that.setState({ [field]: that.state[field].concat(user[count]) })
-    //     count++;
-    //   } else if ( (count < signupLength) && (formType === "Sign Up") ) {
-    //     field = (count < emailLength) ? "email" : (count < emailLength+passwordLength) ? "password" : "username";
-    //     that.setState({ [field]: that.state[field].concat(user[count]) })
-    //     count++;
-    //   } else {
-    //     clearInterval(this.demo);
-    //     setTimeout(login(
-    //       { email: "welcometo@azena", password: "demopass", username: "demo" }
-    //     ), 5000);
-    //   }
-    // };
-    // this.demo = setInterval(() => demoAutoFill(autofillDemoUser, formType), 100);
-
+    let demoAutoFill = (user, formType) => {
+      if (count === user[field]["length"]) {
+        if (field === "password") {
+          clearInterval(this.demo);
+          setTimeout(() => login(user), 2000);
+          done = true;
+        }
+        field = (formType === "Log In" || field === "username") ? "password" : "username"; 
+        count = 0;
+      } 
+      if (done !== true) {
+        that.setState({ [field]: that.state[field].concat(user[field][count]) })
+        count++;
+      }
+    };
+    this.demo = setInterval(() => demoAutoFill(demoUser, formType), 100);
   }
 
   render() {

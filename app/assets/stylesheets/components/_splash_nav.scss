@@ -1,0 +1,110 @@
+// Hierarchy
+// id "splash-nav-wrapper"
+//    id "splash-nav"
+//      id "splash-nav-logo"
+//        id "splash-logo"
+//      id "splash-nav-items"
+//        class "splash-nav-item"
+//          class "splash-nav-dropdown"
+//        class"splash-nav-item"
+//          class "splash-nav-dropdown"
+//        class "splash-nav-item"
+//      id "splash-login-link"
+//      id "splash-signup-btn"
+
+#splash-nav-wrapper {
+  display      : block;
+  // box-sizing: border-box;
+  width: 100%;
+  position     : static;
+  height       : 75px;
+  box-shadow: 0 5px 5px $lightest-gray;
+}
+
+#splash-logo {
+  height: 75px;
+}
+
+#splash-nav {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+  height         : 75px;
+  font-family    : $font-heading;
+  font-weight    : bold;
+  font-size      : 14px;
+}
+
+.splash-nav-item button, .splash-nav-dropdown a {
+  color     : $surface--text;
+  height    : 100%;
+  padding   : 0 10px;
+  transition: all 0.5s ease 0s;
+
+  &:hover {
+    color        : $secondary;
+    border-bottom: 1px solid $secondary;
+  }
+}
+
+
+
+#splash-nav-items {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+  height         : 100%;
+}
+
+.splash-nav-item {
+  height  : 100%;
+  margin  : 0 auto;
+  position: static;
+}
+
+// .splash-nav-item button:hover {
+
+// }
+
+.splash-nav-item:hover .splash-nav-dropdown {
+  display: block;
+}
+
+.splash-nav-item button:hover .splash-nav-dropdown {
+  display: block;
+}
+
+.splash-nav-dropdown>li {
+  margin: 8px 0;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.splash-nav-dropdown {
+  position     : absolute;
+  top          : 77px;
+  white-space  : nowrap;
+  overflow     : hidden;
+  text-overflow: ellipsis;
+}
+
+
+#splash-login-link:hover {
+  color: $secondary;
+}
+
+#splash-signup-btn {
+  background-color: $primary;
+  box-sizing      : border-box;
+  height          : 50px;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  transition: all 0.3s ease 0s;
+
+  &:hover {
+    color: $primary--text;
+    background-color: rgba(3, 218, 197, 0.8);
+  }
+}

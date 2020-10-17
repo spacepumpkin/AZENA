@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import SplashNav from "./splash_nav/splash_nav";
 
 export default class Splash extends React.Component {
   constructor(props) {
@@ -8,23 +9,16 @@ export default class Splash extends React.Component {
 
   componentDidMount() {
     if (document.title !== "azena") { document.title = "azena" };
+    console.log("routed to Splash page");
   }
 
   render() {
     console.log("rendering Splash...");
     return (
       <div>
-        <div id="logo">
-          <img src={window.logoMainURL} />
-        </div>
-        <h1>WELCOME TO AZENA</h1>
-        <div> Please{" "}
-          <Link className="session-button" to="/login">Log In</Link>{" "}
-          or{" "}
-          <Link className="session-button" to="/signup">Sign Up</Link>
-        </div>
+        <SplashNav />
         <br />
-        <button id="theme-switch"> Don't Press This Button </button>
+        {/* <button id="theme-switch" > Don't Press This Button </button> */}
       </div>
     )
   }

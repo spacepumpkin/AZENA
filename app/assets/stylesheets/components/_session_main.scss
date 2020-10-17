@@ -1,0 +1,9 @@
+// @mixin check-page($background-change: false) {
+//   @if ($background-change) {
+//     background-color: $lightest-gray;
+//   }
+// }
+
+body.gray {
+  background-color: $lightest-gray;
+}

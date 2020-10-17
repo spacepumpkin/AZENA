@@ -1,3 +1,12 @@
+// Nunito Sans Semi-Bold 600; font-family: 'Nunito Sans', sans-serif;
+// Nunito Regular 400
+// Quicksand Regular 400
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;700&family=Nunito&family=Quicksand&display=swap');
+$font-heading: 'Nunito Sans', sans-serif;
+$font-body: 'Nunito', sans-serif;
+$font-other: 'Quicksand', sans-serif;
+
+// SYSTEM FONTs
 // Method 1 - declare in each element
 // font-family: -apple-system,
 // system-ui,
@@ -16,19 +25,22 @@
 // "Segoe UI Symbol"
 
 // Method 2 - preload first
-// @font-face {
-//   font-family: system;
-//   font-style : normal;
-//   font-weight: 300;
-//   src        :
-//     local(".SFNSText-Light"),
-//     local(".HelveticaNeueDeskInterface-Light"),
-//     local(".LucidaGrandeUI"),
-//     local("Ubuntu Light"),
-//     local("Segoe UI Light"),
-//     local("Roboto-Light"),
-//     local("DroidSans"),
-//     local("Tahoma");
-// }
-//   font-family: "system";
+@font-face {
+  font-family: system;
+  font-style : normal;
+  font-weight: 300;
+  src        :
+    local(".SFNSText-Light"),
+    local(".HelveticaNeueDeskInterface-Light"),
+    local(".LucidaGrandeUI"),
+    local("Ubuntu Light"),
+    local("Segoe UI Light"),
+    local("Roboto-Light"),
+    local("DroidSans"),
+    local("Tahoma");
+}
+// font-family: "system";
 
+// font family
+// font weights
+// font sizes

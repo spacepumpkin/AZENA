@@ -41,26 +41,37 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(store);
   ReactDOM.render(<Root store={store} />, rootEl);
   
-  // Theme Switch - if theme saved on localStorage (can also save to State) -----
-  const applyTheme = function(theme) {
-    if (document.body.className !== theme) { 
-      document.body.className = theme;
-      console.log(`switched to ${theme}`);
-    }
-  };
+  // THEME SWITCH --------------------------------------------------------------
+  // saved theme on localStorage (can also save to State)
+
+  // const applyTheme = function(theme) {
+  //   if (document.body.className !== theme) { 
+  //     document.body.className = theme;
+  //     console.log(`switched to ${theme}`);
+  //   }
+  // };
   
-  const savedTheme = localStorage.getItem("theme") || "theme-light";
-  applyTheme(savedTheme);
+  // const savedTheme = localStorage.getItem("theme") || "theme-light";
+  // applyTheme(savedTheme);
 
-  document.getElementById("theme-switch").addEventListener("click", function() {
-    let switchedTheme = (document.body.className === "theme-light") ? "theme-dark" : "theme-light";
-    applyTheme(switchedTheme);
-    localStorage.setItem("theme", switchedTheme);
-  })
-  // --------------------------------------------------------------
+  // document.getElementById("theme-switch").addEventListener("click", () => {
+  //   let switchedTheme = (document.body.className === "theme-light") ? "theme-dark" : "theme-light";
+  //   applyTheme(switchedTheme);
+  //   localStorage.setItem("theme", switchedTheme);
+  // })
+
+  // CLOSING DROPDOWNS ---------------------------------------------------------
+  // closes dropdown menus if user clicks outside
+  function closeDropDowns() {
+    Array.from(document.querySelectorAll("[id$=-'dropdown']"))
+      .forEach((dropdown) => {
+        dropdown.classList.add("hide")
+      });
+  } 
+  // ---------------------------------------------------------------------------
 
 
-  // ------------------------------ TESTING START -------------------------------
+  // ------------------------------ TESTING START ------------------------------
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   // SessionApiUtil
@@ -71,5 +82,5 @@ document.addEventListener("DOMContentLoaded", () => {
   window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
   window.login = login; // PASS - user should be able to login in BE/FE and be saved to state
   window.logout = logout; // PASS - clears session: id: null
-  // ------------------------------ TESTING END ---------------------------------
+  // ------------------------------ TESTING END --------------------------------
 })

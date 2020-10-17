@@ -8,6 +8,7 @@ export default class UserHome extends React.Component {
 
   componentDidMount() {
     if (document.title !== "azena") { document.title = "azena" };
+    console.log("routed to Home page");
   }
   
   handleLogout(e) {

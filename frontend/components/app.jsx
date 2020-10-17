@@ -8,8 +8,6 @@ import LoginFormContainer from "./session/login_form_container";
 import SplashContainer from "./splash/splash_container";
 import UserHomeContainer from "./home/user_home_container";
 
-// import logo from "../../assets/images/FSPLogo-azena-blue-black.png"; // with import
-
 // ! use AuthRoute and ProtectedRoute later
 // AuthRoute / PreAuth - current user should not access - redirect to /home
 // ProtectedRoute - only current user can access - redirect to /
@@ -19,8 +17,8 @@ const App = function (props) {
   return (
     <>
       <header>
-        {/* <img src={"../../assets/images/fsp-logo-blue-black.png"} alt="azena logo" /> */}
       </header>
+      {/* <button id="theme-switch" type="button"> Change Theme </button> */}
       <Switch>
         <PostAuthRoute exact path="/home" component={UserHomeContainer} />
         <PreAuthRoute exact path="/signup" component={SignupFormContainer} />

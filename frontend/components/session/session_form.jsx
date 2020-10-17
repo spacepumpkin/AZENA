@@ -21,7 +21,8 @@ export default class SessionForm extends React.Component {
 
   componentDidMount() {
     document.title = `azena - ${this.props.formType}`;
-    console.log(`Mounted ${this.props.formType} form`);
+    document.body.classList.add("gray");
+    console.log(`routed to ${this.props.formType} form`);
     // if (this.props.demo !== undefined && this.props.demo === "demo") { this.demoLogin() } // ! Ryan's method for demologin
   }
 
@@ -32,6 +33,7 @@ export default class SessionForm extends React.Component {
 
   componentWillUnmount() {
     console.log(`Unmounting ${this.props.formType} form`);
+    document.body.classList.remove("gray");
     this.props.receiveSessionErrors([]);
   }
 
@@ -84,7 +86,7 @@ export default class SessionForm extends React.Component {
       if (count === user[field]["length"]) {
         if (field === "password") {
           clearInterval(this.demo);
-          setTimeout(() => login(user), 2000);
+          setTimeout(() => login(user), 1500);
           done = true;
         }
         field = (formType === "Log In" || field === "username") ? "password" : "username"; 
@@ -136,7 +138,7 @@ export default class SessionForm extends React.Component {
             </div>
           }
 
-          <form onSubmit={this.handleSubmit}>
+          <form className="session-form" onSubmit={this.handleSubmit}>
             <fieldset disabled={this.state.disabled}>
             <label> Email{" "}
               {formType === "Sign Up" && <span>(this will be your login)</span> }

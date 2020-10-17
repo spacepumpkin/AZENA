@@ -1,21 +1,47 @@
-@import 'colors.scss';
+// $background-change: false;
 
 body {
-  width: 80%;
-  margin: 0 auto;
-  // font-family: $sans-serif;
-  font-size: 12px;
+  width      : 80%;
+  margin     : 0 auto;
+  font-family: system;
+  font-size  : 12px;
 }
 
+body {
+  font-family: $font-body;
+}
+
+#theme-switch {
+  background-color: $primary;
+  color: $primary--text;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+// body
 .theme-light {
-  background-color: #FFFFFF;
-  color: black;
+  background-color: $background;
+  color           : $text;
 }
 
+// body
 .theme-dark {
-  background-color: $darkgrey;
-  color: white;
+  background-color: $dark--background;
+  color           : $dark--text;
+
   a {
     color: $turquoise;
   }
 }
+
+// borders
+// whitespace
+// container size
+// sidebar size
+// content size
+
+.hide {
+  display: none;
+}
+

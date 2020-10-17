@@ -1,16 +1,16 @@
 import {connect} from "react-redux";
 import Splash from "./splash";
 
-const mapStateToProps = function (state) {
+const mSTP = function (state) {
   return {
     
   };
 };
 
-const mapDispatchToProps = function (dispatch) {
+const mDTP = function (dispatch) {
   return {
 
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Splash);
+export default connect(mSTP, mDTP)(Splash);

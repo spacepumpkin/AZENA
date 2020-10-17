@@ -15,7 +15,7 @@ export default class Splash extends React.Component {
   render() {
     console.log("rendering Splash...");
     return (
-      <div>
+      <div id="splash">
         <SplashNav />
         <br />
         {/* <button id="theme-switch" > Don't Press This Button </button> */}

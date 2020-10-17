@@ -107,24 +107,28 @@ export default class SessionForm extends React.Component {
     return (
       <div className="session-page">
         <h1>&#x2692; SessionForm under construction &#x2692;</h1>
-        <div id="logo" className="session-logo">
-          <Link to="/" style={(this.state.disabled) ? { pointerEvents: 'none' } : {} } >
-            <img style={{ width: 200, height: 100 }} src={window.logoMainURL} />
-          </Link>
-        </div>
-
         <div className="session-box">
           <Link to="/">
-            <button disabled={this.state.disabled} className="session-back" type="button">&lt; Back</button>
+            {/* <button disabled={this.state.disabled} className="session-back" type="button">&lt; Back</button> */}
+            <button disabled={this.state.disabled} className="session-back" type="button" />
           </Link>
+
+          <div className="session-logo">
+            <Link to="/" style={(this.state.disabled) ? { pointerEvents: 'none' } : {}} >
+              <img id="session-logo" src={window.logoMainURL} />
+            </Link>
+          </div>
 
           <h1>{formType}</h1>
 
-          <div className="session-demo">
-            <h3>or try a {" "}
+          <button className="session-demo" type="button" onClick={this.demoLogin} disabled={this.state.disabled}>
               {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> // ! Ryan's method for demologin */}
-              <button type="button" onClick={this.demoLogin} disabled={this.state.disabled} > DEMO </button>
-            </h3>
+            <h3>Login automatically with a<span>&nbsp;DEMO </span> </h3>
+          </button>
+
+          <div className="session-separator">
+            {/* <hr className="divider" /> or <hr className="divider"/> */}
+            {/* <div className="session-line"></div><div> or </div><div className="session-line"></div> */}
           </div>
 
           {
@@ -140,7 +144,7 @@ export default class SessionForm extends React.Component {
 
           <form className="session-form" onSubmit={this.handleSubmit}>
             <fieldset disabled={this.state.disabled}>
-            <label> Email{" "}
+            <label> Email address{" "}
               {formType === "Sign Up" && <span>(this will be your login)</span> }
               <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
             </label>
@@ -172,13 +176,13 @@ export default class SessionForm extends React.Component {
         <div className="session-alternate">
             {
               formType === "Sign Up" ? (
-                <span>Already have an account?{" "}
+              <span>Already have an account?&nbsp;&nbsp;
                   {/* <Link to="/login"> */}
                   <button type="button" onClick={this.switchForm} disabled={this.state.disabled}> Log In </button>
                   {/* </Link> */}
                 </span>
               ) : (
-                <span>Don't have an account?{" "}
+                <span>Don't have an account?&nbsp;&nbsp;
                   {/* <Link to="/signup"> */}
                   <button type="button" onClick={this.switchForm} disabled={this.state.disabled}> Sign Up </button>
                   {/* </Link> */}

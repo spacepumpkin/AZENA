@@ -1,9 +1,12 @@
 // Primaries
 $turquoise: #03dac5;
 $turquoise-med: #02a091;
+$turquoise-dark: #134f5c;
 
 // Secondaries
 $melon: #FFA69E;
+$melon-light: #ffd2ceff;
+$melon-dark: #be6058ff;
 $cgblue: #007EA7;
 $mindaro: #E5F77D;
 
@@ -11,8 +14,10 @@ $mindaro: #E5F77D;
 $spacecadet: #2D3142;
 $darkgrey: #121212;
 
-$light-gray: #e2e2e2;
+$light-gray: #ccc;
+$lighter-gray: #e2e2e2;
 $lightest-gray: #f8f8f8;
+
 
 // Text
 $white: #FFFFFF;
@@ -32,6 +37,8 @@ $surface--text: $gray;
 
 // Primary
 $primary: $turquoise;
+$primary--med: $turquoise-med;
+$primary--dark: $turquoise-dark;
 $primary--text: $white;
 // Secondary
 $secondary: $melon;

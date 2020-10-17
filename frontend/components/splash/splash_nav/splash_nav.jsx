@@ -38,8 +38,9 @@ const SplashNav = function (props) {
             <Link to="/"><button type="button">Pricing</button></Link>
           </div>
         </nav >
+        <div className="empty"></div>
         <Link to="/login" id="splash-login-link"><button type="button"> Log In </button></Link>{" "}
-        <Link to="/signup"><button id="splash-signup-btn" type="button"> Try for free </button></Link>
+        <Link to="/signup" id="splash-signup-link"><button id="splash-signup-btn" type="button"> Try for free </button></Link>
       </div>
     </div>
 

@@ -15,27 +15,42 @@
 #splash-nav-wrapper {
   display      : block;
   // box-sizing: border-box;
-  width: 100%;
+  width        : 100%;
   position     : static;
   height       : 75px;
-  box-shadow: 0 5px 5px $lightest-gray;
+  box-shadow   : 0 5px 5px $lightest-gray;
 }
 
 #splash-logo {
-  height: 75px;
+  height    : 75px;
+  opacity : 0.6;
+  // opacity : 1.0;
+  transition: all 1s ease 0s;
+  // -webkit-transition: content 2s ease-in-out;
+  &:hover {
+    // transform            : rotate(180deg);
+    // background-image    : image-url('azena-logo-blue-white-zen.png');
+    // background-repeat: no-repeat;
+    opacity: 1.0;
+    // opacity: 0.0;
+    content    : image-url('azena-logo-melon-black-zen.png');
+    // transition-delay: 2s;
+  }
 }
 
 #splash-nav {
-  display        : flex;
-  justify-content: space-between;
-  align-items    : center;
-  height         : 75px;
-  font-family    : $font-heading;
-  font-weight    : bold;
-  font-size      : 14px;
+  display           : flex;
+  // justify-content: flex-start;
+  align-items       : center;
+  height            : 75px;
+  font-family       : $font-heading;
+  font-weight       : bold;
+  font-size         : 16px;
+  padding           : 0 50px;
 }
 
-.splash-nav-item button, .splash-nav-dropdown a {
+.splash-nav-item button,
+.splash-nav-dropdown a {
   color     : $surface--text;
   height    : 100%;
   padding   : 0 10px;
@@ -43,23 +58,22 @@
 
   &:hover {
     color        : $secondary;
-    border-bottom: 1px solid $secondary;
+    border-bottom: 2px solid $secondary;
   }
 }
-
-
 
 #splash-nav-items {
   display        : flex;
   justify-content: space-between;
   align-items    : center;
   height         : 100%;
+  margin-right   : 50px;
 }
 
 .splash-nav-item {
   height  : 100%;
   margin  : 0 auto;
-  position: static;
+  position: relative;
 }
 
 // .splash-nav-item button:hover {
@@ -74,37 +88,65 @@
   display: block;
 }
 
-.splash-nav-dropdown>li {
-  margin: 8px 0;
-
-  &:hover {
-    color: $secondary;
-  }
-}
-
 .splash-nav-dropdown {
   position     : absolute;
   top          : 77px;
   white-space  : nowrap;
   overflow     : hidden;
   text-overflow: ellipsis;
+
+  li {
+    margin: 8px 0;
+
+    &:hover {
+      color: $secondary;
+    }
+  }
 }
 
 
-#splash-login-link:hover {
-  color: $secondary;
-}
+#splash-login-link {
+  color     : $text;
+  transition: all 0.5s ease 0s;
 
-#splash-signup-btn {
-  background-color: $primary;
-  box-sizing      : border-box;
-  height          : 50px;
-  margin: 10px 20px;
-  padding: 10px 20px;
-  transition: all 0.3s ease 0s;
+  button {
+    height    : 75px;
+    width     : 100%;
+    padding   : 0 10px;
+    margin    : 0 auto;
+    text-align: center;
+  }
 
   &:hover {
-    color: $primary--text;
-    background-color: rgba(3, 218, 197, 0.8);
+    color: $secondary;
   }
+}
+
+
+#splash-signup-link {
+  transition: all 0.3s ease 0s;
+  cursor: auto;
+
+  button {
+    color           : $primary--text;
+    background-color: rgba(3, 218, 197, 1);
+    box-sizing      : border-box;
+    height          : 40px;
+    margin          : 10px 20px;
+    padding         : 10px 20px;
+    border-radius   : 5px;
+    transition      : all 0.3s ease 0s;
+
+    &:hover {
+      background-color      : rgba(56, 165, 154, 1);
+      // background-color   : $primary--med;
+    }
+  }
+  
+  // &:hover button {
+  //   // color              : $primary--text;
+  //   // background-color: rgba(3, 218, 197, 0.8);
+  //   background-color   :  rgba(56, 165, 154, 1);
+  //   // background-color: $primary&E6;
+  // }
 }

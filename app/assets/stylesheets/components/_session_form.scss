@@ -95,13 +95,13 @@
     &:hover {
       // background: $lightest-gray;
       border    : 1px solid $secondary;
-      height    : 48px;
+      // height    : 48px;
       width     : 105%;
       color: $text;
     }
 
     &:focus {
-      height: 48px;
+      // height: 48px;
       width : 105%;
     }
 
@@ -166,11 +166,13 @@
 
 .session-error {
   margin       : 5px 0;
-  padding      : 10px 12px;
-  background   : lightpink;
-  color        : orangered;
+  padding      : 0 6px;
+  // background   : lightpink;
+  color        : $secondary;
   // font-style: italic;
+  height  : 12px;
   font-size    : 12px;
+  font-style: italic;
 }
 
 .session-form {
@@ -180,9 +182,18 @@
   // align-items: flex-start;
   label {
     display: block;
-    padding: 15px 0;
-  }
+    padding-bottom: 5px;
 
+    &:first-child {
+      padding-top: 15px;
+    }
+    &:last-of-type {
+      padding-bottom: 15px;
+    }
+  }
+  span {
+    color: $gray-text;
+  }
   input {
     display         : block;
     box-sizing      : border-box;
@@ -194,7 +205,7 @@
     transition      : all 0.3s ease 0s;
     height          : 35px;
     padding         : 2px 6px;
-    color : $light-gray;
+    color : $darkgrey;
 
     &:focus {
       border          : 2px solid $secondary;

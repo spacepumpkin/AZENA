@@ -12,11 +12,19 @@ class User < ApplicationRecord
   # USER AUTH
 
   # Find user by login email and password from form data
+  # def self.find_by_credentials(email, pw)
+  #   user = self.find_by(email: email)
+  #   return nil if user.nil?
+  #   user.is_password?(pw) ? user : nil
+  # end
+  # Modified to return array [user, errormsg]
   def self.find_by_credentials(email, pw)
+    return [nil, "Email and password required"] if email == ""
     user = self.find_by(email: email)
-    return nil if user.nil?
-    user.is_password?(pw) ? user : nil
+    return [nil, "Email not found"] if user.nil?
+    user.is_password?(pw) ? [user, ""] : [nil, "Password is invalid"]
   end
+
 
   # Set password_digest to digested pw upon initializing new User
   def password=(pw)

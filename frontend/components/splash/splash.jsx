@@ -19,6 +19,17 @@ export default class Splash extends React.Component {
         <SplashNav />
         <br />
         {/* <button id="theme-switch" > Don't Press This Button </button> */}
+        <main id  ="splash-main">
+          <div className="splash-top-left">
+
+          </div>
+          <div className="splash-top-right">
+            {/* <img className="splash-top-img" src={window.logoMainURL} /> */}
+          </div>
+        </main>
+        <footer id="splash-footer">
+
+        </footer>
       </div>
     )
   }

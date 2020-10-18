@@ -70,7 +70,7 @@ export default class SessionForm extends React.Component {
 
   demoLogin() {
     // console.log("logging in demo user...");
-    this.setState({disabled: true}); // disable form when demouser is being entered
+    this.setState(Object.assign(this._nullState, {disabled: true})); // disable form when demoUser is being entered
 
     // Method 3 - iterate through demoUser object based on fields we want to fill
     const login = this.props.login || this.props.processForm;
@@ -104,16 +104,23 @@ export default class SessionForm extends React.Component {
     const { formType, sessionErrors } = this.props;
     console.log(`rendering session form (${formType})...`);
 
-    // if (formType === "Sign Up") {
-    //   sessionErrors.forEach((error, idx) => {
-    //     switch(error.split(" ")[0]) {
-    //       case ("Email"):
-    //         emailErrors.push(error);
-    //         break;
-    //       case ()
-    //     }
-    //   })
-    // }
+    // ! will have to optimize later
+    let emailErrors = [], usernameErrors = [], passwordErrors = [];
+    if (!this.state.disabled && (sessionErrors !== undefined || sessionErrors.length !== 0)) {
+      sessionErrors.forEach((error) => {
+        switch(error.split(" ")[0]) {
+          case ("Email"):
+            emailErrors.push(error);
+            break;
+          case ("Username"):
+            usernameErrors.push(error);
+            break;
+          case ("Password"):
+            passwordErrors.push(error);
+            break;
+        }
+      })
+    }
 
     return (
       <div className="session-page">
@@ -144,8 +151,8 @@ export default class SessionForm extends React.Component {
             {/* <div className="session-line"></div><div> or </div><div className="session-line"></div> */}
           </div>
 
-          {
-            (sessionErrors !== undefined || sessionErrors.length !== 0) &&
+          {/* {
+            (sessionErrors !== undefined && sessionErrors.length !== 0) &&
             <div className="session-errors">
               {sessionErrors.map((error, idx) => {
                 return (
@@ -153,25 +160,28 @@ export default class SessionForm extends React.Component {
                 )
               })}
             </div>
-          }
+          } */}
 
           <form className="session-form" onSubmit={this.handleSubmit}>
             <fieldset disabled={this.state.disabled}>
             <label> Email address{" "}
               {formType === "Sign Up" && <span>(this will be your login)</span> }
               <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
+              <div className="session-error">{emailErrors.join(", ")}</div>
             </label>
             
             {
               formType === "Sign Up" &&
               <label> Username{" "}<span>(required)</span>
                 <input id="session-username" type="text" value={this.state.username} onChange={this.handleChange("username")} />
+                <div className="session-error">{usernameErrors.join(", ")}</div>
               </label>
             }
             
             <label> Password{" "}
               {formType === "Sign Up" && <span>(minimum 6 characters)</span>} 
               <input id="session-password" type="password" value={this.state.password} onChange={this.handleChange("password")}/>
+              <div className="session-error">{passwordErrors.join(", ")}</div>
             </label>
 
             {/* {

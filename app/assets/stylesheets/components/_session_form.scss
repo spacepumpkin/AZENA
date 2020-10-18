@@ -4,6 +4,7 @@
   justify-content: center;
   align-items    : center;
   font-family    : $font-body;
+  color: $gray;
   // background: $spacecadet;
 }
 
@@ -23,11 +24,14 @@
     font-family: $font-other;
     font-size  : 40px;
     margin     : 15px 0;
+    color: $text;
   }
 
   .session-logo {
     align-self: center;
-    width     : 160px;
+    width     : 140px;
+    height: 50px;
+    margin: 20px 0;
 
     // height: 
     #session-logo {
@@ -54,15 +58,23 @@
     }
   }
 
-  .session-demo {
+  // .session-demo {
+  //   position: relative;
+  //   height: 80px;
+  //   width: 100%;
+  //   align-self: center;
+  // }
+
+  .session-demo-btn {
+    // position: absolute;
     align-self   : center;
     box-sizing   : border-box;
     // background: $white;
     height       : 40px;
     width        : 100%;
-    padding      : 10px 25px;
+    padding      : 10px 10px;
     margin       : 10px 0;
-    font-family  : $font-other;
+    font-family  : $font-heading;
     font-size    : 16px;
     text-align   : center;
     border       : 1px solid $light-gray;
@@ -74,17 +86,18 @@
 
       span {
         color      : $primary;
-        font-family: $font-heading;
+        // font-family: $font-heading;
         font-weight: bold;
         font-size  : 17px;
       }
     }
 
     &:hover {
-      background: $lightest-gray;
+      // background: $lightest-gray;
       border    : 1px solid $secondary;
       height    : 48px;
       width     : 105%;
+      color: $text;
     }
 
     &:focus {
@@ -161,7 +174,6 @@
 }
 
 .session-form {
-
   display       : flex;
   flex-direction: column;
 
@@ -182,6 +194,7 @@
     transition      : all 0.3s ease 0s;
     height          : 35px;
     padding         : 2px 6px;
+    color : $light-gray;
 
     &:focus {
       border          : 2px solid $secondary;
@@ -206,7 +219,7 @@
     font-family     : $font-heading;
 
     &:hover {
-      color           : $white;
+      // color           : $white;
       background-color: rgba(3, 218, 197, 1);
     }
 
@@ -218,13 +231,18 @@
 
 .session-alternate {
   margin: 15px 0;
+  // height: 35px;
+  // vertical-align: middle;
 
   button {
     color     : $primary;
     transition: all 0.3s ease 0s;
+    // text-align: center;
+    // vertical-align: middle;
+    // padding: 10px 0;
 
     &:hover {
-      font-size      : 16px;
+      font-size      : 20px;
       text-decoration: underline;
     }
   }

@@ -32,6 +32,7 @@
     // background-image    : image-url('azena-logo-blue-white-zen.png');
     // background-repeat: no-repeat;
     opacity: 1.0;
+    background-color: transparent;
     // opacity: 0.0;
     content    : image-url('azena-logo-melon-black-zen.png');
     // transition-delay: 2s;
@@ -40,7 +41,7 @@
 
 #splash-nav {
   display           : flex;
-  // justify-content: flex-start;
+  justify-content: space-between;
   align-items       : center;
   height            : 75px;
   font-family       : $font-heading;
@@ -55,11 +56,17 @@
   height    : 100%;
   padding   : 0 10px;
   transition: all 0.5s ease 0s;
+  border-bottom: 2px solid transparent;
+  width: fit-content;
 
   &:hover {
     color        : $secondary;
     border-bottom: 2px solid $secondary;
   }
+//   &:focus {
+//     color : $secondary;
+// border-bottom: 2px solid $secondary;
+//   }
 }
 
 #splash-nav-items {
@@ -67,6 +74,7 @@
   justify-content: space-between;
   align-items    : center;
   height         : 100%;
+  margin-left: 10px;
   margin-right   : 50px;
 }
 
@@ -74,6 +82,7 @@
   height  : 100%;
   margin  : 0 auto;
   position: relative;
+  // width: fit-content;
 }
 
 // .splash-nav-item button:hover {
@@ -83,6 +92,13 @@
 .splash-nav-item:hover .splash-nav-dropdown {
   display: block;
 }
+
+// .splash-nav-item:focus .splash-nav-dropdown {
+//   display: block;
+// }
+// .splash-nav-item button:focus .splash-nav-dropdown {
+//   display: block;
+// }
 
 .splash-nav-item button:hover .splash-nav-dropdown {
   display: block;
@@ -104,9 +120,17 @@
   }
 }
 
+.empty {
+  display: block;
+  height: 100%;
+  width: 60em;
+  margin: 0 40px; 
+  border: 1px solid $melon;
+}
 
 #splash-login-link {
   color     : $text;
+  text-align: center;
   transition: all 0.5s ease 0s;
 
   button {
@@ -124,6 +148,7 @@
 
 
 #splash-signup-link {
+  margin-right: 0;
   transition: all 0.3s ease 0s;
   cursor: auto;
 
@@ -132,9 +157,12 @@
     background-color: rgba(3, 218, 197, 1);
     box-sizing      : border-box;
     height          : 40px;
+    width:  8em;
+    text-align: center;
     margin          : 10px 20px;
     padding         : 10px 20px;
     border-radius   : 5px;
+    overflow: hidden;
     transition      : all 0.3s ease 0s;
 
     &:hover {

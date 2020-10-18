@@ -104,9 +104,20 @@ export default class SessionForm extends React.Component {
     const { formType, sessionErrors } = this.props;
     console.log(`rendering session form (${formType})...`);
 
+    // if (formType === "Sign Up") {
+    //   sessionErrors.forEach((error, idx) => {
+    //     switch(error.split(" ")[0]) {
+    //       case ("Email"):
+    //         emailErrors.push(error);
+    //         break;
+    //       case ()
+    //     }
+    //   })
+    // }
+
     return (
       <div className="session-page">
-        <h1>&#x2692; SessionForm under construction &#x2692;</h1>
+        {/* <h1>&#x2692; SessionForm under construction &#x2692;</h1> */}
         <div className="session-box">
           <Link to="/">
             {/* <button disabled={this.state.disabled} className="session-back" type="button">&lt; Back</button> */}
@@ -121,10 +132,12 @@ export default class SessionForm extends React.Component {
 
           <h1>{formType}</h1>
 
-          <button className="session-demo" type="button" onClick={this.demoLogin} disabled={this.state.disabled}>
+          {/* <div className="session-demo"> */}
+          <button className="session-demo-btn" type="button" onClick={this.demoLogin} disabled={this.state.disabled}>
               {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> // ! Ryan's method for demologin */}
             <h3>Login automatically with a<span>&nbsp;DEMO </span> </h3>
           </button>
+          {/* </div> */}
 
           <div className="session-separator">
             {/* <hr className="divider" /> or <hr className="divider"/> */}

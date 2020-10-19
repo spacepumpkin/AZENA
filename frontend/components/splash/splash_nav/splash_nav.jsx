@@ -39,8 +39,10 @@ const SplashNav = function (props) {
           </div>
         </nav >
         <div className="empty"><span> . . . </span></div>
-        <Link to="/login" id="splash-login-link"><button type="button"> Log In </button></Link>{" "}
-        <Link to="/signup" id="splash-signup-link"><button id="splash-signup-btn" type="button"> Try for free </button></Link>
+        <div id="splash-nav-right">
+          <Link to="/login" id="splash-login-link"><button type="button"> Log In </button></Link>{" "}
+          <Link to="/signup" id="splash-signup-link"><button type="button"> Try for free </button></Link>
+        </div>
       </div>
     </div>
 

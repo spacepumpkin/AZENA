@@ -12,7 +12,7 @@ $mindaro: #E5F77D;
 
 // Backgrounds/Surfaces
 $spacecadet: #2D3142;
-$darkgrey: #121212;
+$darkgray: #121212;
 
 $light-gray: #ccc;
 $lighter-gray: #e2e2e2;
@@ -28,9 +28,10 @@ $gray-text: #a9a9a9;
 
 // Background
 $background: $white;
+$background--footer: $spacecadet;
 $text: $black;
 
-$dark--background: $darkgrey;
+$dark--background: $darkgray;
 $dark--text: $white;
 // Surface
 $surface: $lightest-gray;

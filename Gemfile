@@ -54,10 +54,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
-  gem 'guard', require: false
-  gem 'guard-livereload', require: false
-  gem 'rack-livereload'
-  gem 'rb-fsevent', require: false
+  # gem 'guard', require: false
+  # gem 'guard-livereload', require: false
+  # gem 'rack-livereload'
+  # gem 'rb-fsevent', require: false
 end
 
 group :test do

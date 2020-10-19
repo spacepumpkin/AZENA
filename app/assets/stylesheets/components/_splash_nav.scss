@@ -10,7 +10,6 @@
 //          class "splash-nav-dropdown"
 //        class "splash-nav-item"
 //      id "splash-login-link"
-//      id "splash-signup-btn"
 
 #splash-nav-wrapper {
   display      : block;
@@ -18,68 +17,75 @@
   width        : 100%;
   position     : static;
   height       : 75px;
-  box-shadow   : 0 5px 5px $lightest-gray;
+  box-shadow   : 0 5px 10px $lighter-gray;
+  z-index: 1;
 }
 
 #splash-logo {
-  height    : 75px;
-  opacity : 0.6;
+  height     : 75px;
+  opacity    : 0.6;
   // opacity : 1.0;
-  transition: all 1s ease 0s;
+  transition : all 1s ease 0s;
+
   // -webkit-transition: content 2s ease-in-out;
   &:hover {
     // transform            : rotate(180deg);
     // background-image    : image-url('azena-logo-blue-white-zen.png');
     // background-repeat: no-repeat;
-    opacity: 1.0;
-    background-color: transparent;
+    opacity            : 1.0;
+    background-color   : transparent;
     // opacity: 0.0;
-    content    : image-url('azena-logo-melon-black-zen.png');
+    content            : image-url('azena-logo-melon-black-zen.png');
     // transition-delay: 2s;
   }
 }
 
 #splash-nav {
-  display           : flex;
+  display        : flex;
   justify-content: space-between;
-  align-items       : center;
-  height            : 75px;
-  font-family       : $font-heading;
-  font-weight       : bold;
-  font-size         : 16px;
-  padding           : 0 50px;
+  align-items    : center;
+  height         : 75px;
+  font-family    : $font-heading;
+  font-weight    : bold;
+  font-size      : 16px;
+  padding        : 0 50px;
 }
 
 .splash-nav-item button,
 .splash-nav-dropdown a {
-  color     : $surface--text;
-  height    : 100%;
-  padding   : 0 10px;
-  transition: all 0.5s ease 0s;
+  color        : $surface--text;
+  height       : 100%;
+  padding      : 0 10px;
+  transition   : all 0.5s ease 0s;
   border-bottom: 2px solid transparent;
-  width: fit-content;
+  width        : fit-content;
 
   &:hover {
     color        : $secondary;
     border-bottom: 2px solid $secondary;
   }
-//   &:focus {
-//     color : $secondary;
-// border-bottom: 2px solid $secondary;
-//   }
+
+  //   &:focus {
+  //     color : $secondary;
+  // border-bottom: 2px solid $secondary;
+  //   }
 }
 
 @media only screen and (max-width: 820px) {
-  #splash-nav-items, .splash-nav-item, .splash-nav-item > button {
-    display: none;
+
+  #splash-nav-items,
+  .splash-nav-item,
+  .splash-nav-item>button {
+    display      : none;
     // width: 0;
     // visibility: collapse;
     // position: absolute;
   }
+
   .empty :first-child {
-    display: inline-block;
+    display   : inline-block;
     visibility: visible;
-    opacity: 1.0;
+    opacity   : 1.0;
   }
 }
 
@@ -88,17 +94,17 @@
   justify-content: space-between;
   align-items    : center;
   height         : 100%;
-  padding: 0 10px;
-  transition: all 0.8s ease 0s;
+  padding        : 0 10px;
+  transition     : all 0.8s ease 0s;
   // width: 250px;
   // margin: 0 0;
 }
 
 .splash-nav-item {
-  height  : 100%;
-  margin  : 0 auto;
-  position: relative;
-  white-space: nowrap;
+  height       : 100%;
+  margin       : 0 auto;
+  position     : relative;
+  white-space  : nowrap;
   // overflow: hidden; // hid drop down items also
   // transition: all 0.8s ease 0s;
   // width: fit-content;
@@ -125,46 +131,57 @@
 
 .splash-nav-dropdown {
   position     : absolute;
-  top          : 77px;
+  top          : 75px;
   white-space  : nowrap;
   overflow     : hidden;
   text-overflow: ellipsis;
-  font-weight: normal;
-  color: $light-gray;
+  font-weight  : normal;
+  color        : $light-gray;
+  background-color: white;
+  border-radius: 0 0 5px 5px;
+  z-index: -1;
+
 
   li {
     font-size: 15px;
-    margin: 10px 0;
-    padding: 4px 0;
+    margin   : 10px 0;
+    padding  : 4px 0;
 
     &:hover {
-      color: $secondary;
+      color              : $secondary;
       // background-color: $lightest-gray;
     }
   }
 }
 
 .empty {
-  display: flex;
-  height: 100%;
-  width: 60em;
-  margin: 0 20px; 
+  display        : flex;
+  height         : 100%;
+  width          : 60em;
+  margin         : 0 20px;
   // border: 1px solid $melon;
-  text-align: center;
+  text-align     : center;
   justify-content: center;
-  align-items: center;
+  align-items    : center;
 
   span {
-    display: none;
-    margin-top: -10px;
-    color: $primary;
-    font-size: 25px;
+    display    : none;
+    margin-top : -10px;
+    color      : $primary;
+    font-size  : 25px;
     white-space: nowrap;
-    overflow: hidden;
-    opacity: 0.0;
-    visibility: hidden;
-    transition: visibility 0s, opacity 2s ease-out 0s;
+    overflow   : hidden;
+    opacity    : 0.0;
+    visibility : hidden;
+    transition : visibility 0s, opacity 2s ease-out 0s;
   }
+}
+
+#splash-nav-right {
+  display    : flex;
+  align-items: center;
+  width      : fit-content;
+  margin-left: 1px;
 }
 
 #splash-login-link {
@@ -173,11 +190,12 @@
   transition: all 0.5s ease 0s;
 
   button {
-    height    : 75px;
-    width     : 100%;
-    padding   : 0 10px;
-    margin    : 0 auto;
-    text-align: center;
+    height     : 75px;
+    width      : 100%;
+    padding    : 0 10px;
+    margin     : 0 auto;
+    text-align : center;
+    white-space: nowrap;
   }
 
   &:hover {
@@ -185,31 +203,18 @@
   }
 }
 
-
 #splash-signup-link {
   margin-right: 0;
-  transition: all 0.3s ease 0s;
-  cursor: auto;
+  margin-left: 20px;
+  width     : fit-content;
 
   button {
-    color           : $primary--text;
-    background-color: rgba(3, 218, 197, 1);
-    box-sizing      : border-box;
-    height          : 40px;
-    width:  8em;
-    text-align: center;
-    margin          : 10px 20px;
-    padding         : 10px 20px;
-    border-radius   : 5px;
-    overflow: hidden;
-    transition      : all 0.3s ease 0s;
-
-    &:hover {
-      background-color      : rgba(56, 165, 154, 1);
-      // background-color   : $primary--med;
-    }
+    @include signup-button;
+    height             : 40px;
+    width              : 8em;
+    padding            : 10px 20px;
   }
-  
+
   // &:hover button {
   //   // color              : $primary--text;
   //   // background-color: rgba(3, 218, 197, 0.8);

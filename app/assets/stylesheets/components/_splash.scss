@@ -1,16 +1,18 @@
 #splash {
-  width : 100%;
-  margin: 0 0;
+  width         : 100%;
+  margin        : 0 0;
   // height: 100%; // does not work with flex
-  flex: 1;
-  display: flex;
+  flex          : 1;
+  display       : flex;
   flex-direction: column;
 }
 
 // Main
 #splash-main {
+  margin-top: 75px;
   width : 100%;
   height: fit-content;
+  // height: calc(300px + 20vh);
 }
 
 #splash-top {
@@ -35,7 +37,7 @@
 
 #splash-top-left-content {
   height         : 100%;
-  padding        : 60px 60px 20px 60px;
+  padding        : 60px 60px 30px 60px;
   box-sizing     : border-box;
   display        : flex;
   flex-direction : column;
@@ -43,12 +45,12 @@
 
 
   p:first-child {
-    box-sizing : border-box;
-    margin-bottom     : 10px;
-    font-family: $font-other;
-    font-size  : 50px;
-    font-size  : calc(30px + 2vw);
-    line-height: 1.2;
+    box-sizing   : border-box;
+    margin-bottom: 10px;
+    font-family  : $font-other;
+    font-size    : 50px;
+    font-size    : calc(30px + 2vw);
+    line-height  : 1.2;
 
     // span {
     //   color: $primary;
@@ -59,7 +61,7 @@
     border-bottom: 1px solid $gray;
     width        : 20%;
     height       : 15%;
-    min-height: 10px;
+    min-height   : 10px;
   }
 
   p:last-of-type {
@@ -106,41 +108,4 @@
       opacity: 1.0;
     }
   }
-}
-
-#splash-footer {
-  width           : 100%;
-  height          : 100%;
-  flex            : 1;
-  background-color: $background--footer;
-}
-
-#splash-footer-content {
-  width  : 100%;
-  height : fit-content;
-  display: flex;
-  justify-content: center;
-  // align-items: flex-start;
-  padding: 20px 0;
-}
-
-.profile-links {
- display: flex;
- justify-content: space-between;
- align-items: center;
- width: 200px;
- a {
-      box-shadow: 0 0 10px $darkgray;
- }
- img {
-   background-color: $primary--med;
-   border-radius: 5px;
-  //  filter: invert(100%);
-   height: 50px;
-   width: 50px;
-    transition: filter 0.3s ease 0s;
-   &:hover {
-     filter: invert(90%);
-   }
- } 
 }

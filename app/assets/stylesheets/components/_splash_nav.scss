@@ -15,8 +15,9 @@
   display      : block;
   // box-sizing: border-box;
   width        : 100%;
-  position     : static;
+  position     : fixed;
   height       : 75px;
+  background-color: white;
   box-shadow   : 0 5px 10px $lighter-gray;
   z-index: 1;
 }
@@ -53,6 +54,7 @@
 
 .splash-nav-item button,
 .splash-nav-dropdown a {
+  box-sizing: border-box;
   color        : $surface--text;
   height       : 100%;
   padding      : 0 10px;

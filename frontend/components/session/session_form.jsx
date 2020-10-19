@@ -146,10 +146,11 @@ export default class SessionForm extends React.Component {
           </button>
           {/* </div> */}
 
-          <div className="session-separator">
+          <h2 className="session-separator">
             {/* <hr className="divider" /> or <hr className="divider"/> */}
             {/* <div className="session-line"></div><div> or </div><div className="session-line"></div> */}
-          </div>
+            or
+          </h2>
 
           {/* {
             (sessionErrors !== undefined && sessionErrors.length !== 0) &&

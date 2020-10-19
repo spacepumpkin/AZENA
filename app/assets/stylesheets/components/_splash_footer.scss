@@ -17,6 +17,25 @@
   padding        : 20px 0;
 }
 
+.footer-logo-wrapper {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-logo {
+  height: 40px;
+  width: 40px;
+  transition: all 0.3s ease 0s;
+  &:hover {
+    // filter: hue-rotate(180deg);
+    height: 49px;
+    width: 49px;
+    transform: rotate(360deg);
+  }
+}
+
 .footer-greeting {
   margin-top: 20px;
   color: $lightest-gray;

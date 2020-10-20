@@ -7,3 +7,7 @@
 body.gray {
   background-color: $lightest-gray;
 }
+
+:disabled {
+  opacity: 0.7;
+}

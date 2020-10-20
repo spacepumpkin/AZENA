@@ -7,9 +7,9 @@ export default class MainBox extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleLogout(e) {
-    e.preventDefault();
-    this.props.logout().then(() => this.props.history.push("/"));
+  handleLogout(evt) {
+    evt.preventDefault();
+    this.props.logout() //.then(() => this.props.history.push("/"));
   }
 
   render() {
@@ -17,11 +17,19 @@ export default class MainBox extends React.Component {
     return (
       <div id="mainbox">
         <div id="topbar">
-          <div id="header">
+          <div id="main-header">
             <div className="sidebar-menu-button">
               <img src={window.chevronCircleRight} alt="sidebar open button"/>
             </div>
             {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
+            <div>
+              <div>
+                Workspace 
+              </div> 
+              <nav>
+
+              </nav>
+            </div>
           </div>
           <div id="user-header">
             {/* User Settings + TaskSearch + Global Actions */}

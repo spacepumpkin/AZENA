@@ -9,9 +9,9 @@ const SplashNav = function (props) {
   //   "Pricing" : {paths: "", type: "link", children: []}
   // };
 
-  function toggleDropDown(e) {
-    e.currentTarget.classList.toggle("active-btn")
-    e.currentTarget.nextSibling.classList.toggle("hide")
+  function toggleDropDown(evt) {
+    evt.currentTarget.classList.toggle("active-btn")
+    evt.currentTarget.nextSibling.classList.toggle("hide")
   }
 
   return (

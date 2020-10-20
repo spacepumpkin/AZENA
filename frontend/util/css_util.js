@@ -1,6 +1,6 @@
 
-export function toggleDropDown(e) {
-  e.currentTarget.nextSibling.classList.toggle("hide")
+export function toggleDropDown(evt) {
+  evt.currentTarget.nextSibling.classList.toggle("hide")
 }
 
 

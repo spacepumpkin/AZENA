@@ -179,19 +179,40 @@ $main-padding-top: 15px;
 
 // MainBox
 #mainbox {
+  width: 100%;
   flex          : 5;
+  height: 100%;
   display       : flex;
   flex-direction: column;
   padding-top   : $main-padding-top;
+  border: 1px dotted black;
 }
 
 #topbar {
   width  : 100%;
   height : $header-height;
   display: flex;
-  border : 1px dotted blue;
+  border : 1px dashed blue;
 }
 
-#header {
+#main-header {
   display: flex;
+  align-items: center;
+  width: 50%;
+  border: 1px dotted purple;
+  .sidebar-menu-button {
+    width: 40px;
+  }
+}
+
+#user-header {
+  display: flex;
+  width: 50%;
+  border: 1px dotted purple;
+}
+
+#main-content-wrapper {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed green;
 }

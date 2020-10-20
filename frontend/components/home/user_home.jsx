@@ -11,9 +11,9 @@ export default class UserHome extends React.Component {
     console.log("routed to Home page");
   }
   
-  handleLogout(e) {
-    e.preventDefault();
-    this.props.logout().then(() => this.props.history.push("/"));
+  handleLogout(evt) {
+    evt.preventDefault();
+    this.props.logout() //.then(() => this.props.history.push("/"));
   }
 
   render() {

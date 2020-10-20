@@ -38,17 +38,17 @@ export default class SessionForm extends React.Component {
   }
 
   handleChange(field) {
-    return (e) => {
+    return (evt) => {
       // if (field === "password-verify") {
       //   let verifyInput = document.getElementById("session-password-verification");
         
       // }
-      this.setState({[field]: e.currentTarget.value })
+      this.setState({[field]: evt.currentTarget.value })
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(evt) {
+    evt.preventDefault();
 
     // const verifyInput = document.getElementById("session-password-verification");
     // if (verifyInput.value === )
@@ -59,8 +59,8 @@ export default class SessionForm extends React.Component {
     });
   }
 
-  switchForm(e) {
-    e.preventDefault();
+  switchForm(evt) {
+    evt.preventDefault();
     this.props.formType === "Sign Up" ? (
       this.props.history.push("/login")
     ) : (

@@ -21,9 +21,12 @@ export default class MainBox extends React.Component {
             <div className="sidebar-menu-button">
               <img src={window.chevronCircleRight} alt="sidebar open button"/>
             </div>
+            <div className="header-icon">
+              <span></span>
+            </div>
             {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
             <div>
-              <div>
+              <div className="header-title">
                 Workspace 
               </div> 
               <nav>

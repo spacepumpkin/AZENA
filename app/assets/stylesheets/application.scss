@@ -24,7 +24,12 @@
 @import 'base/layout.scss';
 
 // Components
-@import 'components/*'; // sorted alphabetically
+// @import 'components/*'; // sorted alphabetically
+@import 'components/splash/*'; 
+@import 'components/session/*';
+@import 'components/main';
+@import 'components/sidebar/*';
+@import 'components/mainbox/*';
 // @import 'components/session_main';
 // @import 'components/session_form';
 /* hello */

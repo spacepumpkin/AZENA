@@ -8,9 +8,8 @@ import LoginFormContainer from "./session/login_form_container";
 import SplashContainer from "./splash/splash_container";
 import UserHomeContainer from "./home/user_home_container";
 
-// ! use AuthRoute and ProtectedRoute later
 // AuthRoute / PreAuth - current user should not access - redirect to /home
-// ProtectedRoute - only current user can access - redirect to /
+// ProtectedRoute / PostAuth - only current user can access - redirect to /
 
 const App = function (props) {
   console.log("rendering App...")
@@ -23,7 +22,7 @@ const App = function (props) {
         <PreAuthRoute exact path="/login" component={LoginFormContainer} />
         {/* <PreAuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
         <PreAuthRoute id="splash" exact path="/" component={SplashContainer} />
-        <Redirect to="/">{console.log("redirecting to /")}</Redirect>
+        <Redirect to="/login">{console.log("redirecting to /login")}</Redirect>
       </Switch>
     </>
   );

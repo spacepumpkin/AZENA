@@ -18,8 +18,8 @@ export default class Sidebar extends React.Component {
           </div>
         </div>
         <div id="sidebar-links">
-          <Link to="/home"><img src={window.homeIcon} alt="homeicon" />Home </Link>
-          <Link to="/home"><img src={window.checkCircle} alt="taskicon" /> My Tasks </Link>
+          <Link to="/home"><img className="sidebar-icon" src={window.homeIcon} alt="homeicon" />&nbsp; Home </Link>
+          <Link to="/home"><img className="sidebar-icon" src={window.checkCircle} alt="taskicon" />&nbsp; My Tasks </Link>
         </div>
         <div id="sidebar-workspaces">
           {/* for each user's workspace, create workspace title (link to workspace page) + div dropdown */}
@@ -27,9 +27,9 @@ export default class Sidebar extends React.Component {
           <Link to="/home" className="sidebar-workspace-title">Workspace 1</Link>
           <div className="sidebar-workspace-box">
             <div className="sidebar-workspace-projects">
-              <Link to="/home" className="sidebar-workspace-project"> Project 1</Link>
-              <Link to="/home" className="sidebar-workspace-project"> Project 2</Link>
-              <Link to="/home" className="sidebar-workspace-project"> Project 3</Link>
+              <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 1</Link>
+              <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 2</Link>
+              <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 3</Link>
             </div>
             <div id="sidebar-workspace-bottom">
               <p>

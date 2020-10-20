@@ -1,60 +1,72 @@
-$header-height: 60px;
+$header-height   : 60px;
+$sidebar-padding : 15px;
 $main-padding-top: 15px;
 
 #main-wrapper {
-  min-width: 100%;
-  min-height: 100%;
+  min-width       : 100%;
+  min-height      : 100%;
   background-color: $lightest-gray;
 }
 
 #main {
-  width: 100%;
-  height: 100%;
+  width  : 100%;
+  height : 100%;
   display: flex;
 }
 
 // Sidebar
 #sidebar {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background-color: $spacecadet;
-  border: 1px dotted red;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  flex: 1;
-  color: $light-gray;
-  font-family: $font-body;
+  display            : flex;
+  flex-direction     : column;
+  height             : 100%;
+  background-color   : $spacecadet;
+  border             : 1px dotted red;
+  padding-top        : 15px;
+  // padding-left    : 15px;
+  // padding-right   : 15px;
+  width              : 300px;
+  flex               : 1;
+  color              : $light-gray;
+  font-family        : $font-other;
+
+  a {
+    &:hover {
+      filter: brightness(110%);
+    }
+  }
 }
 
 #sidebar-top {
   display: flex;
-  height: $header-height;
-  padding: 0 0;
-  border: 1px dotted orange;
+  width  : 100%;
+  height : $header-height;
+  padding: 0 $sidebar-padding;
+  border : 1px dashed orange;
+  box-sizing: border-box;
 }
 
 .logo {
   height : 100%;
   padding: 0 10px;
-  
+
   img {
     height: 100%;
   }
 }
 
 .sidebar-menu-button {
-  display: flex;
+  display        : flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  align-items    : center;
+  width          : 100%;
+  height         : 100%;
+
   img {
-    width: 35px;
-    height: 35px;
-    opacity: 0.7;
+    width     : 35px;
+    height    : 35px;
+    opacity   : 0.7;
     transition: opacity 0.3s ease 0s;
+
     &:hover {
       opacity: 1.0;
     }
@@ -62,26 +74,122 @@ $main-padding-top: 15px;
 }
 
 #sidebar-links {
-  display: flex;
+  display       : flex;
   flex-direction: column;
+  border        : 1px dashed orange;
+  width         : 100%;
+
   a {
-    padding: 10px 0;
+    padding       : 10px $sidebar-padding;
+    vertical-align: baseline;
+    line-height   : initial;
+
+    // &:hover {
+    //   filter: brightness(110%);
+    // }
+
+    &::after {
+      content: "";
+      clear  : both;
+      display: block;
+    }
   }
 }
 
+.sidebar-icon {
+  height : 20px;
+  width  : 20px;
+  opacity: 0.5;
+  float  : left;
+}
+
+#sidebar-workspaces {
+  display       : flex;
+  flex-direction: column;
+  width         : 100%;
+  height        : 100%;
+  // overflow      : scroll; // ! how can we make this work?
+  padding       : $sidebar-padding 0;
+  box-sizing: border-box;
+  border: 1px dashed orange;
+
+  >a {
+    font-family: $font-body;
+    font-weight: bold;
+    font-size  : 16px;
+  }
+}
+.sidebar-workspace-box {
+  width: 100%;
+  box-sizing: content-box;
+  display: flex;
+  // padding: 0 0 0 $sidebar-padding; // ! how to make this work
+  flex-direction: column;
+}
+.sidebar-workspace-projects {
+  display       : flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px dotted orange;
+  // padding: 5px 0;
+
+  :nth-child(1)>span {
+    background-color: rgb(random(255), random(255), random(255));
+  }
+  :nth-child(2)>span {
+    background-color: rgb(random(255), random(255), random(255));
+  }
+  :nth-child(3)>span {
+    background-color: rgb(random(255), random(255), random(255));
+  }
+}
+
+.sidebar-workspace-project {
+  width: 100%;
+  padding: 5px 0;
+  >span {
+    height        : 10px;
+    width         : 10px;
+    display       : inline-block;
+    // position: relative;
+    vertical-align: middle;
+  }
+}
+
+#sidebar-workspace-bottom {
+  padding: $sidebar-padding $sidebar-padding;
+  justify-self: flex-end;
+  button {
+    margin: 10px;
+    border-radius: 4px;
+    color: $lightest-gray;
+    box-shadow: 1px 1px 4px $darkgray;
+    background-color: $primary;
+    padding: 3px 4px;
+    opacity: 0.7;
+    align-self: center;
+    text-align: center;
+    transition: opacity 0.3s ease 0s;
+    &:hover {
+      opacity: 1.0;
+    }
+  }
+}
+
+
 // MainBox
 #mainbox {
-  flex: 5;
-  display: flex;
+  flex          : 5;
+  display       : flex;
   flex-direction: column;
-  padding-top: $main-padding-top;
+  padding-top   : $main-padding-top;
 }
 
 #topbar {
-  width: 100%;
-  height: $header-height;
+  width  : 100%;
+  height : $header-height;
   display: flex;
-  border: 1px dotted blue;
+  border : 1px dotted blue;
 }
 
 #header {

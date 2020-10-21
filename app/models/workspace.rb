@@ -12,7 +12,7 @@
 class Workspace < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :creator_id }
   
-  # Join Table for Users
+  # Join Table for Users that are members of the Workspace
   has_many :users_workspaces,
     foreign_key: :workspace_id,
     class_name: :UsersWorkspace

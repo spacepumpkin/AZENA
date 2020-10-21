@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 6}, allow_nil: true
   validates :email, presence: true, uniqueness: true #, format: { with: URI::MailTo::EMAIL_REGEXP } 
 
-  # Join Table for Workspaces
+  # Join Table for Workspaces that User is a member of
   has_many :users_workspaces,
     foreign_key: :user_id,
     class_name: :UsersWorkspace

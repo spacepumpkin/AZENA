@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  username        :string           not null
+#  email           :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 class User < ApplicationRecord
   validates :username, presence: true #, uniqueness: true
   validates :session_token, presence: true, uniqueness: true
@@ -5,11 +17,26 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 6}, allow_nil: true
   validates :email, presence: true, uniqueness: true #, format: { with: URI::MailTo::EMAIL_REGEXP } 
 
-  attr_reader :password
+  # Join Table for Workspaces
+  has_many :users_workspaces,
+    foreign_key: :user_id,
+    class_name: :UsersWorkspace
 
-  after_initialize :ensure_session_token
+  has_many :workspaces,
+    through: :users_workspaces,
+    source: :workspace
+
+  # A User might have 0 or many own (created) workspaces
+  has_many :own_workspaces,
+    foreign_key: :creator_id,
+    class_name: :Workspace
+
+  
 
   # USER AUTH
+
+  attr_reader :password
+  after_initialize :ensure_session_token
 
   # Find user by login email and password from form data
   # def self.find_by_credentials(email, pw)
@@ -39,7 +66,8 @@ class User < ApplicationRecord
 
   # Resets user's session token and returns the new one
   def reset_session_token!
-    self.session_token = SecureRandom::urlsafe_base64(16)
+    # self.session_token = SecureRandom::urlsafe_base64(16)
+    self.session_token = generate_unique_session_token
     self.save!
     return self.session_token
   end
@@ -47,8 +75,23 @@ class User < ApplicationRecord
   private
   # Makes sure user has a session token before saving to DB
   def ensure_session_token
-    self.session_token ||= SecureRandom::urlsafe_base64(16)
+    # self.session_token ||= SecureRandom::urlsafe_base64(16)
+    self.session_token ||= generate_unique_session_token
   end
   
+  # Makes sure there are no session token conflicts (however small that chance may be)
+  def generate_unique_session_token
+    token = SecureRandom.urlsafe_base64(16)
+    ##
+    # Just in case there is a session_token conflict, make sure
+    # not to throw a validation error at the user!
+    ##
+    # checks through session_token column in users table
+    while self.class.exists?(session_token: token)
+      token = SecureRandom.urlsafe_base64(16)
+    end
+
+    token
+  end
   
 end

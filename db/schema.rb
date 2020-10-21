@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_225040) do
+ActiveRecord::Schema.define(version: 2020_10_21_010650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,4 +26,24 @@ ActiveRecord::Schema.define(version: 2020_10_14_225040) do
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
+  create_table "users_workspaces", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "workspace_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_users_workspaces_on_user_id"
+    t.index ["workspace_id"], name: "index_users_workspaces_on_workspace_id"
+  end
+
+  create_table "workspaces", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id", "name"], name: "index_workspaces_on_creator_id_and_name", unique: true
+  end
+
+  add_foreign_key "users_workspaces", "users"
+  add_foreign_key "users_workspaces", "workspaces"
 end

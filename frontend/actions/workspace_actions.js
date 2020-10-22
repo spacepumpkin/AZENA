@@ -46,6 +46,19 @@ export const createWorkspace = function (workspace) {
   };
 };
 
+export const fetchWorkspace = function (workspaceId) {
+  return function (dispatch) {
+    console.log("dispatching fetchWorkspace");
+    return (
+      WorkspaceApiUtil.fetchWorkspace(workspaceId)
+        .then(
+          (workspace) => dispatch(receiveWorkspace(workspace)),
+          (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
+        )
+    );
+  };
+};
+
 // export const deleteWorkspace = function (workspaceId) {
 //   return function (dispatch) {
 //     console.log("dispatching deleteWorkspace");

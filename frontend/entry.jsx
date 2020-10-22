@@ -14,7 +14,7 @@ import * as SessionApiUtil from "./util/session_api_util";
 import { signup, login, logout } from "./actions/session_actions";
 // * Workspaces
 import * as WorkspaceApiUtil from "./util/workspace_api_util";
-import { createWorkspace } from "./actions/workspace_actions";
+import { createWorkspace, fetchWorkspace } from "./actions/workspace_actions";
 // ------------------------------ TESTING END ---------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.currentUser) {
     const { currentUser } = window;
     const { id } = currentUser;
+    const currentWorkspaces = (window.workspaces) ? window.workspaces : {} ;
     console.log(currentUser);
 
     preloadedState = {
@@ -32,8 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         users: {
           [id]: currentUser
         },
-        workspaces: {
-        }
+        workspaces: currentWorkspaces
       },
       session: {
         id: id
@@ -93,5 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // * WorkspaceApiUtil
   // window.createWorkspaceApi = WorkspaceApiUtil.createWorkspace; // PASS - in BE user should be able to create a workspace unique to them
   // window.createWorkspace = createWorkspace; // PASS - FE State should be updated with new workspace or errors
+  // window.fetchWorkspacesApi = WorkspaceApiUtil.fetchWorkspaces; // PASS - should be able to GET current users workspaces
+  // window.fetchWorkspaceApi = WorkspaceApiUtil.fetchWorkspace; // PASS - should be able to GET specific workspace
+  // window.fetchWorkspace = fetchWorkspace; // PASS - should be able to GET specific workspace
+  
+
   // ------------------------------ TESTING END --------------------------------
 })

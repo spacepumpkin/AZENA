@@ -1,7 +1,7 @@
 /* Workspace API Util Functions:
   - fetchEverything(user)             // fetches everything associated with user after login
 
-  - fetchWorkspaces(user)             // fetch all workspaces that user is member of
+  - fetchWorkspaces()             // fetch all workspaces that current user is member of
   
   - fetchWorkspaceMembers(workspace)  // ! Combine with fetchWorkspaces? fetch all members of a workspace excluding current user
   
@@ -18,17 +18,22 @@
 //   })
 // }
 
-export const fetchWorkspaces = (currentUserId) => {
-  console.log(`fetching currentUsers's (id: ${currentUserId}) workspaces...`);
+// Don't need user ID since we can only access current user's workspaces anyway
+export const fetchWorkspaces = () => {
+  console.log(`fetching currentUsers's workspaces...`);
   return $.ajax({
-    url: "/api/workspaces",
+    url: `/api/workspaces`,
     method: "GET",
-    data: { currentUserId }
   })
 }
-// ! will just pass in user ID 
-// Should we pass in everything like this? or just current_user id
-// data: { user: { username: user.username, email: user.email } }
+
+export const fetchWorkspace = (workspaceId) => {
+  console.log(`fetching workspaces #${workspaceId}...`);
+  return $.ajax({
+    url: `/api/workspaces/${workspaceId}`,
+    method: "GET",
+  })
+}
 
 export const createWorkspace = (workspace) => {
   console.log(`creating new workspace...`);

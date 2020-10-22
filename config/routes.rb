@@ -5,8 +5,11 @@
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
 #                  api_user GET    /api/users/:id(.:format)                                                                 api/users#show {:format=>:json}
-#            api_workspaces POST   /api/workspaces(.:format)                                                                api/workspaces#create {:format=>:json}
-#             api_workspace DELETE /api/workspaces/:id(.:format)                                                            api/workspaces#destroy {:format=>:json}
+#                       api GET    /api/users/:id/everything(.:format)                                                      api/users#everything {:format=>:json}
+#            api_workspaces GET    /api/workspaces(.:format)                                                                api/workspaces#index {:format=>:json}
+#                           POST   /api/workspaces(.:format)                                                                api/workspaces#create {:format=>:json}
+#             api_workspace GET    /api/workspaces/:id(.:format)                                                            api/workspaces#show {:format=>:json}
+#                           DELETE /api/workspaces/:id(.:format)                                                            api/workspaces#destroy {:format=>:json}
 #                  new_test GET    /session/new(.:format)                                                                   tests#new
 #                      root GET    /                                                                                        static_pages#root
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show

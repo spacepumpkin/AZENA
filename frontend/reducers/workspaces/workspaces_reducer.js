@@ -7,7 +7,7 @@ const workspacesReducer = function(oldState = {}, action) {
   switch (action.type) {
     case RECEIVE_WORKSPACE:
       console.log(`receiving workspace (workspacesReducer)`)
-      return Object.assign({}, oldState, action.workspace);
+      return Object.assign({}, oldState, { [action.workspace.id]: action.workspace } );
     default:
       return oldState;
   }

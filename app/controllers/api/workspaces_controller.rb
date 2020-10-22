@@ -23,7 +23,7 @@ class Api::WorkspacesController < ApplicationController
   end
 
   def index
-    @workspaces = Workspace.all
+    @workspaces = current_user.workspaces
     render :index
   end
 

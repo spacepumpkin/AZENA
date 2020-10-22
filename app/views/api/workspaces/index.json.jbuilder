@@ -3,3 +3,6 @@
     json.partial! "api/workspaces/workspace", workspace: workspace
   end
 end
+
+# json.partial! "api/workspaces/workspaces", workspaces: @workspaces
+

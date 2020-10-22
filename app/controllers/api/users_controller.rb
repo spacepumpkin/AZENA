@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
 
-  before_action :require_logged_in, only: [:show]
+  before_action :require_logged_in, only: [:show, :everything]
   
   # Attempt to create a new user based on form inputs
   def create
@@ -13,7 +13,7 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  # Returns user information
+  # Returns user information (either current user's page or that of a co-member in a workspace)
   def show
     @user = User.find_by(id: params[:id])
 
@@ -27,9 +27,10 @@ class Api::UsersController < ApplicationController
 
   # ! add update and destroy routes later
 
-
+  # Fetch every entity associated with current user (workspaces, projects, tasks, etc.)
   def everything
-    
+    # @user = User.find_by(id: params[:id])
+    render :everything
   end
 
   private

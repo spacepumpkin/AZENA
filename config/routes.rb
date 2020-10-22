@@ -21,11 +21,12 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do 
     resource :session, only: [:create, :destroy]
     resources :users, only: [:create, :show]
-    get "/api/users/:id/everything", to: "users#everything"
+    get "/users/:id/everything", to: "users#everything"
     resources :workspaces, only: [:create, :destroy, :show, :index]
   end
 
   resource :test, only: [:new], path: "session"
 
   root to: "static_pages#root"
+  # get '*path', to: "static_pages#root"
 end 

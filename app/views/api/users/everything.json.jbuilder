@@ -1,6 +1,42 @@
-json.users @users do |user|
-  json.set! user.id do 
-    json.partial! "api/users/user", user: user
+# json.users @users.each do |user|
+#   json.set! user.id do 
+#     json.partial! "api/users/user", user: user
+#   end
+# end
+
+# json.users do
+#   json.set! current_user.id do
+#     json.partial! "api/users/user", user: current_user
+#   end
+#   current_user.workspaces.each do |workspace|
+#     workspace.users.each do |user|
+#       json.set! user.id do
+#         json.partial! "api/users/user", user: user
+#       end
+#     end
+#   end
+# end
+
+# users = User.where(id: UsersWorkspace.)
+# json.users do
+#   json.set! current_user.id do
+#     json.partial! "api/users/user", user: current_user
+#   end
+#   current_user.workspaces.each do |workspace|
+    
+#         json.set! user.id do
+#           json.partial! "api/users/user", user: user
+#         end
+#       end
+#     end
+#   end
+# end
+
+json.workspaces do
+  current_user.workspaces.each do |workspace|
+    json.set! workspace[:id] do
+      json.partial! "api/workspaces/workspace", workspace: workspace
+    end
   end
 end
 

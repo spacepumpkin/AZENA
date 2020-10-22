@@ -15,7 +15,6 @@ class Api::SessionsController < ApplicationController
     if @user
       login!(@user)
       # render api_user_url(@user.id)
-      p current_user
       render "api/users/show", status: 200
     else
       # flash.now[:errors] = ["Invalid email or password"]

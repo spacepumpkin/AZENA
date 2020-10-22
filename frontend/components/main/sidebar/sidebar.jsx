@@ -6,6 +6,10 @@ export default class Sidebar extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    console.log(`mounted Sidebar`);
+  }
+
   render() {
     return (
       <div id="sidebar">

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export default class SessionForm extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this._nullState = {
       username: "",

@@ -16,7 +16,7 @@ const Auth = function ({ loggedIn, path, component: Component}) {
     <Route
       path={path}
       render={(props) => (
-        loggedIn ? <Redirect to="/home" /> : <Component {...props} />
+        loggedIn ? <Redirect to="/main" /> : <Component {...props} />
       )}
       />
   );
@@ -25,13 +25,13 @@ const Auth = function ({ loggedIn, path, component: Component}) {
 
 // Protected Route / PostAuth Route
 
-const Protected = function ({ loggedIn, path, component: Component}) {
+const Protected = function ({ loggedIn, path, page, component: Component}) {
   console.log("in Protected route");
   return (
     <Route
       path={path}
       render={(props) => (
-        loggedIn ? <Component {...props} /> : <Redirect to="/signup" />
+        loggedIn ? <Component {...props} page={page} /> : <Redirect to="/login" />
       )}
     />
   );

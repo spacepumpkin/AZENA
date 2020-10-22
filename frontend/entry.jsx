@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const { id } = currentUser;
     const currentWorkspaces = (window.workspaces) ? window.workspaces : {} ;
     console.log(currentUser);
-
     preloadedState = {
       entities: {
         users: {

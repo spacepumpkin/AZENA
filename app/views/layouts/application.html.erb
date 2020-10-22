@@ -9,11 +9,11 @@
       <script type="text/javascript">
         window.currentUser =
         <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+        window.workspaces =
+        <%= render("api/workspaces/workspaces.json.jbuilder", workspaces: current_user.workspaces).html_safe %>
+
       </script>
     <% end %>
-
-     <%# window.workspaces = %>
-        <%#= render("api/workspaces/workspaces.json.jbuilder", workspaces: current_user.workspaces).html_safe %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>

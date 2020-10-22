@@ -22,18 +22,3 @@ Workspace.first.workspace_creator
 # YOUR VARIABLES AREN'T ALWAYS LIVE, THEY DON'T ALWAYS UPDATE TO THE CURRENT DB
 # SO WHEN I TRIED TO DO DEMO.WORKSPACES, IT DIDN'T WORK, BUT
 # USER.FIRST.WORKSPACES WORKED
-
-
-
-def workspace_params
-  params.require(:workspace).permit(:name, :description)
-end
-
-@workspace = Workspace.new(workspace_params)
-@workspace.creator_id = current_user.id
-# @workspace.creator_id = params[:id]
-
-if @workspace.save
-  current_user.workpaces << @workspace
-
-end

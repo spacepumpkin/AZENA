@@ -7,10 +7,10 @@ const SplashFooter = function (props) {
     <footer id="splash-footer">
       <div id="splash-footer-content">
         <div className="footer-logo-wrapper" ><img className="footer-logo"src={window.logoIcon1} alt="small azena icon"/></div>
-        <div class="footer-greeting">
+        <div className="footer-greeting">
           Thank you for visiting Azena!
         </div>
-        <div class="profile-links">
+        <div className="profile-links">
           <Link to="https://github.com/spacepumpkin/AZENA"><img src={window.github} alt="github profile" /></Link>
           <Link to="#"><img src={window.linkedin} alt="linkedin profile" /></Link>
         </div>

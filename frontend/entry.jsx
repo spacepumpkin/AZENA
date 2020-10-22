@@ -9,13 +9,13 @@ prop passed in, inside the div with id 'root'.
 */
 
 // ------------------------------ TESTING START -------------------------------
-// SessionApiUtil
-// import * as SessionApiUtil from "./util/session_api_util";
-// SessionActions
-// import { signup, login, logout } from "./actions/session_actions";
-// ------------------------------ TESTING END ---------------------------------
-
+// * Session
+import * as SessionApiUtil from "./util/session_api_util";
 import { signup, login, logout } from "./actions/session_actions";
+// * Workspaces
+import * as WorkspaceApiUtil from "./util/workspace_api_util";
+import { createWorkspace } from "./actions/workspace_actions";
+// ------------------------------ TESTING END ---------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   const rootEl = document.getElementById("root");
@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
         users: {
           [window.currentUser.id]: window.currentUser
         },
+        workspaces: {
+        }
       },
       session: {
         id: window.currentUser.id
@@ -74,13 +76,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // ------------------------------ TESTING START ------------------------------
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  // SessionApiUtil
+
+  // * SessionApiUtil
   // window.sessionSignUp = SessionApiUtil.signup; // PASS - user should be able to sign up and login in BE
   // window.sessionLogin = SessionApiUtil.login; // PASS - user should be able to login in BE
   // window.sessionLogout = SessionApiUtil.logout; // PASS - user should be able to logout in BE
-  // SessionActions
-  window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
-  window.login = login; // PASS - user should be able to login in BE/FE and be saved to state
-  window.logout = logout; // PASS - clears session: id: null
+  // * SessionActions
+  // window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
+  // window.login = login; // PASS - user should be able to login in BE/FE and be saved to state, or errors shown
+  // window.logout = logout; // PASS - clears session: id: null
+  // * WorkspaceApiUtil
+  // window.createWorkspaceApi = WorkspaceApiUtil.createWorkspace; // PASS - in BE user should be able to create a workspace unique to them
+  // window.createWorkspace = createWorkspace; // PASS - FE State should be updated with new workspace or errors
   // ------------------------------ TESTING END --------------------------------
 })

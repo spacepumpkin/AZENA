@@ -1,5 +1,5 @@
 /*
-Export API Util functions with the specified parameters:
+Session API Util functions with the specified parameters:
 
 1. `signup(user)`
 2. `login(user)`

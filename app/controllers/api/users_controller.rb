@@ -1,5 +1,7 @@
 class Api::UsersController < ApplicationController
 
+  before_action :require_logged_in, only: [:show]
+  
   # Attempt to create a new user based on form inputs
   def create
     @user = User.new(user_params)

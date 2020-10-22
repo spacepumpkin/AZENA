@@ -27,6 +27,11 @@ class Api::UsersController < ApplicationController
 
   # ! add update and destroy routes later
 
+
+  def everything
+    
+  end
+
   private
   def user_params
     params.require(:user).permit(:username, :email, :password)

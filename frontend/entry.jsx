@@ -23,19 +23,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // Bootstrap currentUser and currentUser info
   let preloadedState = undefined;
   if (window.currentUser) {
+    const { currentUser } = window;
+    const { id } = currentUser;
+    console.log(currentUser);
+
     preloadedState = {
       entities: {
         users: {
-          [window.currentUser.id]: window.currentUser
+          [id]: currentUser
         },
         workspaces: {
         }
       },
       session: {
-        id: window.currentUser.id
+        id: id
       }
     };
-    console.log(window.currentUser);
+    
+    // ! uncomment later: delete window.currentUser;
   }
 
   // Setup store and render main React DOM

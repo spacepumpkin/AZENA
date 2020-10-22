@@ -7,7 +7,7 @@ class Api::WorkspacesController < ApplicationController
     @workspace.creator_id = current_user.id
     if @workspace.save
       current_user.workspaces << @workspace
-      render json: @workspace
+      render :show #, status: 200
     else
       render json: @workspace.errors.full_messages, status: 422
     end
@@ -16,19 +16,21 @@ class Api::WorkspacesController < ApplicationController
   def destroy
     @workspace = Workspace.find(params[:id])
     if @workspace.destroy
-      render json: @workspace, status: 200
+      render :show #, status: 200
     else
       render json: ["Workspace could not be removed"], status: 422
     end
   end
 
   def index
+    @workspaces = Workspace.all
+    render :index
   end
 
   def show
     @workspace = Workspace.find(params[:id])
     if @workspace
-      render json: @workspace
+      render :show #, status: 200
     else
       render ["Workspace was not found"], status: 422
     end

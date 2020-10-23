@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_010650) do
+ActiveRecord::Schema.define(version: 2020_10_23_045500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "workspace_id", null: false
+    t.integer "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["workspace_id", "name"], name: "index_projects_on_workspace_id_and_name", unique: true
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "due_date"
+    t.integer "project_id", null: false
+    t.integer "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
@@ -24,6 +44,22 @@ ActiveRecord::Schema.define(version: 2020_10_21_010650) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
+  end
+
+  create_table "users_projects", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "project_id"], name: "index_users_projects_on_user_id_and_project_id", unique: true
+  end
+
+  create_table "users_tasks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "task_id"], name: "index_users_tasks_on_user_id_and_task_id", unique: true
   end
 
   create_table "users_workspaces", force: :cascade do |t|

@@ -11,17 +11,22 @@
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
+  include Api::UsersHelper
+
   validates :username, presence: true #, uniqueness: true
   validates :session_token, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :password, length: {minimum: 6}, allow_nil: true
   validates :email, presence: true, uniqueness: true #, format: { with: URI::MailTo::EMAIL_REGEXP } 
 
+  # * BUILT-IN ASSOCIATIONS ----------------------------------------
+
   # Join Table for Workspaces that User is a member of
   has_many :users_workspaces,
     foreign_key: :user_id,
     class_name: :UsersWorkspace
 
+  # ! Workspaces
   has_many :workspaces,
     through: :users_workspaces,
     source: :workspace
@@ -31,9 +36,45 @@ class User < ApplicationRecord
     foreign_key: :creator_id,
     class_name: :Workspace
 
+  # Join Table for Users and their Projects on their Workspaces
+  has_many :users_projects,
+    foreign_key: :user_id,
+    class_name: :UsersProject
+  
+  # ! Projects
+  has_many :projects,
+    through: :users_projects,
+    source: :project
+  
+  # A User might have 0 or many own (created) projects
+  has_many :own_projects,
+    foreign_key: :creator_id,
+    class_name: :Project
+
+  # Join Table for Users and their Tasks on their Projects
+  has_many :users_tasks,
+    foreign_key: :user_id,
+    class_name: :UsersTask
+  
+  # ! Tasks
+  has_many :tasks,
+    through: :users_tasks,
+    source: :task
+
+  # A User might have 0 or many own (created) tasks
+  has_many :own_tasks,
+    foreign_key: :creator_id,
+    class_name: :Task
+
+  # def my_workspaces_users
+  #   self.workspaces.include(:users).users.where.not(id: self.id)
+  # end
+
+  # * CUSTOM ASSOCIATIONS ----------------------------------------
+
   
 
-  # USER AUTH
+  # * USER AUTH
 
   attr_reader :password
   after_initialize :ensure_session_token

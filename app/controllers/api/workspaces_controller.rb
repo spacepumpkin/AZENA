@@ -28,7 +28,7 @@ class Api::WorkspacesController < ApplicationController
   end
 
   def show
-    @workspace = Workspace.find(params[:id])
+    @workspace = Workspace.includes(:projects).find(params[:id])
     if @workspace
       render :show #, status: 200
     else

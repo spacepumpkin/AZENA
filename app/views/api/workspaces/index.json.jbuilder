@@ -1,8 +1,8 @@
-@workspaces.each do |workspace|
-  json.set! workspace.id do
-    json.partial! "api/workspaces/workspace", workspace: workspace
-  end
-end
+# @workspaces.each do |workspace|
+#   json.set! workspace.id do
+#     json.partial! "api/workspaces/workspace", workspace: workspace
+#   end
+# end
 
-# json.partial! "api/workspaces/workspaces", workspaces: @workspaces
+json.partial! "api/workspaces/workspaces.json.jbuilder", workspaces: @workspaces
 

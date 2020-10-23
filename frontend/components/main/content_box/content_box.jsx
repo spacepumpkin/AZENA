@@ -12,9 +12,7 @@ export default class ContentBox extends React.Component {
       <div id="main-content-wrapper">
         <h1>&#x2692; {this.props.page} page under construction &#x2692;</h1>
         {/* WorkspaceBox or HomeBox or ProjectHeader or UserBox */}
-        <Switch>
-          
-        </Switch>
+        
       </div>
     )
   }

@@ -8,7 +8,7 @@
   padding-top        : 15px;
   // padding-left    : 15px;
   // padding-right   : 15px;
-  flex               : 1 1 auto;
+  // flex               : 0 1 auto;
   color              : $light-gray;
   font-family        : $font-other;
   // Keep position fixed to side (also adjust mainbox left margin)
@@ -19,6 +19,12 @@
     &:hover {
       filter: brightness(110%);
     }
+  }
+
+  &.collapsed {
+    width: 0;
+    overflow: hidden;
+    // display: none;
   }
 }
 
@@ -148,7 +154,7 @@
   }
 }
 
-#sidebar-workspace-bottom {
+#sidebar-bottom {
   padding     : $sidebar-padding $sidebar-padding;
   justify-self: flex-end;
 

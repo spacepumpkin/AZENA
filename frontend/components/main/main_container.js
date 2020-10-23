@@ -3,14 +3,18 @@ import { withRouter } from "react-router-dom";
 // import UserHome from "./user_home";
 import Main from "./main";
 
+import { fetchUserWorkspaces } from "../../actions/workspace_actions";
+
 const mSP = function (store) {
   // console.log(store);
   return {
+    payload: store
   };
 };
 
 const mDP = function (dispatch) {
   return {
+    fetchUserWorkspaces: () => dispatch(fetchUserWorkspaces())
   };
 };
 

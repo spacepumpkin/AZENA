@@ -19,14 +19,16 @@ const App = function (props) {
     <>
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}
       <Switch>
-        <ProtectedRoute exact path="/main" page="Home" component={MainContainer} />
+        <ProtectedRoute path="/home" page="Home" component={MainContainer} />
+        <ProtectedRoute exact path="/test1" component={MainContainer} />
+        <ProtectedRoute exact path="/test2" component={MainContainer} />
         <ProtectedRoute exact path="/workspaces/:workspaceId" page="Workspace" component={MainContainer} />
         <AuthRoute exact path="/signup" component={SignupFormContainer} />
         <AuthRoute exact path="/login" component={LoginFormContainer} />
         {/* <AuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
-        <AuthRoute id="splash" exact path="/" component={SplashContainer} />
+        <AuthRoute id="splash" exact p  ath="/" component={SplashContainer} />
         <AuthRoute path="/" component={SplashContainer} />
-        <Redirect to="/" />
+        {/* <Redirect to="/" /> */}
       </Switch>
     </>
   );

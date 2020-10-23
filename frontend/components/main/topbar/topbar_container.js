@@ -10,8 +10,8 @@ function getTopBarTitle (path) {
   
 }
 
+
 const mSP = function (store, ownProps) {
-  
   // if ownProps.ownProps.match.params[:workspaceId]
 
   return {

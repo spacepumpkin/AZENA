@@ -2,7 +2,7 @@
 #mainbox {
   // width         : 100%;
   width         : $mainbox-width;
-  flex          : 5 1 auto;
+  // flex          : 0 1 auto;
   height        : 100%;
   display       : flex;
   flex-direction: column;
@@ -91,4 +91,16 @@
   width : $mainbox-width;
   height    : 100%;
   border    : 1px dashed violet;
+}
+
+
+
+.testbox {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  z-index: 2;
+  align-self: center;
+  margin-top: 100px;
 }

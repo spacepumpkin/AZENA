@@ -1,9 +1,9 @@
 /* Workspace API Util Functions:
   - fetchEverything(user)             // fetches everything associated with user after login
 
-  - fetchWorkspaces()             // fetch all workspaces that current user is member of
+  - fetchUserWorkspaces()             // fetch all workspaces that current user is member of
   
-  - fetchWorkspaceMembers(workspace)  // ! Combine with fetchWorkspaces? fetch all members of a workspace excluding current user
+  - fetchWorkspaceMembers(workspace)  // ! Combine with fetchUserWorkspaces? fetch all members of a workspace excluding current user
   
   - createWorkspace(workspace)        // create new workspace
 
@@ -19,7 +19,7 @@
 // }
 
 // Don't need user ID since we can only access current user's workspaces anyway
-export const fetchWorkspaces = () => {
+export const fetchUserWorkspaces = () => {
   console.log(`fetching currentUsers's workspaces...`);
   return $.ajax({
     url: `/api/workspaces`,

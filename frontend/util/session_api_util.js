@@ -36,6 +36,14 @@ export const logout = () => {
   })
 }
 
+export const fetchEverything = () => {
+  console.log("fetching everything for current user");
+  return $.ajax({
+    url: `/api/everything`,
+    method: "GET"
+  })
+}
+
 // for login
 // this.state = user = {
 //   email: "",

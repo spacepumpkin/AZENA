@@ -1,5 +1,6 @@
 import { 
-  RECEIVE_WORKSPACE, 
+  RECEIVE_WORKSPACE,
+  RECEIVE_USER_WORKSPACES
 } from "../../actions/workspace_actions";
 
 const workspacesReducer = function(oldState = {}, action) {
@@ -8,6 +9,9 @@ const workspacesReducer = function(oldState = {}, action) {
     case RECEIVE_WORKSPACE:
       console.log(`receiving workspace (workspacesReducer)`)
       return Object.assign({}, oldState, { [action.workspace.id]: action.workspace } );
+    case RECEIVE_USER_WORKSPACES:
+      console.log(`receiving user workspaces (workspacesReducer)`)
+      return Object.assign({}, oldState, action.workspaces );
     default:
       return oldState;
   }

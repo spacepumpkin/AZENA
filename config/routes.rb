@@ -5,7 +5,7 @@
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
 #                  api_user GET    /api/users/:id(.:format)                                                                 api/users#show {:format=>:json}
-#                       api GET    /api/users/:id/everything(.:format)                                                      api/users#everything {:format=>:json}
+#            api_everything GET    /api/everything(.:format)                                                                api/users#everything {:format=>:json}
 #            api_workspaces GET    /api/workspaces(.:format)                                                                api/workspaces#index {:format=>:json}
 #                           POST   /api/workspaces(.:format)                                                                api/workspaces#create {:format=>:json}
 #             api_workspace GET    /api/workspaces/:id(.:format)                                                            api/workspaces#show {:format=>:json}
@@ -24,8 +24,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do 
     resource :session, only: [:create, :destroy]
     resources :users, only: [:create, :show]
-    get "/users/:id/everything", to: "users#everything"
     resources :workspaces, only: [:create, :destroy, :show, :index]
+    get "/everything", to: "users#everything"
   end
 
   resource :test, only: [:new], path: "session"

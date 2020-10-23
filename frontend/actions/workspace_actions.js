@@ -2,6 +2,7 @@ import * as WorkspaceApiUtil from "../util/workspace_api_util";
 
 /* Export action constants:
 
+* `RECEIVE_USER_WORKSPACES` - receiveWorkspace (`workspace` payload)
 * `RECEIVE_WORKSPACE` - receiveWorkspace (`workspace` payload)
 * `RECEIVE_WORKSPACE_ERRORS` - receiveWorkspaceErrors(errors) (`errors` payload)
 
@@ -12,8 +13,17 @@ Export thunk action creators with the specified parameters:
 */
 
 // REGULAR ACTIONS --------------------------------------------------
+export const RECEIVE_USER_WORKSPACES = "RECEIVE_USER_WORKSPACES";
 export const RECEIVE_WORKSPACE = "RECEIVE_WORKSPACE";
 export const RECEIVE_WORKSPACE_ERRORS = "RECEIVE_WORKSPACE_ERRORS";
+
+const receiveUserWorkspaces = function(workspaces) {
+  console.log("receiving user workspaces");
+  return {
+    type: RECEIVE_USER_WORKSPACES,
+    workspaces
+  }
+}
 
 const receiveWorkspace = function(workspace) {
   console.log("receiving workspace");
@@ -53,6 +63,19 @@ export const fetchWorkspace = function (workspaceId) {
       WorkspaceApiUtil.fetchWorkspace(workspaceId)
         .then(
           (workspace) => dispatch(receiveWorkspace(workspace)),
+          (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
+        )
+    );
+  };
+};
+
+export const fetchUserWorkspaces = function () {
+  return function (dispatch) {
+    console.log("dispatching fetchUserWorkspaces");
+    return (
+      WorkspaceApiUtil.fetchUserWorkspaces()
+        .then(
+          (workspaces) => dispatch(receiveUserWorkspaces(workspaces)),
           (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
         )
     );

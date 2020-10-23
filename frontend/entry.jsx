@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // * WorkspaceApiUtil
   // window.createWorkspaceApi = WorkspaceApiUtil.createWorkspace; // PASS - in BE user should be able to create a workspace unique to them
   // window.createWorkspace = createWorkspace; // PASS - FE State should be updated with new workspace or errors
-  // window.fetchWorkspacesApi = WorkspaceApiUtil.fetchWorkspaces; // PASS - should be able to GET current users workspaces
+  // window.fetchUserWorkspacesApi = WorkspaceApiUtil.fetchUserWorkspaces; // PASS - should be able to GET current users workspaces
   // window.fetchWorkspaceApi = WorkspaceApiUtil.fetchWorkspace; // PASS - should be able to GET specific workspace
   // window.fetchWorkspace = fetchWorkspace; // PASS - should be able to GET specific workspace
   

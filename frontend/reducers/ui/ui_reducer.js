@@ -12,7 +12,7 @@ const uiReducer = function (oldState = _defaultUI, action) {
 
   switch (action.type) {
     case TOGGLE_SIDEBAR:
-      console.log("toggling sidebar (uiReducer)");
+      // console.log("toggling sidebar (uiReducer)");
       return Object.assign({}, oldState, { sidebarCollapse: !oldState.sidebarCollapse })
     default:
       return oldState;

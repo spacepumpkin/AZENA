@@ -9,12 +9,12 @@ import ContentBoxContainer from "./content_box/content_box_container"; // always
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
-    console.info(props);
+    // console.info(props);
   }
 
   componentDidMount() {
     document.title = `azena - Main`;
-    console.log(`mounted Main (${this.props.page})`);
+    // console.log(`mounted Main (${this.props.page})`);
 
     // Testing fetch for workspaces -> will be removed when we have fetchEverything
     this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();

@@ -33,7 +33,7 @@ const receiveProjectErrors = function (errors) {
 
 export const createProject = function (project) {
   return function (dispatch) {
-    console.log("dispatching createProject");
+    // console.log("dispatching createProject");
     return (
       ProjectApiUtil.createProject(project)
         .then(

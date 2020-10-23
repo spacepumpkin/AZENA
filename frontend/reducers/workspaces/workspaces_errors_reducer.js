@@ -10,7 +10,7 @@ const workspacesErrorsReducer = function (oldState = [], action) {
       // console.log("receiving workspace (workspacesErrorsReducer)");
       return [];
     case RECEIVE_WORKSPACE_ERRORS:
-      console.log(`receiving workspace errors (workspacesErrorsReducer)`)
+      // console.log(`receiving workspace errors (workspacesErrorsReducer)`)
       return Object.assign([], oldState, action.errors)
     default:
       return oldState;

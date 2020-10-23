@@ -10,7 +10,7 @@ const projectsErrorsReducer = function (oldState = [], action) {
       // console.log("receiving project (projectsErrorsReducer)");
       return [];
     case RECEIVE_PROJECT_ERRORS:
-      console.log(`receiving project errors (projectsErrorsReducer)`)
+      // console.log(`receiving project errors (projectsErrorsReducer)`)
       return Object.assign([], oldState, action.errors)
     default:
       return oldState;

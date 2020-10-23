@@ -7,7 +7,7 @@ export default class TopBar extends React.Component {
   }
 
   componentDidMount() {
-    console.log(`mounted Topbar (${this.props.page})`);
+    // console.log(`mounted Topbar (${this.props.page})`);
   }
 
   handleLogout(evt) {

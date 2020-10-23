@@ -10,11 +10,11 @@ prop passed in, inside the div with id 'root'.
 
 // ------------------------------ TESTING START -------------------------------
 // * Session
-import * as SessionApiUtil from "./util/session_api_util";
-import { signup, login, logout } from "./actions/session_actions";
+// import * as SessionApiUtil from "./util/session_api_util";
+// import { signup, login, logout } from "./actions/session_actions";
 // * Workspaces
-import * as WorkspaceApiUtil from "./util/workspace_api_util";
-import { createWorkspace, fetchWorkspace } from "./actions/workspace_actions";
+// import * as WorkspaceApiUtil from "./util/workspace_api_util";
+// import { createWorkspace, fetchWorkspace } from "./actions/workspace_actions";
 // ------------------------------ TESTING END ---------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       usersProjects,
       usersTasks } = currentUserPayload;
     // const currentWorkspaces = (window.workspaces) ? window.workspaces : {} ;
-    console.info("currentUser:", currentUser);
+    // console.info("currentUser:", currentUser);
     preloadedState = {
       entities: {
         users: users,
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
     
-    // ! uncomment later: delete window.currentUser;
+    delete window.currentUser;
   }
 
   // Setup store and render main React DOM
@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ------------------------------ TESTING START ------------------------------
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
+  // window.getState = store.getState;
+  // window.dispatch = store.dispatch;
 
   // * SessionApiUtil
   // window.sessionSignUp = SessionApiUtil.signup; // PASS - user should be able to sign up and login in BE

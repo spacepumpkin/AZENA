@@ -18,11 +18,11 @@ const sessionReducer = function (oldState = _nullSession, action) {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      console.log("receiving current user (sessionReducer)");
+      // console.log("receiving current user (sessionReducer)");
       // ! Modified for user payload
       return Object.assign({}, oldState, {id: action.payload.currentUser.id});
     case LOGOUT_CURRENT_USER:
-      console.log("logging out current user");
+      // console.log("logging out current user");
       return _nullSession;
     default:
       return oldState;

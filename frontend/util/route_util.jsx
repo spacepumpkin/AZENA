@@ -11,7 +11,7 @@ const mSP = function(state) {
 // Auth Route / PreAuth Route
 
 const Auth = function ({ loggedIn, path, component: Component}) {
-  console.log("in Auth route");
+  // console.log("in Auth route");
   return (
     <Route
       path={path}
@@ -26,7 +26,7 @@ const Auth = function ({ loggedIn, path, component: Component}) {
 // Protected Route / PostAuth Route
 
 const Protected = function ({ loggedIn, path, page, component: Component}) {
-  console.log("in Protected route");
+  // console.log("in Protected route");
   return (
     <Route
       path={path}

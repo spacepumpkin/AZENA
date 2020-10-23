@@ -8,14 +8,14 @@ const workspacesReducer = function(oldState = {}, action) {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      console.log("receiving current user (workspacesReducer");
+      // console.log("receiving current user (workspacesReducer");
       // const { workspaces } = action.payload;
       return Object.assign({}, oldState, action.payload.workspaces);
     case RECEIVE_WORKSPACE:
-      console.log(`receiving workspace (workspacesReducer)`)
+      // console.log(`receiving workspace (workspacesReducer)`)
       return Object.assign({}, oldState, { [action.workspace.id]: action.workspace } );
     case RECEIVE_USER_WORKSPACES:
-      console.log(`receiving user workspaces (workspacesReducer)`)
+      // console.log(`receiving user workspaces (workspacesReducer)`)
       return Object.assign({}, oldState, action.workspaces );
     default:
       return oldState;

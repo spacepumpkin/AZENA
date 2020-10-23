@@ -18,7 +18,7 @@ export const RECEIVE_WORKSPACE = "RECEIVE_WORKSPACE";
 export const RECEIVE_WORKSPACE_ERRORS = "RECEIVE_WORKSPACE_ERRORS";
 
 const receiveUserWorkspaces = function(workspaces) {
-  console.log("receiving user workspaces");
+  // console.log("receiving user workspaces");
   return {
     type: RECEIVE_USER_WORKSPACES,
     workspaces
@@ -26,7 +26,7 @@ const receiveUserWorkspaces = function(workspaces) {
 }
 
 const receiveWorkspace = function(workspace) {
-  console.log("receiving workspace");
+  // console.log("receiving workspace");
   return {
     type: RECEIVE_WORKSPACE,
     workspace
@@ -34,7 +34,7 @@ const receiveWorkspace = function(workspace) {
 }
 
 const receiveWorkspaceErrors = function(errors) {
-  console.log("receiving workspace errors");
+  // console.log("receiving workspace errors");
   return {
     type: RECEIVE_WORKSPACE_ERRORS,
     errors
@@ -45,7 +45,7 @@ const receiveWorkspaceErrors = function(errors) {
 
 export const createWorkspace = function (workspace) {
   return function (dispatch) {
-    console.log("dispatching createWorkspace");
+    // console.log("dispatching createWorkspace");
     return (
       WorkspaceApiUtil.createWorkspace(workspace)
         .then(
@@ -58,7 +58,7 @@ export const createWorkspace = function (workspace) {
 
 export const fetchWorkspace = function (workspaceId) {
   return function (dispatch) {
-    console.log("dispatching fetchWorkspace");
+    // console.log("dispatching fetchWorkspace");
     return (
       WorkspaceApiUtil.fetchWorkspace(workspaceId)
         .then(
@@ -71,7 +71,7 @@ export const fetchWorkspace = function (workspaceId) {
 
 export const fetchUserWorkspaces = function () {
   return function (dispatch) {
-    console.log("dispatching fetchUserWorkspaces");
+    // console.log("dispatching fetchUserWorkspaces");
     return (
       WorkspaceApiUtil.fetchUserWorkspaces()
         .then(

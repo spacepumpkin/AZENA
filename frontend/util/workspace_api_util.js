@@ -20,7 +20,7 @@
 
 // Don't need user ID since we can only access current user's workspaces anyway
 export const fetchUserWorkspaces = () => {
-  console.log(`fetching currentUsers's workspaces...`);
+  // console.log(`fetching currentUsers's workspaces...`);
   return $.ajax({
     url: `/api/workspaces`,
     method: "GET",
@@ -28,7 +28,7 @@ export const fetchUserWorkspaces = () => {
 }
 
 export const fetchWorkspace = (workspaceId) => {
-  console.log(`fetching workspaces #${workspaceId}...`);
+  // console.log(`fetching workspaces #${workspaceId}...`);
   return $.ajax({
     url: `/api/workspaces/${workspaceId}`,
     method: "GET",
@@ -36,7 +36,7 @@ export const fetchWorkspace = (workspaceId) => {
 }
 
 export const createWorkspace = (workspace) => {
-  console.log(`creating new workspace...`);
+  // console.log(`creating new workspace...`);
   return $.ajax({
     url: `/api/workspaces`,
     method: "POST",
@@ -48,7 +48,7 @@ export const createWorkspace = (workspace) => {
 //  data: { workspace: { creator_id: window.getState().session.id, name: workspace.name, description: workspace.description} }
 
 export const deleteWorkspace = (workspaceId) => {
-  console.log(`deleting workspace ${workspaceId} ...`);
+  // console.log(`deleting workspace ${workspaceId} ...`);
   return $.ajax({
     url: `/api/workspaces/${workspaceId}`,
     method: "DELETE"

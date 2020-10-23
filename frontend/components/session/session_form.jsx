@@ -21,7 +21,7 @@ export default class SessionForm extends React.Component {
   componentDidMount() {
     document.title = `azena - ${this.props.formType}`;
     document.body.classList.add("gray");
-    console.log(`routed to ${this.props.formType} form`);
+    // console.log(`routed to ${this.props.formType} form`);
     // if (this.props.demo !== undefined && this.props.demo === "demo") { this.demoLogin() } // ! Ryan's method for demologin
   }
 
@@ -31,7 +31,7 @@ export default class SessionForm extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log(`Unmounting ${this.props.formType} form`);
+    // console.log(`Unmounting ${this.props.formType} form`);
     document.body.classList.remove("gray");
     this.props.receiveSessionErrors([]);
   }
@@ -101,7 +101,7 @@ export default class SessionForm extends React.Component {
 
   render() {
     const { formType, sessionErrors } = this.props;
-    console.log(`rendering session form (${formType})...`);
+    // console.log(`rendering session form (${formType})...`);
 
     // ! will have to optimize later
     let emailErrors = [], usernameErrors = [], passwordErrors = [];

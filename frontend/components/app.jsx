@@ -18,7 +18,7 @@ import WorkspaceContainer from "./workspace/workspace_container";
 // ProtectedRoute / PostAuth - only current user can access - redirect to /
 
 const App = function (props) {
-  console.log("rendering App...")
+  // console.log("rendering App...")
 
   return (
     <div id="main-wrapper">

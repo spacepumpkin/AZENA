@@ -8,7 +8,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     if (document.title !== "azena") { document.title = "azena" };
-    console.log("routed to Home page");
+    // console.log("routed to Home page");
     // this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();
   }
 

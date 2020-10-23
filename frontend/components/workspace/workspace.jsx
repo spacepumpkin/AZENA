@@ -8,7 +8,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     if (document.title !== "azena") { document.title = "azena" };
-    console.log("routed to Workspace page");
+    // console.log("routed to Workspace page");
     // this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();
   }
 
@@ -16,7 +16,6 @@ export default class Home extends React.Component {
     const { users, workspaces, projects } = this.props.entities;
     const workspaceId = this.props.workspaceId;
 
-    // debugger
     return (
       <div id="workspace-page">
         <div id="mainbox">

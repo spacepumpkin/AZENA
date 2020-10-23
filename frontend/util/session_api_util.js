@@ -9,7 +9,7 @@ Session API Util functions with the specified parameters:
 
 // create user in backend, log them in, and get user json back
 export const signup = (user) => {
-  console.log("posting new user");
+  // console.log("posting new user");
   return $.ajax({
     url: "/api/users",
     method: "POST",
@@ -19,7 +19,7 @@ export const signup = (user) => {
 
 // log in user in backend and get user json back
 export const login = (user) => {
-  console.log("posting new session");
+  // console.log("posting new session");
   return $.ajax({
     url: "/api/session",
     method: "POST",
@@ -29,7 +29,7 @@ export const login = (user) => {
 
 // log out any current user in backend
 export const logout = () => {
-  console.log("deleting session");
+  // console.log("deleting session");
   return $.ajax({
     url: "/api/session",
     method: "DELETE"
@@ -37,7 +37,7 @@ export const logout = () => {
 }
 
 // export const fetchEverything = () => {
-//   console.log("fetching everything for current user");
+  // console.log("fetching everything for current user");
 //   return $.ajax({
 //     url: `/api/everything`,
 //     method: "GET"

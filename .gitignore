@@ -37,6 +37,7 @@
 .DS_Store
 npm-debug.log
 test_snippets.js
+/app/controllers/api/testfile.rb
 
 #workspace 
 *.code-workspace

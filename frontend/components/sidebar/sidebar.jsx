@@ -11,7 +11,8 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
-    const { workspaces = {} , toggleSidebar, sidebarCollapse } = this.props;
+    const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse } = this.props;
+
     return (
       <div id="sidebar" className={sidebarCollapse ? "collapsed" : ""} >
         <div id="sidebar-top">
@@ -36,8 +37,16 @@ export default class Sidebar extends React.Component {
                   <Link to={`/workspaces/${workspace.id}`} className="sidebar-workspace-title">{workspace.name}</Link>
 
                   <div className="sidebar-workspace-projects">
-                    <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 1</Link>
-                    <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 2</Link>
+                    {
+                      Object.values(projects).map((project) => {
+                        return (
+                          (project.workspaceId === workspace.id) &&
+                          <Link to="/home" className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                        )
+                      })
+                    }
+                    {/* <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 1</Link>
+                    <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 2</Link> */}
                   </div>
                 </div>
               )

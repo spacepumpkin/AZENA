@@ -6,6 +6,7 @@ import { toggleSidebar } from "../../actions/ui_actions.js";
 const mSP = function ({ ui, entities }) {
   return {
     workspaces: entities.workspaces,
+    projects: entities.projects,
     sidebarCollapse: ui.sidebarCollapse
   }
 };

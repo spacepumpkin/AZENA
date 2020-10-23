@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const { currentUser } = window;
     const { id } = currentUser;
     const currentWorkspaces = (window.workspaces) ? window.workspaces : {} ;
-    console.log(currentUser);
+    console.info("currentUser:", currentUser);
     preloadedState = {
       entities: {
         users: {
@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Setup store and render main React DOM
   const store = configureStore(preloadedState);
-  console.log(store);
   ReactDOM.render(<Root store={store} />, rootEl);
   
   // THEME SWITCH --------------------------------------------------------------
@@ -68,12 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // CLOSING DROPDOWNS ---------------------------------------------------------
   // closes dropdown menus if user clicks outside
-  function closeDropDowns() {
-    Array.from(document.querySelectorAll("[id$=-'dropdown']"))
-      .forEach((dropdown) => {
-        dropdown.classList.add("hide")
-      });
-  } 
+  // function closeDropDowns() {
+  //   Array.from(document.querySelectorAll("[id$=-'dropdown']"))
+  //     .forEach((dropdown) => {
+  //       dropdown.classList.add("hide")
+  //     });
+  // } 
   // ---------------------------------------------------------------------------
 
 

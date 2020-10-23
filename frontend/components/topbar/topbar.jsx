@@ -3,11 +3,7 @@ import React from "react";
 export default class TopBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sidebarCollapse: false
-    }
     this.handleLogout = this.handleLogout.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this);
   }
 
   componentDidMount() {
@@ -19,16 +15,13 @@ export default class TopBar extends React.Component {
     this.props.logout() //.then(() => this.props.history.push("/"));
   }
 
-  toggleSidebar() {
-    this.setState({ sidebarCollapse: !sidebarCollapse });
-  }
-
   render() {
-
+    const { topbarTitle } = this.props;
+    
     return (
       <div id="main-header">
         <div className="sidebar-menu-button">
-          <img onClick={this.toggleSidebar} src={window.chevronCircleRight} alt="sidebar open button" />
+          <img onClick={this.props.toggleSidebar} src={window.chevronCircleRight} alt="sidebar open button" />
         </div>
 
         <div className="header-icon">
@@ -38,7 +31,7 @@ export default class TopBar extends React.Component {
         {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
         <div>
           <div className="header-title">
-            {this.props.title}
+            {topbarTitle}
           </div>
           <nav>
 

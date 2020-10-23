@@ -2,8 +2,8 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { ProtectedRoute } from "../../util/route_util";
 
-import SidebarContainer from "./sidebar/sidebar_container"; // always there
-import TopBarContainer from "./topbar/topbar_container";    // always there
+// import SidebarContainer from "./sidebar/sidebar_container"; // always there
+// import TopBarContainer from "./topbar/topbar_container";    // always there
 import ContentBoxContainer from "./content_box/content_box_container"; // always there
 
 export default class Main extends React.Component {
@@ -26,17 +26,17 @@ export default class Main extends React.Component {
     const urlPath = this.props.match.path || "/home";
     // Things to pass to TopBarContainer
     let that = this;
-    let title = "";
-    if (workspaces !== undefined || workspaces.length !== 0) {
-        title = ((path) => {
-        switch (path) {
-          case "/workspaces/:workspaceId":
-            return workspaces[that.props.match.params.workspaceId].name;
-          default:
-            return "Home";
-        } 
-      })(urlPath);
-    }
+    // let title = "";
+    // if (workspaces !== undefined || workspaces.length !== 0) {
+    //     title = ((path) => {
+    //     switch (path) {
+    //       case "/workspaces/:workspaceId":
+    //         return workspaces[that.props.match.params.workspaceId].name;
+    //       default:
+    //         return "Home";
+    //     } 
+    //   })(urlPath);
+    // }
     // if match.path === "/home", title == "Home"
     // if match.path === "/workspaces/:workspaceId" {} title == "workspaces[:id].name"
     // if Project, title == "projects[:id].name"

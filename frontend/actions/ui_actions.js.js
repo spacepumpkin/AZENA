@@ -7,7 +7,6 @@ export const toggleSidebar = function() {
   }
 };
 
-
 // Click Toggle Dropdown Menus
 // export function toggleDropDown(evt) {
 //   evt.currentTarget.nextSibling.classList.toggle("hide")

@@ -56,11 +56,11 @@ export default class Main extends React.Component {
               </div>
             </div>
 
-            <Switch>
-              {/* <Route exact path="/home" component={}/> */}
+            {/* <Switch>
+              <Route exact path="/home" component={}/>
               <Route path="/test1" render={() => <div className="testbox" >test 1!</div>} />
               <Route path="/test2" render={() => <div className="testbox">test 2!</div>} />
-            </Switch>
+            </Switch> */}
 
             
             <ContentBoxContainer />

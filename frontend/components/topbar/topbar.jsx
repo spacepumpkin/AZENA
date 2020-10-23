@@ -16,13 +16,16 @@ export default class TopBar extends React.Component {
   }
 
   render() {
-    const { title } = this.props;
+    const { title, toggleSidebar, sidebarCollapse } = this.props;
 
     return (
       <div id="topbar">
-        <div className="sidebar-menu-button">
+        {/* <div className="sidebar-menu-button">
           <img onClick={this.props.toggleSidebar} src={window.chevronCircleRight} alt="sidebar open button" />
-        </div>
+        </div> */}
+        <button onClick={toggleSidebar} className={
+          `sidebar-menu-button chevron-right ${!sidebarCollapse ? "collapsed" : ""}`
+          } type="button" />
         <div id="topbar-main-header">
           <div className="header-icon">
             <span></span>
@@ -35,7 +38,7 @@ export default class TopBar extends React.Component {
         </div>
         <div id="topbar-user">
           {/* User Settings + TaskSearch + Global Actions */}
-          <button type="button" onClick={this.handleLogout}>Log Out</button>
+          <button id="logout-button" type="button" onClick={this.handleLogout}>Log Out</button>
         </div>
       </div>
     )

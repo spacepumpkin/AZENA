@@ -1,47 +1,40 @@
-// Workspace Main Box
-// has: description + list of members + list of projects
-
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
-export default class Workspace extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
+    if (document.title !== "azena") { document.title = "azena" };
+    console.log("routed to Workspace page");
+    // this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();
   }
 
   render() {
-    console.log("rendering Workspace...")
+    const { users, workspaces, projects } = this.props.entities;
+    const workspaceId = this.props.workspaceId;
 
-    // const { description } = this.props;
-
+    // debugger
     return (
-      <>
-        <div id="workspace-leftpane">
-          <div id="workspace-description">
-            <div id="workspace-description-title">
-              Description
-            </div>
-            <form>
-              <textarea id="workspace-description-text" placeholder="Click to add team description...">
-                {/* {workspace.description} */}
-              </textarea>
-            </form>
+      <div id="workspace-page">
+        <div id="mainbox">
+          <div className="sidebar-workspace-projects">
+            <h1>Projects</h1>
+            {
+              Object.values(projects).map((project) => {
+                return (
+                  (project.workspaceId === workspaceId) &&
+                  <Link to="/home" key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                )
+              })
+            }
           </div>
-          <div id="workspace-members">
-            <div id="workspace-members-title">
-              Members
-            </div>
-            <div id="workspace-members-list">
-              <ul>
-                Members List
-              </ul>
-            </div>
-          </div>
-
         </div>
-      </>
+      </div>
     )
   }
-};
+}
+
+// recent changes: removed window.currentUser requirement for logout button after making it a protected route

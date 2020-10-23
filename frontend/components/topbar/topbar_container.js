@@ -8,21 +8,27 @@ import { toggleSidebar } from "../../actions/ui_actions.js";
 
 function getTopBarTitle(entities, ownProps) {
   // if (workspaces !== undefined || workspaces.length !== 0) {
-  switch (ownProps.match.path) {
-    case "/workspaces/:workspaceId":
-      return entities.workspaces[ownProps.match.params.workspaceId].name;
-    case "/projects/:projectId/board":
-      return entities.projects[ownProps.match.params.projectId].name;
-    default:
-      return "Home";
+  // switch (ownProps.match.path) {
+  //   case "/workspaces/:workspaceId":
+  //     return entities.workspaces[ownProps.match.params.workspaceId].name;
+  //   case "/projects/:projectId/board":
+  //     return entities.projects[ownProps.match.params.projectId].name;
+  //   default:
+  //     return "Home";
+  // }
+  let pathname = ownProps.location.pathname;
+  if (pathname.includes("workspaces")) {
+    return entities.workspaces[pathname.slice("/workspaces/".length)].name;
+  } else {
+    return "Home";
   }
 }
 
-const mSP = function ({entities}, ownProps) {
+const mSP = function ({entities, ui}, ownProps) {
   const title = getTopBarTitle(entities, ownProps);
-  
   return {
-    title: title
+    title: title,
+    sidebarCollapse: ui.sidebarCollapse
   };
 };
 

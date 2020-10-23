@@ -37,5 +37,13 @@ const Protected = function ({ loggedIn, path, page, component: Component}) {
   );
 };
 
+const ProtectedCheck = function ({ loggedIn, component: Component }) {
+
+  return (
+    loggedIn && Component
+  )
+}
+
 export const AuthRoute = withRouter(connect(mSP)(Auth));
 export const ProtectedRoute = withRouter(connect(mSP)(Protected));
+export const ProtectedLayout = withRouter(connect(mSP)(ProtectedCheck));

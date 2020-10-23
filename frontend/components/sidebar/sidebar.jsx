@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default class Sidebar extends React.Component {
   constructor(props) {
@@ -14,14 +14,14 @@ export default class Sidebar extends React.Component {
     const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse } = this.props;
 
     return (
-      <div id="sidebar" className={sidebarCollapse ? "collapsed" : ""} >
+      <div id="sidebar" className={`${sidebarCollapse ? "collapsed" : ""}`} >
         <div id="sidebar-top">
-          <div className="logo">
-            <img src={window.logoMainURL} alt="azena logo" />
-          </div>
-          <div className="sidebar-menu-button">
+          <Link id="sidebar-logo" to="/home" > <img  src={window.logoMainURL} /> </Link>
+          <button onClick={toggleSidebar} className={`sidebar-menu-button chevron-left`} type="button" />
+
+          {/* <div className="sidebar-menu-button">
             <img onClick={toggleSidebar} src={window.chevronCircleLeft} alt="sidebar close button" />
-          </div>
+          </div> */}
         </div>
         <div id="sidebar-links">
           <Link to="/home"><img className="sidebar-icon" src={window.homeIcon} alt="homeicon" />&nbsp; Home </Link>
@@ -34,8 +34,10 @@ export default class Sidebar extends React.Component {
             Object.values(workspaces).map((workspace) => {
               return (
                 <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
-                  <Link to={`/workspaces/${workspace.id}`} className="sidebar-workspace-title">{workspace.name}</Link>
-
+                  <div className="sidebar-workspace-title-wrapper">
+                    <NavLink activeClassName="selected-primary" to={`/workspaces/${workspace.id}`} className="sidebar-workspace-title">{workspace.name}</NavLink>
+                    <button className={`sidebar-workspace-plus`} type="button" />
+                  </div>
                   <div className="sidebar-workspace-projects">
                     {
                       Object.values(projects).map((project) => {

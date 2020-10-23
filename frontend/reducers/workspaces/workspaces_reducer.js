@@ -2,10 +2,15 @@ import {
   RECEIVE_WORKSPACE,
   RECEIVE_USER_WORKSPACES
 } from "../../actions/workspace_actions";
+import { RECEIVE_CURRENT_USER } from "../../actions/session_actions";
 
 const workspacesReducer = function(oldState = {}, action) {
   Object.freeze(oldState);
   switch (action.type) {
+    case RECEIVE_CURRENT_USER:
+      console.log("receiving current user (workspacesReducer");
+      // const { workspaces } = action.payload;
+      return Object.assign({}, oldState, action.payload.workspaces);
     case RECEIVE_WORKSPACE:
       console.log(`receiving workspace (workspacesReducer)`)
       return Object.assign({}, oldState, { [action.workspace.id]: action.workspace } );

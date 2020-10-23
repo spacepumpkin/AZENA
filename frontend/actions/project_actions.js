@@ -16,10 +16,16 @@ export const RECEIVE_PROJECT = "RECEIVE_PROJECT";
 export const RECEIVE_PROJECT_ERRORS = "RECEIVE_PROJECT_ERRORS";
 
 const receiveProject = function (project) {
-  console.log("receiving project");
   return {
     type: RECEIVE_PROJECT,
     project
+  }
+}
+
+const receiveProjectErrors = function (errors) {
+  return {
+    type: RECEIVE_PROJECT_ERRORS,
+    errors
   }
 }
 

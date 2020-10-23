@@ -40,10 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
         users: users,
         workspaces: workspaces,
         projects: projects,
-        tasks: tasks,
-        usersWorkspaces: usersWorkspaces,
-        usersProjects: usersProjects,
-        usersTasks: usersTasks,
+        // tasks: tasks,
+        // usersWorkspaces: usersWorkspaces,
+        // usersProjects: usersProjects,
+        // usersTasks: usersTasks,
       },
       session: {
         id: currentUser.id

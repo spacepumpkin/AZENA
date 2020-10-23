@@ -20,11 +20,20 @@ export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 
 // For creating + logging in user (adds to users and session slices)
-const receiveCurrentUser = function (user) {
-  console.log("receiving current user...");
+// const receiveCurrentUser = function (user) {
+//   console.log("receiving current user...");
+//   return {
+//     type: RECEIVE_CURRENT_USER,
+//     user
+//   }
+// };
+
+// ! Modified for user payload
+const receiveCurrentUser = function (payload) {
+  console.log("receiving current user payload...");
   return {
     type: RECEIVE_CURRENT_USER,
-    user
+    payload
   }
 };
 
@@ -66,7 +75,7 @@ export const login = function (user) {
     return (
       SessionApiUtil.login(user)
         .then(
-          (user) => dispatch(receiveCurrentUser(user)),
+          (payload) => dispatch(receiveCurrentUser(payload)),
           (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
         )
     );

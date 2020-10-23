@@ -7,7 +7,8 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login!(@user)
-      render :show #, status: 200
+      # render :show #, status: 200
+      render :everything #, status: 200
     else
       render json: @user.errors.full_messages, status: 422
     end
@@ -29,7 +30,7 @@ class Api::UsersController < ApplicationController
 
   # Fetch every entity associated with current user (workspaces, projects, tasks, etc.)
   def everything
-    # @user = User.find_by(id: params[:id])
+    @user = User.includes(:workspaces, :projects).find_by(id: params[:id])
     render :everything
   end
 

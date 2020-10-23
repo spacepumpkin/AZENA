@@ -7,9 +7,8 @@
 
     <% if current_user %>
       <script type="text/javascript">
-        window.currentUser =
+        window.currentUserPayload =
         <%= render("api/users/all_info.json.jbuilder", user: current_user).html_safe %>
-
       </script>
     <% end %>
         <%# window.workspaces = %>

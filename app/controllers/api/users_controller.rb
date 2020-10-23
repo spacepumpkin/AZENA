@@ -8,7 +8,7 @@ class Api::UsersController < ApplicationController
     if @user.save
       login!(@user)
       # render :show #, status: 200
-      render :everything #, status: 200
+      render :everything #, status: 200 # ! for big fetch
     else
       render json: @user.errors.full_messages, status: 422
     end

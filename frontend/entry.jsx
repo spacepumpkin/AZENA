@@ -20,22 +20,33 @@ import { createWorkspace, fetchWorkspace } from "./actions/workspace_actions";
 document.addEventListener("DOMContentLoaded", () => {
   const rootEl = document.getElementById("root");
 
-  // Bootstrap currentUser and currentUser info
+  // ! Bootstrap currentUser and currentUser info - updated to get payload instead
   let preloadedState = undefined;
-  if (window.currentUser) {
-    const { currentUser } = window;
-    const { id } = currentUser;
-    const currentWorkspaces = (window.workspaces) ? window.workspaces : {} ;
+  if (window.currentUserPayload) {
+    const { currentUserPayload } = window;
+    const { 
+      currentUser, 
+      users, 
+      workspaces, 
+      projects,
+      tasks,
+      usersWorkspaces, 
+      usersProjects,
+      usersTasks } = currentUserPayload;
+    // const currentWorkspaces = (window.workspaces) ? window.workspaces : {} ;
     console.info("currentUser:", currentUser);
     preloadedState = {
       entities: {
-        users: {
-          [id]: currentUser
-        },
-        workspaces: currentWorkspaces
+        users: users,
+        workspaces: workspaces,
+        projects: projects,
+        tasks: tasks,
+        usersWorkspaces: usersWorkspaces,
+        usersProjects: usersProjects,
+        usersTasks: usersTasks,
       },
       session: {
-        id: id
+        id: currentUser.id
       }
     };
     

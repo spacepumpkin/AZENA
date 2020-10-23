@@ -24,7 +24,7 @@
 
 // MainHeader (Workspace, Project, etc.)
 
-#main-header {
+#topbar-main-header {
   display    : flex;
   align-items: center;
   width      : 50%;
@@ -91,16 +91,4 @@
   width : $mainbox-width;
   height    : 100%;
   border    : 1px dashed violet;
-}
-
-
-
-.testbox {
-  width: 50px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  z-index: 2;
-  align-self: center;
-  margin-top: 100px;
 }

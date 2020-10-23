@@ -41,7 +41,7 @@ export default class Sidebar extends React.Component {
                       Object.values(projects).map((project) => {
                         return (
                           (project.workspaceId === workspace.id) &&
-                          <Link to="/home" className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                          <Link to="/home" key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
                         )
                       })
                     }

@@ -16,26 +16,26 @@ export default class TopBar extends React.Component {
   }
 
   render() {
-    const { topbarTitle } = this.props;
-    
+    const { title } = this.props;
+
     return (
-      <div id="main-header">
+      <div id="topbar">
         <div className="sidebar-menu-button">
           <img onClick={this.props.toggleSidebar} src={window.chevronCircleRight} alt="sidebar open button" />
         </div>
-
-        <div className="header-icon">
-          <span></span>
-        </div>
-
-        {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
-        <div>
-          <div className="header-title">
-            {topbarTitle}
+        <div id="topbar-main-header">
+          <div className="header-icon">
+            <span></span>
           </div>
-          <nav>
 
-          </nav>
+          {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
+          <div className="header-title-wrapper">
+            <div className="header-title"> {title} </div>
+          </div>
+        </div>
+        <div id="topbar-user">
+          {/* User Settings + TaskSearch + Global Actions */}
+          <button type="button" onClick={this.handleLogout}>Log Out</button>
         </div>
       </div>
     )

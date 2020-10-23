@@ -22,10 +22,11 @@ const App = function (props) {
     <div>
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}
       <ProtectedRoute path="/" component={SidebarContainer} />
+      {/* <div > */}
       <ProtectedRoute path="/" component={TopBarContainer} />
       <Switch>
         <ProtectedRoute path="/home" component={HomeContainer} />
-        {/* <ProtectedRoute exact path="/workspaces/:workspaceId" component={HomeContainer} /> */}
+        <ProtectedRoute exact path="/workspaces/:workspaceId" component={HomeContainer} />
         {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
         {/* <ProtectedRoute exact path="/projects/:projectId/list" component={ProjectListContainer} /> */}
         {/* <ProtectedRoute exact path="/test1" component={MainContainer} />
@@ -37,6 +38,7 @@ const App = function (props) {
         <AuthRoute path="/" component={SplashContainer} />
         {/* <Redirect to="/" /> */}
       </Switch>
+      {/* </div> */}
     </div>
   );
 };

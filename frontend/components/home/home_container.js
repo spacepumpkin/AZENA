@@ -13,8 +13,8 @@ const mSP = function(state) {
 
 const mDP = function(dispatch) {
   return {
-    logout: () => dispatch(logout()),
-    fetchUserWorkspaces: () => dispatch(fetchUserWorkspaces())
+    // logout: () => dispatch(logout()),
+    // fetchUserWorkspaces: () => dispatch(fetchUserWorkspaces())
   };
 };
 

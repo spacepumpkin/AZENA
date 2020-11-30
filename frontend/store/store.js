@@ -14,16 +14,18 @@ const thunk = function({dispatch, getState}) {
   }
 }
 
+const middlewares = [thunk];
+
 // ! Refactor later to ignore logger in production rather than hardcode out
-// if (process.env.NODE_ENV !== "production") {
-//   // must use 'require' (import only allowed at top of file)
-//   const { logger } = require("redux-logger");
-//   middlewares.push(logger);
-// } 
+if (process.env.NODE_ENV !== "production") {
+  // must use 'require' (import only allowed at top of file)
+  const { logger } = require("redux-logger");
+  middlewares.push(logger);
+} 
 
 // generate store that can take in a preloadedState (like current session)
 const configureStore = function(preloadedState = {}) {
-  return createStore(rootReducer, preloadedState, applyMiddleware(thunk))
+  return createStore(rootReducer, preloadedState, applyMiddleware(...middlewares))
 };
 
 export default configureStore;

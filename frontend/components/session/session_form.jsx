@@ -173,14 +173,16 @@ export default class SessionForm extends React.Component {
             {
               formType === "Sign Up" &&
               <label> Username{" "}<span>(required)</span>
-                <input id="session-username" type="text" value={this.state.username} onChange={this.handleChange("username")} />
+                <input id="session-username" type="text" value={this.state.username} 
+                onChange={this.handleChange("username")} />
                 <div className="session-error">{usernameErrors.join(", ")}</div>
               </label>
             }
             
             <label> Password{" "}
               {formType === "Sign Up" && <span>(minimum 6 characters)</span>} 
-              <input id="session-password" type="password" value={this.state.password} onChange={this.handleChange("password")}/>
+              <input id="session-password" type="password" value={this.state.password} 
+              onChange={this.handleChange("password")} autoComplete="off"/>
               <div className="session-error">{passwordErrors.join(", ")}</div>
             </label>
 

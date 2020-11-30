@@ -9,6 +9,7 @@ export default class Sidebar extends React.Component {
       plusMenuWorkspaceId: -1
     }
     this.showPlusMenu = this.showPlusMenu.bind(this);
+    this.renderCount = 0;
   }
 
   componentDidMount() {
@@ -20,23 +21,62 @@ export default class Sidebar extends React.Component {
       if (this.state.plusMenuWorkspaceId === workspaceId) {
         this.setState({ plusMenuWorkspaceId: -1 })
       } else {
-        this.setState({ plusMenuWorkspaceId: workspaceId })
+        this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId })
       }
     }
   }
 
   showProjects(workspaceId) {
     return (e) => {
-      // if (this.state.activeWorkspaceId === workspaceId) {
-      //   this.setState({ activeWorkspaceId: -1 })
-      // } else {
-        this.setState({ activeWorkspaceId: workspaceId })
-      // }
+      if (this.state.activeWorkspaceId === workspaceId) {
+        this.setState({ activeWorkspaceId: -1, plusMenuWorkspaceId: -1 })
+      } else {
+        this.setState({ activeWorkspaceId: workspaceId, plusMenuWorkspaceId: -1 })
+      }
     }
   }
 
   render() {
-    const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse } = this.props;
+    const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse } = this.props; 
+    const { activeWorkspaceId, plusMenuWorkspaceId} = this.state;
+    this.renderCount += 1;
+    console.log("render count: ", this.renderCount);
+
+    const mappedWorkspaces = (
+      Object.values(workspaces).map((workspace) => {
+        debugger
+        let showMenu = this.state.plusMenuWorkspaceId === workspace.id;
+        return (
+          <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
+            <div className="sidebar-workspace-title-wrapper">
+              <NavLink activeClassName="selected-primary"
+                to={`/workspaces/${workspace.id}`}
+                className="sidebar-workspace-title"
+                onClick={this.showProjects(workspace.id)}
+              >
+                {workspace.name}
+              </NavLink>
+              <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} onClick={this.showPlusMenu(workspace.id)} type="button" />
+              <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}>
+                <Link to={`/projects/new`}>Create New Project</Link>
+              </div>
+            </div>
+            <div className="sidebar-workspace-projects">
+              {
+                (this.state.activeWorkspaceId === workspace.id) &&
+                Object.values(projects).map((project) => {
+                  return (
+                    (project.workspaceId === workspace.id) &&
+                    <Link to="/home" key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                  )
+                })
+              }
+            </div>
+          </div>
+        )
+      }
+      )
+    )
 
     return (
       <div id="sidebar" className={`${sidebarCollapse ? "collapsed" : ""}`} >
@@ -54,24 +94,26 @@ export default class Sidebar extends React.Component {
           <h1>My Workspaces</h1>
           {
             Object.values(workspaces).map((workspace) => {
+              debugger
+              let showMenu = plusMenuWorkspaceId === workspace.id;
+              let showProjects = activeWorkspaceId === workspace.id;
               return (
                 <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
                   <div className="sidebar-workspace-title-wrapper">
-                    <NavLink activeClassName="selected-primary"
-                      to={`/workspaces/${workspace.id}`}
-                      className="sidebar-workspace-title"
+                    <Link to={`/workspaces/${workspace.id}`}
+                      className={`sidebar-workspace-title ${showProjects ? "selected-primary" : ""}`}
                       onClick={this.showProjects(workspace.id)}
                     >
                       {workspace.name}
-                    </NavLink>
-                    <button className={`sidebar-workspace-plus`} onClick={this.showPlusMenu(workspace.id)} type="button" />
-                    <div className={`sidebar-workspace-plus-menu ${(this.state.plusMenuWorkspaceId === workspace.id) ? "show-menu" : ""}`}>
+                    </Link>
+                    <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} onClick={this.showPlusMenu(workspace.id)} type="button" />
+                    <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}>
                       <Link to={`/projects/new`}>Create New Project</Link>
                     </div>
                   </div>
                   <div className="sidebar-workspace-projects">
                     {
-                      (this.state.activeWorkspaceId === workspace.id) &&
+                      (showProjects) &&
                       Object.values(projects).map((project) => {
                         return (
                           (project.workspaceId === workspace.id) &&

@@ -33,7 +33,7 @@ export default class TopBar extends React.Component {
 
           {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
           <div className="header-title-wrapper">
-            <div className="header-title"> {title} </div>
+            <div className="header-title" contentEditable > {title} </div>
           </div>
         </div>
         <div id="topbar-user">

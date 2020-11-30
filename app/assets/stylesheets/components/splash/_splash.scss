@@ -1,7 +1,7 @@
 #splash {
   width         : 100%;
   margin        : 0 0;
-  height: 100%; // does not work with flex
+  height        : 100%; // does not work with flex
   flex          : 1;
   display       : flex;
   flex-direction: column;
@@ -9,13 +9,16 @@
 
 // Main
 #splash-main {
-  margin-top: 75px;
-  width : 100%;
-  height: fit-content;
+  margin-top      : 75px;
+  width           : 100%;
+  height          : fit-content;
+  // min-height      : 80%;
+  // height       : 80%;
   // height: calc(300px + 20vh);
 }
 
 #splash-top {
+  height      : fit-content;
   width       : 100%;
   min-width   : 820px;
   margin      : 0 auto;
@@ -94,18 +97,35 @@
 #splash-top-right {
   // display: flex;
   // flex-direction: column;
-  width           : 50%;
-  // background: image-url('unsplash-splash-2-gs.jpg') no-repeat center;
+  height             : 70vh;
+  width              : 50%;
+  // background      : image-url('unsplash-splash-2.jpg') no-repeat center/100%;
+  // background-size : 500px;
+  // filter          : grayscale(100%);
   // white-space  : nowrap;
 
   #splash-top-img {
-    width     : 100%;
-    filter    : contrast(1.2);
-    opacity   : 0.8;
-    transition: all 0.5s ease 0s;
+    width          : 100%;
+    height         : 100%;
+    // margin-top: 50px;
+    background     : image-url('unsplash-splash-2.jpg') no-repeat center;
+    background-size: cover;
+    filter         : contrast(1.2) grayscale(100%);
+    transition     : all 0.5s ease 0s;
 
-    &:hover {
-      opacity: 1.0;
-    }
+    // &:hover {
+    //   filter: grayscale(0%);
+    // }
   }
+
+  // #splash-top-img {
+  //   width     : 100%;
+  //   filter    : contrast(1.2);
+  //   opacity   : 0.8;
+  //   transition: all 0.5s ease 0s;
+
+  //   &:hover {
+  //     opacity: 1.0;
+  //   }
+  // }
 }

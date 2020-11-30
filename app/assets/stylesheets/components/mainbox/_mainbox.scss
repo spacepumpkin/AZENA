@@ -26,7 +26,8 @@
   top             : 0;
   // left: 0;
   background-color: white;
-  padding-top     : 20px;
+  // padding-top     : 20px;
+  padding-top     : $main-padding-top;
   padding-bottom  : 20px;
   border-bottom   : 1px solid $lighter-gray;
   box-shadow      : 5px 0 $gray;

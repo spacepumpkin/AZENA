@@ -18,7 +18,7 @@ const SplashNav = function (props) {
     <div id="splash-nav-wrapper">
       <div id="splash-nav">
         <div id="splash-nav-logo"><Link to="/"><img id="splash-logo" src={window.logoMainURL} /></Link></div>
-        <nav id="splash-nav-items">
+        {/* <nav id="splash-nav-items">
           <div className="splash-nav-item">
             <button type="button">Why Azena?</button>
             <ul className="splash-nav-dropdown hide">
@@ -37,7 +37,7 @@ const SplashNav = function (props) {
           <div className="splash-nav-item">
             <Link to="/"><button type="button">Pricing</button></Link>
           </div>
-        </nav >
+        </nav > */}
         <div className="empty"><span> . . . </span></div>
         <div id="splash-nav-right">
           <Link to="/login" id="splash-login-link"><button type="button"> Log In </button></Link>{" "}

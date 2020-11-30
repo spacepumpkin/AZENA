@@ -12,7 +12,7 @@ const SplashFooter = function (props) {
         </div>
         <div className="profile-links">
           <Link to="https://github.com/spacepumpkin/AZENA"><img src={window.github} alt="github profile" /></Link>
-          <Link to="#"><img src={window.linkedin} alt="linkedin profile" /></Link>
+          <Link to="https://www.linkedin.com/in/gary-w-269749ba/"><img src={window.linkedin} alt="linkedin profile" /></Link>
         </div>
       </div>
     </footer>

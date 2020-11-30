@@ -18,7 +18,8 @@ const SplashMain = function (props) {
 
         </div>
         <div id="splash-top-right">
-          <img id="splash-top-img" src={window.splashImageGS} alt="employees working but fun" />
+          <div id="splash-top-img"></div>
+          {/* <img id="splash-top-img" src={window.splashImage} alt="employees working but fun" /> */}
           <span></span>
         </div>
       </section>

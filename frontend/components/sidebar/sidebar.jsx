@@ -5,7 +5,8 @@ export default class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeWorkspaceId: props.workspaces ? Object.keys(props.workspaces)[0] : 0
+      activeWorkspaceId: props.workspaces ? Object.keys(props.workspaces)[0] : -1,
+      plusMenuWorkspaceId: -1
     }
     this.showPlusMenu = this.showPlusMenu.bind(this);
   }
@@ -16,7 +17,21 @@ export default class Sidebar extends React.Component {
 
   showPlusMenu(workspaceId) {
     return (e) => {
+      if (this.state.plusMenuWorkspaceId === workspaceId) {
+        this.setState({ plusMenuWorkspaceId: -1 })
+      } else {
+        this.setState({ plusMenuWorkspaceId: workspaceId })
+      }
+    }
+  }
 
+  showProjects(workspaceId) {
+    return (e) => {
+      // if (this.state.activeWorkspaceId === workspaceId) {
+      //   this.setState({ activeWorkspaceId: -1 })
+      // } else {
+        this.setState({ activeWorkspaceId: workspaceId })
+      // }
     }
   }
 
@@ -45,12 +60,12 @@ export default class Sidebar extends React.Component {
                     <NavLink activeClassName="selected-primary"
                       to={`/workspaces/${workspace.id}`}
                       className="sidebar-workspace-title"
-                      onClick={() => this.setState({ activeWorkspaceId: workspace.id }) }
-                      >
+                      onClick={this.showProjects(workspace.id)}
+                    >
                       {workspace.name}
                     </NavLink>
                     <button className={`sidebar-workspace-plus`} onClick={this.showPlusMenu(workspace.id)} type="button" />
-                    <div className={`sidebar-workspace-plus-menu ${(this.state.activeWorkspaceId === workspace.id) ? "show-menu" : ""}`}>
+                    <div className={`sidebar-workspace-plus-menu ${(this.state.plusMenuWorkspaceId === workspace.id) ? "show-menu" : ""}`}>
                       <Link to={`/projects/new`}>Create New Project</Link>
                     </div>
                   </div>

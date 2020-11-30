@@ -151,6 +151,7 @@ button.collapsed {
 .sidebar-workspace-title-wrapper {
   display        : flex;
   justify-content: space-between;
+  position       : relative;
 }
 
 .sidebar-workspace-title {
@@ -199,12 +200,35 @@ button.collapsed {
   }
 
   &:active {
-    -webkit-transform: rotate(270deg);
-    -webkit-transform: rotate(270deg);
-    -moz-transform   : rotate(270deg);
-    -o-transform     : rotate(270deg);
-    -ms-transform    : rotate(270deg);
-    transform        : rotate(270deg);
+    -webkit-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    -moz-transform   : rotate(135deg);
+    -o-transform     : rotate(135deg);
+    -ms-transform    : rotate(135deg);
+    transform        : rotate(135deg);
+  }
+}
+
+.sidebar-workspace-plus-menu {
+  display   : none;
+  position  : relative;
+  transition: all 0.3s ease 0s;
+
+  &.show-menu {
+    display   : block;
+    position  : absolute;
+    // top: 50px;
+    // left: 300px;
+    right     : 0px;
+    bottom    : -10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index   : 100;
+  }
+  >a {
+    &:hover {
+      font-weight: bold; 
+    }
   }
 }
 

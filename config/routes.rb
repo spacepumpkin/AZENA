@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do 
     resource :session, only: [:create, :destroy]
     resources :users, only: [:create, :show]
-    resources :workspaces, only: [:create, :destroy, :show, :index]
+    resources :workspaces, only: [:create, :destroy, :update, :show, :index]
     get "/users/:id/everything", to: "users#everything"
   end
 

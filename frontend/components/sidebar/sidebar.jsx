@@ -44,7 +44,6 @@ export default class Sidebar extends React.Component {
 
     const mappedWorkspaces = (
       Object.values(workspaces).map((workspace) => {
-        debugger
         let showMenu = this.state.plusMenuWorkspaceId === workspace.id;
         return (
           <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
@@ -94,7 +93,6 @@ export default class Sidebar extends React.Component {
           <h1>My Workspaces</h1>
           {
             Object.values(workspaces).map((workspace) => {
-              debugger
               let showMenu = plusMenuWorkspaceId === workspace.id;
               let showProjects = activeWorkspaceId === workspace.id;
               return (

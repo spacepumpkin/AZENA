@@ -14,7 +14,7 @@ prop passed in, inside the div with id 'root'.
 // import { signup, login, logout } from "./actions/session_actions";
 // * Workspaces
 // import * as WorkspaceApiUtil from "./util/workspace_api_util";
-// import { createWorkspace, fetchWorkspace } from "./actions/workspace_actions";
+// import { createWorkspace, fetchWorkspace, updateWorkspace, deleteWorkspace } from "./actions/workspace_actions";
 // ------------------------------ TESTING END ---------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ------------------------------ TESTING START ------------------------------
-  // window.getState = store.getState;
-  // window.dispatch = store.dispatch;
+  window.getState = store.getState;
+  window.dispatch = store.dispatch;
 
   // * SessionApiUtil
   // window.sessionSignUp = SessionApiUtil.signup; // PASS - user should be able to sign up and login in BE
@@ -105,7 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.fetchUserWorkspacesApi = WorkspaceApiUtil.fetchUserWorkspaces; // PASS - should be able to GET current users workspaces
   // window.fetchWorkspaceApi = WorkspaceApiUtil.fetchWorkspace; // PASS - should be able to GET specific workspace
   // window.fetchWorkspace = fetchWorkspace; // PASS - should be able to GET specific workspace
-  
+  // window.updateWorkspaceApi = WorkspaceApiUtil.updateWorkspace; // PASS - can update own workspaces
+  // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
+  // window.deleteWorkspaceApi = WorkspaceApiUtil.deleteWorkspace; // 
+  // window.deleteWorkspace = deleteWorkspace; // 
 
   // ------------------------------ TESTING END --------------------------------
 })

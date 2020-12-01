@@ -19,6 +19,7 @@
 // }
 
 // Don't need user ID since we can only access current user's workspaces anyway
+// PASS
 export const fetchUserWorkspaces = () => {
   // console.log(`fetching currentUsers's workspaces...`);
   return $.ajax({
@@ -27,6 +28,7 @@ export const fetchUserWorkspaces = () => {
   })
 }
 
+// PASS
 export const fetchWorkspace = (workspaceId) => {
   // console.log(`fetching workspaces #${workspaceId}...`);
   return $.ajax({
@@ -35,11 +37,22 @@ export const fetchWorkspace = (workspaceId) => {
   })
 }
 
+// PASS
 export const createWorkspace = (workspace) => {
   // console.log(`creating new workspace...`);
   return $.ajax({
     url: `/api/workspaces`,
     method: "POST",
+    data: {workspace: {name: workspace.name, description: workspace.description}}
+  })
+}
+
+// PASS
+export const updateWorkspace = (workspace) => {
+  // console.log(`updating workspace: ${workspace.id}`);
+  return $.ajax({
+    url: `/api/workspaces/${workspace.id}`,
+    method: "PATCH",
     data: {workspace: {name: workspace.name, description: workspace.description}}
   })
 }

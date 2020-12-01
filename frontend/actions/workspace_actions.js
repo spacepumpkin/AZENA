@@ -16,6 +16,7 @@ Export thunk action creators with the specified parameters:
 export const RECEIVE_USER_WORKSPACES = "RECEIVE_USER_WORKSPACES";
 export const RECEIVE_WORKSPACE = "RECEIVE_WORKSPACE";
 export const RECEIVE_WORKSPACE_ERRORS = "RECEIVE_WORKSPACE_ERRORS";
+export const REMOVE_WORKSPACE = "REMOVE_WORKSPACE";
 
 const receiveUserWorkspaces = function(workspaces) {
   // console.log("receiving user workspaces");
@@ -41,8 +42,16 @@ const receiveWorkspaceErrors = function(errors) {
   }
 }
 
+const removeWorkspace = function(workspace) {
+  return {
+    type: REMOVE_WORKSPACE,
+    workspace
+  }
+}
+
 // THUNK ACTIONS --------------------------------------------------
 
+// PASS
 export const createWorkspace = function (workspace) {
   return function (dispatch) {
     // console.log("dispatching createWorkspace");
@@ -56,6 +65,7 @@ export const createWorkspace = function (workspace) {
   };
 };
 
+// PASS
 export const fetchWorkspace = function (workspaceId) {
   return function (dispatch) {
     // console.log("dispatching fetchWorkspace");
@@ -69,6 +79,7 @@ export const fetchWorkspace = function (workspaceId) {
   };
 };
 
+// PASS
 export const fetchUserWorkspaces = function () {
   return function (dispatch) {
     // console.log("dispatching fetchUserWorkspaces");
@@ -82,15 +93,30 @@ export const fetchUserWorkspaces = function () {
   };
 };
 
-// export const deleteWorkspace = function (workspaceId) {
-//   return function (dispatch) {
-//     console.log("dispatching deleteWorkspace");
-//     return (
-//       WorkspaceApiUtil.deleteWorkspace(workspaceId)
-//         .then(
-//           (workspace) => dispatch(removeWorkspace(workspace)),
-//           (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
-//         )
-//     );
-//   }
-// }
+// PASS
+export const updateWorkspace = function (workspace) {
+  return function (dispatch) {
+    // console.log("dispatching updateWorkspace");
+    return (
+      WorkspaceApiUtil.updateWorkspace(workspace)
+        .then(
+          (workspace) => dispatch(receiveWorkspace(workspace)),
+          (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
+        )
+    );
+  };
+};
+
+//
+export const deleteWorkspace = function (workspaceId) {
+  return function (dispatch) {
+    console.log("dispatching deleteWorkspace");
+    return (
+      WorkspaceApiUtil.deleteWorkspace(workspaceId)
+        .then(
+          (workspace) => dispatch(removeWorkspace(workspace)),
+          (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
+        )
+    );
+  }
+}

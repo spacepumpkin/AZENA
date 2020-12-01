@@ -3,7 +3,13 @@ import React from "react";
 export default class TopBar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      title: props.title
+    }
+
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleTitleUpdate = this.handleTitleUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -15,8 +21,21 @@ export default class TopBar extends React.Component {
     this.props.logout() //.then(() => this.props.history.push("/"));
   }
 
+  handleTitleChange(evt) {
+    console.log("current title: ", evt.target.value);
+    if (evt.target.value.length > 1) this.setState({ title: evt.target.value });
+  }
+
+  handleTitleUpdate(evt) {
+    if (evt.target.value !== this.props.title) {
+      debugger
+      console.log("title has changed from", this.props.title, "to", evt.target.value);
+    }
+  }
+
   render() {
-    const { title, toggleSidebar, sidebarCollapse } = this.props;
+    const { toggleSidebar, sidebarCollapse } = this.props;
+    const { title } = this.state;
 
     return (
       <div id="topbar">
@@ -25,7 +44,7 @@ export default class TopBar extends React.Component {
         </div> */}
         <button onClick={toggleSidebar} className={
           `sidebar-menu-button chevron-right ${!sidebarCollapse ? "collapsed" : ""}`
-          } type="button" />
+        } type="button" />
         <div id="topbar-main-header">
           <div className="header-icon">
             <span></span>
@@ -33,7 +52,18 @@ export default class TopBar extends React.Component {
 
           {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
           <div className="header-title-wrapper">
-            <div className="header-title" contentEditable > {title} </div>
+            <textarea className="header-title"
+              onChange={this.handleTitleChange}
+              onBlur={this.handleTitleUpdate}
+              minLength={"2"}
+              maxLength={"25"}
+              cols={"25"}
+              rows={"1"}
+              autoComplete="off" autoCorrect="off" autoCapitalize="off"
+              spellCheck="false"
+              value={title}
+            >
+            </textarea>
           </div>
         </div>
         <div id="topbar-user">

@@ -7,13 +7,20 @@ export default class TopBar extends React.Component {
       title: props.title
     }
 
+    this.titleInput = React.createRef();
+
     this.handleLogout = this.handleLogout.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleTitleUpdate = this.handleTitleUpdate.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentDidMount() {
     // console.log(`mounted Topbar (${this.props.page})`);
+    // document.addEventListener("keydown", this.handleKeyDown);
+  }
+  componentWillUnmount() {
+    // document.removeEventListener("keydown", this.handleKeyDown);
   }
 
   handleLogout(evt) {
@@ -22,14 +29,29 @@ export default class TopBar extends React.Component {
   }
 
   handleTitleChange(evt) {
-    console.log("current title: ", evt.target.value);
-    if (evt.target.value.length > 1) this.setState({ title: evt.target.value });
+    // Remove all tabs, new lines
+    const val = evt.target.value.replace(/[\r\n\v\t]+/g, '');
+    console.log(`current title: "${val}", length: ${val.length}, changed?: ${val === this.state.title}`);
+    // Avoid re-rendering if title hasn't changed
+    if (val === this.state.title) return;
+    // debugger
+    if (val.length >= 1) this.setState({ title: val });
   }
 
   handleTitleUpdate(evt) {
     if (evt.target.value !== this.props.title) {
+    // if (evt.target.value !== this.state.title) {
+      console.log(`title has changed from "${this.props.title}" to "${evt.target.value}"`);
       debugger
-      console.log("title has changed from", this.props.title, "to", evt.target.value);
+    }
+  }
+
+  handleKeyDown(evt) {
+    // Catch any enter presses within title input textarea to defocus instead of adding \n
+    if (evt.key === "Enter" || evt.keyCode === 13) {
+      evt.preventDefault();
+      this.titleInput.current.blur();
+      console.log("Moved away from title input");
     }
   }
 
@@ -55,6 +77,8 @@ export default class TopBar extends React.Component {
             <textarea className="header-title"
               onChange={this.handleTitleChange}
               onBlur={this.handleTitleUpdate}
+              onKeyDown={this.handleKeyDown}
+              ref={this.titleInput}
               minLength={"2"}
               maxLength={"25"}
               cols={"25"}

@@ -74,6 +74,11 @@
 
 .header-title {
   font-size: 30px;
+  vertical-align: middle;
+  overflow: hidden;
+  &:focus {
+    border: 1px solid $primary;
+  }
 }
 
 

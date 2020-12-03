@@ -6,7 +6,13 @@ import TopBar from "./topbar";
 import { logout } from "../../actions/session_actions";
 import { toggleSidebar } from "../../actions/ui_actions.js";
 
-function getTopBarTitle(entities, ownProps) {
+import { updateWorkspace } from '../../actions/workspace_actions';
+
+// ! Not tested yet
+import { updateProject } from '../../actions/project_actions';
+
+function getTopBarInfo(entities, pathname, dispatch) {
+  // ! Definitely can optimize later; use switch, ownProps.match.params?
   // if (workspaces !== undefined || workspaces.length !== 0) {
   // switch (ownProps.match.path) {
   //   case "/workspaces/:workspaceId":
@@ -16,27 +22,81 @@ function getTopBarTitle(entities, ownProps) {
   //   default:
   //     return "Home";
   // }
-  let pathname = ownProps.location.pathname;
   if (pathname.includes("workspaces")) {
-    return entities.workspaces[pathname.slice("/workspaces/".length)].name;
+    const workspace = entities.workspaces[pathname.slice("/workspaces/".length)];
+    return {
+      title: workspace.name,
+      pageType: "Workspace",
+      item: workspace,
+      updateItem: (workspace) => dispatch(updateWorkspace(workspace))
+    }
+  } else if (pathname.includes("projects")) {
+    const project = entities.projects[pathname.slice("/projects/".length)];
+    return {
+      title: project.name,
+      pageType: "Project",
+      item: project,
+      updateItem: (project) => dispatch(updateProject(project))
+    }
   } else {
-    return "Home";
+    return {
+      title: "Home",
+      pageType: "Home",
+      item: {id: null, name: null, description: null, creatorId: null},
+      updateItem: () => console.log("Cannot update, currently in Home page")
+    }
   }
 }
 
-const mSP = function ({entities, ui}, ownProps) {
-  const title = getTopBarTitle(entities, ownProps);
+// Pass down specific update method while keeping DRY -- 1st way (using window.location.pathname)
+// -- DID NOT WORK (window.location.pathname gave "/" instead of something like "/workspaces/1")
+// function updateItem (ownProps) {
+//   const currentPath = window.location.pathname;
+//   if (currentPath.includes("workspaces")) {
+//     return updateWorkspace;
+//   }
+// }
+
+const mSP = function ({entities, ui, session}, ownProps) {
+  // Get title, page type (home, workspace, project, etc.), and item that can be updated
+  //  (workspace or project). Also check if current user is creator of item, else can't update
+  const { title, pageType, item } = getTopBarInfo(entities, ownProps.location.pathname);
   return {
+    sidebarCollapse: ui.sidebarCollapse,
     title: title,
-    sidebarCollapse: ui.sidebarCollapse
+    pageType: pageType,
+    item: item,
+    isCreator: (item.creatorId === session.id)
   };
 };
 
-const mDP = function (dispatch) {
+const mDP = function (dispatch, ownProps) {
+  // debugger
+  // const { updateItem } = getTopBarInfo(ownProps.entities, ownProps.location.pathname, dispatch)
   return {
     logout: () => dispatch(logout()),
-    toggleSidebar: () => dispatch(toggleSidebar())
+    toggleSidebar: () => dispatch(toggleSidebar()),
+    // updateItem: updateItem
   };
 };
 
-export default withRouter(connect(mSP, mDP)(TopBar));
+// ! Pass down specific update method while keeping DRY -- 2nd way (mergeProps) -- IT WORKS
+const mergeProps = function (stateProps, dispatchProps, ownProps) {
+
+  switch (stateProps.pageType) {
+    case "Workspace":
+      dispatchProps["updateItem"] = (item) => dispatch(updateWorkspace(item));
+      break;
+    case "Project":
+      dispatchProps["updateItem"] = (item) => dispatch(updateProject(item));
+      break;
+    default:
+      dispatchProps["updateItem"] = () => console.log("updateItem didn't work");
+      break;
+  }
+  return { ...stateProps, ...dispatchProps }
+}
+// ! 3rd way (pass down both methods)
+
+export default withRouter(connect(mSP, mDP, mergeProps)(TopBar));
+// export default withRouter(connect(mSP, mDP)(TopBar));

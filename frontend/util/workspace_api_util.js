@@ -10,6 +10,7 @@
   - fetchWorkspaceProjects(workspace) // fetch all projects belonging to workspace
 */
 
+// Don't need since we have all the data we need when user is logged in
 // export const fetchEverything = (user) => {
 //   console.log(`fetching everything for ${user.username}`)
 //   return $.ajax({

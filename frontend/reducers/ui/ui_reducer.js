@@ -4,7 +4,7 @@ import {
 
 const _defaultUI = {
   sidebarCollapse: false,
-  darktheme: false
+  darkTheme: false
 };
 
 const uiReducer = function (oldState = _defaultUI, action) {

@@ -62,7 +62,7 @@ export const signup = function (user) {
     return (
       SessionApiUtil.signup(user)
         .then(
-          (user) => dispatch(receiveCurrentUser(user)),
+          (payload) => dispatch(receiveCurrentUser(payload)),
           (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
         )
     );

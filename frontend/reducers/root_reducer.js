@@ -15,13 +15,21 @@ export default rootReducer;
 
 // State = {
 //   entities: {
-//     users: {
-//     }
+//     users: {},
+//     workspaces: {},
+//     projects: {},
+//     tasks: {},
 //   },
 //   session: {
 //     id: null,
 //   },
 //   errors: {
 //     session: [],
+//     workspaces: [],
+//     projects: []
+//   },
+//   ui: {
+//     sidebarCollapse: false,
+//     darkTheme: false
 //   }
 // }

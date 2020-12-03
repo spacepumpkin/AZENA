@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Main from "./main";
 
-import { fetchUserWorkspaces } from "../../actions/workspace_actions";
+// import { fetchUserWorkspaces } from "../../actions/workspace_actions";
 
 const mSP = function (store) {
   // console.log(store);
@@ -13,7 +13,7 @@ const mSP = function (store) {
 
 const mDP = function (dispatch) {
   return {
-    fetchUserWorkspaces: () => dispatch(fetchUserWorkspaces())
+    // fetchUserWorkspaces: () => dispatch(fetchUserWorkspaces())
   };
 };
 

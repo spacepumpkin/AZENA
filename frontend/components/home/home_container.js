@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 // import { withRouter } from "react-router-dom";
 import Home from "./home";
 
-import { fetchUserWorkspaces } from "../../actions/workspace_actions";
-import { logout } from "../../actions/session_actions";
+// import { fetchUserWorkspaces } from "../../actions/workspace_actions";
+// import { logout } from "../../actions/session_actions";
 
 const mSP = function(state) {
   return {

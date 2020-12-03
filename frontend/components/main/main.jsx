@@ -17,7 +17,7 @@ export default class Main extends React.Component {
     // console.log(`mounted Main (${this.props.page})`);
 
     // Testing fetch for workspaces -> will be removed when we have fetchEverything
-    this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();
+    // this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();
   }
 
   render() {

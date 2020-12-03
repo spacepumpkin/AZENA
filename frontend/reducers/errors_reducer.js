@@ -12,5 +12,7 @@ const errorsReducer = combineReducers({
 export default errorsReducer;
 
 // errors: {
-//   session: []
+//   session: [],
+//   workspaces: [],
+//   projects: []
 // }

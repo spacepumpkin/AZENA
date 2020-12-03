@@ -9,7 +9,7 @@ export default class Sidebar extends React.Component {
       plusMenuWorkspaceId: -1
     }
     this.showPlusMenu = this.showPlusMenu.bind(this);
-    this.renderCount = 0;
+    this.sidebarRenderCount = 0;
   }
 
   componentDidMount() {
@@ -39,8 +39,8 @@ export default class Sidebar extends React.Component {
   render() {
     const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse } = this.props; 
     const { activeWorkspaceId, plusMenuWorkspaceId} = this.state;
-    this.renderCount += 1;
-    console.log("render count: ", this.renderCount);
+    this.sidebarRenderCount += 1;
+    console.log("sidebar render count: ", this.sidebarRenderCount);
 
     const mappedWorkspaces = (
       Object.values(workspaces).map((workspace) => {

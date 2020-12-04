@@ -1,9 +1,5 @@
 // MainBox
 
-
-
-
-
 #mainbox {
   width            : 100%;
   // width         : $mainbox-width;
@@ -14,115 +10,15 @@
   // padding-top   : $main-padding-top;
   // Adjust margin left to account for fixed sidebar
   // margin-left   : $sidebar-width;
+  
 }
-
-#topbar {
-  width           : 100%;
-  // flex: 0 1 auto;
-  height          : $header-height;
-  display         : flex;
-  // keep position fixed; also need to adjust main content margin-top
-  position        : sticky;
-  top             : 0;
-  // left: 0;
-  background-color: white;
-  // padding-top     : 20px;
-  padding-top     : $main-padding-top;
-  padding-bottom  : 20px;
-  border-bottom   : 1px solid $lighter-gray;
-  box-shadow      : 5px 0 $gray;
-
-  .sidebar-menu-button {
-    width          : 20px;
-    margin-left    : 0;
-    // padding-left: 0;
-    padding        : 0 10px;
-    position       : relative;
-    left           : 0;
-  }
-}
-
-// MainHeader (Workspace, Project, etc.)
-
-#topbar-main-header {
-  display       : flex;
-  align-items   : center;
-  width         : 50%;
-  // border     : 1px dotted purple;
-}
-
-.header-icon {
-  width       : 50px;
-  // height: 100%;
-  box-sizing  : border-box;
-  text-align  : center;
-  padding     : 0 10px;
-  margin-right: 20px;
-
-  >span {
-    vertical-align: middle;
-    padding       : 20% 10px;
-
-    display         : inline-block;
-    // box-sizing: border-box;
-    width           : 40px;
-    height          : 40px;
-    background-color: rgb(random(255), random(255), random(255));
-    border-radius   : 8px;
-  }
-}
-
-.header-title {
-  font-size: 30px;
-  vertical-align: middle;
-  overflow: hidden;
-  &:focus {
-    border: 1px solid $primary;
-  }
-}
-
-
-// UserHeader
-
-#topbar-user {
-  display              : flex;
-  width                : 50%;
-  // border            : 1px dotted purple;
-  // justify-content: flex-end;
-  transition: all 0.3s ease 0s;
-
-  >button {
-    // background-color   : $primary;
-    // padding            : 2px 4px;
-    // text-align         : center;
-    // float           : right;
-    height     : 75px;
-    width      : 100%;
-    padding    : 0 10px;
-    margin     : 0 auto;
-    text-align : center;
-    white-space: nowrap;
-    font-size: 20px;
-  }
-
-  &:hover {
-    color: $secondary;
-  }
-}
-
-// &::after {
-//   content: "";
-//   clear  : both;
-//   display: block;
-//   height : 0;
-// }
-
 
 // MainContent (Workspace, Project, etc.)
 #main-content {
   // margin-top   : $header-height; // adjust for fixed topbar;
   // width : $mainbox-width;
-  width        : 100%;
+  // max-width: 100vw;
+  // width        : 100vw;
   height       : 100%;
   // border    : 1px dashed violet;
   padding      : 50px;

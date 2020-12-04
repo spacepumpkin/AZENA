@@ -18,7 +18,8 @@ class Project < ApplicationRecord
   # Join Table for Users and their Projects on their Workspaces
   has_many :users_projects,
     foreign_key: :project_id,
-    class_name: :UsersProject
+    class_name: :UsersProject,
+    dependent: :destroy # ! necessary?
   
   has_many :users,
     through: :users_projects,

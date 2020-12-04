@@ -14,7 +14,11 @@ class Api::ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
+    @project = Project.find_by(id: params[:id])
+    if @project.nil?
+      render json: ["Project was not found"], status: 404
+      return
+    end
     if @project.destroy
       render :show #, status: 200
     else
@@ -28,11 +32,11 @@ class Api::ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.includes(:tasks).find(params[:id])
+    @project = Project.includes(:tasks).find_by(id: params[:id])
     if @project
       render :show #, status: 200
     else
-      render ["Project was not found"], status: 422
+      render ["Project was not found"], status: 404
     end
   end
 

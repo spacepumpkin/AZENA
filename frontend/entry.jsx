@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import configureStore from "./store/store";
-import Root from "./components/root";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import configureStore from './store/store';
+import Root from './components/root';
 
 /*
 Entry point file that renders the `Root` component, with a `store`
@@ -10,11 +10,15 @@ prop passed in, inside the div with id 'root'.
 
 // ------------------------------ TESTING START -------------------------------
 // * Session
-// import * as SessionApiUtil from "./util/session_api_util";
-// import { signup, login, logout } from "./actions/session_actions";
+// import * as SessionApiUtil from './util/session_api_util';
+// import { signup, login, logout } from './actions/session_actions';
 // * Workspaces
-// import * as WorkspaceApiUtil from "./util/workspace_api_util";
-// import { createWorkspace, fetchWorkspace, updateWorkspace, deleteWorkspace } from "./actions/workspace_actions";
+// import * as WorkspaceApiUtil from './util/workspace_api_util';
+// import { createWorkspace, fetchWorkspace, updateWorkspace, deleteWorkspace } from './actions/workspace_actions';
+// * Projects
+// import * as ProjectApiUtil from './util/project_api_util';
+// import { createProject, updateProject, deleteProject } from './actions/project_actions';
+
 // ------------------------------ TESTING END ---------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -107,8 +111,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.fetchWorkspace = fetchWorkspace; // PASS - should be able to GET specific workspace
   // window.updateWorkspaceApi = WorkspaceApiUtil.updateWorkspace; // PASS - can update own workspaces
   // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
-  // window.deleteWorkspaceApi = WorkspaceApiUtil.deleteWorkspace; // 
-  // window.deleteWorkspace = deleteWorkspace; // 
+  // window.deleteWorkspaceApi = WorkspaceApiUtil.deleteWorkspace; // PASS - should be able to delete workspace in BE
+  // window.deleteWorkspace = deleteWorkspace; // PASS - should be able to delete workspace in BE and FE
+
 
   // ------------------------------ TESTING END --------------------------------
 })

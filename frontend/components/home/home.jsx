@@ -19,7 +19,7 @@ export default class Home extends React.Component {
     let that = this;
     return (
       <div id="home">
-        <div id="mainbox">
+        {/* <div id="mainbox"> */}
           {/* Hello I'm home! */}
           <div>
             <h1>Your Workspaces</h1>
@@ -50,7 +50,7 @@ export default class Home extends React.Component {
               
           </div>
         </div>
-      </div>
+      // </div>
     )
   }
 }

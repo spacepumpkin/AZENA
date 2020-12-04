@@ -71,7 +71,6 @@ const mSP = function ({entities, ui, session}, ownProps) {
 };
 
 const mDP = function (dispatch, ownProps) {
-  // debugger
   // const { updateItem } = getTopBarInfo(ownProps.entities, ownProps.location.pathname, dispatch)
   return {
     logout: () => dispatch(logout()),

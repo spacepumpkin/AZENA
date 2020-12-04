@@ -14,7 +14,11 @@ class Api::TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
+    if @task.nil?
+      render json: ["Task was not found"], status: 404
+      return
+    end
     if @task.destroy
       render :show #, status: 200
     else
@@ -28,7 +32,7 @@ class Api::TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id])
     if @task
       render :show #, status: 200
     else

@@ -3,11 +3,12 @@ import SideBar from './sidebar';
 
 import { toggleSidebar } from "../../actions/ui_actions.js";
 
-const mSP = function ({ ui, entities }) {
+const mSP = function ({ ui, entities, session }) {
   return {
     workspaces: entities.workspaces,
     projects: entities.projects,
-    sidebarCollapse: ui.sidebarCollapse
+    sidebarCollapse: ui.sidebarCollapse,
+    currentUserId: session.id
   }
 };
 

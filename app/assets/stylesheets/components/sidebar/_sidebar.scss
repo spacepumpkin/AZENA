@@ -11,7 +11,7 @@
   color                 : $gray;
   font-family           : $font-other;
   // Keep position fixed to side (also adjust mainbox left margin)
-  // position: sticky;
+  // position              : fixed;
   width                 : $sidebar-width;
   box-sizing            : border-box; // best for collapsing
   box-shadow            : 0 0 25px $lighter-gray;
@@ -176,6 +176,11 @@ button.collapsed {
     color: $primary;
   }
 }
+.selected-primary {
+  color              : $primary;
+  // font-weight: bold;
+  // background-color: $secondary;
+}
 
 .sidebar-workspace-plus {
   width             : 14px;
@@ -225,9 +230,10 @@ button.collapsed {
     overflow-y: hidden;
     z-index   : 100;
   }
+
   >a {
     &:hover {
-      font-weight: bold; 
+      font-weight: bold;
     }
   }
 }

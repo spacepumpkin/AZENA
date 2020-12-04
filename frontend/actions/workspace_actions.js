@@ -17,6 +17,7 @@ export const RECEIVE_USER_WORKSPACES = "RECEIVE_USER_WORKSPACES";
 export const RECEIVE_WORKSPACE = "RECEIVE_WORKSPACE";
 export const RECEIVE_WORKSPACE_ERRORS = "RECEIVE_WORKSPACE_ERRORS";
 export const REMOVE_WORKSPACE = "REMOVE_WORKSPACE";
+// export const REMOVE_WORKSPACE_FROM_USER = "REMOVE_WORKSPACE_FROM_USER";
 
 const receiveUserWorkspaces = function(workspaces) {
   // console.log("receiving user workspaces");

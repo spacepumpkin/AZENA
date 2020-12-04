@@ -26,10 +26,8 @@ $main-padding-top: 15px;
   display           : flex;
   background-color  : $lightest-gray;
   // justify-content: flex-start;
-}
-
-.selected-primary {
-  color: $primary;
-  font-weight: bold;
-  background-color: $secondary;
+  
+  // Prevent sidebar from scrolling by preventing rest of page from scrolling
+  overflow-y: hidden;
+  overflow-x: hidden;
 }

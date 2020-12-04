@@ -17,7 +17,8 @@ class Workspace < ApplicationRecord
   # Join Table for Users that are members of the Workspace
   has_many :users_workspaces,
     foreign_key: :workspace_id,
-    class_name: :UsersWorkspace
+    class_name: :UsersWorkspace,
+    dependent: :destroy # ! necessary?
   
   has_many :users,
     through: :users_workspaces,

@@ -4,8 +4,9 @@ import { Link, NavLink } from "react-router-dom";
 export default class Sidebar extends React.Component {
   constructor(props) {
     super(props);
+    // Keep track of which workspace is selected, which plus button is selected
     this.state = {
-      activeWorkspaceId: props.workspaces ? Object.keys(props.workspaces)[0] : -1,
+      activeWorkspaceId: -1,
       plusMenuWorkspaceId: -1
     }
     this.showPlusMenu = this.showPlusMenu.bind(this);
@@ -37,24 +38,37 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
-    const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse } = this.props; 
-    const { activeWorkspaceId, plusMenuWorkspaceId} = this.state;
+    const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse, currentUserId } = this.props;
+    const { activeWorkspaceId, plusMenuWorkspaceId } = this.state;
+
     this.sidebarRenderCount += 1;
     console.log("sidebar render count: ", this.sidebarRenderCount);
 
-    const mappedWorkspaces = (
-      Object.values(workspaces).map((workspace) => {
-        let showMenu = this.state.plusMenuWorkspaceId === workspace.id;
+    // Separate user's workspaces into own and other workspaces
+    const ownWorkspaces = [];
+    const otherWorkspaces = [];
+
+    Object.values(workspaces).forEach((workspace) => {
+      if (workspace.creatorId === currentUserId) {
+        ownWorkspaces.push(workspace);
+      } else {
+        otherWorkspaces.push(workspace);
+      }
+    })
+
+    const mappedWorkspaces = (selectedWorkspaces) => (
+      selectedWorkspaces.map((workspace) => {
+        let showMenu = plusMenuWorkspaceId === workspace.id;
+        let showProjects = activeWorkspaceId === workspace.id;
         return (
           <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
             <div className="sidebar-workspace-title-wrapper">
-              <NavLink activeClassName="selected-primary"
-                to={`/workspaces/${workspace.id}`}
-                className="sidebar-workspace-title"
+              <Link to={`/workspaces/${workspace.id}`}
+                className={`sidebar-workspace-title ${showProjects ? "selected-primary" : ""}`}
                 onClick={this.showProjects(workspace.id)}
               >
                 {workspace.name}
-              </NavLink>
+              </Link>
               <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} onClick={this.showPlusMenu(workspace.id)} type="button" />
               <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}>
                 <Link to={`/projects/new`}>Create New Project</Link>
@@ -62,7 +76,7 @@ export default class Sidebar extends React.Component {
             </div>
             <div className="sidebar-workspace-projects">
               {
-                (this.state.activeWorkspaceId === workspace.id) &&
+                (showProjects) &&
                 Object.values(projects).map((project) => {
                   return (
                     (project.workspaceId === workspace.id) &&
@@ -88,46 +102,12 @@ export default class Sidebar extends React.Component {
           <Link to="/home"><img className="sidebar-icon" src={window.checkCircle} alt="taskicon" />&nbsp; My Tasks </Link>
         </div>
         <div id="sidebar-workspaces">
-          {/* for each user's workspace, create workspace title (link to workspace page) + div dropdown */}
-          {/* for each workspace div, add list of project links */}
           <h1>My Workspaces</h1>
-          {
-            Object.values(workspaces).map((workspace) => {
-              let showMenu = plusMenuWorkspaceId === workspace.id;
-              let showProjects = activeWorkspaceId === workspace.id;
-              return (
-                <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
-                  <div className="sidebar-workspace-title-wrapper">
-                    <Link to={`/workspaces/${workspace.id}`}
-                      className={`sidebar-workspace-title ${showProjects ? "selected-primary" : ""}`}
-                      onClick={this.showProjects(workspace.id)}
-                    >
-                      {workspace.name}
-                    </Link>
-                    <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} onClick={this.showPlusMenu(workspace.id)} type="button" />
-                    <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}>
-                      <Link to={`/projects/new`}>Create New Project</Link>
-                    </div>
-                  </div>
-                  <div className="sidebar-workspace-projects">
-                    {
-                      (showProjects) &&
-                      Object.values(projects).map((project) => {
-                        return (
-                          (project.workspaceId === workspace.id) &&
-                          <Link to="/home" key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
-                        )
-                      })
-                    }
-                    {/* <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 1</Link>
-                    <Link to="/home" className="sidebar-workspace-project"> <span></span>&nbsp; Project 2</Link> */}
-                  </div>
-                </div>
-              )
-            }
-            )
-          }
-
+          {mappedWorkspaces(ownWorkspaces)}
+        </div>
+        <div id="sidebar-workspaces">
+          <h1>Other Workspaces</h1>
+          {mappedWorkspaces(otherWorkspaces)}
         </div>
         <div id="sidebar-bottom">
           <p>Invite your team and start collaborating!</p>

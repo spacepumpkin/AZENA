@@ -24,7 +24,8 @@ class User < ApplicationRecord
   # Join Table for Workspaces that User is a member of
   has_many :users_workspaces,
     foreign_key: :user_id,
-    class_name: :UsersWorkspace
+    class_name: :UsersWorkspace,
+    dependent: :destroy # ! necessary?
 
   # ! Workspaces
   has_many :workspaces,
@@ -34,12 +35,14 @@ class User < ApplicationRecord
   # A User might have 0 or many own (created) workspaces
   has_many :own_workspaces,
     foreign_key: :creator_id,
-    class_name: :Workspace
+    class_name: :Workspace,
+    dependent: :destroy # ! necessary?
 
   # Join Table for Users and their Projects on their Workspaces
   has_many :users_projects,
     foreign_key: :user_id,
-    class_name: :UsersProject
+    class_name: :UsersProject,
+    dependent: :destroy # ! necessary?
   
   # ! Projects
   has_many :projects,
@@ -49,7 +52,8 @@ class User < ApplicationRecord
   # A User might have 0 or many own (created) projects
   has_many :own_projects,
     foreign_key: :creator_id,
-    class_name: :Project
+    class_name: :Project,
+    dependent: :destroy # ! necessary?
 
   # Join Table for Users and their Tasks on their Projects
   has_many :users_tasks,

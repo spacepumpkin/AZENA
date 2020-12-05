@@ -1,19 +1,16 @@
 import * as WorkspaceApiUtil from "../util/workspace_api_util";
 
-/* Export action constants:
-
-* `RECEIVE_USER_WORKSPACES` - receiveWorkspace (`workspace` payload)
-* `RECEIVE_WORKSPACE` - receiveWorkspace (`workspace` payload)
-* `RECEIVE_WORKSPACE_ERRORS` - receiveWorkspaceErrors(errors) (`errors` payload)
-
+/* 
 Export thunk action creators with the specified parameters:
 
-* createWorkspace(workspace) -> receiveWorkspace or receiveWorkspaceErrors
-
+* createWorkspace(workspace) -> RECEIVE_WORKSPACE
+* updateWorkspace(workspace) -> RECEIVE_WORKSPACE
+* destroyWorkspace(workspaceId) -> REMOVE_WORKSPACE
+- removeWorkspaceFromUser(workspace) -> REMOVE_WORKSPACE
 */
 
 // REGULAR ACTIONS --------------------------------------------------
-export const RECEIVE_USER_WORKSPACES = "RECEIVE_USER_WORKSPACES";
+// export const RECEIVE_USER_WORKSPACES = "RECEIVE_USER_WORKSPACES";
 export const RECEIVE_WORKSPACE = "RECEIVE_WORKSPACE";
 export const RECEIVE_WORKSPACE_ERRORS = "RECEIVE_WORKSPACE_ERRORS";
 export const REMOVE_WORKSPACE = "REMOVE_WORKSPACE";
@@ -108,12 +105,26 @@ export const updateWorkspace = function (workspace) {
   };
 };
 
-//
-export const deleteWorkspace = function (workspaceId) {
+// PASS
+export const destroyWorkspace = function (workspaceId) {
   return function (dispatch) {
-    console.log("dispatching deleteWorkspace");
+    console.log("dispatching destroyWorkspace");
     return (
-      WorkspaceApiUtil.deleteWorkspace(workspaceId)
+      WorkspaceApiUtil.destroyWorkspace(workspaceId)
+        .then(
+          (workspace) => dispatch(removeWorkspace(workspace)),
+          (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
+        )
+    );
+  }
+}
+
+// ! Save for later
+export const removeWorkspaceFromUser = function (userId, workspaceId) {
+  return function (dispatch) {
+    console.log("dispatching removeWorkspaceFromUser");
+    return (
+      WorkspaceApiUtil.removeWorkspaceFromUser(userId, workspaceId)
         .then(
           (workspace) => dispatch(removeWorkspace(workspace)),
           (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))

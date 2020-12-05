@@ -1,6 +1,6 @@
 import {
   RECEIVE_PROJECT,
-  RECEIVE_PROJECT_ERRORS
+  REMOVE_PROJECT
 } from "../../actions/project_actions";
 import { RECEIVE_CURRENT_USER } from "../../actions/session_actions";
 
@@ -13,6 +13,11 @@ const projectsReducer = function (oldState = {}, action) {
     case RECEIVE_PROJECT:
       // console.log("receiving project (projectsReducer)");
       return Object.assign({}, oldState, { [action.project.id]: action.project });
+    case REMOVE_PROJECT:
+      // console.log(`removing project (projectsReducer)`)
+      const newState = Object.assign({}, oldState);
+      delete newState[action.project.id];
+      return newState;
     default:
       return oldState;
   }

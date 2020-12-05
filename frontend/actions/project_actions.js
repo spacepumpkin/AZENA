@@ -1,10 +1,15 @@
 import * as ProjectApiUtil from "../util/project_api_util";
+/*
+  * createProject(project) -> RECEIVE_PROJECT
+  * updateProject(project) -> RECEIVE_PROJECT
+  * destroyProject(project) -> REMOVE_PROJECT
+*/
 
 // REGULAR ACTIONS --------------------------------------------------
 export const RECEIVE_PROJECT = "RECEIVE_PROJECT";
 export const RECEIVE_PROJECT_ERRORS = "RECEIVE_PROJECT_ERRORS";
-export const DELETE_PROJECT = "DELETE_PROJECT";
-export const REMOVE_PROJECT_FROM_WORKSPACE = "REMOVE_PROJECT_FROM_WORKSPACE";
+export const REMOVE_PROJECT = "REMOVE_PROJECT";
+// export const REMOVE_PROJECT_FROM_WORKSPACE = "REMOVE_PROJECT_FROM_WORKSPACE";
 
 const receiveProject = function (project) {
   return {
@@ -20,10 +25,10 @@ const receiveProjectErrors = function (errors) {
   }
 }
 
-const deleteProject = function (projectId) {
+const removeProject = function (project) {
   return {
-    type: DELETE_PROJECT,
-    projectId
+    type: REMOVE_PROJECT,
+    project
   }
 }
 
@@ -50,7 +55,7 @@ export const createProject = function (project) {
   };
 };
 
-// Test Status - not tested
+// Test Status - PASS
 export const updateProject = function (project) {
   return function (dispatch) {
     // console.log("dispatching updateProject");
@@ -64,14 +69,14 @@ export const updateProject = function (project) {
   };
 };
 
-// Test Status - not tested
+// Test Status - PASS
 export const destroyProject = function (projectId) {
   return function (dispatch) {
     // console.log("dispatching destroyProject");
     return (
       ProjectApiUtil.destroyProject(projectId)
         .then(
-          (project) => dispatch(deleteProject(project.id)),
+          (project) => dispatch(removeProject(project)),
           (errors) => dispatch(receiveProjectErrors(errors.responseJSON))
         )
     );

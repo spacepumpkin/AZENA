@@ -9,7 +9,7 @@
 
 // Test Status - PASS
 export const createProject = (project) => {
-  console.log(`creating new project...`);
+  console.log(`creating new project (${project.name})...`);
   return $.ajax({
     url: `/api/projects`,
     method: "POST",
@@ -23,9 +23,9 @@ export const createProject = (project) => {
   })
 }
 
-// Test Status - not tested
+// Test Status - PASS
 export const updateProject = (project) => {
-  console.log(`updating project...`);
+  console.log(`updating project #${project.id}...`);
   return $.ajax({
     url: `/api/projects/${project.id}`,
     method: "PATCH",
@@ -33,9 +33,9 @@ export const updateProject = (project) => {
   })
 }
 
-// Test Status - not tested
+// Test Status - PASS
 export const destroyProject = (projectId) => {
-  console.log(`deleting project...`);
+  console.log(`destroying project #${projectId}...`);
   return $.ajax({
     url: `/api/projects/${projectId}`,
     method: "DELETE"

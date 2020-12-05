@@ -14,9 +14,11 @@ prop passed in, inside the div with id 'root'.
 // import { signup, login, logout } from './actions/session_actions';
 // * Workspaces
 // import * as WorkspaceApiUtil from './util/workspace_api_util';
-// import { createWorkspace, fetchWorkspace, updateWorkspace, deleteWorkspace } from './actions/workspace_actions';
+// import { createWorkspace, fetchWorkspace, updateWorkspace, destroyWorkspace } from './actions/workspace_actions';
 // * Projects
-import { createProject, updateProject, deleteProject } from './actions/project_actions';
+// import { createProject, updateProject, destroyProject } from './actions/project_actions';
+// * Tasks
+//
 
 // ------------------------------ TESTING END ---------------------------------
 
@@ -52,8 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
         id: currentUser.id
       }
     };
-    
-    delete window.currentUser;
+    debugger
+    delete window.currentUserPayload;
   }
 
   // Setup store and render main React DOM
@@ -110,11 +112,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.fetchWorkspace = fetchWorkspace; // PASS - should be able to GET specific workspace
   // window.updateWorkspaceApi = WorkspaceApiUtil.updateWorkspace; // PASS - can update own workspaces
   // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
-  // window.deleteWorkspaceApi = WorkspaceApiUtil.deleteWorkspace; // PASS - should be able to delete workspace in BE
-  // window.deleteWorkspace = deleteWorkspace; // PASS - should be able to delete workspace in BE and FE
+  // window.destroyWorkspaceApi = WorkspaceApiUtil.destroyWorkspace; // PASS - should be able to destroy workspace in BE
+  // window.destroyWorkspace = destroyWorkspace; // PASS - should be able to destroy workspace in BE and FE
   // window.createProject = createProject; // PASS - should be able to create workspace in BE and FE
-  // window.updateProject = updateProject; //  - should be able to update workspace in BE and FE
-  // window.deleteProject = deleteProject; //  - should be able to delete workspace in BE and FE
+  // window.updateProject = updateProject; // PASS - should be able to update workspace in BE and FE
+  // window.destroyProject = destroyProject; // PASS - should be able to destroy workspace in BE and FE
 
 
   // ------------------------------ TESTING END --------------------------------

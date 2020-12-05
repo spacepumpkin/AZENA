@@ -12,6 +12,23 @@ class Api::ProjectsController < ApplicationController
     end
   end
 
+  def update
+    @project = Project.find_by(id: params[:id])
+    if @project.nil?
+      render json: ["Project was not found"], status: 404
+      return
+    end
+    if @project.creator_id != current_user.id
+      render json: ["Project can only be updated by its creator"], status: 422
+      return
+    end
+    if @project.update(project_params)
+      render :show, status: 200
+    else
+      render json: ["Project could not be removed"], status: 422
+    end
+  end
+
   def destroy
     @project = Project.find_by(id: params[:id])
     if @project.nil?

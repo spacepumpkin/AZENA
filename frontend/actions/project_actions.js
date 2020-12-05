@@ -36,7 +36,7 @@ const deleteProject = function (projectId) {
 
 // THUNK ACTIONS --------------------------------------------------
 
-// Test Status - not tested
+// Test Status - PASS
 export const createProject = function (project) {
   return function (dispatch) {
     // console.log("dispatching createProject");

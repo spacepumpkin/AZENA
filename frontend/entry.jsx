@@ -16,7 +16,6 @@ prop passed in, inside the div with id 'root'.
 // import * as WorkspaceApiUtil from './util/workspace_api_util';
 // import { createWorkspace, fetchWorkspace, updateWorkspace, deleteWorkspace } from './actions/workspace_actions';
 // * Projects
-// import * as ProjectApiUtil from './util/project_api_util';
 import { createProject, updateProject, deleteProject } from './actions/project_actions';
 
 // ------------------------------ TESTING END ---------------------------------
@@ -113,7 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
   // window.deleteWorkspaceApi = WorkspaceApiUtil.deleteWorkspace; // PASS - should be able to delete workspace in BE
   // window.deleteWorkspace = deleteWorkspace; // PASS - should be able to delete workspace in BE and FE
-  window.createProject = createProject; //  - should be able to create workspace in BE and FE
+  // window.createProject = createProject; // PASS - should be able to create workspace in BE and FE
+  // window.updateProject = updateProject; //  - should be able to update workspace in BE and FE
+  // window.deleteProject = deleteProject; //  - should be able to delete workspace in BE and FE
 
 
   // ------------------------------ TESTING END --------------------------------

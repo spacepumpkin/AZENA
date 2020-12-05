@@ -11,7 +11,7 @@ class Api::WorkspacesController < ApplicationController
     if @workspace
       render :show, status: 200
     else
-      render json: ["Workspace was not found"], status: 422
+      render json: ["Workspace was not found"], status: 404
     end
   end
 

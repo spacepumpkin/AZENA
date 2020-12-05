@@ -24,14 +24,11 @@ export default class TopBar extends React.Component {
 
   componentDidMount() {
     // console.log(`mounted Topbar (${this.props.page})`);
-    // document.addEventListener("keydown", this.handleKeyDown);
   }
-  componentWillUnmount() {
-    // document.removeEventListener("keydown", this.handleKeyDown);
-  }
+  
   componentDidUpdate(prevProps) {
     // Reset title if we changed pages
-    console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
+    // console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
     if (prevProps.title !== this.props.title) {
       this.setState({ title: this.props.title })
     }
@@ -42,41 +39,38 @@ export default class TopBar extends React.Component {
     this.props.logout() //.then(() => this.props.history.push("/"));
   }
 
+  // Remove all tabs, new lines + check if we're within allowable char range
   handleTitleChange(evt) {
-    // Remove all tabs, new lines + check if we're within allowable char range
-    const val = evt.target.value.replace(/[\r\n\v\t]+/g, '');
-    console.log(`evt.target.value: "${evt.target.value}"`)
-    console.log(`old title: "${this.state.title}", new title: "${val}", length: ${val.length}, changed?: ${val !== this.state.title}`);
+    const editedTitle = evt.target.value.replace(/[\r\n\v\t]+/g, '');
+    // console.log(`evt.target.value: "${evt.target.value}"`)
+    // console.log(`old title: "${this.state.title}", new title: "${editedTitle}", length: ${editedTitle.length}, changed?: ${editedTitle !== this.state.title}`);
 
     // Avoid re-rendering if title hasn't changed
-    if (val === this.state.title) return;
-    if (val.length >= this.titleMin && val.length <= this.titleMax) this.setState({ title: val });
+    if (editedTitle === this.state.title) return;
+    if (editedTitle.length >= this.titleMin && editedTitle.length <= this.titleMax) this.setState({ title: editedTitle });
   }
 
+  // If edited title differs from original, update in BE
   handleTitleUpdate(evt) {
-    const { title, pageType, isCreator } = this.props;
+    const { title: currentTitle, pageType, isCreator } = this.props;
 
-    // Only allow a DB update of item's title if we're on a valid page, user is creator of item,
-    // and if the title's changed
-    if (pageType !== "Home" && isCreator && this.state.title !== title) {
-      // if (evt.target.value !== this.state.title) {
-      console.log(`title has changed from "${title}" to "${this.state.title}"`);
+    if (pageType !== "Home" && isCreator && this.state.title !== currentTitle) {
+      // console.log(`title has changed from "${currentTitle}" to "${this.state.title}"`);
       const { updateItem, item } = this.props;
-      if (item.id !== undefined && item.id !== null) updateItem({ id: item.id, name: evt.target.value })
+      if (item.id !== undefined && item.id !== null) updateItem({ id: item.id, name: this.state.title })
     }
   }
 
+  // Catch any enter presses within title input textarea to defocus instead of adding \n
   handleKeyDown(evt) {
-    // Catch any enter presses within title input textarea to defocus instead of adding \n
     if (evt.key === "Enter" || evt.keyCode === 13) {
       evt.preventDefault();
       this.titleInput.current.blur();
-      console.log("Moved away from title input");
     }
   }
 
   render() {
-    const { toggleSidebar, sidebarCollapse } = this.props;
+    const { toggleSidebar, sidebarCollapse, pageType, isCreator } = this.props;
     const { title } = this.state; // Will change based on route
     this.topbarRenderCount += 1;
     console.log("topbar render count: ", this.topbarRenderCount);
@@ -107,7 +101,7 @@ export default class TopBar extends React.Component {
               rows={"1"}
               autoComplete="off" autoCorrect="off" autoCapitalize="off"
               spellCheck="false"
-              disabled={this.props.pageType === "Home" || !this.props.isCreator}
+              disabled={pageType === "Home" || !isCreator}
               value={title}
             >
             </textarea>

@@ -12,7 +12,7 @@ const projectsReducer = function (oldState = {}, action) {
       return Object.assign({}, oldState, action.payload.projects );
     case RECEIVE_PROJECT:
       // console.log("receiving project (projectsReducer)");
-      return Object.assign({}, oldState, action.project);
+      return Object.assign({}, oldState, { [action.project.id]: action.project });
     default:
       return oldState;
   }

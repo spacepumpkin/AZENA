@@ -7,7 +7,7 @@
   - fetchProjects(userId) // fetch all projects associated with user
 */
 
-// Test Status - not tested
+// Test Status - PASS
 export const createProject = (project) => {
   console.log(`creating new project...`);
   return $.ajax({

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :users, only: [:create, :show]
     resources :workspaces, only: [:create, :destroy, :update, :show, :index]
+    resources :projects, only: [:create, :update, :destroy]
     get "/users/:id/everything", to: "users#everything"
   end
 

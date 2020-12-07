@@ -18,7 +18,7 @@ prop passed in, inside the div with id 'root'.
 // * Projects
 // import { createProject, updateProject, destroyProject } from './actions/project_actions';
 // * Tasks
-//
+import { createTask, updateTask, destroyTask } from './actions/task_actions';
 
 // ------------------------------ TESTING END ---------------------------------
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         users: users,
         workspaces: workspaces,
         projects: projects,
-        // tasks: tasks,
+        tasks: tasks,
         // usersWorkspaces: usersWorkspaces,
         // usersProjects: usersProjects,
         // usersTasks: usersTasks,
@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
         id: currentUser.id
       }
     };
-    debugger
     delete window.currentUserPayload;
   }
 
@@ -114,9 +113,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
   // window.destroyWorkspaceApi = WorkspaceApiUtil.destroyWorkspace; // PASS - should be able to destroy workspace in BE
   // window.destroyWorkspace = destroyWorkspace; // PASS - should be able to destroy workspace in BE and FE
-  // window.createProject = createProject; // PASS - should be able to create workspace in BE and FE
-  // window.updateProject = updateProject; // PASS - should be able to update workspace in BE and FE
-  // window.destroyProject = destroyProject; // PASS - should be able to destroy workspace in BE and FE
+  // window.createProject = createProject; // PASS - should be able to create project in BE and FE
+  // window.updateProject = updateProject; // PASS - should be able to update project in BE and FE
+  // window.destroyProject = destroyProject; // PASS - should be able to destroy project in BE and FE
+  window.createTask = createTask; //  - should be able to create task in BE and FE
+  window.updateTask = updateTask; //  - should be able to update task in BE and FE
+  window.destroyTask = destroyTask; //  - should be able to destroy task in BE and FE
 
 
   // ------------------------------ TESTING END --------------------------------

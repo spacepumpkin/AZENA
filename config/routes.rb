@@ -4,6 +4,7 @@
 #               api_session DELETE /api/session(.:format)                                                                   api/sessions#destroy {:format=>:json}
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
 #       everything_api_user GET    /api/users/:id/everything(.:format)                                                      api/users#everything {:format=>:json}
+# remove_workspace_api_user DELETE /api/users/:id/remove_workspace(.:format)                                                api/users#remove_workspace {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
 #                  api_user GET    /api/users/:id(.:format)                                                                 api/users#show {:format=>:json}
 #            api_workspaces GET    /api/workspaces(.:format)                                                                api/workspaces#index {:format=>:json}
@@ -16,7 +17,10 @@
 #               api_project PATCH  /api/projects/:id(.:format)                                                              api/projects#update {:format=>:json}
 #                           PUT    /api/projects/:id(.:format)                                                              api/projects#update {:format=>:json}
 #                           DELETE /api/projects/:id(.:format)                                                              api/projects#destroy {:format=>:json}
-#                  new_test GET    /session/new(.:format)                                                                   tests#new
+#                 api_tasks POST   /api/tasks(.:format)                                                                     api/tasks#create {:format=>:json}
+#                  api_task PATCH  /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>:json}
+#                           PUT    /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>:json}
+#                           DELETE /api/tasks/:id(.:format)                                                                 api/tasks#destroy {:format=>:json}
 #                      root GET    /                                                                                        static_pages#root
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -37,10 +41,11 @@ Rails.application.routes.draw do
     end
     resources :workspaces, only: [:create, :destroy, :update, :show, :index]
     resources :projects, only: [:create, :update, :destroy]
+    resources :tasks, only: [:create, :update, :destroy]
     # get "/users/:id/everything", to: "users#everything"
   end
 
-  resource :test, only: [:new], path: 'session'
+  # resource :test, only: [:new], path: 'session'
 
   root to: 'static_pages#root'
   # get '*path', to: "static_pages#root"

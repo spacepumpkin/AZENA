@@ -18,6 +18,9 @@ json.projects do
   json.partial! "api/projects/projects.json.jbuilder", projects: user.projects
 end
 
+json.tasks do
+  json.partial! "api/tasks/tasks.json.jbuilder", tasks: user.tasks
+end
 
 # ! Add real tasks later
 json.tasks({})

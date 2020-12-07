@@ -25,7 +25,7 @@ class Api::ProjectsController < ApplicationController
     if @project.update(project_params)
       render :show, status: 200
     else
-      render json: ["Project could not be removed"], status: 422
+      render json: ["Project could not be updated"], status: 422
     end
   end
 

@@ -37,4 +37,11 @@ class ApplicationController < ActionController::Base
     session[:session_token] = nil
     @current_user = nil
   end
+
+  # def all_users_tasks
+  #   projects = @current_user.projects
+
+  #   projects.each do |project|
+  #   end
+  # end
 end

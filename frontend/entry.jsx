@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       workspaces, 
       projects,
       tasks,
+      assignedTasksIds,
       usersWorkspaces, 
       usersProjects,
       usersTasks } = currentUserPayload;
@@ -46,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         workspaces: workspaces,
         projects: projects,
         tasks: tasks,
+        assignedTasksIds: assignedTasksIds
         // usersWorkspaces: usersWorkspaces,
         // usersProjects: usersProjects,
         // usersTasks: usersTasks,
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         id: currentUser.id
       }
     };
-    debugger
+    // debugger
     delete window.currentUserPayload;
   }
 

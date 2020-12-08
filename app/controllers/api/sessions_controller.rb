@@ -16,7 +16,7 @@ class Api::SessionsController < ApplicationController
       login!(@user)
       # render api_user_url(@user.id)
       # render "api/users/show", status: 200
-      render "api/users/everything", status: 200 # ! for big fetch
+      render "api/users/everything", status: 200 # for big fetch
     else
       # flash.now[:errors] = ["Invalid email or password"]
       # render json: ["Invalid email or password"], status: 422

@@ -18,12 +18,24 @@ json.projects do
   json.partial! "api/projects/projects.json.jbuilder", projects: user.projects
 end
 
-json.assigned_tasks do
-  json.partial! "api/tasks/tasks.json.jbuilder", tasks: user.tasks
+json.assigned_tasks_ids do
+  # json.partial! "api/tasks/tasks.json.jbuilder", tasks: user.tasks
+  json.array! user.tasks.to_a.map { |task| task.id }
 end
 
-# ! Add real tasks later
 # json.tasks({})
+# ! More efficient way? Avoid N+1?
+all_tasks = [];
+user.projects.each do |project|
+  tasks = project.tasks.to_a
+  unless tasks.empty?
+    all_tasks.concat(tasks)
+  end
+end
+
+json.tasks do
+  json.partial! "api/tasks/tasks.json.jbuilder", tasks: all_tasks
+end
 
 # ! Mainly for when we have member users
 json.users_workspaces do

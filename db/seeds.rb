@@ -17,12 +17,12 @@ demo_workspace1 = Workspace.create!(creator_id: demo.id, name: "My First Workspa
 demo_workspace2 = Workspace.create!(creator_id: demo.id, name: "Wonderful Workspace", description: "You can create as many workspaces as you'd like")
 demo_workspace3 = Workspace.create!(creator_id: demo.id, name: "The Go-Getters", description: "Our team gets the go's")
 
-demo.workspaces << demo.own_workspaces # Add all created workspaces to associated workspaces
+demo.workspaces << demo.created_workspaces # Add all created workspaces to associated workspaces
 
 # Make Test Workspaces
 test_workspace1 = Workspace.create!(creator_id: test.id, name: "Build Testing Space", description: "This space is for testing tests that test tests")
 test_workspace2 = Workspace.create!(creator_id: test.id, name: "Build Testing Space Numba 2")
-test.workspaces << test.own_workspaces
+test.workspaces << test.created_workspaces
 
 test_workspace2.users << demo # Add Demo user to test's 2nd workspace's users
 
@@ -34,12 +34,12 @@ demo_workspace1_project3 = Project.create!(name: "Backend Routes", description: 
 demo_workspace2_project1 = Project.create!(name: "Wonderful Project", description: "What a wonderful project.", workspace_id: demo_workspace2.id, creator_id: demo.id)
 demo_workspace3_project1 = Project.create!(name: "Go-Go Project", description: "Goal: Get >10 Go's", workspace_id: demo_workspace3.id, creator_id: demo.id)
 
-demo.projects << demo.own_projects # Add all created projects to associated projects
+demo.projects << demo.created_projects # Add all created projects to associated projects
 
 # Make Test Projects
 test_workspace2_project1 = Project.create!(name: "The Very First Test", description: "Testing a tasty test", workspace_id: test_workspace2.id, creator_id: test.id)
 
-test.projects << test.own_projects # Add all created projects to associated projects
+test.projects << test.created_projects # Add all created projects to associated projects
 test_workspace2_project1.users << demo # Add demo to list of users
 
 # Make Demo Tasks
@@ -47,4 +47,4 @@ workspace1_project1_task1 = Task.create!(name: "Get 8 hours of sleep", descripti
 workspace1_project1_task2 = Task.create!(name: "Dream of code", description: "", due_date: "2020-10-25",project_id: demo_workspace1_project1.id, creator_id: demo.id)
 workspace3_project1_task1 = Task.create!(name: "DO THE THING", description: "", due_date: "2020-10-26",project_id: demo_workspace3_project1.id, creator_id: demo.id)
 
-demo.tasks << demo.own_tasks
+# demo.tasks << demo.created_tasks # Don't add created tasks to assigned tasks

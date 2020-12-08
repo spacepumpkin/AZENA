@@ -1,6 +1,6 @@
 class Api::SessionsController < ApplicationController
 
-  before_action :require_logged_in, only: [:destroy]
+  before_action :require_logged_in, only: [:destroy] # ! remove to allow 2 people be logged in
 
   def create
     # @user = User.find_by_credentials(

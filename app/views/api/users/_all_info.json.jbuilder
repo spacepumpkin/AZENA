@@ -18,12 +18,12 @@ json.projects do
   json.partial! "api/projects/projects.json.jbuilder", projects: user.projects
 end
 
-json.tasks do
+json.assigned_tasks do
   json.partial! "api/tasks/tasks.json.jbuilder", tasks: user.tasks
 end
 
 # ! Add real tasks later
-json.tasks({})
+# json.tasks({})
 
 # ! Mainly for when we have member users
 json.users_workspaces do
@@ -37,10 +37,6 @@ end
 
 # ! Add real users tasks later
 json.users_tasks({})
-
-# json.tasks do
-#   json.partial! "api/tasks/tasks.json.jbuilder", tasks: user.tasks
-# end
 
 # entities: {
 #   users: {},

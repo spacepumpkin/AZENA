@@ -13,6 +13,14 @@
   
 }
 
+#mainbox h1 {
+  color        : $darkgray;
+  font-size    : 24px;
+  margin       : 10px 0;
+  padding      : 10px 0;
+  border-bottom: 1px solid $secondary;
+}
+
 // MainContent (Workspace, Project, etc.)
 #main-content {
   // margin-top   : $header-height; // adjust for fixed topbar;
@@ -22,12 +30,4 @@
   height       : 100%;
   // border    : 1px dashed violet;
   padding      : 50px;
-}
-
-#mainbox h1 {
-  color        : $darkgray;
-  font-size    : 24px;
-  margin       : 10px 0;
-  padding      : 10px 0;
-  border-bottom: 1px solid $secondary;
 }

@@ -23,7 +23,9 @@ function getTopBarInfo(entities, pathname, dispatch) {
   //     return "Home";
   // }
   if (pathname.includes("workspaces")) {
-    const workspace = entities.workspaces[pathname.slice("/workspaces/".length)];
+    // const workspace = entities.workspaces[pathname.slice("/workspaces/".length)];
+    let workspaceId = pathname.replace(/\D/g, '');
+    const workspace = entities.workspaces[workspaceId];
     return {
       title: workspace.name,
       pageType: "Workspace",
@@ -31,7 +33,8 @@ function getTopBarInfo(entities, pathname, dispatch) {
       updateItem: (workspace) => dispatch(updateWorkspace(workspace))
     }
   } else if (pathname.includes("projects")) {
-    const project = entities.projects[pathname.slice("/projects/".length)];
+    let projectId = pathname.replace(/\D/g, '');
+    const project = entities.projects[projectId];
     return {
       title: project.name,
       pageType: "Project",

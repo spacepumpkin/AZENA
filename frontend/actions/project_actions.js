@@ -2,7 +2,7 @@ import * as ProjectApiUtil from "../util/project_api_util";
 /*
   * createProject(project) -> RECEIVE_PROJECT
   * updateProject(project) -> RECEIVE_PROJECT
-  * destroyProject(project) -> REMOVE_PROJECT
+  * destroyProject(projectId) -> REMOVE_PROJECT
 */
 
 // REGULAR ACTIONS --------------------------------------------------

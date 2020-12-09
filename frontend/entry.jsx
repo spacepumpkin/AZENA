@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         id: currentUser.id
       }
     };
-    // debugger
+    debugger
     delete window.currentUserPayload;
   }
 

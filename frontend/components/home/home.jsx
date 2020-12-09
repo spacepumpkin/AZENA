@@ -36,7 +36,7 @@ export default class Home extends React.Component {
                         Object.values(projects).map((project) => {
                           return (
                             (project.workspaceId === workspace.id) &&
-                            <Link to="/home" key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                            <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
                           )
                         })
                       }

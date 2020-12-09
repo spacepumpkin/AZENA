@@ -70,8 +70,11 @@ export default class TopBar extends React.Component {
   }
 
   render() {
-    const { toggleSidebar, sidebarCollapse, pageType, isCreator } = this.props;
-    const { title } = this.state; // Will change based on route
+    const { toggleSidebar, sidebarCollapse, pageType, isCreator, title: propsTitle } = this.props;
+    const { title: stateTitle } = this.state; // Will change based on route
+    // console.log("propsTitle: ", propsTitle, "stateTitle: ", stateTitle);
+    const renderedTitle = stateTitle;
+
     this.topbarRenderCount += 1;
     console.log("topbar render count: ", this.topbarRenderCount);
 
@@ -102,7 +105,7 @@ export default class TopBar extends React.Component {
               autoComplete="off" autoCorrect="off" autoCapitalize="off"
               spellCheck="false"
               disabled={pageType === "Home" || !isCreator}
-              value={title}
+              value={renderedTitle}
             >
             </textarea>
           </div>

@@ -18,7 +18,7 @@ const mSP = function ({ entities }, ownProps) {
   return {
     projectId: projectId,
     projectTasks: projectTasks,
-    assignedTasksIds: entities.assignedTasksIds
+    usersTasks: entities.usersTasks
   }
 };
 

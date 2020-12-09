@@ -39,7 +39,6 @@ User.includes(projects: :tasks).all.each do |user|
     break
   end
 end
-debugger
 
 json.tasks do
   json.partial! "api/tasks/tasks.json.jbuilder", tasks: all_tasks

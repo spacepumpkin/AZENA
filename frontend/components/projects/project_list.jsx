@@ -11,7 +11,7 @@ export default class ProjectList extends React.Component {
   }
 
   render() {
-    const { projectId, projectTasks, assignedTasksIds } = this.props;
+    const { projectId, projectTasks, usersTasks } = this.props;
 
     return (
       <div id="project-list">

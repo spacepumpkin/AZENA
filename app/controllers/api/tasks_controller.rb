@@ -32,7 +32,7 @@ class Api::TasksController < ApplicationController
       return
     end
     if @task.destroy
-      render :show #, status: 200
+      render :show, status: 200
     else
       render json: ["Task could not be removed"], status: 422
     end

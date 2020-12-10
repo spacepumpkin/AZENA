@@ -64,8 +64,10 @@ class Api::UsersController < ApplicationController
 
     @users_task = UsersTask.new(users_task_params)
     if @users_task.save
-      # render template: "api/users/users_task" #, status: 200
-      render :show_users_task, status: 200
+      render template: "api/users/_users_task", locals: {users_task: @users_task} #, status: 200
+
+      # ! Backup that works:
+      # render :show_users_task, status: 200
     else
       # render json: ["Task could not be assigned to #{@users_task.user.username}"], status: 422
       render json: @users_task.errors.full_messages, status: 422
@@ -79,8 +81,9 @@ class Api::UsersController < ApplicationController
       return
     end
     if @users_task.destroy
-      # render template: "api/users/users_task", status: 200
-      render :show_users_task, status: 200
+      render template: "api/users/_users_task", locals: { users_task: @users_task } #, status: 20
+      # ! Backup that works:
+      # render :show_users_task, status: 200
     else
       # render json: ["Task could not be unassigned from #{@users_task.user.username}"], status: 422
       render json: @users_task.errors.full_messages, status: 422

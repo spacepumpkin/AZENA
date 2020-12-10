@@ -119,8 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.createTask = createTask; // PASS - should be able to create task in BE and FE + assign task to user (create usersTask)
   // window.updateTask = updateTask; // PASS - should be able to update task in BE and FE
   // window.destroyTask = destroyTask; // PASS - should be able to destroy task in BE and FE + unassign all users from task (delete usersTask)
-  // window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
-  // window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
+  window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
+  window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
 
   // ------------------------------ TESTING END --------------------------------
 })

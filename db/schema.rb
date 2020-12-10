@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_045500) do
+ActiveRecord::Schema.define(version: 2020_12_10_221220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 2020_10_23_045500) do
     t.index ["workspace_id", "name"], name: "index_projects_on_workspace_id_and_name", unique: true
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "order", null: false
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_sections_on_project_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -33,6 +42,8 @@ ActiveRecord::Schema.define(version: 2020_10_23_045500) do
     t.integer "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "section_id"
+    t.integer "order"
   end
 
   create_table "users", force: :cascade do |t|

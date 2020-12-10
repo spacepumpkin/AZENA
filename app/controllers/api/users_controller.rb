@@ -61,14 +61,14 @@ class Api::UsersController < ApplicationController
       render json: ["Task '#{@users_task.task.name}' is already assigned to #{@users_task.user.username}"], status: 422
       return
     end
-    debugger
 
     @users_task = UsersTask.new(users_task_params)
     if @users_task.save
-      debugger
-      render template: "api/users/users_task.json.jbuilder", users_task: @users_task
+      # render template: "api/users/users_task" #, status: 200
+      render :show_users_task, status: 200
     else
-      render json: ["Task could not be assigned to #{@users_task.user.username}"], status: 422
+      # render json: ["Task could not be assigned to #{@users_task.user.username}"], status: 422
+      render json: @users_task.errors.full_messages, status: 422
     end
   end
 
@@ -78,11 +78,12 @@ class Api::UsersController < ApplicationController
       render json: ["Task '#{@users_task.task.name}' is not assigned to #{@users_task.user.username}"], status: 404
       return
     end
-
     if @users_task.destroy
-      render template: "api/users/users_task", users_task: @users_task, status: 200
+      # render template: "api/users/users_task", status: 200
+      render :show_users_task, status: 200
     else
-      render json: ["Task could not be unassigned from #{@users_task.user.username}"], status: 422
+      # render json: ["Task could not be unassigned from #{@users_task.user.username}"], status: 422
+      render json: @users_task.errors.full_messages, status: 422
     end
   end
 

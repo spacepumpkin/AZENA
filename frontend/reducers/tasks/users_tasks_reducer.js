@@ -1,8 +1,8 @@
 import {
-  RECEIVE_TASK,
-  REMOVE_TASK,
+  // RECEIVE_TASK,
+  // REMOVE_TASK,
   RECEIVE_USERS_TASK,
-  REMOVE_USERS_TASK
+  // REMOVE_USERS_TASK
 } from "../../actions/task_actions";
 import { RECEIVE_CURRENT_USER } from "../../actions/session_actions";
 
@@ -13,6 +13,10 @@ const userTasksReducer = function (oldState = {}, action) {
     case RECEIVE_CURRENT_USER:
       // console.log("receiving current user (userTasksReducer");
       return action.payload.usersTasks;
+    // case RECEIVE_TASK:
+    //   return Object.assign({}, oldState, { [action.usersTask.id]: action.usersTask })
+    case RECEIVE_USERS_TASK:
+      return Object.assign({}, oldState, { [action.usersTask.id]: action.usersTask })
     default:
       return oldState;
   }

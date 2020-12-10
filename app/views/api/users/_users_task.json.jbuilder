@@ -1,1 +1,1 @@
-json.extract! users_task, :user_id, :task_id
+json.extract! users_task, :id, :user_id, :task_id

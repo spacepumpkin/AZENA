@@ -12,7 +12,7 @@ export const RECEIVE_TASK = "RECEIVE_TASK"; // hits tasksReducer + usersTasksRed
 export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS"; // hits tasksReducer + usersTasksReducer
 export const REMOVE_TASK = "REMOVE_TASK"; // hits tasksReducer + usersTasksReducer
 export const RECEIVE_USERS_TASK = "RECEIVE_USERS_TASK"; // hits usersTasksReducer
-export const REMOVE_USERS_TASK = "REMOVE_USERS_TASK"; // hits usersTasksReducer
+export const REMOVE_USERS_TASKS = "REMOVE_USERS_TASKS"; // hits usersTasksReducer
 // export const REMOVE_TASK_FROM_WORKSPACE = "REMOVE_TASK_FROM_WORKSPACE";
 
 const receiveTask = function (task) {
@@ -53,13 +53,17 @@ const removeUsersTask = function (usersTask) {
 // THUNK ACTIONS --------------------------------------------------
 
 // Test Status - PASS
+// Payload from backend now has task and usersTask, dispatch separate action for usersTask
 export const createTask = function (task) {
   return function (dispatch) {
     // console.log("dispatching createTask");
     return (
       TaskApiUtil.createTask(task)
         .then(
-          (task) => dispatch(receiveTask(task)),
+          ({ task, usersTask }) => {
+            dispatch(receiveTask(task))
+            dispatch(receiveUsersTask(usersTask))
+          },
           (errors) => dispatch(receiveTaskErrors(errors.responseJSON))
         )
     );

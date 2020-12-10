@@ -67,12 +67,12 @@ end
 # ! Mainly for when we have member users, multiple assignees for tasks
 # json.users_tasks({})
 json.users_tasks do
-  # json.partial! "api/users/users_tasks.json.jbuilder", user: user # for current_user only
-  UsersTask.all.each do |users_task|
-    json.set! users_task.id do
-      json.extract! users_task, :user_id, :task_id
-    end
-  end
+  json.partial! "api/users/users_tasks.json.jbuilder", users_tasks: UsersTask.all
+  # UsersTask.all.each do |users_task|
+  #   json.set! users_task.id do
+  #     json.extract! users_task, :user_id, :task_id
+  #   end
+  # end
 end
 
 # entities: {

@@ -6,6 +6,8 @@ class Api::TasksController < ApplicationController
     @task.creator_id = current_user.id
     if @task.save
       current_user.tasks << @task # * Add to current user's tasks by default when created
+      @users_task = UsersTask.find_by(task_id: @task.id) # Also send back users_task when task is created
+      # @users_task = UsersTask.create(user_id: current_user.id, task_id: @task.id) # Alternative method, same queries
       render :show, status: 200
     else
       render json: @task.errors.full_messages, status: 422
@@ -31,6 +33,7 @@ class Api::TasksController < ApplicationController
       render json: ["Task was not found"], status: 404
       return
     end
+    @users_tasks = UsersTask.where(task_id: @task.id).to_a # Also send back all users_tasks when task is created
     if @task.destroy
       render :show, status: 200
     else

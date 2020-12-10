@@ -14,8 +14,10 @@ json.workspaces do
   json.partial! "api/workspaces/workspaces.json.jbuilder", workspaces: user.workspaces
 end
 
+user_projects = user.projects.all.includes(:tasks)
+
 json.projects do
-  json.partial! "api/projects/projects.json.jbuilder", projects: user.projects
+  json.partial! "api/projects/projects.json.jbuilder", projects: user_projects
 end
 
 # ! Possibly replace this with users_tasks if we have multiple users assigned to same tasks
@@ -30,7 +32,7 @@ end
 all_tasks = []
 # User.includes(projects: :tasks).find_by(id: user.id).projects.each do |project|
 # Project.includes(:tasks).each do |project|
-user.projects.all.includes(:tasks).each do |project|
+user_projects.each do |project|
   tasks = project.tasks.to_a
   unless tasks.empty?
     all_tasks.concat(tasks)

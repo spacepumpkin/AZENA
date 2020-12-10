@@ -10,9 +10,13 @@
 #  creator_id  :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  section_id  :integer
+#  order       :integer
 #
 class Task < ApplicationRecord
 
+  validates :name, :project_id, :creator_id, presence: true
+  
   # Join Table for Users and their Tasks on their Workspaces' Projects
   has_many :users_tasks,
     foreign_key: :task_id,
@@ -31,4 +35,9 @@ class Task < ApplicationRecord
   belongs_to :project,
     foreign_key: :project_id,
     class_name: :Project
+
+  # A Task can belong to 1 Section (in 1 Project)
+  belongs_to :section,
+    foreign_key: :section_id,
+    class_name: :Section
 end

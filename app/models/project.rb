@@ -41,6 +41,12 @@ class Project < ApplicationRecord
     class_name: :Task,
     dependent: :destroy
 
+  # A Project can have 0 or more sections
+  has_many :sections,
+    foreign_key: :project_id,
+    class_name: :Section,
+    dependent: :destroy
+
   # * CUSTOM ASSOCIATIONS ----------------------------------------
 
 end

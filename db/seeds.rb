@@ -47,4 +47,4 @@ workspace1_project1_task1 = Task.create!(name: "Get 8 hours of sleep", descripti
 workspace1_project1_task2 = Task.create!(name: "Dream of code", description: "", due_date: "2020-10-25",project_id: demo_workspace1_project1.id, creator_id: demo.id)
 workspace3_project1_task1 = Task.create!(name: "DO THE THING", description: "", due_date: "2020-10-26",project_id: demo_workspace3_project1.id, creator_id: demo.id)
 
-# demo.tasks << demo.created_tasks # Don't add created tasks to assigned tasks
+demo.tasks << demo.created_tasks # Add created tasks to assigned tasks by default

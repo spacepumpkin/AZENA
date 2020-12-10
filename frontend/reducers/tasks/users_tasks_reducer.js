@@ -1,7 +1,9 @@
-// import {
-//   RECEIVE_TASK,
-//   REMOVE_TASK
-// } from "../../actions/task_actions";
+import {
+  RECEIVE_TASK,
+  REMOVE_TASK,
+  RECEIVE_USERS_TASK,
+  REMOVE_USERS_TASK
+} from "../../actions/task_actions";
 import { RECEIVE_CURRENT_USER } from "../../actions/session_actions";
 
 const userTasksReducer = function (oldState = {}, action) {

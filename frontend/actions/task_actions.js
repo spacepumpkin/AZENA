@@ -2,13 +2,17 @@ import * as TaskApiUtil from "../util/task_api_util";
 /*
   * createTask(task) -> RECEIVE_TASK
   * updateTask(task) -> RECEIVE_TASK
-  * destroyTask(task) -> REMOVE_TASK
+  * destroyTask(taskId) -> REMOVE_TASK
+  * assignTask(userId, taskId) -> RECEIVE_USERS_TASK
+  * unassignTask(userId, taskId) -> REMOVE_USERS_TASK
 */
 
 // REGULAR ACTIONS --------------------------------------------------
-export const RECEIVE_TASK = "RECEIVE_TASK";
-export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS";
-export const REMOVE_TASK = "REMOVE_TASK";
+export const RECEIVE_TASK = "RECEIVE_TASK"; // hits tasksReducer + usersTasksReducer
+export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS"; // hits tasksReducer + usersTasksReducer
+export const REMOVE_TASK = "REMOVE_TASK"; // hits tasksReducer + usersTasksReducer
+export const RECEIVE_USERS_TASK = "RECEIVE_USERS_TASK"; // hits usersTasksReducer
+export const REMOVE_USERS_TASK = "REMOVE_USERS_TASK"; // hits usersTasksReducer
 // export const REMOVE_TASK_FROM_WORKSPACE = "REMOVE_TASK_FROM_WORKSPACE";
 
 const receiveTask = function (task) {
@@ -32,12 +36,19 @@ const removeTask = function (task) {
   }
 }
 
-// const removeTaskFromWorkspace = function (taskId) {
-//   return {
-//     type: REMOVE_TASK_FROM_WORKSPACE,
-//     taskId
-//   }
-// }
+const receiveUsersTask = function (usersTask) {
+  return {
+    type: RECEIVE_USERS_TASK,
+    usersTask
+  }
+}
+
+const removeUsersTask = function (usersTask) {
+  return {
+    type: REMOVE_USERS_TASK,
+    usersTask
+  }
+}
 
 // THUNK ACTIONS --------------------------------------------------
 
@@ -77,6 +88,33 @@ export const destroyTask = function (taskId) {
       TaskApiUtil.destroyTask(taskId)
         .then(
           (task) => dispatch(removeTask(task)),
+          (errors) => dispatch(receiveTaskErrors(errors.responseJSON))
+        )
+    );
+  };
+};
+
+// Test Status -
+export const assignUsersTask = function (userId, taskId) {
+  return function (dispatch) {
+    // console.log("dispatching assignUsersTask");
+    return (
+      TaskApiUtil.assignUsersTask(userId, taskId)
+        .then(
+          (usersTask) => dispatch(receiveUsersTask(usersTask)),
+          (errors) => dispatch(receiveTaskErrors(errors.responseJSON))
+        )
+    );
+  };
+};
+
+export const unassignUsersTask = function (userId, taskId) {
+  return function (dispatch) {
+    // console.log("dispatching unassignUsersTask");
+    return (
+      TaskApiUtil.unassignUsersTask(userId, taskId)
+        .then(
+          (usersTask) => dispatch(removeUsersTask(usersTask)),
           (errors) => dispatch(receiveTaskErrors(errors.responseJSON))
         )
     );

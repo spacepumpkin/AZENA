@@ -2,12 +2,14 @@
   - fetchTask(taskId)   // Probably not using
   * createTask(task)
   * updateTask(task)
-  * destroyTask(taskId) 
+  * destroyTask(taskId)
+  * assignUsersTask(userId, taskId)
+  * unassignUsersTask(userId, taskId)
 
   - fetchTasks(userId) // fetch all tasks associated with user; no need anymore
 */
 
-// Test Status - 
+// Test Status - PASS
 export const createTask = (task) => {
   console.log(`creating new task (${task.name})...`);
   return $.ajax({
@@ -24,7 +26,7 @@ export const createTask = (task) => {
   })
 }
 
-// Test Status - 
+// Test Status - PASS
 export const updateTask = (task) => {
   console.log(`updating task #${task.id}...`);
   return $.ajax({
@@ -34,11 +36,31 @@ export const updateTask = (task) => {
   })
 }
 
-// Test Status - 
+// Test Status - PASS
 export const destroyTask = (taskId) => {
   console.log(`destroying task #${taskId}...`);
   return $.ajax({
     url: `/api/tasks/${taskId}`,
     method: "DELETE"
+  })
+}
+
+// Test Status - 
+export const assignUsersTask = (userId, taskId) => {
+  console.log(`assigning task #${taskId} to user #${userId}...`);
+  return $.ajax({
+    url: `/api/users/${userId}/tasks`,
+    method: "POST",
+    data: { users_task: { user_id: userId, task_id: taskId } }
+  })
+}
+
+// Test Status - 
+export const unassignUsersTask = (userId, taskId) => {
+  console.log(`unassigning task #${taskId} from user #${userId}...`);
+  return $.ajax({
+    url: `/api/users/${userId}/tasks`,
+    method: "DELETE",
+    data: { users_task: { user_id: userId, task_id: taskId } }
   })
 }

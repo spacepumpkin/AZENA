@@ -5,7 +5,7 @@ class Api::TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.creator_id = current_user.id
     if @task.save
-      # current_user.tasks << @task
+      current_user.tasks << @task # * Add to current user's tasks by default when created
       render :show, status: 200
     else
       render json: @task.errors.full_messages, status: 422

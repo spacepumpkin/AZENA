@@ -28,15 +28,12 @@ end
 # Alternatively, we could get ALL the tasks then filter in frontend
 # This only looks for tasks attached to projects connected to current_user
 all_tasks = []
-User.includes(projects: :tasks).all.each do |user|
-  if user.id == current_user.id
-    user.projects.each do |project|
-      tasks = project.tasks.to_a
-      unless tasks.empty?
-        all_tasks.concat(tasks)
-      end
-    end
-    break
+# User.includes(projects: :tasks).find_by(id: user.id).projects.each do |project|
+# Project.includes(:tasks).each do |project|
+user.projects.all.includes(:tasks).each do |project|
+  tasks = project.tasks.to_a
+  unless tasks.empty?
+    all_tasks.concat(tasks)
   end
 end
 

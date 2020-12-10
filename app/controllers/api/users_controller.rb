@@ -29,7 +29,7 @@ class Api::UsersController < ApplicationController
 
   # Fetch every entity associated with current user (workspaces, projects, tasks, etc.)
   def everything
-    @user = User.includes(:workspaces, :projects, :tasks).find_by(id: params[:id])
+    @user = User.includes(:workspaces, :projects, :tasks, projects: :tasks).find_by(id: params[:id])
     render :everything
   end
 

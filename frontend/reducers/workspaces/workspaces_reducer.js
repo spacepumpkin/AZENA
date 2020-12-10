@@ -35,6 +35,6 @@ export default workspacesReducer;
 //     id: 1,
 //     name: "",
 //     description: "",
-//     creator_id: 1,
+//     creatorId: 1,
 //   },
 // }

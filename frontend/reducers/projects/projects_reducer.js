@@ -25,3 +25,13 @@ const projectsReducer = function (oldState = {}, action) {
 }
 
 export default projectsReducer;
+
+// projects: {
+//   1: {
+//     id: 1,
+//     name: "",
+//     description: "",
+//     creatorId: 1,
+//     workspaceId: 1
+//   },
+// }

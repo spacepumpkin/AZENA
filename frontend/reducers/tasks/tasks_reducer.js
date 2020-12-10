@@ -24,3 +24,14 @@ const tasksReducer = function (oldState = {}, action) {
 }
 
 export default tasksReducer;
+
+// tasks: {
+//   1: {
+//     id: 1,
+//     name: "",
+//     description: "",
+//     dueDate: "2020-10-21"
+//     creatorId: 1,
+//     projectId: 1
+//   },
+// }

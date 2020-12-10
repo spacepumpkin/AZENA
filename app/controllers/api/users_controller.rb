@@ -61,10 +61,12 @@ class Api::UsersController < ApplicationController
       render json: ["Task '#{@users_task.task.name}' is already assigned to #{@users_task.user.username}"], status: 422
       return
     end
+    debugger
 
     @users_task = UsersTask.new(users_task_params)
     if @users_task.save
-      render template: "api/users/users_task", users_task: @users_task, status: 200
+      debugger
+      render template: "api/users/users_task.json.jbuilder", users_task: @users_task
     else
       render json: ["Task could not be assigned to #{@users_task.user.username}"], status: 422
     end

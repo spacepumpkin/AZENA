@@ -8,11 +8,12 @@ import * as TaskApiUtil from "../util/task_api_util";
 */
 
 // REGULAR ACTIONS --------------------------------------------------
-export const RECEIVE_TASK = "RECEIVE_TASK"; // hits tasksReducer + usersTasksReducer
-export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS"; // hits tasksReducer + usersTasksReducer
+export const RECEIVE_TASK = "RECEIVE_TASK"; // hits tasksReducer
+export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS"; // hits tasksErrorsReducer
 export const REMOVE_TASK = "REMOVE_TASK"; // hits tasksReducer + usersTasksReducer
 export const RECEIVE_USERS_TASK = "RECEIVE_USERS_TASK"; // hits usersTasksReducer
-export const REMOVE_USERS_TASKS = "REMOVE_USERS_TASKS"; // hits usersTasksReducer
+export const REMOVE_USERS_TASK = "REMOVE_USERS_TASK"; // hits usersTasksReducer
+// export const REMOVE_USERS_TASKS = "REMOVE_USERS_TASKS"; // hits usersTasksReducer
 // export const REMOVE_TASK_FROM_WORKSPACE = "REMOVE_TASK_FROM_WORKSPACE";
 
 const receiveTask = function (task) {
@@ -43,12 +44,21 @@ const receiveUsersTask = function (usersTask) {
   }
 }
 
+// Remove single user task assignment
 const removeUsersTask = function (usersTask) {
   return {
     type: REMOVE_USERS_TASK,
     usersTask
   }
 }
+
+// Remove all assignments associated with a deleted task
+// const removeUsersTasks = function (usersTasks) {
+//   return {
+//     type: REMOVE_USERS_TASKS,
+//     usersTasks
+//   }
+// }
 
 // THUNK ACTIONS --------------------------------------------------
 
@@ -91,7 +101,10 @@ export const destroyTask = function (taskId) {
     return (
       TaskApiUtil.destroyTask(taskId)
         .then(
-          (task) => dispatch(removeTask(task)),
+          ({ task, usersTasks }) => {
+            dispatch(removeTask(task))
+            // dispatch(removeUsersTasks(usersTasks))
+          },
           (errors) => dispatch(receiveTaskErrors(errors.responseJSON))
         )
     );

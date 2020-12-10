@@ -20,4 +20,5 @@ export default entitiesReducer;
 //     workspaces: {},
 //     projects: {},
 //     tasks: {},
+//     usersTasks: {}
 //   },

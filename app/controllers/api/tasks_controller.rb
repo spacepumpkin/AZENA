@@ -8,7 +8,7 @@ class Api::TasksController < ApplicationController
       current_user.tasks << @task # * Add to current user's tasks by default when created
       @users_task = UsersTask.find_by(task_id: @task.id) # Also send back users_task when task is created
       # @users_task = UsersTask.create(user_id: current_user.id, task_id: @task.id) # Alternative method, same queries
-      render :show, status: 200
+      render :show #, status: 200
     else
       render json: @task.errors.full_messages, status: 422
     end
@@ -21,7 +21,7 @@ class Api::TasksController < ApplicationController
       return
     end
     if @task.update(task_params)
-      render :show, status: 200
+      render :show #, status: 200
     else
       render json: ["Task could not be updated"], status: 422
     end
@@ -33,9 +33,9 @@ class Api::TasksController < ApplicationController
       render json: ["Task was not found"], status: 404
       return
     end
-    @users_tasks = UsersTask.where(task_id: @task.id).to_a # Also send back all users_tasks when task is created
+    @users_tasks = UsersTask.where(task_id: @task.id).to_a # Also send back users_tasks associated with task
     if @task.destroy
-      render :show, status: 200
+      render :show #, status: 200
     else
       render json: ["Task could not be removed"], status: 422
     end

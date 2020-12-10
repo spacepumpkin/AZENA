@@ -18,7 +18,7 @@ prop passed in, inside the div with id 'root'.
 // * Projects
 // import { createProject, updateProject, destroyProject } from './actions/project_actions';
 // * Tasks
-import { createTask, updateTask, destroyTask } from './actions/task_actions';
+import { createTask, updateTask, destroyTask, assignUsersTask, unassignUsersTask } from './actions/task_actions';
 
 // ------------------------------ TESTING END ---------------------------------
 
@@ -116,10 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.createProject = createProject; // PASS - should be able to create project in BE and FE
   // window.updateProject = updateProject; // PASS - should be able to update project in BE and FE
   // window.destroyProject = destroyProject; // PASS - should be able to destroy project in BE and FE
-  window.createTask = createTask; //  - should be able to create task in BE and FE
-  window.updateTask = updateTask; //  - should be able to update task in BE and FE
-  window.destroyTask = destroyTask; //  - should be able to destroy task in BE and FE
-
+  // window.createTask = createTask; // PASS - should be able to create task in BE and FE + assign task to user (create usersTask)
+  // window.updateTask = updateTask; // PASS - should be able to update task in BE and FE
+  // window.destroyTask = destroyTask; // PASS - should be able to destroy task in BE and FE + unassign all users from task (delete usersTask)
+  window.assignUsersTask = assignUsersTask; // - should be able to assign user to a specific task
+  window.unassignUsersTask = unassignUsersTask; // - should be able to unassign user from a specific tasks
 
   // ------------------------------ TESTING END --------------------------------
 })

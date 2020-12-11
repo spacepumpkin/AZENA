@@ -48,3 +48,11 @@ workspace1_project1_task2 = Task.create!(name: "Dream of code", description: "",
 workspace3_project1_task1 = Task.create!(name: "DO THE THING", description: "", due_date: "2020-10-26",project_id: demo_workspace3_project1.id, creator_id: demo.id)
 
 demo.tasks << demo.created_tasks # Add created tasks to assigned tasks by default
+
+test_workspace2_project1_section1 = Section.create!(name: "Upcoming", order: 0, project_id: test_workspace2_project1.id)
+test_workspace2_project1_section3 = Section.create!(name: "Done", order: 3, project_id: test_workspace2_project1.id)
+test_workspace2_project1_section2 = Section.create!(name: "In Progress", order: 2, project_id: test_workspace2_project1.id)
+
+demo_workspace1_project1_section1 = Section.create!(name: "Upcoming", order: 1, project_id: demo_workspace1_project1.id)
+demo_workspace1_project1_section2 = Section.create!(name: "Doing", order: 2, project_id: demo_workspace1_project1.id)
+demo_workspace1_project1_section3 = Section.create!(name: "Done", order: 3, project_id: demo_workspace1_project1.id)

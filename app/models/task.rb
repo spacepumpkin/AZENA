@@ -16,11 +16,12 @@
 class Task < ApplicationRecord
 
   validates :name, :project_id, :creator_id, presence: true
-  
+
   # Join Table for Users and their Tasks on their Workspaces' Projects
   has_many :users_tasks,
     foreign_key: :task_id,
-    class_name: :UsersTask
+    class_name: :UsersTask,
+    dependent: :destroy # ! necessary?
   
   has_many :users,
     through: :users_tasks,

@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     end
     resources :workspaces, only: [:create, :destroy, :update, :show, :index]
     resources :projects, only: [:create, :update, :destroy]
+    resources :sections, only: [:create, :update, :destroy]
     resources :tasks, only: [:create, :update, :destroy]
     # get "/users/:id/everything", to: "users#everything"
   end

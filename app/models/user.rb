@@ -61,7 +61,8 @@ class User < ApplicationRecord
   # Join Table for Users and their Tasks on their Projects
   has_many :users_tasks,
     foreign_key: :user_id,
-    class_name: :UsersTask
+    class_name: :UsersTask,
+    dependent: :destroy
   
   # All of a user's assigned tasks (not necessarily created)
   has_many :tasks,

@@ -1,0 +1,1 @@
+json.partial! "api/sections/section.json.jbuilder", section: @section

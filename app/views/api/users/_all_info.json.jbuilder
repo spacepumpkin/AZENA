@@ -14,7 +14,7 @@ json.workspaces do
   json.partial! "api/workspaces/workspaces.json.jbuilder", workspaces: user.workspaces
 end
 
-user_projects = user.projects.all.includes(:tasks)
+user_projects = user.projects.all.includes(:tasks, :sections)
 
 json.projects do
   json.partial! "api/projects/projects.json.jbuilder", projects: user_projects
@@ -41,6 +41,17 @@ end
 
 json.tasks do
   json.partial! "api/tasks/tasks.json.jbuilder", tasks: all_tasks
+end
+
+# ! Has to be a better way to do this
+project_sections = user_projects.inject([]) do |all_sections, project|  
+  sections = project.sections.to_a
+  all_sections.concat(sections) unless sections.empty?
+  all_sections
+end
+
+json.sections do
+  json.partial! "api/sections/sections.json.jbuilder", sections: project_sections
 end
 
 # ! Mainly for when we have member users

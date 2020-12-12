@@ -19,6 +19,10 @@
 #               api_project PATCH  /api/projects/:id(.:format)                                                              api/projects#update {:format=>:json}
 #                           PUT    /api/projects/:id(.:format)                                                              api/projects#update {:format=>:json}
 #                           DELETE /api/projects/:id(.:format)                                                              api/projects#destroy {:format=>:json}
+#              api_sections POST   /api/sections(.:format)                                                                  api/sections#create {:format=>:json}
+#               api_section PATCH  /api/sections/:id(.:format)                                                              api/sections#update {:format=>:json}
+#                           PUT    /api/sections/:id(.:format)                                                              api/sections#update {:format=>:json}
+#                           DELETE /api/sections/:id(.:format)                                                              api/sections#destroy {:format=>:json}
 #                 api_tasks POST   /api/tasks(.:format)                                                                     api/tasks#create {:format=>:json}
 #                  api_task PATCH  /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>:json}
 #                           PUT    /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>:json}

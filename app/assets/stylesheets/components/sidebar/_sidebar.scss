@@ -229,6 +229,9 @@ button.collapsed {
     overflow-x: hidden;
     overflow-y: hidden;
     z-index   : 100;
+    > a{
+      position: absolute;
+    }
   }
 
   >a {

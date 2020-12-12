@@ -18,7 +18,9 @@ prop passed in, inside the div with id 'root'.
 // * Projects
 // import { createProject, updateProject, destroyProject } from './actions/project_actions';
 // * Tasks
-import { createTask, updateTask, destroyTask, assignUsersTask, unassignUsersTask } from './actions/task_actions';
+// import { createTask, updateTask, destroyTask, assignUsersTask, unassignUsersTask } from './actions/task_actions';
+// * Sections
+import { createSection, updateSection, destroySection } from './actions/section_actions';
 
 // ------------------------------ TESTING END ---------------------------------
 
@@ -34,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       users, 
       workspaces, 
       projects,
+      sections,
       tasks,
       usersWorkspaces, 
       usersProjects,
@@ -45,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         users: users,
         workspaces: workspaces,
         projects: projects,
+        sections: sections,
         tasks: tasks,
         // usersWorkspaces: usersWorkspaces,
         // usersProjects: usersProjects,
@@ -119,8 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.createTask = createTask; // PASS - should be able to create task in BE and FE + assign task to user (create usersTask)
   // window.updateTask = updateTask; // PASS - should be able to update task in BE and FE
   // window.destroyTask = destroyTask; // PASS - should be able to destroy task in BE and FE + unassign all users from task (delete usersTask)
-  window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
-  window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
+  // window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
+  // window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
+  window.createSection = createSection; // PASS - should be able to create new section under a project
+  window.updateSection = updateSection; // PASS - should be able to update a section
+  window.destroySection = destroySection; // Half pass - should be able to destroy a section and handle section tasks
 
   // ------------------------------ TESTING END --------------------------------
 })

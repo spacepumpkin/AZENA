@@ -6,7 +6,9 @@ class ProjectForm extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div id="project-form-wrapper">
+        <div id="project-form">
+
         <h1>Create a New Project</h1>
         <form action="">
         <label> Project Name
@@ -20,6 +22,8 @@ class ProjectForm extends React.Component {
         </label>
         <button type="button">Submit</button>
         </form>
+        </div>
+
       </div>
     )
   }

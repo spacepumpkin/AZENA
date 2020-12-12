@@ -40,7 +40,7 @@ const App = function (props) {
                 <ProtectedRoute exact path="/projects/:projectId/list" component={ProjectListContainer} />
                 {/* <ProtectedRoute exact path="/test1" component={MainContainer} />
         <ProtectedRoute exact path="/test2" component={MainContainer} /> */}
-                <Redirect to="/" />
+                {/* <Redirect to="/" /> */}
               </Switch>
             </div>
           </div>

@@ -13,7 +13,8 @@ const sessionErrorsReducer = function (oldState = [], action) {
   switch (action.type) {
     case RECEIVE_SESSION_ERRORS:
       // console.log("receiving session errors");
-      return action.errors;
+      return Object.assign([], action.errors);
+      // return action.errors;
     case RECEIVE_CURRENT_USER:
       // console.log("receiving current user (sessionErrorsReducer)");
       return [];

@@ -7,7 +7,7 @@ end
 
 # ! Add all co-member users later instead of singular user
 json.users do
-  json.partial! "api/users/users.json.jbuilder", users: [user]
+  json.partial! "api/users/users.json.jbuilder", users: User.all
 end
 
 json.workspaces do

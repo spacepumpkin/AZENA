@@ -1,0 +1,14 @@
+#workspace {
+  display: flex;
+}
+
+#workspace-leftpane {
+  margin-right: 20px;
+}
+
+#workspace-description {
+  
+  >textarea {
+    height: 200px;
+  }
+}

@@ -22,7 +22,7 @@ function getTopBarInfo(entities, pathname, dispatch) {
   //   default:
   //     return "Home";
   // }
-  if (pathname.includes("workspaces")) {
+  if (pathname.includes("workspaces") && !pathname.includes("new")) {
     // const workspace = entities.workspaces[pathname.slice("/workspaces/".length)];
     let workspaceId = pathname.replace(/\D/g, '');
     const workspace = entities.workspaces[workspaceId];
@@ -32,7 +32,7 @@ function getTopBarInfo(entities, pathname, dispatch) {
       item: workspace,
       updateItem: (workspace) => dispatch(updateWorkspace(workspace))
     }
-  } else if (pathname.includes("projects")) {
+  } else if (pathname.includes("projects") && !pathname.includes("new")) {
     let projectId = pathname.replace(/\D/g, '');
     const project = entities.projects[projectId];
     return {

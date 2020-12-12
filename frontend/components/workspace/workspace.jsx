@@ -13,11 +13,45 @@ export default class Workspace extends React.Component {
   }
 
   render() {
-    const { projects } = this.props.entities;
+    const { projects, workspaces, users } = this.props.entities;
     const workspaceId = this.props.workspaceId;
+    const thisWorkspace = Object.values(workspaces).find(workspace => workspace.id === workspaceId)
 
     return (
       <div id="workspace">
+        <div id="workspace-leftpane">
+          <div id="workspace-description">
+            <h1>Description</h1>
+            <textarea
+              // onKeyDown={this.handleKeyDown}
+              // onChange={this.handleTitleChange}
+              // onBlur={this.handleTitleUpdate}
+              // ref={this.titleInput}
+              // minLength={this.titleMin}
+              // maxLength={this.titleMax}
+              // cols={this.titleMax}
+              // rows={"1"}
+              autoComplete="off" autoCorrect="off" autoCapitalize="off"
+              spellCheck="false"
+              value={thisWorkspace.description}
+            ></textarea>
+          </div>
+          <div id="workspace-members">
+            <h1>Members</h1>
+            <div>
+              {
+                Object.values(users).map((user) => {
+                  return (
+                    <div>
+                      <div style={{ fontWeight: "bold" }}>{user.username}</div>
+                      <div style={{ color: "gray" }}>{user.email}</div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
+        </div>
         <div className="sidebar-workspace-projects">
           <h1>Projects</h1>
           {
@@ -28,6 +62,7 @@ export default class Workspace extends React.Component {
               )
             })
           }
+          <Link to={`/projects/new`}>New Project</Link>
         </div>
       </div>
     )

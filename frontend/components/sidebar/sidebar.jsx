@@ -70,9 +70,7 @@ export default class Sidebar extends React.Component {
                 {workspace.name}
               </Link>
               <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} onClick={this.showPlusMenu(workspace.id)} type="button" />
-              <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}>
-                <Link to={`/projects/new`}>Create New Project</Link>
-              </div>
+              {/* Had to move menu out from here to get z-index to work */}
             </div>
             <div className="sidebar-workspace-projects">
               {
@@ -84,6 +82,10 @@ export default class Sidebar extends React.Component {
                   )
                 })
               }
+            </div>
+            <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}>
+              <Link to={`/projects/new`}>Create New Project</Link>
+              <Link to={`/projects/new`}>Delete Workspace</Link>
             </div>
           </div>
         )
@@ -109,10 +111,9 @@ export default class Sidebar extends React.Component {
           <h1>Other Workspaces</h1>
           {mappedWorkspaces(otherWorkspaces)}
         </div>
-        <button type="button">Create New Workspace</button>
         <div id="sidebar-bottom">
-          <p>Invite your team and start collaborating!</p>
-          <button type="button">Invite to Asana</button>
+          {/* <p>Organize your projects here!</p> */}
+          <button type="button">Create New Workspace</button>
         </div>
       </div >
     )

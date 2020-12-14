@@ -11,10 +11,31 @@ export default class Sidebar extends React.Component {
     }
     this.showPlusMenu = this.showPlusMenu.bind(this);
     this.sidebarRenderCount = 0;
+    this.sidebarDropdownRef = React.createRef();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   componentDidMount() {
     // console.log(`mounted Sidebar`);
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside)
+  }
+
+  handleClickOutside(evt) {
+    // debugger
+    console.log("handleClickOutside");
+    // Only react if a plusMenu dropdown is open & if click target is not something 
+    // on which we already have a listener, otherwise do nothing
+    if (this.state.plusMenuWorkspaceId !== -1 
+      && !evt.target.classList.contains("sidebar-workspace-plus")
+      && !evt.target.classList.contains("sidebar-workspace-title")) {
+      if (this.sidebarDropdownRef && !this.sidebarDropdownRef.current.contains(evt.target)) {
+        // alert("You clicked outside the sidebar dropdown menu!");
+        this.setState({plusMenuWorkspaceId: -1});
+      }
+    }
   }
 
   showPlusMenu(workspaceId) {
@@ -70,7 +91,8 @@ export default class Sidebar extends React.Component {
                 {workspace.name}
               </Link>
               <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} onClick={this.showPlusMenu(workspace.id)} type="button" />
-              {/* Had to move menu out from here to get z-index to work */}
+              {/* Had to remove z-index on sidebar-workspace-projects to get this to show */}
+              
             </div>
             <div className="sidebar-workspace-projects">
               {
@@ -83,7 +105,8 @@ export default class Sidebar extends React.Component {
                 })
               }
             </div>
-            <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}>
+            <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}
+              ref={this.sidebarDropdownRef}>
               <Link to={`/projects/new`}>Create New Project</Link>
               <Link to={`/projects/new`}>Delete Workspace</Link>
             </div>

@@ -109,6 +109,7 @@ export default class Sidebar extends React.Component {
           <h1>Other Workspaces</h1>
           {mappedWorkspaces(otherWorkspaces)}
         </div>
+        <button type="button">Create New Workspace</button>
         <div id="sidebar-bottom">
           <p>Invite your team and start collaborating!</p>
           <button type="button">Invite to Asana</button>

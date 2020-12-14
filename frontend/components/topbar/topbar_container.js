@@ -69,7 +69,8 @@ const mSP = function ({entities, ui, session}, ownProps) {
     title: title,
     pageType: pageType,
     item: item,
-    isCreator: (item.creatorId === session.id)
+    isCreator: (item.creatorId === session.id),
+    user: entities.users[session.id]
   };
 };
 

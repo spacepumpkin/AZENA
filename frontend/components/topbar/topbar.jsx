@@ -1,15 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default class TopBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: props.title
+      title: props.title,
+      showUserMenu: false
     }
 
     // Controlling title blur event
     this.titleInput = React.createRef();
-    
+
     // Title min and max char count
     this.titleMin = 1;
     this.titleMax = 25;
@@ -25,7 +27,7 @@ export default class TopBar extends React.Component {
   componentDidMount() {
     // console.log(`mounted Topbar (${this.props.page})`);
   }
-  
+
   componentDidUpdate(prevProps) {
     // Reset title if we changed pages
     // console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
@@ -70,8 +72,8 @@ export default class TopBar extends React.Component {
   }
 
   render() {
-    const { toggleSidebar, sidebarCollapse, pageType, isCreator, title: propsTitle } = this.props;
-    const { title: stateTitle } = this.state; // Will change based on route
+    const { toggleSidebar, sidebarCollapse, pageType, isCreator, title: propsTitle, user } = this.props;
+    const { title: stateTitle, showUserMenu } = this.state; // Will change based on route
     // console.log("propsTitle: ", propsTitle, "stateTitle: ", stateTitle);
     const renderedTitle = stateTitle;
 
@@ -83,10 +85,11 @@ export default class TopBar extends React.Component {
         {/* <div className="sidebar-menu-button">
           <img onClick={this.props.toggleSidebar} src={window.chevronCircleRight} alt="sidebar open button" />
         </div> */}
-        <button onClick={toggleSidebar} className={
-          `sidebar-menu-button chevron-right ${!sidebarCollapse ? "collapsed" : ""}`
-        } type="button" />
+
         <div id="topbar-main-header">
+          <button onClick={toggleSidebar} className={
+            `sidebar-menu-button chevron-right ${!sidebarCollapse ? "collapsed" : ""}`
+          } type="button" />
           <div className="header-icon">
             <span></span>
           </div>
@@ -112,7 +115,17 @@ export default class TopBar extends React.Component {
         </div>
         <div id="topbar-user">
           {/* User Settings + TaskSearch + Global Actions */}
-          <button id="logout-button" type="button" onClick={this.handleLogout}>Log Out</button>
+          <div id="user-avatar">
+            <button id="user-avatar-button" type="button" onClick={()=> this.setState({showUserMenu: !showUserMenu})}>
+              {user.username[0].toUpperCase()}
+            </button>
+            <div id="user-menu-arrow" className={`${showUserMenu ? "show-user-menu" : ""}`}></div>
+            <div id="user-menu" className={`${showUserMenu ? "show-user-menu" : ""}`}>
+              <div className="user-menu-item" onClick={() => this.setState({ showUserMenu: !showUserMenu })}><Link to="/home">Workspaces</Link></div>
+              <div className="user-menu-item" onClick={this.handleLogout}>Log Out</div>
+            </div>
+          </div>
+          {/* <button id="logout-button" type="button" onClick={this.handleLogout}>Log Out</button> */}
         </div>
       </div>
     )

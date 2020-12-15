@@ -28,20 +28,34 @@ export default class Sidebar extends React.Component {
     console.log("handleClickOutside");
     // Only react if a plusMenu dropdown is open & if click target is not something 
     // on which we already have a listener, otherwise do nothing
-    if (this.state.plusMenuWorkspaceId !== -1 
+    if (this.state.plusMenuWorkspaceId !== -1
       && !evt.target.classList.contains("sidebar-workspace-plus")
       && !evt.target.classList.contains("sidebar-workspace-title")) {
       if (this.sidebarDropdownRef && !this.sidebarDropdownRef.current.contains(evt.target)) {
         // alert("You clicked outside the sidebar dropdown menu!");
-        this.setState({plusMenuWorkspaceId: -1});
+        this.setState({ plusMenuWorkspaceId: -1 });
       }
     }
   }
 
   showPlusMenu(workspaceId) {
-    return (e) => {
+    return (evt) => {
+      // if this is the blur event
+      if (evt.nativeEvent.type === "blur") {
+        // if we're not clicking another plus or title, close all plus menus; else stop and let click handler go
+        if (evt.relatedTarget === null
+          || (
+            evt.relatedTarget.classList[0] !== "sidebar-workspace-plus"
+            && evt.relatedTarget.classList[0] !== "sidebar-workspace-title"
+          )
+        ) {
+          this.setState({ plusMenuWorkspaceId: -1 });
+        }
+        return;
+      }
+      // if this is the click event
       if (this.state.plusMenuWorkspaceId === workspaceId) {
-        this.setState({ plusMenuWorkspaceId: -1 })
+        this.setState({ plusMenuWorkspaceId: -1 });
       } else {
         this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId })
       }
@@ -49,7 +63,7 @@ export default class Sidebar extends React.Component {
   }
 
   showProjects(workspaceId) {
-    return (e) => {
+    return (evt) => {
       if (this.state.activeWorkspaceId === workspaceId) {
         this.setState({ activeWorkspaceId: -1, plusMenuWorkspaceId: -1 })
       } else {
@@ -90,10 +104,11 @@ export default class Sidebar extends React.Component {
               >
                 {workspace.name}
               </Link>
-              <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} 
-              onClick={this.showPlusMenu(workspace.id)} type="button" />
+              <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`}
+                onClick={this.showPlusMenu(workspace.id)} type="button"
+                tabIndex="0"
+                onBlur={this.showPlusMenu()} />
               {/* Had to remove z-index on sidebar-workspace-projects to get this to show */}
-              
             </div>
             <div className="sidebar-workspace-projects">
               {
@@ -108,8 +123,7 @@ export default class Sidebar extends React.Component {
             </div>
             <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}
               ref={this.sidebarDropdownRef}
-              tabIndex="0"
-              onBlur={this.showPlusMenu(workspace.id)}>
+            >
               <Link to={`/projects/new`}>Create New Project</Link>
               <Link to={`/projects/new`}>Delete Workspace</Link>
             </div>

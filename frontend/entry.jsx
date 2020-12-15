@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         projects: projects,
         sections: sections,
         tasks: tasks,
-        // usersWorkspaces: usersWorkspaces,
+        usersWorkspaces: usersWorkspaces,
         // usersProjects: usersProjects,
         usersTasks: usersTasks,
       },
@@ -117,14 +117,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
   // window.destroyWorkspaceApi = WorkspaceApiUtil.destroyWorkspace; // PASS - should be able to destroy workspace in BE
   // window.destroyWorkspace = destroyWorkspace; // PASS - should be able to destroy workspace in BE and FE
+  // * Project Actions
   // window.createProject = createProject; // PASS - should be able to create project in BE and FE
   // window.updateProject = updateProject; // PASS - should be able to update project in BE and FE
   // window.destroyProject = destroyProject; // PASS - should be able to destroy project in BE and FE
+  // * Task Actions
   // window.createTask = createTask; // PASS - should be able to create task in BE and FE + assign task to user (create usersTask)
   // window.updateTask = updateTask; // PASS - should be able to update task in BE and FE
   // window.destroyTask = destroyTask; // PASS - should be able to destroy task in BE and FE + unassign all users from task (delete usersTask)
   // window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
   // window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
+  // * Section Actions
   window.createSection = createSection; // PASS - should be able to create new section under a project
   window.updateSection = updateSection; // PASS - should be able to update a section
   window.destroySection = destroySection; // Half pass - should be able to destroy a section and handle section tasks

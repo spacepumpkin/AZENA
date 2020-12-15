@@ -37,6 +37,7 @@ const removeTask = function (task) {
   }
 }
 
+// Add single user task assignment
 const receiveUsersTask = function (usersTask) {
   return {
     type: RECEIVE_USERS_TASK,
@@ -111,7 +112,7 @@ export const destroyTask = function (taskId) {
   };
 };
 
-// Test Status -
+// Test Status - PASS
 export const assignUsersTask = function (userId, taskId) {
   return function (dispatch) {
     // console.log("dispatching assignUsersTask");
@@ -125,6 +126,7 @@ export const assignUsersTask = function (userId, taskId) {
   };
 };
 
+// Test Status - PASS
 export const unassignUsersTask = function (userId, taskId) {
   return function (dispatch) {
     // console.log("dispatching unassignUsersTask");

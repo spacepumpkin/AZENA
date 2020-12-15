@@ -6,7 +6,9 @@
   * createWorkspace(workspace)        // create new workspace
   * updateWorkspace(workspace)        // update workspace
   * destroyWorkspace(workspaceId)      // destroy workspace
-  * removeWorkspaceFromUser(workspaceId)   // remove workspace from current user
+  * assignUsersWorkspace(userId, workspaceId)   // add usersWorkspace
+  * unassignUsersWorkspace(userId, workspaceId) // remove usersWorkspace
+  removeWorkspaceFromUser(workspaceId)   // remove workspace from current user
 */
 
 // Don't need since we have all the data we need when user is logged in
@@ -63,6 +65,26 @@ export const destroyWorkspace = (workspaceId) => {
   return $.ajax({
     url: `/api/workspaces/${workspaceId}`,
     method: "DELETE"
+  })
+}
+
+// Test Status - 
+export const assignUsersWorkspace = (userId, workspaceId) => {
+  console.log(`assigning workspace #${workspaceId} to user #${userId}...`);
+  return $.ajax({
+    url: `/api/users/${userId}/workspaces`,
+    method: "POST",
+    data: { users_workspace: { user_id: userId, workspace_id: workspaceId } }
+  })
+}
+
+// Test Status - 
+export const unassignUsersWorkspace = (userId, workspaceId) => {
+  console.log(`unassigning workspace #${workspaceId} from user #${userId}...`);
+  return $.ajax({
+    url: `/api/users/${userId}/workspaces`,
+    method: "DELETE",
+    data: { users_workspace: { user_id: userId, workspace_id: workspaceId } }
   })
 }
 

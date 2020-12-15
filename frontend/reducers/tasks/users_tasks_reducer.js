@@ -6,13 +6,13 @@ import {
 } from "../../actions/task_actions";
 import { RECEIVE_CURRENT_USER } from "../../actions/session_actions";
 
-const userTasksReducer = function (oldState = {}, action) {
+const usersTasksReducer = function (oldState = {}, action) {
   Object.freeze(oldState);
   const newState = Object.assign({}, oldState);
   
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      // console.log("receiving current user (userTasksReducer");
+      // console.log("receiving current user (usersTasksReducer");
       return action.payload.usersTasks;
     case RECEIVE_USERS_TASK:
       return Object.assign(newState, { [action.usersTask.id]: action.usersTask })
@@ -29,7 +29,7 @@ const userTasksReducer = function (oldState = {}, action) {
   }
 }
 
-export default userTasksReducer;
+export default usersTasksReducer;
 
 // usersTasks: {
 //   1: {

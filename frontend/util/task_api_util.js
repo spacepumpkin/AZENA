@@ -45,7 +45,7 @@ export const destroyTask = (taskId) => {
   })
 }
 
-// Test Status - 
+// Test Status - PASS
 export const assignUsersTask = (userId, taskId) => {
   console.log(`assigning task #${taskId} to user #${userId}...`);
   return $.ajax({
@@ -55,7 +55,7 @@ export const assignUsersTask = (userId, taskId) => {
   })
 }
 
-// Test Status - 
+// Test Status - PASS
 export const unassignUsersTask = (userId, taskId) => {
   console.log(`unassigning task #${taskId} from user #${userId}...`);
   return $.ajax({

@@ -14,6 +14,9 @@ Export thunk action creators with the specified parameters:
 export const RECEIVE_WORKSPACE = "RECEIVE_WORKSPACE";
 export const RECEIVE_WORKSPACE_ERRORS = "RECEIVE_WORKSPACE_ERRORS";
 export const REMOVE_WORKSPACE = "REMOVE_WORKSPACE";
+
+export const RECEIVE_USERS_WORKSPACE = "RECEIVE_USERS_WORKSPACE";
+export const REMOVE_USERS_WORKSPACE = "REMOVE_USERS_WORKSPACE";
 // export const REMOVE_WORKSPACE_FROM_USER = "REMOVE_WORKSPACE_FROM_USER";
 
 const receiveUserWorkspaces = function(workspaces) {
@@ -44,6 +47,22 @@ const removeWorkspace = function(workspace) {
   return {
     type: REMOVE_WORKSPACE,
     workspace
+  }
+}
+
+// Add workspace to single user
+const receiveUsersWorkspace = function (usersWorkspace) {
+  return {
+    type: RECEIVE_USERS_WORKSPACE,
+    usersWorkspace
+  }
+}
+
+// Remove workspace from single user
+const removeUsersWorkspace = function (usersWorkspace) {
+  return {
+    type: REMOVE_USERS_WORKSPACE,
+    usersWorkspace
   }
 }
 
@@ -118,6 +137,34 @@ export const destroyWorkspace = function (workspaceId) {
     );
   }
 }
+
+// Test Status - 
+export const assignUsersWorkspace = function (userId, workspaceId) {
+  return function (dispatch) {
+    // console.log("dispatching assignUsersWorkspace");
+    return (
+      WorkspaceApiUtil.assignUsersWorkspace(userId, workspaceId)
+        .then(
+          (usersWorkspace) => dispatch(receiveUsersWorkspace(usersWorkspace)),
+          (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
+        )
+    );
+  };
+};
+
+// Test Status - 
+export const unassignUsersWorkspace = function (userId, workspaceId) {
+  return function (dispatch) {
+    // console.log("dispatching unassignUsersWorkspace");
+    return (
+      WorkspaceApiUtil.unassignUsersWorkspace(userId, workspaceId)
+        .then(
+          (usersWorkspace) => dispatch(removeUsersWorkspace(usersWorkspace)),
+          (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
+        )
+    );
+  };
+};
 
 // ! Save for later
 export const removeWorkspaceFromUser = function (userId, workspaceId) {

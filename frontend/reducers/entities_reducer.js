@@ -5,6 +5,7 @@ import projectsReducer from "./projects/projects_reducer";
 import sectionsReducer from "./sections/sections_reducer";
 import tasksReducer from "./tasks/tasks_reducer";
 import usersTasksReducer from "./tasks/users_tasks_reducer";
+import userWorkspacesReducer from "./workspaces/users_workspaces_reducer";
 
 const entitiesReducer = combineReducers({
   users: usersReducer,
@@ -12,7 +13,8 @@ const entitiesReducer = combineReducers({
   projects: projectsReducer,
   sections: sectionsReducer,
   tasks: tasksReducer,
-  usersTasks: usersTasksReducer
+  usersTasks: usersTasksReducer,
+  usersWorkspaces: userWorkspacesReducer
 });
 
 export default entitiesReducer;

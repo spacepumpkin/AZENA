@@ -17,10 +17,10 @@ export default class Sidebar extends React.Component {
 
   componentDidMount() {
     // console.log(`mounted Sidebar`);
-    document.addEventListener('mousedown', this.handleClickOutside);
+    // document.addEventListener('mousedown', this.handleClickOutside);
   }
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside)
+    // document.removeEventListener('mousedown', this.handleClickOutside)
   }
 
   handleClickOutside(evt) {
@@ -90,7 +90,8 @@ export default class Sidebar extends React.Component {
               >
                 {workspace.name}
               </Link>
-              <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} onClick={this.showPlusMenu(workspace.id)} type="button" />
+              <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`} 
+              onClick={this.showPlusMenu(workspace.id)} type="button" />
               {/* Had to remove z-index on sidebar-workspace-projects to get this to show */}
               
             </div>
@@ -106,7 +107,9 @@ export default class Sidebar extends React.Component {
               }
             </div>
             <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}
-              ref={this.sidebarDropdownRef}>
+              ref={this.sidebarDropdownRef}
+              tabIndex="0"
+              onBlur={this.showPlusMenu(workspace.id)}>
               <Link to={`/projects/new`}>Create New Project</Link>
               <Link to={`/projects/new`}>Delete Workspace</Link>
             </div>

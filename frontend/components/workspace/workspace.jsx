@@ -4,18 +4,69 @@ import { Link, NavLink } from "react-router-dom";
 export default class Workspace extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      description: (props.description !== null ? props.description : ""),
+      // editMode: false
+    };
+    // Controlling description blur event
+    this.descriptionInput = React.createRef();
+
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleDescriptionUpdate = this.handleDescriptionUpdate.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    // this.handleFocus = this.handleFocus.bind(this);
   }
 
   componentDidMount() {
-    if (document.title !== "azena") { document.title = "azena" };
-    // console.log("routed to Workspace page");
-    // this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();
+    if (document.title !== this.props.workspace.name) { document.title = this.props.workspace.name };
   }
 
+  componentDidUpdate(prevProps) {
+    // Reset title if we changed pages
+    // console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
+    if (document.title !== this.props.workspace.name) { document.title = this.props.workspace.name };
+    if (prevProps.description !== this.props.description) {
+      this.setState({ description: this.props.description })
+    }
+  }
+
+  // Update workspace description in local state
+  handleDescriptionChange(evt) {
+    const editedDescription = evt.target.value.replace(/[\r\n\v\t]+/g, '');
+
+    const { description: currentDescription } = this.state;
+    if (editedDescription === currentDescription) return;
+    this.setState({ description: editedDescription });
+  }
+
+  // Update workspace description in backend when blurred away, if it's changed
+  handleDescriptionUpdate(evt) {
+    const { description: stateDescription } = this.state;
+    const { description: propsDescription, workspaceId, updateWorkspace } = this.props;
+
+    if (stateDescription !== propsDescription) {
+      console.log(`description has changed from "${propsDescription}" to "${stateDescription}"`);
+      updateWorkspace({ id: workspaceId, description: stateDescription });
+    }
+  }
+
+  // Catch any enter presses within description input textarea to defocus instead of adding \n
+  handleKeyDown(evt) {
+    if (evt.key === "Enter" || evt.keyCode === 13) {
+      evt.preventDefault();
+      this.descriptionInput.current.blur();
+    }
+  }
+
+  // Update description in state when focused on a new workspace's description textarea
+  // handleFocus(evt) {
+  //   if (this.state.editMode === false) this.setState({ description: evt.target.value, editMode: true });
+  // }
+
   render() {
-    const { projects, workspaces, users } = this.props.entities;
-    const workspaceId = this.props.workspaceId;
-    const thisWorkspace = Object.values(workspaces).find(workspace => workspace.id === workspaceId)
+    const { projects, users } = this.props.entities;
+    const { description: stateDescription } = this.state;
+    const { workspaceId } = this.props;
 
     return (
       <div id="workspace">
@@ -23,17 +74,18 @@ export default class Workspace extends React.Component {
           <div id="workspace-description">
             <h1>Description</h1>
             <textarea
-              // onKeyDown={this.handleKeyDown}
-              // onChange={this.handleTitleChange}
-              // onBlur={this.handleTitleUpdate}
-              // ref={this.titleInput}
+              // onFocus={this.handleFocus}
+              onKeyDown={this.handleKeyDown}
+              onChange={this.handleDescriptionChange}
+              onBlur={this.handleDescriptionUpdate}
+              ref={this.descriptionInput}
               // minLength={this.titleMin}
               // maxLength={this.titleMax}
               // cols={this.titleMax}
               // rows={"1"}
               autoComplete="off" autoCorrect="off" autoCapitalize="off"
               spellCheck="false"
-              value={thisWorkspace.description}
+              value={stateDescription}
             ></textarea>
           </div>
           <div id="workspace-members">
@@ -42,7 +94,7 @@ export default class Workspace extends React.Component {
               {
                 Object.values(users).map((user) => {
                   return (
-                    <div>
+                    <div key={`user-${user.id}`}>
                       <div style={{ fontWeight: "bold" }}>{user.username}</div>
                       <div style={{ color: "gray" }}>{user.email}</div>
                     </div>

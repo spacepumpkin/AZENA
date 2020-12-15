@@ -9,6 +9,7 @@ const mSP = function ({ entities }, ownProps) {
   //     return entities.tasks[taskId].projectId === projectId;
   //   })
   //   .map(taskId => entities.tasks[taskId]);
+  const project = entities.projects[projectId];
   let projectTasks = Object.assign({}, entities.tasks);
   for (let taskId in projectTasks) {
     if (projectTasks[taskId].projectId !== projectId) {
@@ -17,6 +18,7 @@ const mSP = function ({ entities }, ownProps) {
   }
   return {
     projectId: projectId,
+    project: project,
     projectTasks: projectTasks,
     usersTasks: entities.usersTasks
   }

@@ -1,17 +1,24 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
+import { updateWorkspace, destroyWorkspace } from '../../actions/workspace_actions';
 import Workspace from "./workspace";
 
 const mSP = function ({entities}, ownProps) {
+  const workspaceId = parseInt(ownProps.match.params.workspaceId);
+  const workspace = entities.workspaces[workspaceId];
+
   return {
     entities: entities,
-    workspaceId: parseInt(ownProps.match.params.workspaceId)
+    workspace: workspace,
+    description: workspace.description,
+    workspaceId: workspaceId
   };
 };
 
 const mDP = function (dispatch) {
   return {
-
+    updateWorkspace: (workspace) => dispatch(updateWorkspace(workspace)),
+    destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId))
   };
 };
 

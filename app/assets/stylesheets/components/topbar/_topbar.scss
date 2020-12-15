@@ -63,10 +63,34 @@
   vertical-align: middle;
   overflow      : hidden;
   font-weight   : bold;
+  padding       : 4px;
+  border-radius : 5px;
+  border        : 2px solid transparent;
+  opacity       : 90%;
+  transition    : all 0.3s ease 0s;
 
   &:focus {
-    border: 1px solid $primary;
+    opacity: 100%;
+    border : 2px solid $primary;
   }
+}
+
+.title-editable:hover {
+  opacity: 100%;
+  border : 2px solid $light-gray;
+}
+
+@keyframes flash {
+  0% {
+    color      : $primary;
+  }
+  100% {
+    color      : black;
+  }
+}
+
+.title-flash {
+  animation: flash 0.8s linear;
 }
 
 

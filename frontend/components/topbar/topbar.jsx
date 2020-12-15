@@ -6,7 +6,8 @@ export default class TopBar extends React.Component {
     super(props);
     this.state = {
       title: props.title,
-      showUserMenu: false
+      showUserMenu: false,
+      titleFlash: false
     }
 
     // Controlling title blur event
@@ -32,7 +33,7 @@ export default class TopBar extends React.Component {
     // Reset title if we changed pages
     // console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
     if (prevProps.title !== this.props.title) {
-      this.setState({ title: this.props.title })
+      this.setState({ title: this.props.title, titleFlash: true });
     }
   }
 
@@ -73,9 +74,12 @@ export default class TopBar extends React.Component {
 
   render() {
     const { toggleSidebar, sidebarCollapse, pageType, isCreator, title: propsTitle, user } = this.props;
-    const { title: stateTitle, showUserMenu } = this.state; // Will change based on route
+    const { title: stateTitle, showUserMenu, titleFlash } = this.state; // Will change based on route
     // console.log("propsTitle: ", propsTitle, "stateTitle: ", stateTitle);
     const renderedTitle = stateTitle;
+
+    const titleClassName = titleFlash ? ["header-title title-flash"] : ["header-title"];
+    if (pageType !== "Home" && isCreator) titleClassName.push("title-editable");
 
     this.topbarRenderCount += 1;
     console.log("topbar render count: ", this.topbarRenderCount);
@@ -96,7 +100,7 @@ export default class TopBar extends React.Component {
 
           {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
           <div className="header-title-wrapper">
-            <textarea className="header-title"
+            <textarea className={titleClassName.join(" ")}
               onKeyDown={this.handleKeyDown}
               onChange={this.handleTitleChange}
               onBlur={this.handleTitleUpdate}
@@ -109,8 +113,8 @@ export default class TopBar extends React.Component {
               spellCheck="false"
               disabled={pageType === "Home" || !isCreator}
               value={renderedTitle}
-            >
-            </textarea>
+              onAnimationEnd={() => this.setState({ titleFlash: false })}
+            ></textarea>
           </div>
         </div>
         <div id="topbar-user">

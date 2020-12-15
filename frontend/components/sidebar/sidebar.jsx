@@ -125,7 +125,7 @@ export default class Sidebar extends React.Component {
               ref={this.sidebarDropdownRef}
             >
               <Link to={`/projects/new`}>Create New Project</Link>
-              <Link to={`/projects/new`}>Delete Workspace</Link>
+              {(currentUserId === workspace.creatorId) && <Link to={`/projects/new`}>Delete Workspace</Link>}
             </div>
           </div>
         )

@@ -5,7 +5,7 @@ export default class Workspace extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: (props.description !== null ? props.description : ""),
+      description: props.description,
       // editMode: false
     };
     // Controlling description blur event
@@ -18,12 +18,14 @@ export default class Workspace extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.workspace === undefined) return;
     if (document.title !== this.props.workspace.name) { document.title = this.props.workspace.name };
   }
 
   componentDidUpdate(prevProps) {
     // Reset title if we changed pages
     // console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
+    if (this.props.workspace === undefined) return;
     if (document.title !== this.props.workspace.name) { document.title = this.props.workspace.name };
     if (prevProps.description !== this.props.description) {
       this.setState({ description: this.props.description })
@@ -66,7 +68,8 @@ export default class Workspace extends React.Component {
   render() {
     const { projects, users } = this.props.entities;
     const { description: stateDescription } = this.state;
-    const { workspaceId } = this.props;
+    const { workspaceId, workspace } = this.props;
+    if (typeof workspaceId !== 'number' || workspace === undefined) return null;
 
     return (
       <div id="workspace">

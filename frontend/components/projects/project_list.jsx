@@ -7,6 +7,7 @@ export default class ProjectList extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.project === undefined) return;
     if (document.title !== this.props.project.name) { document.title = this.props.project.name };
   }
 
@@ -15,8 +16,9 @@ export default class ProjectList extends React.Component {
   }
 
   render() {
-    const { projectId, projectTasks, usersTasks } = this.props;
-
+    const { project, projectId, projectTasks, usersTasks } = this.props;
+    if (typeof projectId !== 'number' || project === undefined) return null;
+    
     return (
       <div id="project-list">
         <div className="sidebar-workspace-projects">

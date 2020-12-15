@@ -24,29 +24,47 @@ function getTopBarInfo(entities, pathname, dispatch) {
   // }
   if (pathname.includes("workspaces") && !pathname.includes("new")) {
     // const workspace = entities.workspaces[pathname.slice("/workspaces/".length)];
-    let workspaceId = pathname.replace(/\D/g, '');
+    let workspaceId = pathname.replace(/\D/g, ''); // Only grab the number
     const workspace = entities.workspaces[workspaceId];
-    return {
-      title: workspace.name,
-      pageType: "Workspace",
-      item: workspace,
-      updateItem: (workspace) => dispatch(updateWorkspace(workspace))
+    if (workspace === undefined) {
+      return {
+        title: "This workspace does not exist",
+        pageType: "Workspace",
+        item: { id: null, name: null, description: null, creatorId: null },
+        updateItem: () => console.log("Cannot update, workspace does not exist.")
+      }
+    } else {
+      return {
+        title: workspace.name,
+        pageType: "Workspace",
+        item: workspace,
+        updateItem: (workspace) => dispatch(updateWorkspace(workspace))
+      }
     }
   } else if (pathname.includes("projects") && !pathname.includes("new")) {
-    let projectId = pathname.replace(/\D/g, '');
+    let projectId = pathname.replace(/\D/g, ''); // Only grab the number
     const project = entities.projects[projectId];
-    return {
-      title: project.name,
-      pageType: "Project",
-      item: project,
-      updateItem: (project) => dispatch(updateProject(project))
+    if (project === undefined) {
+      return {
+        title: "This project does not exist",
+        pageType: "Project",
+        item: { id: null, name: null, description: null, creatorId: null },
+        updateItem: () => console.log("Cannot update, project does not exist.")
+      }
+    } else {
+      return {
+        title: project.name,
+        pageType: "Project",
+        item: project,
+        updateItem: (project) => dispatch(updateProject(project))
+      }
     }
   } else {
     return {
       title: "Home",
       pageType: "Home",
-      item: {id: null, name: null, description: null, creatorId: null},
-      updateItem: () => console.log("Cannot update, currently in Home page")
+      item: { id: null, name: null, description: null, creatorId: null },
+      updateItem: () => console.log("Cannot update, currently in Home page.")
     }
   }
 }
@@ -60,7 +78,7 @@ function getTopBarInfo(entities, pathname, dispatch) {
 //   }
 // }
 
-const mSP = function ({entities, ui, session}, ownProps) {
+const mSP = function ({ entities, ui, session }, ownProps) {
   // Get title, page type (home, workspace, project, etc.), and item that can be updated
   //  (workspace or project). Also check if current user is creator of item, else can't update
   const { title, pageType, item } = getTopBarInfo(entities, ownProps.location.pathname);

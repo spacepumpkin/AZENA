@@ -15,6 +15,7 @@ import HomeContainer from "./home/home_container";
 import WorkspaceContainer from "./workspace/workspace_container";
 import ProjectListContainer from './projects/project_list_container';
 import ProjectFormContainer from './projects/project_form_container';
+import WorkspaceModalContainer from './workspace/workspace_modal_container';
 
 // AuthRoute / PreAuth - current user should not access - redirect to /home
 // ProtectedRoute / PostAuth - only current user can access - redirect to /
@@ -41,10 +42,12 @@ const App = function (props) {
                 {/* <ProtectedRoute exact path="/test1" component={MainContainer} />
         <ProtectedRoute exact path="/test2" component={MainContainer} /> */}
                 {/* <Redirect to="/" /> */}
+                <Route path="/" render={() => <div>Page Not Found</div>} />
               </Switch>
             </div>
           </div>
-          <Route path="/projects/new" component={ProjectFormContainer} />
+          <Route path="/users/:userId/new-project" component={ProjectFormContainer} />
+          <Route path="/users/:userId/new-workspace" component={WorkspaceModalContainer} />
         </div>
       }
       />

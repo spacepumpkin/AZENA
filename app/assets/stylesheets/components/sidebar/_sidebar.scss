@@ -148,7 +148,7 @@ button.collapsed {
   overflow-x    : hidden;
   margin        : 5px 0;
   border-bottom : 1px solid $lighter-gray;
-  position: relative;
+  position      : relative;
 }
 
 .sidebar-workspace-title-wrapper {
@@ -224,20 +224,21 @@ button.collapsed {
   transition: all 0.3s ease 0s;
 
   &.show-menu {
-    display                  : block;
-    position                 : fixed;
+    display               : block;
+    position              : fixed;
     // width           : 100%;
     // height          : 100%;
     // top          : 30px;
-    left                     : 250px;
+    left                  : 250px;
     // right              : -10px;
     // bottom             : -15px;
-    overflow-x               : hidden;
-    overflow-y               : hidden;
-    border-radius            : 5px;
-    border                   : 1px solid $lighter-gray;
+    overflow-x            : hidden;
+    overflow-y            : hidden;
+    border-radius         : 5px;
+    border                : 1px solid $lighter-gray;
+    box-shadow            : 0 0 10px $lighter-gray; 
     // padding               : 4px 6px;
-    z-index                  : 5;
+    z-index               : 5;
 
     >a {
       display: block;
@@ -248,8 +249,11 @@ button.collapsed {
         background : whitesmoke;
         color      : $primary;
       }
-      &:last-child:hover {
-        color : $secondary;
+
+      &:nth-child(2):hover {
+        font-weight: bold;
+        color      : $secondary;
+        background : $lightest-gray;
       }
     }
 

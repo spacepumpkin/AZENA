@@ -21,8 +21,8 @@ class Api::WorkspacesController < ApplicationController
       render json: ["Workspace could not be found"], status: 404
       return
     end
-    if @workspace.creator_id != current_user.id
-      render json: ["Workspace can only be updated by its creator"], status: 422
+    if (params[:workspace][:name] != @workspace.name) && (@workspace.creator_id != current_user.id)
+      render json: ["Workspace name can only be updated by its creator"], status: 422
       return
     end
     if @workspace.update(workspace_params)

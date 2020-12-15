@@ -6,11 +6,12 @@ import Workspace from "./workspace";
 const mSP = function ({entities}, ownProps) {
   const workspaceId = parseInt(ownProps.match.params.workspaceId);
   const workspace = entities.workspaces[workspaceId];
+  const description = (workspace.description === null) ? "" : workspace.description;
 
   return {
     entities: entities,
     workspace: workspace,
-    description: workspace.description,
+    description: description,
     workspaceId: workspaceId
   };
 };

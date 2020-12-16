@@ -24,7 +24,7 @@
 #workspace-modal-box {
   display       : flex;
   flex-direction: column;
-  border        : 1px solid $spacecadet;
+  // border        : 1px solid $spacecadet;
   border-radius : 8px;
   position      : fixed;
   padding       : 40px 50px;
@@ -94,12 +94,16 @@
   flex-direction : column;
   justify-content: space-between;
   margin-top     : 20px;
-  
+
   // align-items: center;
   label {
     // border-bottom: 2px solid $secondary;
     font-size  : 15px;
     font-weight: bold;
+  }
+
+  .label-input-focused {
+    color: $primary;
   }
 
   input,

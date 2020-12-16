@@ -5,11 +5,15 @@ class WorkspaceModal extends React.Component {
     super(props);
     this._nullState = {
       name: "",
-      description: ""
+      description: "",
+      labelInputFocused: "",
     };
     this.state = Object.assign({}, this._nullState);
+    this.renderCount = 0;
+    // this.nameInputFocused = false;
+    // this.descriptionInputFocused = false;
 
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -21,12 +25,26 @@ class WorkspaceModal extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    console.log(`Test submit of creating workspace "${this.state.name}"`)
+  }
 
+  handleFocus(field) {
+    return (evt) => {
+      if (evt.nativeEvent.type === "blur" && (field === "name" || field === "description")) {
+        return;
+      } else {
+        this.setState({ labelInputFocused: field });
+      }
+    }
+    // let fieldInputFocused = `${field}InputFocused`;
+    // this.setState({ [fieldInputFocused]: !this[fieldInputFocused] });
   }
 
   render() {
     // debugger
     const { workspaceErrors } = this.props;
+    const { name, description, labelInputFocused } = this.state;
+
     let nameErrors = [], descriptionErrors = [], otherErrors = [];
     if (workspaceErrors !== undefined || workspaceErrors.length !== 0) {
       workspaceErrors.forEach((error) => {
@@ -43,6 +61,9 @@ class WorkspaceModal extends React.Component {
         }
       })
     }
+    this.renderCount += 1;
+    console.log("workspace modal renders: ", this.renderCount);
+
     return (
       <div id="workspace-modal">
         <div id="workspace-modal-backdrop">
@@ -56,18 +77,26 @@ class WorkspaceModal extends React.Component {
             <div id="workspace-modal-close"><span>Close</span></div>
           </div>
           <form id="workspace-modal-form" onSubmit={this.handleSubmit}>
-            <label htmlFor={"workspace-modal-name"}>Workspace Name</label>
+            <label htmlFor={"workspace-modal-name"} className={labelInputFocused === "name" ? "label-input-focused" : ""}>
+              Workspace Name
+            </label>
             <input id="workspace-modal-name" type="text"
               placeholder={"My Brand New Workspace..."}
-              value={this.state.name}
-              onChange={this.handleChange("name")} />
+              value={name}
+              onChange={this.handleChange("name")}
+              onFocus={this.handleFocus("name")}
+              onBlur={this.handleFocus("")} />
             <div className="workspace-error">{nameErrors.join(", ")}</div>
 
-            <label htmlFor={"workspace-modal-description"}>Description</label>
+            <label htmlFor={"workspace-modal-description"} className={labelInputFocused === "description" ? "label-input-focused" : ""}>
+              Description
+            </label>
             <textarea id="workspace-modal-description"
               placeholder={"Click to add a description of your workspace..."}
-              value={this.state.description}
-              onChange={this.handleChange("description")}></textarea>
+              value={description}
+              onChange={this.handleChange("description")}
+              onFocus={this.handleFocus("description")}
+              onBlur={this.handleFocus("")} ></textarea>
             <div className="workspace-error">{descriptionErrors.join(", ")}</div>
 
             <button id="workspace-modal-submit">Create Workspace</button>

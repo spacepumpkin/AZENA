@@ -85,7 +85,7 @@ export default class SessionForm extends React.Component {
       if (count === user[field]["length"]) {
         if (field === "password") {
           clearInterval(this.demo);
-          setTimeout(() => login(user), 1200);
+          setTimeout(() => login(user), 1000);
           done = true;
         }
         field = (formType === "Log In" || field === "username") ? "password" : "username"; 

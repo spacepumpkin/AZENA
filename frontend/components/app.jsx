@@ -1,7 +1,7 @@
 // Functionality Imports
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { AuthRoute, ProtectedRoute, ProtectedLayout } from "../util/route_util";
+import { AuthRoute, AuthLayout, ProtectedRoute, ProtectedLayout } from "../util/route_util";
 
 // Component Imports associated with Routes
 import SignupFormContainer from "./session/signup_form_container";
@@ -27,42 +27,44 @@ const App = function (props) {
     <div id="main-wrapper">
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}
       {/* Protected Routes */}
-      <ProtectedLayout 
-      component={
-        <div id="main">
-          <Route path="/" component={SidebarContainer} />
-          <div id="mainbox">
-            <Route path="/" component={TopBarContainer} />
-            <div id="main-content">
-              <Switch>
-                <ProtectedRoute exact path="/home" component={HomeContainer} />
-                <ProtectedRoute exact path="/workspaces/:workspaceId" component={WorkspaceContainer} />
-                {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
-                <ProtectedRoute exact path="/projects/:projectId/list" component={ProjectListContainer} />
-                {/* <ProtectedRoute exact path="/test1" component={MainContainer} />
+      <ProtectedLayout     
+        component={
+          <div id="main">
+            <Route path="/" component={SidebarContainer} />
+            <div id="mainbox">
+              <Route path="/" component={TopBarContainer} />
+              <div id="main-content">
+                <Switch>
+                  <ProtectedRoute exact path="/home" component={HomeContainer} />
+                  <ProtectedRoute exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
+                  {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
+                  <ProtectedRoute exact path="/projects/:projectId(\d+)/list" component={ProjectListContainer} />
+                  {/* <ProtectedRoute exact path="/test1" component={MainContainer} />
         <ProtectedRoute exact path="/test2" component={MainContainer} /> */}
-                {/* <Redirect to="/" /> */}
-                <Route path="/" render={() => <div>Page Not Found</div>} />
-              </Switch>
+                  <Redirect to="/home" />
+                  {/* <Route path="/" render={() => <div>Page Not Found</div>} /> */}
+                </Switch>
+              </div>
             </div>
+            <Route path="/users/:userId/new-project" component={ProjectFormContainer} />
+            <Route path="/users/:userId/new-workspace" component={WorkspaceModalContainer} />
           </div>
-          <Route path="/users/:userId/new-project" component={ProjectFormContainer} />
-          <Route path="/users/:userId/new-workspace" component={WorkspaceModalContainer} />
-        </div>
-      }
+        }
       />
-      {/* }/> */}
-        
-      {/* </ProtectedRoute> */}
+
       {/* Auth Routes */}
-      <Switch>
-        <AuthRoute exact path="/signup" component={SignupFormContainer} />
-        <AuthRoute exact path="/login" component={LoginFormContainer} />
-        {/* <AuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
-        <AuthRoute id="splash" exact path="/" component={SplashContainer} />
-        <AuthRoute path="/" component={SplashContainer} />
-        {/* <Redirect to="/" /> */}
-      </Switch>
+      <AuthLayout
+        component={
+          <Switch>
+            <AuthRoute exact path="/signup" component={SignupFormContainer} />
+            <AuthRoute exact path="/login" component={LoginFormContainer} />
+            {/* <AuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
+            <AuthRoute id="splash" exact path="/" component={SplashContainer} />
+            <Redirect to="/" />
+            {/* <AuthRoute path="/" component={SplashContainer} /> */}
+          </Switch>
+        }
+      />
     </div>
 
   );

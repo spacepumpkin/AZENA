@@ -12,6 +12,7 @@ export default class ProjectList extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.props.project === undefined) return;
     if (document.title !== this.props.project.name) { document.title = this.props.project.name };
   }
 

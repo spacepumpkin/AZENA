@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
-import { updateWorkspace, destroyWorkspace } from '../../actions/workspace_actions';
+import { updateWorkspace, destroyWorkspace, receiveWorkspaceErrors } from '../../actions/workspace_actions';
 import Workspace from "./workspace";
 
 const mSP = function ({entities}, ownProps) {
@@ -19,7 +19,8 @@ const mSP = function ({entities}, ownProps) {
 const mDP = function (dispatch) {
   return {
     updateWorkspace: (workspace) => dispatch(updateWorkspace(workspace)),
-    destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId))
+    destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId)),
+    receiveWorkspaceErrors: (errors) => dispatch(receiveWorkspaceErrors(errors))
   };
 };
 

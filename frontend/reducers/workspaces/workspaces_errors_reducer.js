@@ -1,3 +1,4 @@
+import { RESET_ALL_ERRORS } from "../../actions/error_actions";
 import {
   RECEIVE_WORKSPACE,
   RECEIVE_WORKSPACE_ERRORS
@@ -11,7 +12,9 @@ const workspacesErrorsReducer = function (oldState = [], action) {
       return [];
     case RECEIVE_WORKSPACE_ERRORS:
       // console.log(`receiving workspace errors (workspacesErrorsReducer)`)
-      return Object.assign([], oldState, action.errors)
+      return Object.assign([], oldState, action.errors);
+    case RESET_ALL_ERRORS:
+      return [];
     default:
       return oldState;
   }

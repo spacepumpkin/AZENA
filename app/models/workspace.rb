@@ -9,8 +9,25 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# class WorkspaceValidator < ActiveModel::Validator
+#     def validate(record)
+#       unless record.name.starts_with?(" ")
+#         record.errors[:name] << "Name cannot start with a space"
+#       end
+#     end
+# end
+
 class Workspace < ApplicationRecord
-  validates :name, presence: true, uniqueness: { scope: :creator_id }
+  # include ActiveModel::Validations
+  validates :name, presence: true, length: { maximum: 25, too_long: "Name can't be over 25 characters" }, uniqueness: { scope: :creator_id }
+  # validates_with(WorkspaceValidator)
+  validate :name_cannot_start_with_space
+
+  def name_cannot_start_with_space
+    if name.present? && name.starts_with?(" ")
+      errors.add(:name, "cannot start with a space")
+    end
+  end
 
   # * BUILT-IN ASSOCIATIONS ----------------------------------------
 
@@ -19,23 +36,21 @@ class Workspace < ApplicationRecord
     foreign_key: :workspace_id,
     class_name: :UsersWorkspace,
     dependent: :destroy # ! necessary?
-  
+
   has_many :users,
     through: :users_workspaces,
     source: :user
-  
+
   # A Workspace has 1 creator
   belongs_to :workspace_creator,
     foreign_key: :creator_id,
     class_name: :User
 
-  
   # A Workspace has 0+ projects
   has_many :projects,
     foreign_key: :workspace_id,
     class_name: :Project,
     dependent: :destroy
-
 
   # * CUSTOM ASSOCIATIONS ----------------------------------------
 
@@ -43,5 +58,4 @@ class Workspace < ApplicationRecord
   has_many :projects_tasks,
     through: :projects,
     source: :tasks
-
 end

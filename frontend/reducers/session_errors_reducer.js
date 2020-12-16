@@ -1,3 +1,4 @@
+import { RESET_ALL_ERRORS } from "../actions/error_actions";
 import {
   RECEIVE_SESSION_ERRORS,
   RECEIVE_CURRENT_USER
@@ -17,6 +18,8 @@ const sessionErrorsReducer = function (oldState = [], action) {
       // return action.errors;
     case RECEIVE_CURRENT_USER:
       // console.log("receiving current user (sessionErrorsReducer)");
+      return [];
+    case RESET_ALL_ERRORS:
       return [];
     default:
       return oldState;

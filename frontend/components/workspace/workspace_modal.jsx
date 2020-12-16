@@ -15,17 +15,49 @@ class WorkspaceModal extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.receiveWorkspaceErrors([]);
   }
 
   handleChange(field) {
     return (evt) => {
-      this.setState({ [field]: evt.currentTarget.value })
+      // if (field === "name") {
+      // const filteredName = evt.target.value.replace(/[\r\n\v\t]+/g, '');
+      // if (filteredName !== evt.target.value) {
+      //     this.setState({ [field]: filteredName });
+      //     return;
+      //   } 
+      // }
+      let that = this;
+      this.setState({ [field]: evt.currentTarget.value }, () => {
+        if (field === "name" && this.state.name.length >= 25) {
+          console.log("Name character max is 25");
+        }
+      })
     }
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
     console.log(`Test submit of creating workspace "${this.state.name}"`)
+    let that = this;
+    this.props.createWorkspace({
+      name: this.state.name,
+      description: this.state.description
+    }).then((passRes) => {
+      console.log("Passed, errors: ", that.props.workspaceErrors);
+      // if (that.props.workspaceErrors && that.props.workspaceErrors.length === 0) {
+      //   console.log("No errors");
+      that.props.history.push(`/workspaces/${passRes.workspace.id}`)
+      // }
+    }, (failRes) => {
+      console.log("Failed, errors: ", that.props.workspaceErrors);
+      // console.log("fail result: ", failRes);
+    })
   }
 
   handleFocus(field) {
@@ -45,6 +77,10 @@ class WorkspaceModal extends React.Component {
     }
     // let fieldInputFocused = `${field}InputFocused`;
     // this.setState({ [fieldInputFocused]: !this[fieldInputFocused] });
+  }
+
+  handleClose(evt) {
+    this.props.history && this.props.history.goBack();
   }
 
   render() {
@@ -81,7 +117,7 @@ class WorkspaceModal extends React.Component {
         <div id="workspace-modal-box">
           <div id="workspace-modal-top">
             <h1>Create Your New Workspace</h1>
-            <div id="workspace-modal-close"><span>Close</span></div>
+            <div id="workspace-modal-close" onClick={this.handleClose}><span>Close</span></div>
           </div>
           <form id="workspace-modal-form" onSubmit={this.handleSubmit}>
             <label htmlFor={"workspace-modal-name"} className={labelInputFocused === "name" ? "label-input-focused" : ""}>
@@ -89,6 +125,7 @@ class WorkspaceModal extends React.Component {
             </label>
             <input id="workspace-modal-name" type="text"
               placeholder={"My Brand New Workspace..."}
+              maxLength={"25"}
               value={name}
               onChange={this.handleChange("name")}
               onFocus={this.handleFocus("name")}
@@ -105,7 +142,7 @@ class WorkspaceModal extends React.Component {
               onFocus={this.handleFocus("description")}
               onBlur={this.handleFocus("")} ></textarea>
             <div className="workspace-error">{descriptionErrors.join(", ")}</div>
-
+            <div className="workspace-error">{otherErrors.join(", ")}</div>
             <button id="workspace-modal-submit">Create Workspace</button>
           </form>
         </div>

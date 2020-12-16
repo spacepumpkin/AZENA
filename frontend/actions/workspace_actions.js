@@ -35,7 +35,7 @@ const receiveWorkspace = function(workspace) {
   }
 }
 
-const receiveWorkspaceErrors = function(errors) {
+export const receiveWorkspaceErrors = function(errors) {
   // console.log("receiving workspace errors");
   return {
     type: RECEIVE_WORKSPACE_ERRORS,

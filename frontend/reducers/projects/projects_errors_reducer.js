@@ -1,3 +1,4 @@
+import { RESET_ALL_ERRORS } from "../../actions/error_actions";
 import {
   RECEIVE_PROJECT,
   RECEIVE_PROJECT_ERRORS
@@ -11,7 +12,9 @@ const projectsErrorsReducer = function (oldState = [], action) {
       return [];
     case RECEIVE_PROJECT_ERRORS:
       // console.log(`receiving project errors (projectsErrorsReducer)`)
-      return Object.assign([], oldState, action.errors)
+      return Object.assign([], oldState, action.errors);
+    case RESET_ALL_ERRORS:
+      return [];
     default:
       return oldState;
   }

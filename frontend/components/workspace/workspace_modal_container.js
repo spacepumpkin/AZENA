@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import WorkspaceModal from './workspace_modal';
 
-import { createWorkspace } from '../../actions/workspace_actions';
+import { createWorkspace, receiveWorkspaceErrors } from '../../actions/workspace_actions';
 
 const mSP = function ({entities, errors, session}) {
   return {
@@ -12,7 +12,8 @@ const mSP = function ({entities, errors, session}) {
 
 const mDP = function (dispatch) {
   return {
-    createWorkspace: (workspace) => dispatch(createWorkspace(workspace))
+    createWorkspace: (workspace) => dispatch(createWorkspace(workspace)),
+    receiveWorkspaceErrors: (errors) => dispatch(receiveWorkspaceErrors(errors))
   }
 };
 

@@ -329,10 +329,16 @@ button.collapsed {
     // align-self: center;
   }
 
-  >button {
-    width           : 100%;
+  >a {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  button {
+    width           : 95%;
     height          : 40px;
-    margin          : 10px;
+    // margin          : 10px;
     border-radius   : 4px;
     color           : $lightest-gray;
     box-shadow      : 1px 1px 4px $gray;

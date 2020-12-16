@@ -115,7 +115,16 @@
     &::before,
     &::after {
       opacity  : 100%;
-      // filter: hue-rotation();
+    }
+  }
+
+  &:focus {
+    background-color: rgb(238, 238, 238);
+    opacity         : 100%;
+
+    &::before,
+    &::after {
+      opacity  : 100%;
     }
   }
 }

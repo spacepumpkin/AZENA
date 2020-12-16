@@ -32,9 +32,13 @@ export default class Workspace extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.receiveWorkspaceErrors([]);
+  }
+
   // Update workspace description in local state
   handleDescriptionChange(evt) {
-    const editedDescription = evt.target.value.replace(/[\r\n\v\t]+/g, '');
+    const editedDescription = evt.target.value.replace(/[\t]+/g, '');
 
     const { description: currentDescription } = this.state;
     if (editedDescription === currentDescription) return;
@@ -78,7 +82,7 @@ export default class Workspace extends React.Component {
             <h1>Description</h1>
             <textarea
               // onFocus={this.handleFocus}
-              onKeyDown={this.handleKeyDown}
+              // onKeyDown={this.handleKeyDown}
               onChange={this.handleDescriptionChange}
               onBlur={this.handleDescriptionUpdate}
               ref={this.descriptionInput}

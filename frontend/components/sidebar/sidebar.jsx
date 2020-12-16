@@ -153,7 +153,7 @@ export default class Sidebar extends React.Component {
         </div>
         <div id="sidebar-bottom">
           {/* <p>Organize your projects here!</p> */}
-          <button type="button">Create New Workspace</button>
+          <Link to="/workspaces/new"><button type="button">Create New Workspace</button></Link>
         </div>
       </div >
     )

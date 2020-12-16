@@ -1,3 +1,24 @@
+@keyframes show-modal {
+  0% {
+    display      : none;
+    visibility   : hidden;
+    opacity      : 0;
+    // transform : translateY(0%);
+    top          : 100%;
+  }
+
+  70% {
+    top: 28%;
+  }
+
+  100% {
+    display      : flex;
+    visibility   : visible;
+    opacity      : 1;
+    // transform : translateY(-50%);
+  }
+}
+
 #workspace-modal {
   z-index        : 5;
   position       : fixed;
@@ -22,15 +43,16 @@
 }
 
 #workspace-modal-box {
-  display       : flex;
-  flex-direction: column;
+  display          : flex;
+  flex-direction   : column;
   // border        : 1px solid $spacecadet;
-  border-radius : 8px;
-  position      : fixed;
-  padding       : 40px 50px;
-  box-shadow    : 0 0 25px gray;
-  top           : 30%;
-  left          : 40%;
+  border-radius    : 8px;
+  position         : fixed;
+  padding          : 40px 50px;
+  box-shadow       : 0 0 25px gray;
+  top              : 30%;
+  left             : 40%;
+  animation        : show-modal 1s ease-in-out;
   // margin: 0 auto;
 }
 
@@ -40,27 +62,30 @@
 }
 
 #workspace-modal-close {
-  width        : 40px;
-  height       : 40px;
+  width        : 30px;
+  height       : 30px;
   cursor       : pointer;
   position     : absolute;
-  top          : 4px;
-  right        : 4px;
+  top          : 8px;
+  right        : 8px;
   opacity      : 70%;
   border-radius: 5px;
 
   &::before,
   &::after {
     content         : '';
-    width           : 3px;
+    width           : 4px;
     height          : 80%;
     background-color: black;
     display         : block;
     transform       : translateX(0px);
     position        : absolute;
     top             : 4px;
-    right           : 25px;
-    opacity         : 50%;
+    right           : 14px;
+    border-radius   : 2px;
+    opacity         : 70%;
+    transition      : all 0.3s ease 0s;
+
   }
 
   &::before {
@@ -86,6 +111,12 @@
   &:hover {
     background-color: rgb(238, 238, 238);
     opacity         : 100%;
+
+    &::before,
+    &::after {
+      opacity  : 100%;
+      // filter: hue-rotation();
+    }
   }
 }
 

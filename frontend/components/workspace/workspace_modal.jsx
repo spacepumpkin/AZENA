@@ -30,7 +30,14 @@ class WorkspaceModal extends React.Component {
 
   handleFocus(field) {
     return (evt) => {
-      if (evt.nativeEvent.type === "blur" && (field === "name" || field === "description")) {
+      evt.stopPropagation();
+      // debugger
+      if (evt.nativeEvent.type === "blur" && evt.relatedTarget !== null
+        && (
+          evt.relatedTarget.tagName === "INPUT"
+          || evt.relatedTarget.tagName === "TEXTAREA"
+          || evt.relatedTarget.tagName === "LABEL"
+        )) {
         return;
       } else {
         this.setState({ labelInputFocused: field });

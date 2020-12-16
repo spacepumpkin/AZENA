@@ -36,6 +36,7 @@ const App = function (props) {
               <div id="main-content">
                 <Switch>
                   <ProtectedRoute exact path="/home" component={HomeContainer} />
+                  <Route exact path="/workspaces/new" component={WorkspaceModalContainer} />
                   <ProtectedRoute exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
                   {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
                   <ProtectedRoute exact path="/projects/:projectId(\d+)/list" component={ProjectListContainer} />
@@ -46,8 +47,7 @@ const App = function (props) {
                 </Switch>
               </div>
             </div>
-            <Route path="/users/:userId/new-project" component={ProjectFormContainer} />
-            <Route path="/users/:userId/new-workspace" component={WorkspaceModalContainer} />
+            <Route path="/projects/new" component={ProjectFormContainer} />
           </div>
         }
       />

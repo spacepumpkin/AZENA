@@ -15,17 +15,17 @@ class WorkspaceModal extends React.Component {
 
   handleChange(field) {
     return (evt) => {
-      this.setState({[field]: evt.currentTarget.value })
+      this.setState({ [field]: evt.currentTarget.value })
     }
   }
-  
+
   handleSubmit(evt) {
     evt.preventDefault();
 
   }
 
   render() {
-    debugger
+    // debugger
     const { workspaceErrors } = this.props;
     let nameErrors = [], descriptionErrors = [], otherErrors = [];
     if (workspaceErrors !== undefined || workspaceErrors.length !== 0) {
@@ -56,14 +56,20 @@ class WorkspaceModal extends React.Component {
             <div id="workspace-modal-close"><span>Close</span></div>
           </div>
           <form id="workspace-modal-form" onSubmit={this.handleSubmit}>
-            <label>Workspace Name
-              <input id="workspace-modal-name" type="text" value={this.state.name} onChange={this.handleChange("name")} />
-              <div className="workspace-error">{nameErrors.join(", ")}</div>
-            </label>
-            <label>Description
-              <input id="workspace-modal-description" type="text" value={this.state.description} onChange={this.handleChange("description")} />
-              <div className="workspace-error">{descriptionErrors.join(", ")}</div>
-            </label>
+            <label htmlFor={"workspace-modal-name"}>Workspace Name</label>
+            <input id="workspace-modal-name" type="text"
+              placeholder={"My Brand New Workspace..."}
+              value={this.state.name}
+              onChange={this.handleChange("name")} />
+            <div className="workspace-error">{nameErrors.join(", ")}</div>
+
+            <label htmlFor={"workspace-modal-description"}>Description</label>
+            <textarea id="workspace-modal-description"
+              placeholder={"Click to add a description of your workspace..."}
+              value={this.state.description}
+              onChange={this.handleChange("description")}></textarea>
+            <div className="workspace-error">{descriptionErrors.join(", ")}</div>
+
             <button id="workspace-modal-submit">Create Workspace</button>
           </form>
         </div>

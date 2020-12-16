@@ -4,6 +4,11 @@
   display        : flex;
   justify-content: center;
   align-items    : center;
+  margin         : 0 auto;
+  // top: 0;
+  // left: 0;
+  // width: 100vw;
+  // height: 100vh;
 }
 
 #workspace-modal-backdrop {
@@ -19,14 +24,86 @@
 #workspace-modal-box {
   display       : flex;
   flex-direction: column;
-  border        : 1px solid $lighter-gray;
-  border-radius : 10px;
-  position      : relative;
+  border        : 1px solid $spacecadet;
+  border-radius : 8px;
+  position      : fixed;
+  padding       : 40px 50px;
+  box-shadow    : 0 0 25px gray;
+  top           : 30%;
+  left          : 40%;
+  // margin: 0 auto;
+}
+
+#workspace-modal-top {
+  display    : flex;
+  // position: relative;
+}
+
+#workspace-modal-close {
+  width        : 40px;
+  height       : 40px;
+  cursor       : pointer;
+  position     : absolute;
+  top          : 4px;
+  right        : 4px;
+  opacity      : 70%;
+  border-radius: 5px;
+
+  &::before,
+  &::after {
+    content         : '';
+    width           : 3px;
+    height          : 80%;
+    background-color: black;
+    display         : block;
+    transform       : translateX(0px);
+    position        : absolute;
+    top             : 4px;
+    right           : 25px;
+    opacity         : 50%;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  >span {
+    width         : 1px;
+    height        : 1px;
+    padding       : 0;
+    margin        : -1px;
+    overflow      : hidden;
+    // white-space: nowrap;
+    // clip-path: rect(0, 0, 0, 0);
+    // border: 0;
+    position      : absolute;
+  }
+
+  &:hover {
+    background-color: rgb(238, 238, 238);
+    opacity         : 100%;
+  }
 }
 
 #workspace-modal-form {
+  display        : flex;
+  flex-direction : column;
+  justify-content: space-between;
+  margin-top     : 20px;
+  
+  // align-items: center;
+  label {
+    // border-bottom: 2px solid $secondary;
+    font-size  : 15px;
+    font-weight: bold;
+  }
 
-  input {
+  input,
+  textarea {
     display         : block;
     box-sizing      : border-box;
     margin          : 5px 0;
@@ -34,10 +111,15 @@
     background-color: $lightest-gray;
     border          : 1px solid $lighter-gray;
     border-radius   : 5px;
-    transition      : all 0.3s ease 0s;
     height          : 35px;
-    padding         : 2px 6px;
+    padding         : 4px 6px;
     color           : $darkgray;
+    transition      : all 0.3s ease 0s;
+
+    &:hover {
+      opacity: 100%;
+      border : 1px solid gray;
+    }
 
     &:focus {
       border          : 2px solid $secondary;
@@ -47,27 +129,51 @@
     }
   }
 
+  textarea {
+    padding-top: 6px;
+    height     : 70px;
+  }
+
   >button {
-    box-sizing      : border-box;
-    margin          : 10px 0;
-    width           : 100%;
-    height          : 35px;
-    text-align      : center;
-    background-color: rgba(3, 218, 197, 0.6);
-    color           : $primary--text;
-    font-weight     : bold;
-    transition      : all 0.3s ease 0s;
-    padding         : 5px 10px;
-    border-radius   : 5px;
-    font-family     : $font-heading;
+    align-self         : center;
+    box-sizing         : border-box;
+    width              : 90%;
+    height             : 35px;
+    margin-top         : 20px;
+    padding            : 5px 10px;
+    border-radius      : 5px;
+    background-color   : rgba(3, 218, 197, 0.6);
+    text-align         : center;
+    color              : $primary--text;
+    font-family        : $font-heading;
+    // font-weight     : bold;
+    // letter-spacing  : 2px;
+    opacity            : 80%;
+    transition         : all 0.3s ease 0s;
 
     &:hover {
       // color           : $white;
+      // border          : 1px solid $secondary;
+      opacity         : 100%;
       background-color: rgba(3, 218, 197, 1);
+      width           : 100%;
     }
 
     &:focus {
-      box-shadow: 0 0 8px $secondary;
+      box-shadow: 0 0 8px $lighter-gray;
+      width     : 105%;
+      opacity   : 100%;
     }
   }
+}
+
+.workspace-error {
+  margin          : 5px 0;
+  padding         : 0 6px;
+  // background   : lightpink;
+  color           : $secondary;
+  // font-style: italic;
+  height          : 12px;
+  font-size       : 12px;
+  font-style      : italic;
 }

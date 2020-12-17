@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import Workspace from "../workspace/workspace";
 
 export default class Sidebar extends React.Component {
   constructor(props) {
@@ -7,12 +8,15 @@ export default class Sidebar extends React.Component {
     // Keep track of which workspace is selected, which plus button is selected
     this.state = {
       activeWorkspaceId: -1,
-      plusMenuWorkspaceId: -1
+      plusMenuWorkspaceId: -1,
+      showModal: false
     }
-    this.showPlusMenu = this.showPlusMenu.bind(this);
     this.sidebarRenderCount = 0;
     this.sidebarDropdownRef = React.createRef();
+
+    this.showPlusMenu = this.showPlusMenu.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -39,14 +43,17 @@ export default class Sidebar extends React.Component {
   }
 
   showPlusMenu(workspaceId) {
+    let that = this;
     return (evt) => {
       // if this is the blur event
       if (evt.nativeEvent.type === "blur") {
-        // if we're not clicking another plus or title, close all plus menus; else stop and let click handler go
+        // if we're not clicking another plus or title, or inside the plus menu, close current plus menu; 
+        // else stop and let click handler go
         if (evt.relatedTarget === null
           || (
             evt.relatedTarget.classList[0] !== "sidebar-workspace-plus"
             && evt.relatedTarget.classList[0] !== "sidebar-workspace-title"
+            && that.sidebarDropdownRef && !that.sidebarDropdownRef.current.contains(evt.relatedTarget)
           )
         ) {
           this.setState({ plusMenuWorkspaceId: -1 });
@@ -72,9 +79,15 @@ export default class Sidebar extends React.Component {
     }
   }
 
+  toggleModal(evt) {
+    // evt.preventDefault();
+    this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 })
+  }
+
   render() {
     const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse, currentUserId } = this.props;
-    const { activeWorkspaceId, plusMenuWorkspaceId } = this.state;
+    const { activeWorkspaceId, plusMenuWorkspaceId, showModal } = this.state;
+    // debugger
 
     this.sidebarRenderCount += 1;
     console.log("sidebar render count: ", this.sidebarRenderCount);
@@ -122,10 +135,14 @@ export default class Sidebar extends React.Component {
               }
             </div>
             <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}
-              ref={this.sidebarDropdownRef}
+              ref={showMenu && this.sidebarDropdownRef}
             >
               <Link to={`/projects/new`}>Create New Project</Link>
-              {(currentUserId === workspace.creatorId) && <Link to={`/projects/new`}>Delete Workspace</Link>}
+              {(currentUserId === workspace.creatorId) ? (
+                <button type="button" onClick={this.toggleModal}>Delete Workspace</button>
+              ) : (
+                  <Link to={`/home`}>Leave Workspace</Link>
+                )}
             </div>
           </div>
         )
@@ -134,28 +151,59 @@ export default class Sidebar extends React.Component {
     )
 
     return (
-      <div id="sidebar" className={`${sidebarCollapse ? "collapsed" : ""}`} >
-        <div id="sidebar-top">
-          <Link id="sidebar-logo" to="/home" > <img src={window.logoMainURL} /> </Link>
-          <button onClick={toggleSidebar} className={`sidebar-menu-button chevron-left`} type="button" />
-        </div>
-        <div id="sidebar-links">
-          <Link to="/home"><img className="sidebar-icon" src={window.homeIcon} alt="homeicon" />&nbsp; Home </Link>
-          <Link to="/home"><img className="sidebar-icon" src={window.checkCircle} alt="taskicon" />&nbsp; My Tasks </Link>
-        </div>
-        <div id="sidebar-workspaces">
-          <h1>My Workspaces</h1>
-          {mappedWorkspaces(ownWorkspaces)}
-        </div>
-        <div id="sidebar-workspaces">
-          <h1>Other Workspaces</h1>
-          {mappedWorkspaces(otherWorkspaces)}
-        </div>
-        <div id="sidebar-bottom">
-          {/* <p>Organize your projects here!</p> */}
-          <Link to="/workspaces/new"><button type="button">Create New Workspace</button></Link>
-        </div>
-      </div >
+      <>
+        <div id="sidebar" className={`${sidebarCollapse ? "collapsed" : ""}`} >
+          <div id="sidebar-top">
+            <Link id="sidebar-logo" to="/home" > <img src={window.logoMainURL} /> </Link>
+            <button onClick={toggleSidebar} className={`sidebar-menu-button chevron-left`} type="button" />
+          </div>
+          <div id="sidebar-links">
+            <Link to="/home"><img className="sidebar-icon" src={window.homeIcon} alt="homeicon" />&nbsp; Home </Link>
+            <Link to="/home"><img className="sidebar-icon" src={window.checkCircle} alt="taskicon" />&nbsp; My Tasks </Link>
+          </div>
+          <div id="sidebar-workspaces">
+            <h1>My Workspaces</h1>
+            {mappedWorkspaces(ownWorkspaces)}
+          </div>
+          <div id="sidebar-workspaces">
+            <h1>Other Workspaces</h1>
+            {mappedWorkspaces(otherWorkspaces)}
+          </div>
+          <div id="sidebar-bottom">
+            {/* <p>Organize your projects here!</p> */}
+            <Link to="/workspaces/new"><button type="button">Create New Workspace</button></Link>
+          </div>
+        </div >
+        { showModal &&
+          <WorkspaceDeleteModal
+            workspace={Object.values(workspaces).find((workspace) => workspace.id === plusMenuWorkspaceId)}
+            toggleModal={this.toggleModal} />
+        }
+      </>
     )
   }
+}
+
+function WorkspaceDeleteModal({ workspace = { name: "" }, toggleModal }) {
+  // let workspace = Object.values(workspaces).find((workspace) => workspace.id === plusMenuWorkspaceId);
+  return (
+    <div className="workspace-modal">
+      <div className="modal-backdrop"></div>
+      <div className="workspace-modal-box">
+        <div className={`modal-close`} onClick={toggleModal}><span>Close</span></div>
+        <div>
+          <h1>{`Delete ${workspace.name}?`}</h1>
+        </div>
+        <div>
+          If you delete this workspace, all associated projects and tasks will also be deleted and other members
+          will no longer be able to access it. Are you sure?
+        </div>
+        <div>
+          <button type="button">Yes</button>
+          <button type="button" onClick={toggleModal}>Cancel</button>
+        </div>
+
+      </div>
+    </div>
+  )
 }

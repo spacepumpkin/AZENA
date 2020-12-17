@@ -19,7 +19,7 @@
   }
 }
 
-#workspace-modal {
+.workspace-modal {
   z-index        : 5;
   position       : fixed;
   display        : flex;
@@ -32,7 +32,7 @@
   // height: 100vh;
 }
 
-#workspace-modal-backdrop {
+.modal-backdrop {
   display         : block;
   position        : fixed;
   top             : 0;
@@ -42,7 +42,7 @@
   background-color: rgba(128, 128, 128, 0.4);
 }
 
-#workspace-modal-box {
+.workspace-modal-box {
   display          : flex;
   flex-direction   : column;
   // border        : 1px solid $spacecadet;
@@ -56,12 +56,12 @@
   // margin: 0 auto;
 }
 
-#workspace-modal-top {
-  display    : flex;
+// #workspace-modal-top {
+  // display    : flex;
   // position: relative;
-}
+// }
 
-#workspace-modal-close {
+.modal-close {
   width        : 30px;
   height       : 30px;
   cursor       : pointer;
@@ -166,7 +166,7 @@
     }
 
     &:focus {
-      border          : 2px solid $secondary;
+      border          : 2px solid $primary;
       background-color: $white;
       // border-radius: 5px;
       box-shadow      : inset 0 2px 4px $lighter-gray, 0 2px 4px $lighter-gray;

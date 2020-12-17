@@ -108,16 +108,12 @@ class WorkspaceModal extends React.Component {
     console.log("workspace modal renders: ", this.renderCount);
 
     return (
-      <div id="workspace-modal">
-        <div id="workspace-modal-backdrop">
+      <div className="workspace-modal">
+        <div className="modal-backdrop"></div>
+        <div className="workspace-modal-box">
+          <div className="modal-close" onClick={this.handleClose}><span>Close</span></div>
           <div>
-
-          </div>
-        </div>
-        <div id="workspace-modal-box">
-          <div id="workspace-modal-top">
             <h1>Create Your New Workspace</h1>
-            <div id="workspace-modal-close" onClick={this.handleClose}><span>Close</span></div>
           </div>
           <form id="workspace-modal-form" onSubmit={this.handleSubmit}>
             <label htmlFor={"workspace-modal-name"} className={labelInputFocused === "name" ? "label-input-focused" : ""}>

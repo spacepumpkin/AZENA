@@ -44,19 +44,135 @@
 
 @mixin signup-button {
   // need to include margin, padding, height, width
-  cursor             : pointer;
-  color              : $primary--text;
-  background-color   : rgba(3, 218, 197, 1);
-  box-sizing         : border-box;
-  text-align         : center;
-  
-  border-radius      : 4px;
-  white-space        : nowrap;
-  overflow           : hidden;
-  transition         : all 0.3s ease 0s;
+  cursor          : pointer;
+  color           : $primary--text;
+  background-color: rgba(3, 218, 197, 1);
+  box-sizing      : border-box;
+  text-align      : center;
+
+  border-radius: 4px;
+  white-space  : nowrap;
+  overflow     : hidden;
+  transition   : all 0.3s ease 0s;
 
   &:hover {
     background-color      : rgba(56, 165, 154, 1);
     // background-color   : $primary--med;
   }
+}
+
+@mixin basic-modal-wrapper {
+  z-index        : 10;
+  position       : fixed;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  margin         : 0 auto;
+}
+
+@keyframes show-modal {
+  0% {
+    display      : none;
+    visibility   : hidden;
+    opacity      : 0;
+    top          : 100%;
+    // transform : translateY(0%);
+  }
+
+  70% {
+    top: 28%;
+  }
+
+  100% {
+    display      : flex;
+    visibility   : visible;
+    opacity      : 1;
+    // transform : translateY(-50%);
+  }
+}
+
+@mixin modal-box {
+  display       : flex;
+  flex-direction: column;
+  border-radius : 8px;
+  position      : fixed;
+  padding       : 40px 50px;
+  box-shadow    : 0 0 25px gray;
+  top           : 30%;
+  left          : 35%;
+  animation     : show-modal 1s ease-in-out;
+}
+
+.modal-close {
+  width        : 30px;
+  height       : 30px;
+  cursor       : pointer;
+  position     : absolute;
+  top          : 7px;
+  right        : 8px;
+  opacity      : 70%;
+  border-radius: 5px;
+
+  >span {
+    width   : 1px;
+    height  : 1px;
+    padding : 0;
+    margin  : -1px;
+    overflow: hidden;
+    position: absolute;
+  }
+
+  &::before,
+  &::after {
+    content         : '';
+    width           : 4px;
+    height          : 80%;
+    background-color: black;
+    display         : block;
+    transform       : translateX(0px);
+    position        : absolute;
+    top             : 4px;
+    right           : 14px;
+    border-radius   : 2px;
+    opacity         : 70%;
+    transition      : all 0.3s ease 0s;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    background-color: rgb(238, 238, 238);
+    opacity         : 100%;
+
+    &::before,
+    &::after {
+      opacity: 100%;
+    }
+  }
+
+  &:focus {
+    background-color: rgb(238, 238, 238);
+    opacity         : 100%;
+
+    &::before,
+    &::after {
+      opacity: 100%;
+    }
+  }
+}
+
+.modal-backdrop {
+  display         : block;
+  position        : fixed;
+  top             : 0;
+  bottom          : 0;
+  left            : 0;
+  right           : 0;
+  background-color: rgba(128, 128, 128, 0.4);
 }

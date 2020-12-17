@@ -129,6 +129,7 @@ button.collapsed {
   // overflow      : scroll; // ! how can we make this work?
   padding          : $sidebar-padding 0;
   box-sizing       : border-box;
+  position         : relative;
 
   >a {
     font-family: $font-body;
@@ -144,11 +145,12 @@ button.collapsed {
   display       : flex;
   // padding: 0 0 0 $sidebar-padding; // ! how to make this work
   flex-direction: column;
-  overflow-y    : auto;
-  overflow-x    : hidden;
+  overflow-y    : visible;
+  overflow-x    : visible;
   margin        : 5px 0;
   border-bottom : 1px solid $lighter-gray;
   position      : relative;
+  z-index       : 2;
 }
 
 .sidebar-workspace-title-wrapper {
@@ -160,7 +162,8 @@ button.collapsed {
 .sidebar-workspace-title {
   // height     : 20px;
   // height     : 100%;
-  max-width    : 220px;
+  box-sizing   : border-box;
+  max-width    : 216px;
   font-size    : 18px;
   font-family  : $font-heading;
   color        : $darkgray;
@@ -219,48 +222,39 @@ button.collapsed {
 }
 
 .sidebar-workspace-plus-menu {
-  display   : none;
-  position  : relative;
-  transition: all 0.3s ease 0s;
+  display      : none;
+  position     : absolute;
+  transition   : all 0.3s ease 0s;
+  left         : 250px;
+  z-index      : 5;
+  overflow-x   : hidden;
+  overflow-y   : hidden;
+  border-radius: 5px;
+  border       : 1px solid $lighter-gray;
+  box-shadow   : 0 0 10px $lighter-gray;
 
-  &.show-menu {
-    display               : block;
-    position              : fixed;
-    // width           : 100%;
-    // height          : 100%;
-    // top          : 30px;
-    left                  : 250px;
-    // right              : -10px;
-    // bottom             : -15px;
-    overflow-x            : hidden;
-    overflow-y            : hidden;
-    border-radius         : 5px;
-    border                : 1px solid $lighter-gray;
-    box-shadow            : 0 0 10px $lighter-gray; 
-    // padding               : 4px 6px;
-    z-index               : 5;
+  >a,
+  >button {
+    display: block;
+    padding: 5px 6px;
+    width: 100%;
+    white-space: nowrap;
 
-    >a, >button {
-      display: block;
-      padding: 5px 6px;
-
-      &:first-child:hover {
-        font-weight: bold;
-        background : whitesmoke;
-        color      : $primary;
-      }
-
-      &:nth-child(2):hover {
-        font-weight: bold;
-        color      : $secondary;
-        background : $lightest-gray;
-      }
+    &:first-child:hover {
+      font-weight: bold;
+      background : whitesmoke;
+      color      : $primary;
     }
 
-    // >a {
-    //   position: absolute;
-    //   z-index : 101;
-    // }
+    &:nth-child(2):hover {
+      font-weight: bold;
+      color      : $secondary;
+      background : $lightest-gray;
+    }
+  }
+
+  &.show-menu {
+    display: block;
   }
 }
 
@@ -293,12 +287,11 @@ button.collapsed {
 
 .sidebar-workspace-project {
   // width     : 100%;
-  padding        : 5px 5px;
-  overflow-x     : hidden;
-  transition     : all 0.3s ease 0s;
-  height         : 18px;
-  // z-index     : 1;
-  border-right   : 4px solid transparent;
+  padding     : 5px 5px;
+  overflow-x  : hidden;
+  transition  : all 0.3s ease 0s;
+  height      : 18px;
+  border-right: 4px solid transparent;
 
   >span {
     height        : 10px;
@@ -330,25 +323,25 @@ button.collapsed {
   }
 
   >a {
-    display: flex;
+    display        : flex;
     justify-content: center;
-    margin: 10px 0;
+    margin         : 10px 0;
   }
 
   button {
-    width           : 95%;
-    height          : 40px;
+    width              : 95%;
+    height             : 40px;
     // margin          : 10px;
-    border-radius   : 4px;
-    color           : $lightest-gray;
-    box-shadow      : 1px 1px 4px $gray;
-    background-color: $primary;
-    padding         : 4px 6px;
-    opacity         : 0.7;
-    align-self      : center;
-    text-align      : center;
-    font-size       : 15px;
-    transition      : all 0.3s ease 0s;
+    border-radius      : 4px;
+    color              : $lightest-gray;
+    box-shadow         : 1px 1px 4px $gray;
+    background-color   : $primary;
+    padding            : 4px 6px;
+    opacity            : 0.7;
+    align-self         : center;
+    text-align         : center;
+    font-size          : 15px;
+    transition         : all 0.3s ease 0s;
 
     &:hover {
       opacity: 1.0;

@@ -135,8 +135,7 @@ export default class Sidebar extends React.Component {
               }
             </div>
             <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}
-              ref={showMenu && this.sidebarDropdownRef}
-            >
+              ref={showMenu && this.sidebarDropdownRef}>
               <Link to={`/projects/new`}>Create New Project</Link>
               {(currentUserId === workspace.creatorId) ? (
                 <button type="button" onClick={this.toggleModal}>Delete Workspace</button>
@@ -145,10 +144,12 @@ export default class Sidebar extends React.Component {
                 )}
             </div>
           </div>
+
         )
       }
       )
     )
+    debugger
 
     return (
       <>
@@ -189,15 +190,13 @@ function WorkspaceDeleteModal({ workspace = { name: "" }, toggleModal }) {
   return (
     <div className="workspace-modal">
       <div className="modal-backdrop"></div>
-      <div className="workspace-modal-box">
+      <div id="workspace-delete-modal-box">
         <div className={`modal-close`} onClick={toggleModal}><span>Close</span></div>
-        <div>
-          <h1>{`Delete ${workspace.name}?`}</h1>
-        </div>
-        <div>
+        <h1>{`Delete ${workspace.name}?`}</h1>
+        <p>
           If you delete this workspace, all associated projects and tasks will also be deleted and other members
           will no longer be able to access it. Are you sure?
-        </div>
+        </p>
         <div>
           <button type="button">Yes</button>
           <button type="button" onClick={toggleModal}>Cancel</button>

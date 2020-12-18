@@ -170,6 +170,17 @@
   }
 }
 
+// * FORM 
+
+@mixin error-message {
+  margin          : 5px 0;
+  padding         : 0 6px;
+  color           : $secondary;
+  height          : 12px;
+  font-size       : 12px;
+  font-style      : italic;
+}
+
 // * MODAL ------------------------------------------------------------
 
 .label-input-focused {
@@ -226,7 +237,6 @@
   background-color: $lightest-gray;
   border          : 1px solid $lighter-gray;
   border-radius   : 5px;
-  height          : 35px;
   padding         : 4px 6px;
   color           : $darkgray;
   transition      : all 0.3s ease 0s;

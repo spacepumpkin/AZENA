@@ -26,6 +26,10 @@
     @include modal-text-input;
   }
 
+  input {
+    height: 35px;
+  }
+
   textarea {
     padding-top: 6px;
     height     : 70px;
@@ -51,12 +55,5 @@
 }
 
 .workspace-error {
-  margin          : 5px 0;
-  padding         : 0 6px;
-  // background   : lightpink;
-  color           : $secondary;
-  // font-style: italic;
-  height          : 12px;
-  font-size       : 12px;
-  font-style      : italic;
+  @include error-message;
 }

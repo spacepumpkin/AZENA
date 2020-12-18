@@ -9,6 +9,7 @@ class Feedback extends React.Component {
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   toggleModal(evt) {
@@ -21,8 +22,9 @@ class Feedback extends React.Component {
     const data = new FormData(evt.target); // this can be submitted directly to BE?
     // FormData.entries(), FormData.keys(), FormData.get("name"), FormData.set("name", value)
     for (let [inputName, inputValue] of data.entries()) {
-      console.log(inputName, inputValue);
+      console.log(`${inputName}: "${inputValue}"`);
     }
+    this.toggleModal();
   }
 
   handleFocus(inputId) {
@@ -33,7 +35,6 @@ class Feedback extends React.Component {
 
   render() {
     const { showModal, activeInput } = this.state;
-    console.log("activeInput: ", activeInput);
 
     return (
       <>

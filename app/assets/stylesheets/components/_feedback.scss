@@ -60,18 +60,22 @@
 }
 
 #feedback-modal-form {
-  display: flex;
+  display       : flex;
   flex-direction: column;
 
   label {
     font-size  : 15px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top : 10px;
   }
 
   input,
   textarea {
     @include modal-text-input;
+  }
+
+  input {
+    height: 35px;
   }
 
   textarea {

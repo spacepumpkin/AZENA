@@ -1,14 +1,61 @@
 #project-form-wrapper {
   @include basic-modal-wrapper;
-  position : absolute;
-  height   : 100%;
-  width    : 100%;
-  z-index  : 10;
-  top      : 0;
-  animation: show-modal 1s ease-in-out;
+  // position: absolute;
+  // height  : 100%;
+  // width   : 100%;
+  // z-index : 10;
+  // top     : 0;
 }
 
 #project-form-box {
-  margin : 0 auto;
-  padding: 20em;
+  @include modal-box;
+  margin    : 0 auto;
+  // padding: 20em;
+  animation : show-modal 1s ease-in-out;
+
+}
+
+#project-form {
+  display        : flex;
+  flex-direction : column;
+  justify-content: space-between;
+  margin-top     : 20px;
+
+  label {
+    font-size  : 15px;
+    font-weight: bold;
+  }
+
+  input,
+  textarea {
+    @include modal-text-input;
+  }
+
+  input {
+    height: 35px;
+  }
+
+  textarea {
+    padding-top: 6px;
+    height     : 70px;
+  }
+
+  >button {
+    @include submit-button;
+    background-color: rgba(3, 218, 197, 0.6);
+    width           : 90%;
+
+    &:hover {
+      background-color: rgba(3, 218, 197, 1);
+      width           : 100%;
+    }
+
+    &:focus {
+      width        : 105%;
+    }
+  }
+}
+
+.project-error {
+  @include error-message;
 }

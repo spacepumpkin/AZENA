@@ -1,10 +1,12 @@
 import {
-  TOGGLE_SIDEBAR
-} from "../../actions/ui_actions.js";
+  TOGGLE_SIDEBAR,
+  SET_CURRENT_WORKSPACE
+} from "../../actions/ui_actions";
 
 const _defaultUI = {
   sidebarCollapse: false,
-  darkTheme: false
+  darkTheme: false,
+  currentWorkspaceId: -1
 };
 
 const uiReducer = function (oldState = _defaultUI, action) {
@@ -13,7 +15,9 @@ const uiReducer = function (oldState = _defaultUI, action) {
   switch (action.type) {
     case TOGGLE_SIDEBAR:
       // console.log("toggling sidebar (uiReducer)");
-      return Object.assign({}, oldState, { sidebarCollapse: !oldState.sidebarCollapse })
+      return Object.assign({}, oldState, { sidebarCollapse: !oldState.sidebarCollapse });
+    case SET_CURRENT_WORKSPACE:
+      return Object.assign({}, oldState, { currentWorkspaceId: action.workspaceId });
     default:
       return oldState;
   }

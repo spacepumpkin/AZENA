@@ -18,6 +18,7 @@ export default class Sidebar extends React.Component {
     this.showPlusMenu = this.showPlusMenu.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.openProjectModal = this.openProjectModal.bind(this);
     // this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
@@ -104,13 +105,23 @@ export default class Sidebar extends React.Component {
     this.setState({ showModal: false, plusMenuWorkspaceId: -1 });
   }
 
+  openProjectModal(evt) {
+    this.setState({ plusMenuShow: false });
+    this.props.setCurrentWorkspace(this.state.plusMenuWorkspaceId);
+  }
+
   // handleDestroyWorkspace(workspaceId) {
   //   this.props.destroyWorkspace(workspaceId);
   //   this.setState({ showModal: false, plusMenuWorkspaceId: -1 });
   // }
 
   render() {
-    const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse, currentUserId } = this.props;
+    const {
+      workspaces = {},
+      projects = {},
+      toggleSidebar,
+      sidebarCollapse,
+      currentUserId } = this.props;
     const { activeWorkspaceId, plusMenuWorkspaceId, plusMenuShow, showModal } = this.state;
     // 
 
@@ -165,12 +176,17 @@ export default class Sidebar extends React.Component {
             { showMenu && (
               <div className={`sidebar-workspace-plus-menu`}
                 ref={this.sidebarDropdownRef}>
-                <Link to={`/projects/new`}>Create New Project</Link>
+
+                <Link to={`/workspaces/${workspace.id}/projects/new`} onClick={this.openProjectModal}>
+                  Create New Project
+                  </Link>
+
                 {(currentUserId === workspace.creatorId) ? (
                   <button type="button" onClick={this.openModal}>Delete Workspace</button>
                 ) : (
                     <Link to={`/home`}>Leave Workspace</Link>
                   )}
+
               </div>
             )}
           </div>
@@ -208,7 +224,7 @@ export default class Sidebar extends React.Component {
           <WorkspaceDeleteModal
             workspace={workspaces[plusMenuWorkspaceId]}
             closeModal={this.closeModal} />
-            // destroyWorkspace={this.props.destroyWorkspace} />
+          // destroyWorkspace={this.props.destroyWorkspace} />
         }
       </>
     )

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import TopBar from "./topbar";
 
 import { logout } from "../../actions/session_actions";
-import { toggleSidebar } from "../../actions/ui_actions.js";
+import { toggleSidebar } from "../../actions/ui_actions";
 
 import { updateWorkspace } from '../../actions/workspace_actions';
 
@@ -96,7 +96,7 @@ const mDP = function (dispatch, ownProps) {
   // const { updateItem } = getTopBarInfo(ownProps.entities, ownProps.location.pathname, dispatch)
   return {
     logout: () => dispatch(logout()),
-    toggleSidebar: () => dispatch(toggleSidebar()),
+    toggleSidebar: () => dispatch(toggleSidebar),
     // updateItem: updateItem
   };
 };

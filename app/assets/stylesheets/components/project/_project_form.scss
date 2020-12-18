@@ -1,11 +1,14 @@
 #project-form-wrapper {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 10;
+  @include basic-modal-wrapper;
+  position : absolute;
+  height   : 100%;
+  width    : 100%;
+  z-index  : 10;
+  top      : 0;
+  animation: show-modal 1s ease-in-out;
 }
 
-#project-form {
-  margin: 0 auto;
+#project-form-box {
+  margin : 0 auto;
   padding: 20em;
 }

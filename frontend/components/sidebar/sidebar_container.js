@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import SideBar from './sidebar';
 
-import { toggleSidebar } from "../../actions/ui_actions.js";
+import { setCurrentWorkspace, toggleSidebar } from "../../actions/ui_actions";
 import { destroyWorkspace } from '../../actions/workspace_actions';
 
 const mSP = function ({ ui, entities, session }) {
@@ -15,8 +15,9 @@ const mSP = function ({ ui, entities, session }) {
 
 const mDP = function (dispatch) {
   return {
-    toggleSidebar: () => dispatch(toggleSidebar()),
-    destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId))
+    toggleSidebar: () => dispatch(toggleSidebar),
+    destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId)),
+    setCurrentWorkspace: (workspaceId) => dispatch(setCurrentWorkspace(workspaceId))
   }
 };
 

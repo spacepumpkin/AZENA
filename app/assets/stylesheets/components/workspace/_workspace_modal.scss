@@ -27,29 +27,7 @@
 
   input,
   textarea {
-    display         : block;
-    box-sizing      : border-box;
-    margin          : 5px 0;
-    width           : 100%;
-    background-color: $lightest-gray;
-    border          : 1px solid $lighter-gray;
-    border-radius   : 5px;
-    height          : 35px;
-    padding         : 4px 6px;
-    color           : $darkgray;
-    transition      : all 0.3s ease 0s;
-
-    &:hover {
-      opacity: 100%;
-      border : 1px solid gray;
-    }
-
-    &:focus {
-      border          : 2px solid $primary;
-      background-color: $white;
-      // border-radius: 5px;
-      box-shadow      : inset 0 2px 4px $lighter-gray, 0 2px 4px $lighter-gray;
-    }
+    @include modal-text-input;
   }
 
   textarea {

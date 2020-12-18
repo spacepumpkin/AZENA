@@ -1,5 +1,6 @@
 // Functionality Imports
 import React from "react";
+import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from "react-router-dom";
 import { AuthRoute, AuthLayout, ProtectedRoute, ProtectedLayout } from "../util/route_util";
 
@@ -17,16 +18,18 @@ import ProjectListContainer from './projects/project_list_container';
 import ProjectFormContainer from './projects/project_form_container';
 import WorkspaceModalContainer from './workspace/workspace_modal_container';
 
+import Feedback from './main/feedback';
+
 // AuthRoute / PreAuth - current user should not access - redirect to /home
 // ProtectedRoute / PostAuth - only current user can access - redirect to /
 
 const App = function (props) {
   // console.log("rendering App...")
-
   return (
     <div id="main-wrapper">
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}
       {/* Protected Routes */}
+      <Feedback />
       <ProtectedLayout     
         component={
           <div id="main">
@@ -70,4 +73,6 @@ const App = function (props) {
   );
 };
 
-export default App;
+const mSP = function (state) { return { reduxState: state } };
+
+export default connect(mSP)(App);

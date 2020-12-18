@@ -12,6 +12,7 @@ export default class TopBar extends React.Component {
 
     // Controlling title blur event
     this.titleInput = React.createRef();
+    this.userMenuRef = React.createRef();
 
     // Title min and max char count
     this.titleMin = 1;
@@ -124,7 +125,7 @@ export default class TopBar extends React.Component {
               {user.username[0].toUpperCase()}
             </button>
             <div id="user-menu-arrow" className={`${showUserMenu ? "show-user-menu" : ""}`}></div>
-            <div id="user-menu" className={`${showUserMenu ? "show-user-menu" : ""}`}>
+            <div id="user-menu" className={`${showUserMenu ? "show-user-menu" : ""}`} ref={this.userMenuRef}>
               <div className="user-menu-item" onClick={() => this.setState({ showUserMenu: !showUserMenu })}><Link to="/home">Workspaces</Link></div>
               <div className="user-menu-item" onClick={this.handleLogout}>Log Out</div>
             </div>

@@ -137,14 +137,14 @@ export default class Sidebar extends React.Component {
         let showProjects = activeWorkspaceId === workspace.id;
         return (
           <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
-            <div className="sidebar-workspace-title-wrapper">
+            <div className="workspace-title-wrapper">
               <Link to={`/workspaces/${workspace.id}`}
                 className={`sidebar-workspace-title ${showProjects ? "selected-primary" : ""}`}
                 onClick={this.showProjects(workspace.id)}
               >
                 {workspace.name}
               </Link>
-              <button className={`sidebar-workspace-plus ${(showMenu) ? "rotated-plus" : ""}`}
+              <button className={`workspace-plus ${(showMenu) ? "rotated-plus" : ""}`}
                 onClick={this.showPlusMenu(workspace.id)} type="button"
                 tabIndex="0"
                 onBlur={this.showPlusMenu()} />

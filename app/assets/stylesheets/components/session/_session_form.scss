@@ -95,15 +95,13 @@
     }
 
     &:hover {
-      // background: $lightest-gray;
       border       : 1px solid $secondary;
-      // height    : 48px;
       width        : 105%;
       color        : $text;
     }
 
     &:focus {
-      // height: 48px;
+      border : 1px solid $secondary;
       width: 105%;
     }
 

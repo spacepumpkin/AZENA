@@ -8,12 +8,12 @@ $mainbox-width   : calc(100vw - #{$sidebar-width});
 $main-padding-top: 15px;
 
 #main-wrapper {
-  width: 100%;
+  width        : 100%;
   // min-width : 100%;
-  min-width : 100%;
-  max-width : 100%; 
-  min-height: 100%;
-  max-height: 100%;
+  min-width    : 100%;
+  max-width    : 100%;
+  min-height   : 100%;
+  max-height   : 100%;
 }
 
 #main {
@@ -26,8 +26,66 @@ $main-padding-top: 15px;
   display           : flex;
   background-color  : $lightest-gray;
   // justify-content: flex-start;
-  
+
   // Prevent sidebar from scrolling by preventing rest of page from scrolling
   overflow-y: hidden;
   overflow-x: hidden;
+}
+
+#feedback-button {
+  // --width: 200px;
+  // --height: 100px;
+
+  display    : inline-block;
+  position   : fixed;
+  bottom     : 15px;
+  right      : 15px;
+  z-index    : 1;
+  height     : 35px;
+  width      : 35px;
+  overflow   : hidden;
+  white-space: nowrap;
+  line-height: 35px;
+  cursor     : pointer;
+
+  padding         : 0px 12px;
+  box-sizing      : border-box;
+  border-radius   : 10000px; // 25%/50%;
+  background-color: $primary;
+  color           : transparent;
+
+  transition: color 0.3s ease 0s, width 0.5s ease; //filter 0.5s ease-out;
+
+  >span {
+    font-size: 16px;
+  }
+
+  &:hover {
+    color     : $primary--text;
+    width     : 135px;
+    filter    : hue-rotate(360deg);
+    transition: color 0.4s ease 0.1s, width 0.5s ease, filter 0.5s ease-in-out;
+  }
+}
+
+#feedback-modal-wrapper {
+  @include basic-modal-wrapper;
+  display: none;
+  z-index: 2;
+}
+
+.show {
+  display: block;
+}
+
+#feedback-modal-box {
+  @include modal-box;
+  background-color: white;
+  
+  >h1 {
+    font-family: $font-heading;
+    font-size: 22px;
+    border-bottom: 3px solid $secondary;
+
+  }
 }

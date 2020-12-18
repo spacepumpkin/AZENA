@@ -1,8 +1,3 @@
-// @mixin session-list {
-
-// }
-
-
 // @mixin reset-list {
 //   margin    : 0;
 //   padding   : 0;
@@ -42,6 +37,8 @@
 //   @include replace-text(url("/images/mail.svg"), 0);
 // }
 
+// * SPLASH ------------------------------------------------------------
+
 @mixin signup-button {
   // need to include margin, padding, height, width
   cursor          : pointer;
@@ -61,7 +58,71 @@
   }
 }
 
-// * TITLE FLASH
+// * WORKSPACE BOX (Sidebar & Home) ----------------------------------------
+
+@mixin workspace-box {
+  width         : 100%;
+  box-sizing    : content-box;
+  display       : flex;
+  flex-direction: column;
+  overflow-y    : visible;
+  overflow-x    : visible;
+  margin        : 5px 0;
+  border-bottom : 1px solid $lighter-gray;
+  position      : relative;
+}
+
+.workspace-title-wrapper {
+  display        : flex;
+  justify-content: space-between;
+  position       : relative;
+}
+
+@mixin workspace-title {
+  box-sizing   : border-box;
+  max-width    : 216px;
+  font-size    : 18px;
+  font-family  : $font-heading;
+  color        : $darkgray;
+  padding      : 6px 5px;
+  overflow     : hidden;
+  text-overflow: ellipsis;
+  white-space  : nowrap;
+  transition   : all 0.3s ease 0s;
+
+  &:hover {
+    color: $primary;
+  }
+
+  &:active {
+    color: $primary;
+  }
+}
+
+.workspace-plus {
+  width     : 14px;
+  height    : 14px;
+  box-sizing: border-box;
+  background: image-url('plus.svg') no-repeat center;
+  align-self: center;
+  filter    : invert(100%) sepia(0%) saturate(11%) hue-rotate(162deg) brightness(89%) contrast(77%);
+  transition: all 0.3s ease 0s;
+
+  &:hover {
+    filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%);
+  }
+
+  &.rotated-plus {
+    -webkit-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    -moz-transform   : rotate(135deg);
+    -o-transform     : rotate(135deg);
+    -ms-transform    : rotate(135deg);
+    transform        : rotate(135deg);
+  }
+}
+
+// * TITLE FLASH ------------------------------------------------------------
 @keyframes flashBlack {
   0% {
     color: black;
@@ -83,7 +144,7 @@
 }
 
 
-// * BUTTONS
+// * BUTTONS ------------------------------------------------------------
 @mixin submit-button {
   align-self      : center;
   box-sizing      : border-box;
@@ -109,7 +170,7 @@
   }
 }
 
-// * MODAL
+// * MODAL ------------------------------------------------------------
 
 @mixin basic-modal-wrapper {
   z-index        : 10;

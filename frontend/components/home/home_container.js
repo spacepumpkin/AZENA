@@ -7,7 +7,7 @@ import Home from "./home";
 
 const mSP = function(state) {
   return {
-    payload: state
+    reduxState: state
   };
 };
 

@@ -1,0 +1,100 @@
+.home-workspace-box {
+  @include workspace-box;
+}
+
+.home-workspace-title {
+  @include workspace-title;
+}
+
+// .home-workspace-plus {
+//   @include workspace-plus;
+// }
+
+.home-workspace-plus-menu {
+  display      : block;
+  position     : absolute;
+  transition   : all 0.3s ease 0s;
+  left         : 250px;
+  z-index      : 5;
+  overflow-x   : hidden;
+  overflow-y   : hidden;
+  border-radius: 5px;
+  border       : 1px solid $lighter-gray;
+  box-shadow   : 0 0 10px $lighter-gray;
+
+  >a,
+  >button {
+    display    : block;
+    padding    : 5px 6px;
+    width      : 100%;
+    white-space: nowrap;
+
+    &:first-child:hover {
+      font-weight: bold;
+      background : whitesmoke;
+      color      : $primary;
+    }
+
+    &:nth-child(2):hover {
+      font-weight: bold;
+      color      : $secondary;
+      background : $lightest-gray;
+    }
+  }
+
+  // &.show-menu {
+  //   display: block;
+  // }
+}
+
+
+
+.home-workspace-projects {
+  display       : flex;
+  flex-direction: column;
+  width         : 100%;
+  padding       : 5px 0;
+  overflow-y    : auto;
+  overflow-x    : hidden;
+
+  :nth-child(1)>span {
+    background-color: rgb(random(255), random(255), random(255));
+  }
+
+  :nth-child(2)>span {
+    background-color: rgb(random(255), random(255), random(255));
+  }
+
+  :nth-child(3)>span {
+    background-color: rgb(random(255), random(255), random(255));
+  }
+
+  :nth-child(4)>span {
+    background-color: rgb(random(255), random(255), random(255));
+  }
+}
+
+.home-workspace-project {
+  // width     : 100%;
+  padding     : 5px 5px;
+  overflow-x  : hidden;
+  transition  : all 0.3s ease 0s;
+  height      : 18px;
+  border-right: 4px solid transparent;
+
+  >span {
+    height        : 10px;
+    width         : 10px;
+    display       : inline-block;
+    // position: relative;
+    vertical-align: middle;
+
+  }
+
+  &:hover {
+    color           : $primary;
+    font-size       : 17px;
+    border-right    : 4px solid $primary;
+    background-color: $lightest-gray;
+  }
+}

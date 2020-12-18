@@ -63,7 +63,6 @@ class WorkspaceModal extends React.Component {
   handleFocus(field) {
     return (evt) => {
       evt.stopPropagation();
-      // debugger
       if (evt.nativeEvent.type === "blur" && evt.relatedTarget !== null
         && (
           evt.relatedTarget.tagName === "INPUT"
@@ -84,7 +83,6 @@ class WorkspaceModal extends React.Component {
   }
 
   render() {
-    // debugger
     const { workspaceErrors } = this.props;
     const { name, description, labelInputFocused } = this.state;
 

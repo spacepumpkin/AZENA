@@ -17,10 +17,8 @@ export default class Home extends React.Component {
   showPlusMenu(workspaceId) {
     return (evt) => {
       if (this.state.plusMenuWorkspaceId === workspaceId) {
-        // debugger
         this.setState({ plusMenuWorkspaceId: -1 });
       } else {
-        // debugger
         this.setState({ plusMenuWorkspaceId: workspaceId });
       }
     }

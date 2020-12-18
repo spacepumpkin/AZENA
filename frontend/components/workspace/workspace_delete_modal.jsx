@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { destroyWorkspace } from '../../actions/workspace_actions';
+
 const mDP = function (dispatch) {
   return {
     destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId))
@@ -10,13 +12,11 @@ const mDP = function (dispatch) {
 
 function WorkspaceDeleteModal(props) {
 
-  const { workspace = { id: -1, name: "" }, closeModal, destroyWorkspace } = props;
-
-  debugger
+  const { workspace = { id: -1, name: "" }, closeModal, destroyWorkspace, history } = props;
 
   const deleteWorkspace = function (workspaceId) {
     closeModal();
-    destroyWorkspace(workspaceId);
+    destroyWorkspace(workspaceId).then(() => history.push("/home"));
   };
 
   return (

@@ -18,7 +18,7 @@ export default class Sidebar extends React.Component {
     this.showPlusMenu = this.showPlusMenu.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
+    // this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
   componentDidMount() {
@@ -96,18 +96,18 @@ export default class Sidebar extends React.Component {
 
   openModal(evt) {
     // Want to keep plusMenuWorkspaceId for deleting workspace or creating projects, but close the plus menu
-    this.setState({ showModal: !this.state.showModal, plusMenuShow: false });
+    this.setState({ showModal: true, plusMenuShow: false });
   }
 
   closeModal(evt) {
     // Want to reset plusMenuWorkspaceId when closing the modal
-    this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 });
-  }
-
-  handleDestroyWorkspace(workspaceId) {
-    this.props.destroyWorkspace(workspaceId);
     this.setState({ showModal: false, plusMenuWorkspaceId: -1 });
   }
+
+  // handleDestroyWorkspace(workspaceId) {
+  //   this.props.destroyWorkspace(workspaceId);
+  //   this.setState({ showModal: false, plusMenuWorkspaceId: -1 });
+  // }
 
   render() {
     const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse, currentUserId } = this.props;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Workspace from "../workspace/workspace";
+import WorkspaceDeleteModal from '../workspace/workspace_delete_modal';
 
 export default class Sidebar extends React.Component {
   constructor(props) {
@@ -16,7 +16,8 @@ export default class Sidebar extends React.Component {
     this.sidebarDropdownRef = React.createRef();
 
     this.showPlusMenu = this.showPlusMenu.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
@@ -79,17 +80,33 @@ export default class Sidebar extends React.Component {
     }
   }
 
-  toggleModal(evt) {
-    // evt.preventDefault();
-    // this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 })
+  // toggleModal(status) {
+  //   // evt.preventDefault();
+  //   // this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 })
+  //   return (evt) => {
+  //     if (status === "open") {
+  //       // Want to keep plusMenuWorkspaceId but close the plus menu
+  //       this.setState({ showModal: !this.state.showModal, plusMenuShow: false });
+  //     } else {
+  //       // Want to reset plusMenuWorkspaceId when closing the modal
+  //       this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 });
+  //     }
+  //   }
+  // }
 
-    // Want to keep plusMenuWorkspaceId but close the plus menu
-    this.setState({ showModal: !this.state.showModal, plusMenuShow: false })
+  openModal(evt) {
+    // Want to keep plusMenuWorkspaceId for deleting workspace or creating projects, but close the plus menu
+    this.setState({ showModal: !this.state.showModal, plusMenuShow: false });
+  }
+
+  closeModal(evt) {
+    // Want to reset plusMenuWorkspaceId when closing the modal
+    this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 });
   }
 
   handleDestroyWorkspace(workspaceId) {
     this.props.destroyWorkspace(workspaceId);
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, plusMenuWorkspaceId: -1 });
   }
 
   render() {
@@ -150,7 +167,7 @@ export default class Sidebar extends React.Component {
                 ref={this.sidebarDropdownRef}>
                 <Link to={`/projects/new`}>Create New Project</Link>
                 {(currentUserId === workspace.creatorId) ? (
-                  <button type="button" onClick={this.toggleModal}>Delete Workspace</button>
+                  <button type="button" onClick={this.openModal}>Delete Workspace</button>
                 ) : (
                     <Link to={`/home`}>Leave Workspace</Link>
                   )}
@@ -190,40 +207,40 @@ export default class Sidebar extends React.Component {
         { showModal &&
           <WorkspaceDeleteModal
             workspace={workspaces[plusMenuWorkspaceId]}
-            toggleModal={this.toggleModal} 
-            destroyWorkspace={this.props.destroyWorkspace} />
+            closeModal={this.closeModal} />
+            // destroyWorkspace={this.props.destroyWorkspace} />
         }
       </>
     )
   }
 }
 
-function WorkspaceDeleteModal({ workspace = { id: -1, name: "" }, toggleModal, destroyWorkspace}) {
+// function WorkspaceDeleteModal({ workspace = { id: -1, name: "" }, toggleModal, destroyWorkspace}) {
 
-  const deleteWorkspace = function(workspaceId) {
-    toggleModal;
-    destroyWorkspace(workspaceId);
-  };
+//   const deleteWorkspace = function(workspaceId) {
+//     toggleModal;
+//     destroyWorkspace(workspaceId);
+//   };
 
-  return (
-    <div className="workspace-modal">
-      <div className="modal-backdrop"></div>
-      <div id="workspace-delete-modal-box">
-        <div className={`modal-close`} onClick={toggleModal}><span>Close</span></div>
-        <h1>Delete <span>{workspace.name}</span> ?</h1>
-        <p>
-          If you delete this workspace, <span>all associated projects and tasks</span> will also be deleted and other members
-          will no longer be able to access it.
-        </p>
-        <p>
-          Are you sure?
-        </p>
-        <div className="modal-buttons">
-          <button type="button" onClick={() => deleteWorkspace(workspace.id)}>Yes</button>
-          <button type="button" onClick={toggleModal}>Cancel</button>
-        </div>
+//   return (
+//     <div className="workspace-modal">
+//       <div className="modal-backdrop"></div>
+//       <div id="workspace-delete-modal-box">
+//         <div className={`modal-close`} onClick={toggleModal}><span>Close</span></div>
+//         <h1>Delete <span>{workspace.name}</span> ?</h1>
+//         <p>
+//           If you delete this workspace, <span>all associated projects and tasks</span> will also be deleted and other members
+//           will no longer be able to access it.
+//         </p>
+//         <p>
+//           Are you sure?
+//         </p>
+//         <div className="modal-buttons">
+//           <button type="button" onClick={() => deleteWorkspace(workspace.id)}>Yes</button>
+//           <button type="button" onClick={toggleModal}>Cancel</button>
+//         </div>
 
-      </div>
-    </div>
-  )
-}
+//       </div>
+//     </div>
+//   )
+// }

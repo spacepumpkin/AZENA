@@ -222,7 +222,7 @@ button.collapsed {
 }
 
 .sidebar-workspace-plus-menu {
-  display      : none;
+  display      : block;
   position     : absolute;
   transition   : all 0.3s ease 0s;
   left         : 250px;
@@ -253,9 +253,9 @@ button.collapsed {
     }
   }
 
-  &.show-menu {
-    display: block;
-  }
+  // &.show-menu {
+  //   display: block;
+  // }
 }
 
 

@@ -9,14 +9,15 @@ export default class Sidebar extends React.Component {
     this.state = {
       activeWorkspaceId: -1,
       plusMenuWorkspaceId: -1,
+      plusMenuShow: false,
       showModal: false
     }
     this.sidebarRenderCount = 0;
     this.sidebarDropdownRef = React.createRef();
 
     this.showPlusMenu = this.showPlusMenu.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
   componentDidMount() {
@@ -27,20 +28,19 @@ export default class Sidebar extends React.Component {
     // document.removeEventListener('mousedown', this.handleClickOutside)
   }
 
-  handleClickOutside(evt) {
-    // debugger
-    console.log("handleClickOutside");
-    // Only react if a plusMenu dropdown is open & if click target is not something 
-    // on which we already have a listener, otherwise do nothing
-    if (this.state.plusMenuWorkspaceId !== -1
-      && !evt.target.classList.contains("sidebar-workspace-plus")
-      && !evt.target.classList.contains("sidebar-workspace-title")) {
-      if (this.sidebarDropdownRef && !this.sidebarDropdownRef.current.contains(evt.target)) {
-        // alert("You clicked outside the sidebar dropdown menu!");
-        this.setState({ plusMenuWorkspaceId: -1 });
-      }
-    }
-  }
+  // handleClickOutside(evt) {
+  //   console.log("handleClickOutside");
+  //   // Only react if a plusMenu dropdown is open & if click target is not something 
+  //   // on which we already have a listener, otherwise do nothing
+  //   if (this.state.plusMenuWorkspaceId !== -1
+  //     && !evt.target.classList.contains("sidebar-workspace-plus")
+  //     && !evt.target.classList.contains("sidebar-workspace-title")) {
+  //     if (this.sidebarDropdownRef && !this.sidebarDropdownRef.current.contains(evt.target)) {
+  //       // alert("You clicked outside the sidebar dropdown menu!");
+  //       this.setState({ plusMenuWorkspaceId: -1 });
+  //     }
+  //   }
+  // }
 
   showPlusMenu(workspaceId) {
     let that = this;
@@ -53,18 +53,18 @@ export default class Sidebar extends React.Component {
           || (
             evt.relatedTarget.classList[0] !== "sidebar-workspace-plus"
             && evt.relatedTarget.classList[0] !== "sidebar-workspace-title"
-            && that.sidebarDropdownRef && !that.sidebarDropdownRef.current.contains(evt.relatedTarget)
+            && that.sidebarDropdownRef && that.sidebarDropdownRef.current && !that.sidebarDropdownRef.current.contains(evt.relatedTarget)
           )
         ) {
-          this.setState({ plusMenuWorkspaceId: -1 });
+          this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
         }
         return;
       }
       // if this is the click event
       if (this.state.plusMenuWorkspaceId === workspaceId) {
-        this.setState({ plusMenuWorkspaceId: -1 });
+        this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
       } else {
-        this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId })
+        this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId, plusMenuShow: true })
       }
     }
   }
@@ -72,22 +72,30 @@ export default class Sidebar extends React.Component {
   showProjects(workspaceId) {
     return (evt) => {
       if (this.state.activeWorkspaceId === workspaceId) {
-        this.setState({ activeWorkspaceId: -1, plusMenuWorkspaceId: -1 })
+        this.setState({ activeWorkspaceId: -1, plusMenuWorkspaceId: -1, plusMenuShow: false })
       } else {
-        this.setState({ activeWorkspaceId: workspaceId, plusMenuWorkspaceId: -1 })
+        this.setState({ activeWorkspaceId: workspaceId, plusMenuWorkspaceId: -1, plusMenuShow: false })
       }
     }
   }
 
   toggleModal(evt) {
     // evt.preventDefault();
-    this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 })
+    // this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 })
+
+    // Want to keep plusMenuWorkspaceId but close the plus menu
+    this.setState({ showModal: !this.state.showModal, plusMenuShow: false })
+  }
+
+  handleDestroyWorkspace(workspaceId) {
+    this.props.destroyWorkspace(workspaceId);
+    this.setState({ showModal: false });
   }
 
   render() {
     const { workspaces = {}, projects = {}, toggleSidebar, sidebarCollapse, currentUserId } = this.props;
-    const { activeWorkspaceId, plusMenuWorkspaceId, showModal } = this.state;
-    // debugger
+    const { activeWorkspaceId, plusMenuWorkspaceId, plusMenuShow, showModal } = this.state;
+    // 
 
     this.sidebarRenderCount += 1;
     console.log("sidebar render count: ", this.sidebarRenderCount);
@@ -106,7 +114,9 @@ export default class Sidebar extends React.Component {
 
     const mappedWorkspaces = (selectedWorkspaces) => (
       selectedWorkspaces.map((workspace) => {
-        let showMenu = plusMenuWorkspaceId === workspace.id;
+        // Only show plus menu if we're on the correct workspace and we want it to show
+        let showMenu = plusMenuWorkspaceId === workspace.id && plusMenuShow;
+        // Only show workspace projects if the specific workspace title was clicked
         let showProjects = activeWorkspaceId === workspace.id;
         return (
           <div className="sidebar-workspace-box" key={`workspace-${workspace.id}`}>
@@ -134,22 +144,24 @@ export default class Sidebar extends React.Component {
                 })
               }
             </div>
-            <div className={`sidebar-workspace-plus-menu ${(showMenu) ? "show-menu" : ""}`}
-              ref={showMenu && this.sidebarDropdownRef}>
-              <Link to={`/projects/new`}>Create New Project</Link>
-              {(currentUserId === workspace.creatorId) ? (
-                <button type="button" onClick={this.toggleModal}>Delete Workspace</button>
-              ) : (
-                  <Link to={`/home`}>Leave Workspace</Link>
-                )}
-            </div>
+
+            { showMenu && (
+              <div className={`sidebar-workspace-plus-menu`}
+                ref={this.sidebarDropdownRef}>
+                <Link to={`/projects/new`}>Create New Project</Link>
+                {(currentUserId === workspace.creatorId) ? (
+                  <button type="button" onClick={this.toggleModal}>Delete Workspace</button>
+                ) : (
+                    <Link to={`/home`}>Leave Workspace</Link>
+                  )}
+              </div>
+            )}
           </div>
 
         )
       }
       )
     )
-    debugger
 
     return (
       <>
@@ -177,28 +189,37 @@ export default class Sidebar extends React.Component {
         </div >
         { showModal &&
           <WorkspaceDeleteModal
-            workspace={Object.values(workspaces).find((workspace) => workspace.id === plusMenuWorkspaceId)}
-            toggleModal={this.toggleModal} />
+            workspace={workspaces[plusMenuWorkspaceId]}
+            toggleModal={this.toggleModal} 
+            destroyWorkspace={this.props.destroyWorkspace} />
         }
       </>
     )
   }
 }
 
-function WorkspaceDeleteModal({ workspace = { name: "" }, toggleModal }) {
-  // let workspace = Object.values(workspaces).find((workspace) => workspace.id === plusMenuWorkspaceId);
+function WorkspaceDeleteModal({ workspace = { id: -1, name: "" }, toggleModal, destroyWorkspace}) {
+
+  const deleteWorkspace = function(workspaceId) {
+    toggleModal;
+    destroyWorkspace(workspaceId);
+  };
+
   return (
     <div className="workspace-modal">
       <div className="modal-backdrop"></div>
       <div id="workspace-delete-modal-box">
         <div className={`modal-close`} onClick={toggleModal}><span>Close</span></div>
-        <h1>{`Delete ${workspace.name}?`}</h1>
+        <h1>Delete <span>{workspace.name}</span> ?</h1>
         <p>
-          If you delete this workspace, all associated projects and tasks will also be deleted and other members
-          will no longer be able to access it. Are you sure?
+          If you delete this workspace, <span>all associated projects and tasks</span> will also be deleted and other members
+          will no longer be able to access it.
         </p>
-        <div>
-          <button type="button">Yes</button>
+        <p>
+          Are you sure?
+        </p>
+        <div className="modal-buttons">
+          <button type="button" onClick={() => deleteWorkspace(workspace.id)}>Yes</button>
           <button type="button" onClick={toggleModal}>Cancel</button>
         </div>
 

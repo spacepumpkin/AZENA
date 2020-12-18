@@ -36,16 +36,19 @@
 }
 
 .footer-logo {
-  height           : 40px;
-  width            : 40px;
-  transition       : all 0.3s ease 0s;
-  animation        : rotation 5s infinite linear;
-  // &:hover {
-  //   filter: hue-rotate(180deg);
-  //   // height: 49px;
-  //   // width: 49px;
-  //   // transform: rotate(360deg);
-  // }
+  height    : 40px;
+  width     : 40px;
+  transition: all 0.5s ease 0s;
+  animation : rotation 5s infinite linear;
+
+  &:hover {
+    filter      : hue-rotate(360deg);
+    height      : 105%;
+    width       : 105%;
+    // height: 49px;
+    // width: 49px;
+    // transform: rotate(360deg);
+  }
 }
 
 .footer-greeting {

@@ -172,6 +172,10 @@
 
 // * MODAL ------------------------------------------------------------
 
+.label-input-focused {
+  color: $primary;
+}
+
 @mixin basic-modal-wrapper {
   z-index        : 10;
   position       : fixed;

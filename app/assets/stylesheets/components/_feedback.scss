@@ -1,0 +1,96 @@
+#feedback-button {
+  // --width: 200px;
+  // --height: 100px;
+
+  display    : inline-block;
+  position   : fixed;
+  bottom     : 15px;
+  right      : 15px;
+  z-index    : 1;
+  height     : 35px;
+  width      : 35px;
+  overflow   : hidden;
+  white-space: nowrap;
+  line-height: 35px;
+  cursor     : pointer;
+
+  padding         : 0px 12px;
+  box-sizing      : border-box;
+  border-radius   : 10000px; // 25%/50%;
+  background-color: $primary;
+  color           : transparent;
+
+  transition: color 0.3s ease 0s, width 0.5s ease; //filter 0.5s ease-out;
+
+  >span {
+    font-size: 16px;
+  }
+
+  &:hover {
+    color     : $primary--text;
+    width     : 135px;
+    filter    : hue-rotate(360deg);
+    transition: color 0.4s ease 0.1s, width 0.5s ease, filter 0.8s ease;
+  }
+}
+
+#feedback-modal-wrapper {
+  @include basic-modal-wrapper;
+  // display: none;
+  z-index: 2;
+
+  // .show {
+  //   display: flex;
+  // }
+}
+
+#feedback-modal-box {
+  @include modal-box;
+  width           : 400px;
+  height          : 500px;
+  background-color: white;
+
+  h1 {
+    font-family  : $font-heading;
+    font-size    : 22px;
+    border-bottom: 3px solid $secondary;
+    padding      : 5px 0;
+    margin-bottom: 15px;
+  }
+}
+
+#feedback-modal-form {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size  : 15px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  input,
+  textarea {
+    @include modal-text-input;
+  }
+
+  textarea {
+    height: 80px;
+  }
+
+  button {
+    @include submit-button;
+    background-color: rgba(3, 218, 197, 0.6);
+    width           : 90%;
+    margin          : 15px auto;
+
+    &:hover {
+      background-color: rgba(3, 218, 197, 1);
+      width           : 100%;
+    }
+
+    &:focus {
+      width: 100%;
+    }
+  }
+}

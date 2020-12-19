@@ -167,7 +167,7 @@ export default class SessionForm extends React.Component {
             <label> Email address{" "}
               {formType === "Sign Up" && <span>(this will be your login)</span> }
               <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
-              <div className="session-error">{emailErrors.join(", ")}</div>
+              <div className="error-message">{emailErrors.join(", ")}</div>
             </label>
             
             {
@@ -175,7 +175,7 @@ export default class SessionForm extends React.Component {
               <label> Username{" "}<span>(required)</span>
                 <input id="session-username" type="text" value={this.state.username} 
                 onChange={this.handleChange("username")} />
-                <div className="session-error">{usernameErrors.join(", ")}</div>
+                <div className="error-message">{usernameErrors.join(", ")}</div>
               </label>
             }
             
@@ -183,7 +183,7 @@ export default class SessionForm extends React.Component {
               {formType === "Sign Up" && <span>(minimum 6 characters)</span>} 
               <input id="session-password" type="password" value={this.state.password} 
               onChange={this.handleChange("password")} autoComplete="off"/>
-              <div className="session-error">{passwordErrors.join(", ")}</div>
+              <div className="error-message">{passwordErrors.join(", ")}</div>
             </label>
 
             {/* {

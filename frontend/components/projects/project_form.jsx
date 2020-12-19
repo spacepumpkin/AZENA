@@ -1,22 +1,48 @@
 import React from 'react';
 
-const ProjectForm = function ({ workspaceId, setCurrentWorkspaceId }) {
+const ProjectForm = function (props) {
+  const { 
+    workspaceId, 
+    setCurrentWorkspaceId, 
+    projectErrors,
+    createProject
+  } = props;
   // const [name, setName] = React.useState("");
   // const [description, setDescription] = React.useState("");
-
+  debugger
   const handleClose = () => {
-    // history && history.goBack();
     setCurrentWorkspaceId(-1);
   }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const data = new FormData(evt.target); 
-    console.log(data);
     for (let [inputName, inputValue] of data.entries()) {
       console.log(`${inputName}: "${inputValue}"`);
     }
-    // console.log("New Project Created: ", name);
+    createProject({
+      name: data.get("name"), 
+      description: data.get("description"),
+      workspaceId: workspaceId
+    });
+  }
+
+  // Project errors
+  let nameErrors = [], descriptionErrors = [], otherErrors = [];
+  if (projectErrors !== undefined || projectErrors.length !== 0) {
+    projectErrors.forEach((error) => {
+      switch (error.split(" ")[0]) {
+        case ("Name"):
+          nameErrors.push(error);
+          break;
+        case ("Description"):
+          descriptionErrors.push(error);
+          break;
+        default:
+          otherErrors.push(error);
+          break;
+      }
+    })
   }
 
   return (
@@ -29,14 +55,15 @@ const ProjectForm = function ({ workspaceId, setCurrentWorkspaceId }) {
           <label className={`label-input-focused`} > Project Name
               <input type="text" name="name" />
           </label>
-          <div className="workspace-error"></div>
+          <div className="error-message">{nameErrors.join(", ")}</div>
 
           <label> Description
               <textarea name="description" ></textarea>
           </label>
-          <div className="workspace-error"></div>
+          <div className="error-message">{descriptionErrors.join(", ")}</div>
 
           <button>Create Project</button>
+          <div className="error-message">{otherErrors.join(", ")}</div>
         </form>
       </div>
 

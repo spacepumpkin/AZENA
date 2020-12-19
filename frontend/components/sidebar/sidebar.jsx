@@ -106,7 +106,6 @@ export default class Sidebar extends React.Component {
   }
 
   openProjectModal(evt) {
-    console.log("opening project modal...");
     this.props.setCurrentWorkspaceId(this.state.plusMenuWorkspaceId);
     this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
     // this.props.setCurrentWorkspace(this.state.plusMenuWorkspaceId);

@@ -42,8 +42,6 @@ const App = function (props) {
     };
   }, [currentWorkspaceId])
 
-  console.log("App has rerendered, showProjectModal = ", showProjectModal);
-
   return (
     <div id="main-wrapper">
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}

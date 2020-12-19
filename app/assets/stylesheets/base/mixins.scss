@@ -172,7 +172,7 @@
 
 // * FORM 
 
-@mixin error-message {
+.error-message {
   margin          : 5px 0;
   padding         : 0 6px;
   color           : $secondary;
@@ -207,12 +207,13 @@
 
   70% {
     top: 28%;
+    opacity: 1;
   }
 
   100% {
     display      : flex;
     visibility   : visible;
-    opacity      : 1;
+    // opacity      : 1;
     // transform : translateY(-50%);
   }
 }

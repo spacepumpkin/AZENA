@@ -11,8 +11,18 @@
 #  updated_at   :datetime         not null
 #
 class Project < ApplicationRecord
-  validates :name, presence: true, uniqueness: { scope: :workspace_id }
-  
+  validates :name, presence: true,
+                   length: { maximum: 25, too_long: "Name can't be over 25 characters" },
+                   uniqueness: { scope: :workspace_id }
+
+  validate :name_cannot_start_with_space
+
+  def name_cannot_start_with_space
+    if name.present? && name.starts_with?(" ")
+      errors.add(:name, "cannot start with a space")
+    end
+  end
+
   # * BUILT-IN ASSOCIATIONS ----------------------------------------
 
   # Join Table for Users and their Projects on their Workspaces
@@ -20,11 +30,11 @@ class Project < ApplicationRecord
     foreign_key: :project_id,
     class_name: :UsersProject,
     dependent: :destroy # ! necessary?
-  
+
   has_many :users,
     through: :users_projects,
     source: :user
-  
+
   # A Project has 1 creator
   belongs_to :project_creator,
     foreign_key: :creator_id,

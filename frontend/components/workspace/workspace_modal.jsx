@@ -124,7 +124,7 @@ class WorkspaceModal extends React.Component {
               onChange={this.handleChange("name")}
               onFocus={this.handleFocus("name")}
               onBlur={this.handleFocus("")} />
-            <div className="workspace-error">{nameErrors.join(", ")}</div>
+            <div className="error-message">{nameErrors.join(", ")}</div>
 
             <label htmlFor={"workspace-modal-description"} className={labelInputFocused === "description" ? "label-input-focused" : ""}>
               Description
@@ -135,9 +135,9 @@ class WorkspaceModal extends React.Component {
               onChange={this.handleChange("description")}
               onFocus={this.handleFocus("description")}
               onBlur={this.handleFocus("")} ></textarea>
-            <div className="workspace-error">{descriptionErrors.join(", ")}</div>
-            <div className="workspace-error">{otherErrors.join(", ")}</div>
+            <div className="error-message">{descriptionErrors.join(", ")}</div>
             <button id="workspace-modal-submit">Create Workspace</button>
+            <div className="error-message">{otherErrors.join(", ")}</div>
           </form>
         </div>
       </div>

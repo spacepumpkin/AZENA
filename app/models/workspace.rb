@@ -8,19 +8,11 @@
 #  creator_id  :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#
-# class WorkspaceValidator < ActiveModel::Validator
-#     def validate(record)
-#       unless record.name.starts_with?(" ")
-#         record.errors[:name] << "Name cannot start with a space"
-#       end
-#     end
-# end
 
 class Workspace < ApplicationRecord
-  # include ActiveModel::Validations
-  validates :name, presence: true, length: { maximum: 25, too_long: "Name can't be over 25 characters" }, uniqueness: { scope: :creator_id }
-  # validates_with(WorkspaceValidator)
+  validates :name, presence: true,
+                   length: { maximum: 25, too_long: "Name can't be over 25 characters" },
+                   uniqueness: { scope: :creator_id }
   validate :name_cannot_start_with_space
 
   def name_cannot_start_with_space

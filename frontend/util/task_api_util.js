@@ -11,7 +11,7 @@
 
 // Test Status - PASS
 export const createTask = (task) => {
-  console.log(`creating new task (${task.name})...`);
+  console.log(`creating new task ("${task.name}")...`);
   return $.ajax({
     url: `/api/tasks`,
     method: "POST",

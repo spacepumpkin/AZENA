@@ -9,7 +9,7 @@
 
 // Test Status - PASS
 export const createProject = (project) => {
-  console.log(`creating new project (${project.name})...`);
+  console.log(`creating new project ("${project.name}")...`);
   return $.ajax({
     url: `/api/projects`,
     method: "POST",

@@ -5,11 +5,11 @@ const ProjectForm = function (props) {
     workspaceId, 
     setCurrentWorkspaceId, 
     projectErrors,
-    createProject
+    createProject,
+    history
   } = props;
   // const [name, setName] = React.useState("");
   // const [description, setDescription] = React.useState("");
-  debugger
   const handleClose = () => {
     setCurrentWorkspaceId(-1);
   }
@@ -24,7 +24,8 @@ const ProjectForm = function (props) {
       name: data.get("name"), 
       description: data.get("description"),
       workspaceId: workspaceId
-    });
+    }).then(({project}) => history.push(`/projects/${project.id}/list`));
+    setCurrentWorkspaceId(-1);
   }
 
   // Project errors

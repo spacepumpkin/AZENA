@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { createProject } from '../../actions/project_actions';
 import ProjectForm from './project_form';
 
@@ -15,4 +16,4 @@ const mDP = function (dispatch) {
   }
 };
 
-export default connect(mSP, mDP)(ProjectForm);
+export default withRouter(connect(mSP, mDP)(ProjectForm));

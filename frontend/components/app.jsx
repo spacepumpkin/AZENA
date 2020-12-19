@@ -1,5 +1,5 @@
 // Functionality Imports
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from "react-router-dom";
 import { AuthRoute, AuthLayout, ProtectedRoute, ProtectedLayout } from "../util/route_util";
@@ -25,22 +25,48 @@ import Feedback from './main/feedback';
 
 const App = function (props) {
   // console.log("rendering App...")
+
+  const [currentWorkspaceId, setCurrentWorkspaceId] = useState(-1);
+  const [showProjectModal, toggleProjectModal] = React.useState(false);
+  // let showProjectModal = false;
+
+  useEffect(() => {
+    if (currentWorkspaceId !== -1) {
+      toggleProjectModal(true);
+    } else {
+      toggleProjectModal(false);
+    }
+
+    return () => {
+      console.log("App has unmounted");
+    };
+  }, [currentWorkspaceId])
+
+  console.log("App has rerendered, showProjectModal = ", showProjectModal);
+
   return (
     <div id="main-wrapper">
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}
       {/* Protected Routes */}
       <Feedback />
-      <ProtectedLayout     
+      <ProtectedLayout
         component={
           <div id="main">
-            <Route path="/" component={SidebarContainer} />
+            <Route path="/" render={(props) => (
+              <SidebarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />
+            )}
+            />
+            {showProjectModal &&
+              <ProjectFormContainer workspaceId={currentWorkspaceId}
+                setCurrentWorkspaceId={setCurrentWorkspaceId} />
+            }
             <div id="mainbox">
               <Route path="/" component={TopBarContainer} />
               <div id="main-content">
                 <Switch>
                   <ProtectedRoute exact path="/home" component={HomeContainer} />
                   <Route exact path="/workspaces/new" component={WorkspaceModalContainer} />
-                  <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectFormContainer} />
+                  {/* <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectFormContainer} /> */}
                   <ProtectedRoute exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
                   {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
                   <ProtectedRoute exact path="/projects/:projectId(\d+)/list" component={ProjectListContainer} />

@@ -26,8 +26,7 @@ function WorkspaceDeleteModal(props) {
         <div className={`modal-close`} onClick={closeModal}><span>Close</span></div>
         <h1>Delete <span>{workspace.name}</span> ?</h1>
         <p>
-          If you delete this workspace, <span>all associated projects and tasks</span> will also be deleted and other members
-          will no longer be able to access it.
+          <span>All associated projects and tasks</span> will also be deleted. This cannot be undone.
         </p>
         <p>
           Are you sure?

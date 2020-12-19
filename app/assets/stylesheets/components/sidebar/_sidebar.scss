@@ -171,11 +171,13 @@ button.collapsed {
   box-shadow   : 0 0 10px $lighter-gray;
 
   >a,
-  >button {
+  >button,
+  div {
     display    : block;
     padding    : 5px 6px;
     width      : 100%;
     white-space: nowrap;
+    cursor     : pointer;
 
     &:first-child:hover {
       font-weight: bold;

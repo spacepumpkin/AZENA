@@ -13,6 +13,19 @@
   // padding: 20em;
   animation : show-modal 1s ease-in-out;
 
+  >h1 {
+    color        : $darkgray;
+    margin       : 10px 0 15px 0;
+    padding      : 10px 0;
+    border-bottom: 3px solid $secondary;
+    font-size    : 24px;
+    text-align   : center;
+
+    >span {
+      color    : $primary;
+      animation: flash 1.5s linear;
+    }
+  }
 }
 
 #project-form {
@@ -51,7 +64,7 @@
     }
 
     &:focus {
-      width        : 105%;
+      width: 105%;
     }
   }
 }

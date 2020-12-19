@@ -106,8 +106,10 @@ export default class Sidebar extends React.Component {
   }
 
   openProjectModal(evt) {
-    this.setState({ plusMenuShow: false });
-    this.props.setCurrentWorkspace(this.state.plusMenuWorkspaceId);
+    console.log("opening project modal...");
+    this.props.setCurrentWorkspaceId(this.state.plusMenuWorkspaceId);
+    this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+    // this.props.setCurrentWorkspace(this.state.plusMenuWorkspaceId);
   }
 
   // handleDestroyWorkspace(workspaceId) {
@@ -177,9 +179,12 @@ export default class Sidebar extends React.Component {
               <div className={`sidebar-workspace-plus-menu`}
                 ref={this.sidebarDropdownRef}>
 
-                <Link to={`/workspaces/${workspace.id}/projects/new`} onClick={this.openProjectModal}>
+                {/* <Link to={`/workspaces/${workspace.id}/projects/new`} onClick={this.openProjectModal}>
+                  Create New Project */}
+                <button onClick={this.openProjectModal}>
                   Create New Project
-                  </Link>
+                  </button>
+                {/* </Link> */}
 
                 {(currentUserId === workspace.creatorId) ? (
                   <button type="button" onClick={this.openModal}>Delete Workspace</button>

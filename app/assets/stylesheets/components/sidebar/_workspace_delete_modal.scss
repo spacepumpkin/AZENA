@@ -1,6 +1,6 @@
 #workspace-delete-modal-box {
   @include modal-box;
-  width: 400px;
+  width: 410px;
 
   >h1 {
     color        : $darkgray;
@@ -12,7 +12,7 @@
 
     >span {
       color    : $primary;
-      animation: flash 1.5s linear;
+      animation: flashBlack 1s linear;
     }
   }
 
@@ -24,6 +24,7 @@
 
     >span {
       color      : $secondary;
+      font-family: $font-body;
       font-weight: bold;
     }
   }

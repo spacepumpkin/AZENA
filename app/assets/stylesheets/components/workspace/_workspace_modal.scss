@@ -14,9 +14,7 @@
   justify-content: space-between;
   margin-top     : 20px;
 
-  // align-items: center;
   label {
-    // border-bottom: 2px solid $secondary;
     font-size  : 15px;
     font-weight: bold;
   }
@@ -41,15 +39,12 @@
     width           : 90%;
 
     &:hover {
-      // opacity         : 100%;
       background-color: rgba(3, 218, 197, 1);
       width           : 100%;
     }
 
     &:focus {
-      // box-shadow: 0 0 8px $lighter-gray;
       width        : 105%;
-      // opacity   : 100%;
     }
   }
 }

@@ -90,6 +90,7 @@ button.collapsed {
   flex-direction: column;
   width         : 100%;
   padding       : 20px 0;
+  font-size     : 20px;
 
   a {
     padding       : 10px $sidebar-padding;
@@ -115,8 +116,8 @@ button.collapsed {
 }
 
 .sidebar-icon {
-  height : 20px;
-  width  : 20px;
+  height : 25px;
+  width  : 25px;
   opacity: 0.5;
   float  : left;
 }

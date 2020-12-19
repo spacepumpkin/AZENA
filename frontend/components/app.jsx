@@ -38,7 +38,7 @@ const App = function (props) {
     }
 
     return () => {
-      console.log("App has unmounted");
+      console.log(`New current workspace: ${currentWorkspaceId}`);
     };
   }, [currentWorkspaceId])
 

@@ -207,21 +207,23 @@ button.collapsed {
   overflow-y    : auto;
   overflow-x    : hidden;
 
-  :nth-child(1)>span {
-    background-color: rgb(random(255), random(255), random(255));
+  @for $i from 1 to 6 {
+    :nth-child(#{$i})>span {
+      background-color: rgb(random(255), random(255), random(255));
+    }
   }
 
-  :nth-child(2)>span {
-    background-color: rgb(random(255), random(255), random(255));
-  }
+  // :nth-child(2)>span {
+  //   background-color: rgb(random(255), random(255), random(255));
+  // }
 
-  :nth-child(3)>span {
-    background-color: rgb(random(255), random(255), random(255));
-  }
+  // :nth-child(3)>span {
+  //   background-color: rgb(random(255), random(255), random(255));
+  // }
 
-  :nth-child(4)>span {
-    background-color: rgb(random(255), random(255), random(255));
-  }
+  // :nth-child(4)>span {
+  //   background-color: rgb(random(255), random(255), random(255));
+  // }
 }
 
 .sidebar-workspace-project {

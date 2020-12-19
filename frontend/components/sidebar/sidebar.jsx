@@ -10,15 +10,19 @@ export default class Sidebar extends React.Component {
       activeWorkspaceId: -1,
       plusMenuWorkspaceId: -1,
       plusMenuShow: false,
-      showModal: false
+      showWkspDelModal: false,
+      activeProjectId: -1,
+      showProjDelModal: false
     }
     this.sidebarRenderCount = 0;
     this.sidebarDropdownRef = React.createRef();
 
     this.showPlusMenu = this.showPlusMenu.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.openProjectModal = this.openProjectModal.bind(this);
+    this.openWkspDeleteModal = this.openWkspDeleteModal.bind(this);
+    this.closeWkspDeleteModal = this.closeWkspDeleteModal.bind(this);
+    this.openProjectCreateModal = this.openProjectCreateModal.bind(this);
+    this.openProjectDeleteModal = this.openProjectDeleteModal.bind(this);
+    this.closeProjectDeleteModal = this.closeProjectDeleteModal.bind(this);
     // this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
@@ -83,37 +87,49 @@ export default class Sidebar extends React.Component {
 
   // toggleModal(status) {
   //   // evt.preventDefault();
-  //   // this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 })
+  //   // this.setState({ showWkspDelModal: !this.state.showWkspDelModal, plusMenuWorkspaceId: -1 })
   //   return (evt) => {
   //     if (status === "open") {
   //       // Want to keep plusMenuWorkspaceId but close the plus menu
-  //       this.setState({ showModal: !this.state.showModal, plusMenuShow: false });
+  //       this.setState({ showWkspDelModal: !this.state.showWkspDelModal, plusMenuShow: false });
   //     } else {
   //       // Want to reset plusMenuWorkspaceId when closing the modal
-  //       this.setState({ showModal: !this.state.showModal, plusMenuWorkspaceId: -1 });
+  //       this.setState({ showWkspDelModal: !this.state.showWkspDelModal, plusMenuWorkspaceId: -1 });
   //     }
   //   }
   // }
 
-  openModal(evt) {
+  openWkspDeleteModal(evt) {
     // Want to keep plusMenuWorkspaceId for deleting workspace or creating projects, but close the plus menu
-    this.setState({ showModal: true, plusMenuShow: false });
+    this.setState({ showWkspDelModal: true, plusMenuShow: false });
   }
 
-  closeModal(evt) {
+  closeWkspDeleteModal(evt) {
     // Want to reset plusMenuWorkspaceId when closing the modal
-    this.setState({ showModal: false, plusMenuWorkspaceId: -1 });
+    this.setState({ showWkspDelModal: false, plusMenuWorkspaceId: -1 });
   }
 
-  openProjectModal(evt) {
+  openProjectCreateModal(evt) {
     this.props.setCurrentWorkspaceId(this.state.plusMenuWorkspaceId);
     this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
     // this.props.setCurrentWorkspace(this.state.plusMenuWorkspaceId);
   }
 
+  openProjectDeleteModal(projectId) {
+    return (evt) => {
+      this.setState({ activeProjectId: projectId, showProjDelModal: true });
+    }
+  }
+
+  closeProjectDeleteModal() {
+    return (evt) => {
+      this.setState({ activeProjectId: -1, showProjDelModal: false });
+    }
+  }
+
   // handleDestroyWorkspace(workspaceId) {
   //   this.props.destroyWorkspace(workspaceId);
-  //   this.setState({ showModal: false, plusMenuWorkspaceId: -1 });
+  //   this.setState({ showWkspDelModal: false, plusMenuWorkspaceId: -1 });
   // }
 
   render() {
@@ -123,7 +139,7 @@ export default class Sidebar extends React.Component {
       toggleSidebar,
       sidebarCollapse,
       currentUserId } = this.props;
-    const { activeWorkspaceId, plusMenuWorkspaceId, plusMenuShow, showModal } = this.state;
+    const { activeWorkspaceId, plusMenuWorkspaceId, plusMenuShow, showWkspDelModal } = this.state;
     // 
 
     this.sidebarRenderCount += 1;
@@ -168,7 +184,14 @@ export default class Sidebar extends React.Component {
                 Object.values(projects).map((project) => {
                   return (
                     (project.workspaceId === workspace.id) &&
-                    <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                    (
+                      <>
+                        <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                        <button className={`workspace-plus`} type="button"
+                          onClick={this.openProjectDeleteModal(project.id)}
+                        />
+                      </>
+                    )
                   )
                 })
               }
@@ -178,15 +201,15 @@ export default class Sidebar extends React.Component {
               <div className={`sidebar-workspace-plus-menu`}
                 ref={this.sidebarDropdownRef}>
 
-                {/* <Link to={`/workspaces/${workspace.id}/projects/new`} onClick={this.openProjectModal}>
+                {/* <Link to={`/workspaces/${workspace.id}/projects/new`} onClick={this.openProjectCreateModal}>
                   Create New Project */}
-                <button onClick={this.openProjectModal}>
+                <button onClick={this.openProjectCreateModal}>
                   Create New Project
                   </button>
                 {/* </Link> */}
 
                 {(currentUserId === workspace.creatorId) ? (
-                  <button type="button" onClick={this.openModal}>Delete Workspace</button>
+                  <button type="button" onClick={this.openWkspDeleteModal}>Delete Workspace</button>
                 ) : (
                     <Link to={`/home`}>Leave Workspace</Link>
                   )}
@@ -224,10 +247,10 @@ export default class Sidebar extends React.Component {
             <Link to="/workspaces/new"><button type="button">Create New Workspace</button></Link>
           </div>
         </div >
-        { showModal &&
+        { showWkspDelModal &&
           <WorkspaceDeleteModal
             workspace={workspaces[plusMenuWorkspaceId]}
-            closeModal={this.closeModal} />
+            closeModal={this.closeWkspDeleteModal} />
           // destroyWorkspace={this.props.destroyWorkspace} />
         }
       </>

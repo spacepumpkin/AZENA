@@ -1,31 +1,45 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
 const ProjectForm = function (props) {
-  const { 
-    workspaceId, 
-    setCurrentWorkspaceId, 
+  const {
+    workspaceId,
+    setCurrentWorkspaceId,
     projectErrors,
     createProject,
     history
   } = props;
   // const [name, setName] = React.useState("");
   // const [description, setDescription] = React.useState("");
-  const handleClose = () => {
+
+  // For checking if name input is blank
+  // const nameRef = useRef(null);
+
+  // function handleFocus(inputId) {
+  //   return (evt) => {
+  //     activeInput(inputId);
+  //   }
+  // }
+
+  function handleClose() {
     setCurrentWorkspaceId(-1);
   }
 
-  const handleSubmit = (evt) => {
+  function handleSubmit(evt) {
     evt.preventDefault();
-    const data = new FormData(evt.target); 
+    const data = new FormData(evt.target);
     for (let [inputName, inputValue] of data.entries()) {
       console.log(`${inputName}: "${inputValue}"`);
     }
     createProject({
-      name: data.get("name"), 
+      name: data.get("name"),
       description: data.get("description"),
       workspaceId: workspaceId
-    }).then(({project}) => history.push(`/projects/${project.id}/list`));
-    setCurrentWorkspaceId(-1);
+    }).then(({ project }) => {
+      history.push(`/projects/${project.id}/list`)
+      setCurrentWorkspaceId(-1);
+    }, ({errors}) => {
+      console.log("Project has errors: ", errors);
+    });
   }
 
   // Project errors
@@ -53,16 +67,19 @@ const ProjectForm = function (props) {
         <div className="modal-close" onClick={handleClose}><span>Close</span></div>
         <h1>Create a New Project</h1>
         <form id="project-form" onSubmit={handleSubmit}>
-          <label className={`label-input-focused`} > Project Name
+          <label>
+            Project Name
               <input type="text" name="name" />
           </label>
           <div className="error-message">{nameErrors.join(", ")}</div>
 
-          <label> Description
-              <textarea name="description" ></textarea>
+          <label>
+            Description
+              <textarea name="description"></textarea>
           </label>
           <div className="error-message">{descriptionErrors.join(", ")}</div>
 
+          {/* <button disabled={!nameRef.current || nameRef.current.value === ""}>Create Project</button> */}
           <button>Create Project</button>
           <div className="error-message">{otherErrors.join(", ")}</div>
         </form>

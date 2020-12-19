@@ -37,6 +37,10 @@
   label {
     font-size  : 15px;
     font-weight: bold;
+
+    &:focus-within { // WISH I KNEW ABOUT THIS EARLIER LOL
+      color: $primary;
+    }
   }
 
   input,

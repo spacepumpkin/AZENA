@@ -1,4 +1,4 @@
-#workspace-delete-modal-box {
+#project-delete-modal-box {
   @include modal-box;
   width: 410px;
 
@@ -37,36 +37,3 @@
   }
 
 }
-
-// .modal-delete-buttons {
-//   display        : flex;
-//   justify-content: space-around;
-
-//   >button {
-//     @include submit-button;
-//     font-size : 20px;
-//     width     : 40%;
-//     box-shadow: 1px 1px 4px $gray;
-
-//   }
-
-//   >button:first-child {
-//     background-color: $primary;
-
-//     &:hover {
-//       width: 45%;
-
-//       // +button {
-//       //   width: 35%;
-//       // }
-//     }
-//   }
-
-//   >button:last-child {
-//     background-color: $light-gray;
-
-//     &:hover {
-//       width: 45%;
-//     }
-//   }
-// }

@@ -16,24 +16,27 @@ import HomeContainer from "./home/home_container";
 import WorkspaceContainer from "./workspace/workspace_container";
 import ProjectListContainer from './projects/project_list_container';
 import ProjectFormContainer from './projects/project_form_container';
-import WorkspaceModalContainer from './workspace/workspace_modal_container';
+import WorkspaceCreateModalContainer from './workspace/workspace_create_modal_container';
 
 import Feedback from './main/feedback';
 
 // AuthRoute / PreAuth - current user should not access - redirect to /home
 // ProtectedRoute / PostAuth - only current user can access - redirect to /
 
-const App = function (props) {
+const App = function ({reduxState}) {
   // console.log("rendering App...")
-
+  
   const [currentWorkspaceId, setCurrentWorkspaceId] = useState(-1);
   const [showProjectModal, toggleProjectModal] = React.useState(false);
   // let showProjectModal = false;
+  const [currentWorkspace, setCurrentWorkspace] = useState({name: ""});
 
   useEffect(() => {
     if (currentWorkspaceId !== -1) {
+      setCurrentWorkspace(reduxState.entities.workspaces[currentWorkspaceId]);
       toggleProjectModal(true);
     } else {
+      setCurrentWorkspace({name: ""});
       toggleProjectModal(false);
     }
 
@@ -55,7 +58,7 @@ const App = function (props) {
             )}
             />
             {showProjectModal &&
-              <ProjectFormContainer workspaceId={currentWorkspaceId}
+              <ProjectFormContainer workspaceId={currentWorkspaceId} workspace={currentWorkspace}
                 setCurrentWorkspaceId={setCurrentWorkspaceId} />
             }
             <div id="mainbox">
@@ -63,7 +66,7 @@ const App = function (props) {
               <div id="main-content">
                 <Switch>
                   <ProtectedRoute exact path="/home" component={HomeContainer} />
-                  <Route exact path="/workspaces/new" component={WorkspaceModalContainer} />
+                  <Route exact path="/workspaces/new" component={WorkspaceCreateModalContainer} />
                   {/* <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectFormContainer} /> */}
                   <ProtectedRoute exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
                   {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}

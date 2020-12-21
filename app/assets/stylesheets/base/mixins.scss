@@ -170,6 +170,35 @@
   }
 }
 
+.modal-delete-buttons {
+  display        : flex;
+  justify-content: space-around;
+
+  >button {
+    @include submit-button;
+    font-size : 20px;
+    width     : 40%;
+    box-shadow: 1px 1px 4px $gray;
+
+  }
+
+  >button:first-child {
+    background-color: $primary;
+
+    &:hover {
+      width: 45%;
+    }
+  }
+
+  >button:last-child {
+    background-color: $light-gray;
+
+    &:hover {
+      width: 45%;
+    }
+  }
+}
+
 // * FORM 
 
 .error-message {
@@ -206,7 +235,7 @@
   }
 
   70% {
-    top: 28%;
+    top: 23%;
     opacity: 1;
   }
 

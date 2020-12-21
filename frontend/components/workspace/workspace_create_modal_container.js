@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import WorkspaceModal from './workspace_modal';
+import WorkspaceCreateModal from './workspace_create_modal';
 
 import { createWorkspace, receiveWorkspaceErrors } from '../../actions/workspace_actions';
 
@@ -17,4 +17,4 @@ const mDP = function (dispatch) {
   }
 };
 
-export default connect(mSP, mDP)(WorkspaceModal);
+export default connect(mSP, mDP)(WorkspaceCreateModal);

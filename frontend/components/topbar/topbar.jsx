@@ -45,7 +45,8 @@ export default class TopBar extends React.Component {
 
   // Remove all tabs, new lines + check if we're within allowable char range
   handleTitleChange(evt) {
-    const editedTitle = evt.target.value.replace(/[\r\n\v\t]+/g, '');
+    // const editedTitle = evt.target.value.replace(/[\r\n\v\t]+/g, '');
+    const editedTitle = evt.target.innerText.replace(/[\r\n\v\t]+/g, '');
     // console.log(`evt.target.value: "${evt.target.value}"`)
     // console.log(`old title: "${this.state.title}", new title: "${editedTitle}", length: ${editedTitle.length}, changed?: ${editedTitle !== this.state.title}`);
 
@@ -101,27 +102,30 @@ export default class TopBar extends React.Component {
 
           {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
           <div className="header-title-wrapper">
-            <textarea className={titleClassName.join(" ")}
+            <div className={titleClassName.join(" ")}
+              // type="text"
               onKeyDown={this.handleKeyDown}
               onChange={this.handleTitleChange}
               onBlur={this.handleTitleUpdate}
               ref={this.titleInput}
-              minLength={this.titleMin}
-              maxLength={this.titleMax}
-              cols={this.titleMax}
-              rows={"1"}
+              // minLength={this.titleMin}
+              // maxLength={this.titleMax}
+              // cols={this.titleMax}
+              // rows={"1"}
               autoComplete="off" autoCorrect="off" autoCapitalize="off"
               spellCheck="false"
-              disabled={pageType === "Home" || !isCreator}
-              value={renderedTitle}
+              // disabled={pageType === "Home" || !isCreator}
+              // value=
               onAnimationEnd={() => this.setState({ titleFlash: false })}
-            ></textarea>
+              contentEditable={pageType !== "Home" && isCreator}
+              suppressContentEditableWarning={true}
+            >{renderedTitle}</div>
           </div>
         </div>
         <div id="topbar-user">
           {/* User Settings + TaskSearch + Global Actions */}
           <div id="user-avatar">
-            <button id="user-avatar-button" type="button" onClick={()=> this.setState({showUserMenu: !showUserMenu})}>
+            <button id="user-avatar-button" type="button" onClick={() => this.setState({ showUserMenu: !showUserMenu })}>
               {user.username[0].toUpperCase()}
             </button>
             <div id="user-menu-arrow" className={`${showUserMenu ? "show-user-menu" : ""}`}></div>

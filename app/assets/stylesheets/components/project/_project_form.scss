@@ -11,6 +11,7 @@
   @include modal-box;
   margin    : 0 auto;
   // padding: 20em;
+  width: 320px;
   animation : show-modal 1s ease-in-out;
 
   >h1 {
@@ -20,10 +21,11 @@
     border-bottom: 3px solid $secondary;
     font-size    : 24px;
     text-align   : center;
+    line-height: 1.5;
 
     >span {
       color    : $primary;
-      animation: flash 1.5s linear;
+      animation: flashBlack 0.3s linear 0.3s;
     }
   }
 }

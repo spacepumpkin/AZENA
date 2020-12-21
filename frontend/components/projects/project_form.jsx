@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 
 const ProjectForm = function (props) {
   const {
+    workspace,
     workspaceId,
     setCurrentWorkspaceId,
     projectErrors,
@@ -65,17 +66,17 @@ const ProjectForm = function (props) {
       <div className="modal-backdrop"></div>
       <div id="project-form-box">
         <div className="modal-close" onClick={handleClose}><span>Close</span></div>
-        <h1>Create a New Project</h1>
+        <h1>Create a New Project within <span>{workspace.name}</span></h1>
         <form id="project-form" onSubmit={handleSubmit}>
           <label>
             Project Name
-              <input type="text" name="name" />
+              <input type="text" name="name" placeholder="e.g. World Domination" />
           </label>
           <div className="error-message">{nameErrors.join(", ")}</div>
 
           <label>
-            Description
-              <textarea name="description"></textarea>
+            Description (optional)
+              <textarea name="description" placeholder="Click to add a project description..." ></textarea>
           </label>
           <div className="error-message">{descriptionErrors.join(", ")}</div>
 

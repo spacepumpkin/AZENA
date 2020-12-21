@@ -31,7 +31,7 @@ function WorkspaceDeleteModal(props) {
         <p>
           Are you sure?
         </p>
-        <div className="modal-buttons">
+        <div className="modal-delete-buttons">
           <button type="button" onClick={() => deleteWorkspace(workspace.id)}>Yes</button>
           <button type="button" onClick={closeModal}>Cancel</button>
         </div>

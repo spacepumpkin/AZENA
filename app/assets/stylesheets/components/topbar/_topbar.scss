@@ -58,16 +58,26 @@
   }
 }
 
+// .header-title-wrapper {
+// display: table;
+// width: fit-content;
+// }
+
 .header-title {
   font-size     : 30px;
   vertical-align: middle;
   overflow      : hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-weight   : bold;
   padding       : 4px;
   border-radius : 5px;
   border        : 2px solid transparent;
   opacity       : 85%;
   transition    : all 0.3s ease 0s;
+  // width: 100%;
+  // max-width     : 350px;
+  display: inline-block;
 }
 
 .title-editable {

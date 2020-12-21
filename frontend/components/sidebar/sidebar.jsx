@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import WorkspaceDeleteModal from '../workspace/workspace_delete_modal';
+import ProjectDeleteModal from '../projects/project_delete_modal';
 
 export default class Sidebar extends React.Component {
   constructor(props) {
@@ -20,9 +21,9 @@ export default class Sidebar extends React.Component {
     this.showPlusMenu = this.showPlusMenu.bind(this);
     this.openWkspDeleteModal = this.openWkspDeleteModal.bind(this);
     this.closeWkspDeleteModal = this.closeWkspDeleteModal.bind(this);
-    this.openProjectCreateModal = this.openProjectCreateModal.bind(this);
-    this.openProjectDeleteModal = this.openProjectDeleteModal.bind(this);
-    this.closeProjectDeleteModal = this.closeProjectDeleteModal.bind(this);
+    this.openProjCreateModal = this.openProjCreateModal.bind(this);
+    this.openProjDeleteModal = this.openProjDeleteModal.bind(this);
+    this.closeProjDeleteModal = this.closeProjDeleteModal.bind(this);
     // this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
@@ -109,22 +110,23 @@ export default class Sidebar extends React.Component {
     this.setState({ showWkspDelModal: false, plusMenuWorkspaceId: -1 });
   }
 
-  openProjectCreateModal(evt) {
+  openProjCreateModal(evt) {
     this.props.setCurrentWorkspaceId(this.state.plusMenuWorkspaceId);
     this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
     // this.props.setCurrentWorkspace(this.state.plusMenuWorkspaceId);
   }
 
-  openProjectDeleteModal(projectId) {
+  openProjDeleteModal(projectId) {
     return (evt) => {
-      this.setState({ activeProjectId: projectId, showProjDelModal: true });
+      this.setState({ activeProjectId: projectId, showProjDelModal: true }, () => {
+        console.log("Opening ProjDelModal...", "activeProjectId: ", projectId, "showProjDelModal: ", this.state.showProjDelModal);
+      });
     }
   }
 
-  closeProjectDeleteModal() {
-    return (evt) => {
-      this.setState({ activeProjectId: -1, showProjDelModal: false });
-    }
+  closeProjDeleteModal() {
+    console.log("Closing ProjDelModal...", "activeProjectId: ", this.state.activeProjectId, "showProjDelModal: ", this.state.showProjDelModal);
+    this.setState({ activeProjectId: -1, showProjDelModal: false });
   }
 
   // handleDestroyWorkspace(workspaceId) {
@@ -139,7 +141,13 @@ export default class Sidebar extends React.Component {
       toggleSidebar,
       sidebarCollapse,
       currentUserId } = this.props;
-    const { activeWorkspaceId, plusMenuWorkspaceId, plusMenuShow, showWkspDelModal } = this.state;
+    const {
+      activeWorkspaceId,
+      plusMenuWorkspaceId,
+      plusMenuShow,
+      showWkspDelModal,
+      activeProjectId,
+      showProjDelModal } = this.state;
     // 
 
     this.sidebarRenderCount += 1;
@@ -185,12 +193,12 @@ export default class Sidebar extends React.Component {
                   return (
                     (project.workspaceId === workspace.id) &&
                     (
-                      <>
-                        <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                      <div className="sidebar-workspace-project" key={`project-${project.id}`}>
+                        <Link to={`/projects/${project.id}/list`} ><span></span>&nbsp;{project.name}</Link>
                         <button className={`workspace-plus`} type="button"
-                          onClick={this.openProjectDeleteModal(project.id)}
+                          onClick={this.openProjDeleteModal(project.id)}
                         />
-                      </>
+                      </div>
                     )
                   )
                 })
@@ -201,9 +209,9 @@ export default class Sidebar extends React.Component {
               <div className={`sidebar-workspace-plus-menu`}
                 ref={this.sidebarDropdownRef}>
 
-                {/* <Link to={`/workspaces/${workspace.id}/projects/new`} onClick={this.openProjectCreateModal}>
+                {/* <Link to={`/workspaces/${workspace.id}/projects/new`} onClick={this.openProjCreateModal}>
                   Create New Project */}
-                <button onClick={this.openProjectCreateModal}>
+                <button onClick={this.openProjCreateModal}>
                   Create New Project
                   </button>
                 {/* </Link> */}
@@ -252,6 +260,12 @@ export default class Sidebar extends React.Component {
             workspace={workspaces[plusMenuWorkspaceId]}
             closeModal={this.closeWkspDeleteModal} />
           // destroyWorkspace={this.props.destroyWorkspace} />
+        }
+        { showProjDelModal &&
+          <ProjectDeleteModal
+            project={projects[activeProjectId]}
+            closeModal={this.closeProjDeleteModal}
+          />
         }
       </>
     )

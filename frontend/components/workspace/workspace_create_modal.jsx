@@ -1,6 +1,6 @@
 import React from 'react';
 
-class WorkspaceModal extends React.Component {
+class WorkspaceCreateModal extends React.Component {
   constructor(props) {
     super(props);
     this._nullState = {
@@ -127,7 +127,7 @@ class WorkspaceModal extends React.Component {
             <div className="error-message">{nameErrors.join(", ")}</div>
 
             <label htmlFor={"workspace-modal-description"} className={labelInputFocused === "description" ? "label-input-focused" : ""}>
-              Description
+              Description (optional)
             </label>
             <textarea id="workspace-modal-description"
               placeholder={"Click to add a description of your workspace..."}
@@ -145,4 +145,4 @@ class WorkspaceModal extends React.Component {
   }
 }
 
-export default WorkspaceModal;
+export default WorkspaceCreateModal;

@@ -6,6 +6,7 @@ export default class TopBar extends React.Component {
     super(props);
     this.state = {
       title: props.title,
+      showTitleMenu: false,
       showUserMenu: false,
       titleFlash: false
     }
@@ -45,8 +46,7 @@ export default class TopBar extends React.Component {
 
   // Remove all tabs, new lines + check if we're within allowable char range
   handleTitleChange(evt) {
-    // const editedTitle = evt.target.value.replace(/[\r\n\v\t]+/g, '');
-    const editedTitle = evt.target.innerText.replace(/[\r\n\v\t]+/g, '');
+    const editedTitle = evt.target.value.replace(/[\r\n\v\t]+/g, '');
     // console.log(`evt.target.value: "${evt.target.value}"`)
     // console.log(`old title: "${this.state.title}", new title: "${editedTitle}", length: ${editedTitle.length}, changed?: ${editedTitle !== this.state.title}`);
 
@@ -75,8 +75,16 @@ export default class TopBar extends React.Component {
   }
 
   render() {
-    const { toggleSidebar, sidebarCollapse, pageType, isCreator, title: propsTitle, user } = this.props;
-    const { title: stateTitle, showUserMenu, titleFlash } = this.state; // Will change based on route
+    const {
+      toggleSidebar,
+      sidebarCollapse,
+      pageType,
+      isCreator,
+      title: propsTitle,
+      item,
+      user,
+      setCurrentWorkspaceId } = this.props;
+    const { title: stateTitle, showUserMenu, showTitleMenu, titleFlash } = this.state; // Will change based on route
     // console.log("propsTitle: ", propsTitle, "stateTitle: ", stateTitle);
     const renderedTitle = stateTitle;
 
@@ -97,13 +105,27 @@ export default class TopBar extends React.Component {
             `sidebar-menu-button chevron-right ${!sidebarCollapse ? "collapsed" : ""}`
           } type="button" />
           <div className="header-icon">
-            <span></span>
+            <span onClick={() => this.setState({ showTitleMenu: !showTitleMenu })} ></span>
+            {/* <div id="user-menu-arrow" className={`${showUserMenu ? "show-user-menu" : ""}`}></div> */}
+            <div className={`sliding-menu${showTitleMenu ? " show-user-menu" : ""}`} ref={this.userMenuRef}>
+              {pageType === "Workspace" &&
+                <>
+                  <div className="user-menu-item" onClick={() => setCurrentWorkspaceId(item.id)}>Create Project</div>
+                  <div className="user-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Workspace</Link></div>
+                </>
+              }
+              {pageType === "Project" &&
+                <>
+                  <div className="user-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Project</Link></div>
+                </>
+              }
+            </div>
           </div>
 
           {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
           <div className="header-title-wrapper">
-            <div className={titleClassName.join(" ")}
-              // type="text"
+            <input className={titleClassName.join(" ")}
+              type="text"
               onKeyDown={this.handleKeyDown}
               onChange={this.handleTitleChange}
               onBlur={this.handleTitleUpdate}
@@ -114,12 +136,10 @@ export default class TopBar extends React.Component {
               // rows={"1"}
               autoComplete="off" autoCorrect="off" autoCapitalize="off"
               spellCheck="false"
-              // disabled={pageType === "Home" || !isCreator}
-              // value=
+              disabled={pageType === "Home" || !isCreator}
+              value={renderedTitle}
               onAnimationEnd={() => this.setState({ titleFlash: false })}
-              contentEditable={pageType !== "Home" && isCreator}
-              suppressContentEditableWarning={true}
-            >{renderedTitle}</div>
+            />
           </div>
         </div>
         <div id="topbar-user">
@@ -129,7 +149,7 @@ export default class TopBar extends React.Component {
               {user.username[0].toUpperCase()}
             </button>
             <div id="user-menu-arrow" className={`${showUserMenu ? "show-user-menu" : ""}`}></div>
-            <div id="user-menu" className={`${showUserMenu ? "show-user-menu" : ""}`} ref={this.userMenuRef}>
+            <div className={`sliding-menu${showUserMenu ? " show-user-menu" : ""}`} ref={this.userMenuRef}>
               <div className="user-menu-item" onClick={() => this.setState({ showUserMenu: !showUserMenu })}><Link to="/home">Workspaces</Link></div>
               <div className="user-menu-item" onClick={this.handleLogout}>Log Out</div>
             </div>

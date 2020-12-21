@@ -54,15 +54,14 @@ const App = function ({reduxState}) {
         component={
           <div id="main">
             <Route path="/" render={(props) => (
-              <SidebarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />
-            )}
-            />
+              <SidebarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)}/>
             {showProjectModal &&
               <ProjectFormContainer workspaceId={currentWorkspaceId} workspace={currentWorkspace}
                 setCurrentWorkspaceId={setCurrentWorkspaceId} />
             }
             <div id="mainbox">
-              <Route path="/" component={TopBarContainer} />
+              <Route path="/" render={(props) => (
+                <TopBarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)} />
               <div id="main-content">
                 <Switch>
                   <ProtectedRoute exact path="/home" component={HomeContainer} />

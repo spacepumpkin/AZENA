@@ -55,6 +55,14 @@
     height          : 40px;
     background-color: rgb(random(255), random(255), random(255));
     border-radius   : 8px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+
+    &:hover {
+      margin-top: -4px;
+      margin-left: -4px;
+      box-shadow: 2px 2px 4px $light-gray;
+    }
   }
 }
 
@@ -164,7 +172,7 @@
 
 }
 
-#user-menu {
+.sliding-menu {
   display                     : block;
   opacity                     : 0;
   position                    : absolute;

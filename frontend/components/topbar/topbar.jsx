@@ -25,6 +25,8 @@ export default class TopBar extends React.Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleTitleUpdate = this.handleTitleUpdate.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.openUserMenu = this.openUserMenu.bind(this);
   }
 
   componentDidMount() {
@@ -74,6 +76,30 @@ export default class TopBar extends React.Component {
     }
   }
 
+  handleClickOutside(evt) {
+    if (!!evt.relatedTarget || !this.userMenuRef.current.contains(evt.relatedTarget)) {
+
+    }
+  }
+
+  openUserMenu(evt) {
+
+    this.setState({ showUserMenu: true });
+    let that = this;
+    document.addEventListener("click", function clickOutside(evt) {
+      if (!that.userMenuRef.current.contains(evt.target)) {
+        that.setState({ showUserMenu: false });
+      }
+      document.removeEventListener("click", clickOutside, false);
+    });
+    document.addEventListener("keydown", function escapeKey(evt) {
+      if (evt.key === "Escape") {
+        that.setState({ showUserMenu: false });
+      }
+      document.removeEventListener("keydown", escapeKey, false);
+    });
+  }
+
   render() {
     const {
       toggleSidebar,
@@ -104,23 +130,26 @@ export default class TopBar extends React.Component {
           <button onClick={toggleSidebar} className={
             `sidebar-menu-button chevron-right ${!sidebarCollapse ? "collapsed" : ""}`
           } type="button" />
-          <div className="header-icon">
-            <span onClick={() => this.setState({ showTitleMenu: !showTitleMenu })} ></span>
-            {/* <div id="user-menu-arrow" className={`${showUserMenu ? "show-user-menu" : ""}`}></div> */}
-            <div className={`sliding-menu${showTitleMenu ? " show-user-menu" : ""}`} ref={this.userMenuRef}>
-              {pageType === "Workspace" &&
-                <>
-                  <div className="user-menu-item" onClick={() => setCurrentWorkspaceId(item.id)}>Create Project</div>
-                  <div className="user-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Workspace</Link></div>
-                </>
-              }
-              {pageType === "Project" &&
-                <>
-                  <div className="user-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Project</Link></div>
-                </>
-              }
+
+          {pageType !== "Home" &&
+            <div className="header-icon">
+              <span onClick={() => this.setState({ showTitleMenu: !showTitleMenu })} ></span>
+              {/* <div id="user-menu-arrow" className={`${showUserMenu ? "show-sliding-menu" : ""}`}></div> */}
+              <div className={`title-sliding-menu${showTitleMenu ? " show-sliding-menu" : ""}`}>
+                {pageType === "Workspace" &&
+                  <>
+                    <div className="sliding-menu-item" onClick={() => setCurrentWorkspaceId(item.id)}>Create Project</div>
+                    <div className="sliding-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Workspace</Link></div>
+                  </>
+                }
+                {pageType === "Project" &&
+                  <>
+                    <div className="sliding-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Project</Link></div>
+                  </>
+                }
+              </div>
             </div>
-          </div>
+          }
 
           {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
           <div className="header-title-wrapper">
@@ -142,16 +171,21 @@ export default class TopBar extends React.Component {
             />
           </div>
         </div>
+
         <div id="topbar-user">
           {/* User Settings + TaskSearch + Global Actions */}
           <div id="user-avatar">
-            <button id="user-avatar-button" type="button" onClick={() => this.setState({ showUserMenu: !showUserMenu })}>
+            <button id="user-avatar-button" type="button"
+              // onClick={() => this.setState({ showUserMenu: !showUserMenu })}
+              onClick={this.openUserMenu}
+              // onBlur={this.handleClickOutside}
+            >
               {user.username[0].toUpperCase()}
             </button>
-            <div id="user-menu-arrow" className={`${showUserMenu ? "show-user-menu" : ""}`}></div>
-            <div className={`sliding-menu${showUserMenu ? " show-user-menu" : ""}`} ref={this.userMenuRef}>
-              <div className="user-menu-item" onClick={() => this.setState({ showUserMenu: !showUserMenu })}><Link to="/home">Workspaces</Link></div>
-              <div className="user-menu-item" onClick={this.handleLogout}>Log Out</div>
+            <div id="user-menu-arrow" className={`${showUserMenu ? "show-sliding-menu" : ""}`}></div>
+            <div className={`user-sliding-menu${showUserMenu ? " show-sliding-menu" : ""}`} ref={this.userMenuRef}>
+              <div className="sliding-menu-item" onClick={() => this.setState({ showUserMenu: !showUserMenu })} ><Link to="/home">Workspaces</Link></div>
+              <div className="sliding-menu-item" onClick={this.handleLogout}>Log Out</div>
             </div>
           </div>
           {/* <button id="logout-button" type="button" onClick={this.handleLogout}>Log Out</button> */}

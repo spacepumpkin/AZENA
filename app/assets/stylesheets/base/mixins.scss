@@ -202,12 +202,12 @@
 // * FORM 
 
 .error-message {
-  margin          : 5px 0;
-  padding         : 0 6px;
-  color           : $secondary;
-  height          : 12px;
-  font-size       : 12px;
-  font-style      : italic;
+  margin    : 5px 0;
+  padding   : 0 6px;
+  color     : $secondary;
+  height    : 12px;
+  font-size : 12px;
+  font-style: italic;
 }
 
 // * MODAL ------------------------------------------------------------
@@ -235,13 +235,13 @@
   }
 
   70% {
-    top: 23%;
+    top    : 23%;
     opacity: 1;
   }
 
   100% {
-    display      : flex;
-    visibility   : visible;
+    display         : flex;
+    visibility      : visible;
     // opacity      : 1;
     // transform : translateY(-50%);
   }
@@ -357,4 +357,18 @@
   left            : 0;
   right           : 0;
   background-color: rgba(128, 128, 128, 0.4);
+}
+
+@mixin sliding-menu {
+  display         : block;
+  position        : absolute;
+  background-color: white;
+  color           : $surface--text;
+  border-radius   : 5%;
+  box-shadow      : 0 0 25px $lighter-gray;
+  border          : 1px solid $light-gray;
+  opacity         : 0;
+  visibility      : hidden;
+  overflow        : hidden;
+  transition      : all 0.4s ease 0s;
 }

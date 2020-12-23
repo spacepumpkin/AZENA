@@ -55,15 +55,26 @@
     height          : 40px;
     background-color: rgb(random(255), random(255), random(255));
     border-radius   : 8px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
+    cursor          : pointer;
+    transition      : all 0.3s ease 0s;
 
     &:hover {
       // margin-top: -4px;
       // margin-left: -4px;
-      transform: translateY(-3px);
+      transform : translateY(-3px);
       box-shadow: 0px 2px 4px $light-gray;
     }
+  }
+}
+
+.title-sliding-menu {
+  @include sliding-menu;
+  text-align: left;
+
+  &.show-sliding-menu {
+    visibility: visible;
+    opacity   : 1;
+    transform : translateY(30%);
   }
 }
 
@@ -73,20 +84,20 @@
 // }
 
 .header-title {
-  font-size     : 30px;
-  vertical-align: middle;
-  overflow      : hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-weight   : bold;
-  padding       : 4px;
-  border-radius : 5px;
-  border        : 2px solid transparent;
-  opacity       : 85%;
-  transition    : all 0.3s ease 0s;
+  font-size        : 30px;
+  vertical-align   : middle;
+  overflow         : hidden;
+  white-space      : nowrap;
+  text-overflow    : ellipsis;
+  font-weight      : bold;
+  padding          : 4px;
+  border-radius    : 5px;
+  border           : 2px solid transparent;
+  opacity          : 85%;
+  transition       : all 0.3s ease 0s;
   // width: 100%;
   // max-width     : 350px;
-  display: inline-block;
+  display          : inline-block;
 }
 
 .title-editable {
@@ -173,22 +184,10 @@
 
 }
 
-.sliding-menu {
-  display                     : block;
-  opacity                     : 0;
-  position                    : absolute;
+.user-sliding-menu {
+  @include sliding-menu;
   // top                : -10em;
-  right                       : 0;
-  background-color            : white;
-  color                       : $surface--text;
-  border-radius               : 5%;
-  // transform                : translateY(-10%);
-  // box-shadow      : 0 0 5px $lightest-gray;
-  box-shadow                  : 0 0 25px $lighter-gray;
-  border                      : 1px solid $light-gray;
-  visibility                  : hidden;
-  overflow                    : hidden;
-  transition                  : all 0.4s ease 0s;
+  right: 0;
 
   // &:before {
   //   content      : "";
@@ -201,7 +200,7 @@
   //   // transform : translateY(10%);
   // }
 
-  &.show-user-menu {
+  &.show-sliding-menu {
     // display: block;
     // top    : 5em;
     visibility: visible;
@@ -222,20 +221,25 @@
   opacity        : 0;
   transition     : all 0.1s ease 0s;
 
-  &.show-user-menu {
+  &.show-sliding-menu {
     visibility: visible;
     opacity   : 1;
     transform : translateY(20%);
   }
 }
 
-.user-menu-item {
+.sliding-menu-item {
   cursor : pointer;
   padding: 10px 15px;
 
   &:hover {
     color           : $spacecadet;
     background-color: $light-gray;
+  }
+
+  &:last-child:hover {
+    color : $secondary;
+    background-color: $lightest-gray;
   }
 }
 

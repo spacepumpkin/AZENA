@@ -45,7 +45,7 @@
   padding     : 0 10px;
   margin-right: 20px;
 
-  >span {
+  >button {
     vertical-align: middle;
     padding       : 20% 10px;
 
@@ -55,7 +55,7 @@
     height          : 40px;
     background-color: rgb(random(255), random(255), random(255));
     border-radius   : 8px;
-    cursor          : pointer;
+    // cursor          : pointer;
     transition      : all 0.3s ease 0s;
 
     &:hover {

@@ -14,6 +14,7 @@ export default class TopBar extends React.Component {
     // Controlling title blur event
     this.titleInput = React.createRef();
     this.userMenuRef = React.createRef();
+    this.titleMenuRef = React.createRef();
 
     // Title min and max char count
     this.titleMin = 1;
@@ -25,8 +26,8 @@ export default class TopBar extends React.Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleTitleUpdate = this.handleTitleUpdate.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.openUserMenu = this.openUserMenu.bind(this);
+    this.handleMenuBlur = this.handleMenuBlur.bind(this);
+    // this.openUserMenu = this.openUserMenu.bind(this);
   }
 
   componentDidMount() {
@@ -85,19 +86,40 @@ export default class TopBar extends React.Component {
   openUserMenu(evt) {
 
     this.setState({ showUserMenu: true });
-    let that = this;
-    document.addEventListener("click", function clickOutside(evt) {
-      if (!that.userMenuRef.current.contains(evt.target)) {
-        that.setState({ showUserMenu: false });
+    // let that = this;
+    // document.addEventListener("click", function clickOutside(evt) {
+    //   if (!that.userMenuRef.current.contains(evt.target)) {
+    //     that.setState({ showUserMenu: false });
+    //   }
+    //   document.removeEventListener("click", clickOutside, false);
+    // });
+    // document.addEventListener("keydown", function escapeKey(evt) {
+    //   if (evt.key === "Escape") {
+    //     that.setState({ showUserMenu: false });
+    //   }
+    //   document.removeEventListener("keydown", escapeKey, false);
+    // });
+  }
+
+  handleMenuBlur(evt) {
+    // Will close the title menu and/or user menu dropdowns if we blur away or press Esc
+    if (this.state.showUserMenu || this.state.showTitleMenu) {
+      if (evt.nativeEvent.type === "blur") {
+        if (!evt.relatedTarget ||
+          !this.userMenuRef.current.contains(evt.relatedTarget) ||
+          !this.titleMenuRef.current.contains(evt.relatedTarget) ||
+          evt.relatedTarget.id !== "user-avatar-button" ||
+          evt.relatedTarget.id !== "title-menu-button" ) {
+          console.log("Blurred");
+          this.setState({ showUserMenu: false, showTitleMenu: false });
+        }
+      } else if (evt.nativeEvent.type === "keydown") {
+        if (evt.key === "Escape") {
+          console.log("Escaped");
+          this.setState({ showUserMenu: false, showTitleMenu: false });
+        }
       }
-      document.removeEventListener("click", clickOutside, false);
-    });
-    document.addEventListener("keydown", function escapeKey(evt) {
-      if (evt.key === "Escape") {
-        that.setState({ showUserMenu: false });
-      }
-      document.removeEventListener("keydown", escapeKey, false);
-    });
+    }
   }
 
   render() {
@@ -133,9 +155,13 @@ export default class TopBar extends React.Component {
 
           {pageType !== "Home" &&
             <div className="header-icon">
-              <span onClick={() => this.setState({ showTitleMenu: !showTitleMenu })} ></span>
+              <button id="title-menu-button" type="button"
+                onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}
+                onBlur={this.handleMenuBlur}
+                onKeyDown={this.handleMenuBlur}
+              ></button>
               {/* <div id="user-menu-arrow" className={`${showUserMenu ? "show-sliding-menu" : ""}`}></div> */}
-              <div className={`title-sliding-menu${showTitleMenu ? " show-sliding-menu" : ""}`}>
+              <div className={`title-sliding-menu${showTitleMenu ? " show-sliding-menu" : ""}`} ref={this.titleMenuRef}>
                 {pageType === "Workspace" &&
                   <>
                     <div className="sliding-menu-item" onClick={() => setCurrentWorkspaceId(item.id)}>Create Project</div>
@@ -176,15 +202,16 @@ export default class TopBar extends React.Component {
           {/* User Settings + TaskSearch + Global Actions */}
           <div id="user-avatar">
             <button id="user-avatar-button" type="button"
-              // onClick={() => this.setState({ showUserMenu: !showUserMenu })}
-              onClick={this.openUserMenu}
-              // onBlur={this.handleClickOutside}
+              onClick={() => this.setState({ showUserMenu: !showUserMenu })}
+              // onClick={this.openUserMenu}
+              onBlur={this.handleMenuBlur}
+              onKeyDown={this.handleMenuBlur}
             >
               {user.username[0].toUpperCase()}
             </button>
             <div id="user-menu-arrow" className={`${showUserMenu ? "show-sliding-menu" : ""}`}></div>
             <div className={`user-sliding-menu${showUserMenu ? " show-sliding-menu" : ""}`} ref={this.userMenuRef}>
-              <div className="sliding-menu-item" onClick={() => this.setState({ showUserMenu: !showUserMenu })} ><Link to="/home">Workspaces</Link></div>
+              <div className="sliding-menu-item" onClick={() => this.setState({ showUserMenu: false })} ><Link to="/home">Workspaces</Link></div>
               <div className="sliding-menu-item" onClick={this.handleLogout}>Log Out</div>
             </div>
           </div>

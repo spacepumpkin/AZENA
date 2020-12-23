@@ -31,6 +31,9 @@
     // overflow: hidden;
     // opacity : 0.0;
     margin-left: -$sidebar-width;
+    // transform: translateX(-$sidebar-width); // Faster but can't get mainbox to match without shifting
+    // position: absolute;
+    // left: -$sidebar-width;
   }
 }
 
@@ -47,9 +50,14 @@
   height : 100%;
   width  : 100%;
   padding: 0 10px;
+  border-radius: 10px;
+  transition: background 0.3s ease;
 
   img {
     height: 100%;
+  }
+  &:hover {
+    background: $lightest-gray;
   }
 }
 

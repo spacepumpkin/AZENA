@@ -23,8 +23,10 @@ import Feedback from './main/feedback';
 // AuthRoute / PreAuth - current user should not access - redirect to /home
 // ProtectedRoute / PostAuth - only current user can access - redirect to /
 
-const App = function ({reduxState}) {
+const App = function ({ui, entities}) {
   // console.log("rendering App...")
+  const { sidebarCollapse } = ui;
+  const { workspaces } = entities;
   
   const [currentWorkspaceId, setCurrentWorkspaceId] = useState(-1);
   const [showProjectModal, toggleProjectModal] = React.useState(false);
@@ -33,7 +35,7 @@ const App = function ({reduxState}) {
 
   useEffect(() => {
     if (currentWorkspaceId !== -1) {
-      setCurrentWorkspace(reduxState.entities.workspaces[currentWorkspaceId]);
+      setCurrentWorkspace(workspaces[currentWorkspaceId]);
       toggleProjectModal(true);
     } else {
       setCurrentWorkspace({name: ""});
@@ -99,6 +101,6 @@ const App = function ({reduxState}) {
   );
 };
 
-const mSP = function (state) { return { reduxState: state } };
+const mSP = function (state) { return state };
 
 export default connect(mSP)(App);

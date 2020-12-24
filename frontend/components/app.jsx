@@ -18,6 +18,7 @@ import TopBarContainer from "./topbar/topbar_container";    // always there
 
 // * MAIN CONTENT
 import HomeContainer from "./home/home_container";
+import MyTasks from "./home/my_tasks";
 import WorkspaceContainer from "./workspace/workspace_container";
 import ProjectListContainer from './projects/project_list_container';
 
@@ -79,6 +80,7 @@ const App = function ({ ui, entities }) {
               <div id="main-content">
                 <Switch>
                   <Route exact path="/home" component={HomeContainer} />
+                  <Route exact path="/mytasks" component={MyTasks} />
                   <Route exact path="/workspaces/new" component={WorkspaceCreateModalContainer} />
                   {/* <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectCreateModalContainer} /> */}
                   <Route exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />

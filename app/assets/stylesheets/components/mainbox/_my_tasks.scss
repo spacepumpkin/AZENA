@@ -1,0 +1,32 @@
+#my-tasks{
+
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid $light-gray;
+}
+
+tr:nth-of-type(odd) {
+  background: $lightest-gray;
+}
+
+th {
+  background: $lightest-gray;
+  color: $primary;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+td, th {
+  padding: 6px;
+  border: 1px solid $light-gray;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+td >span {
+  margin: 0 6px;
+}

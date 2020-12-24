@@ -9,8 +9,7 @@ const mSP = function ({ ui, entities, session }) {
     workspaces: entities.workspaces,
     projects: entities.projects,
     sidebarCollapse: ui.sidebarCollapse,
-    currentItems: ui.items,
-    currentModal: ui.currentModal,
+    currentItems: ui.currentItems,
     currentUserId: session.id
   }
 };

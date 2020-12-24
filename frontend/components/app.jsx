@@ -74,6 +74,9 @@ const App = function ({ui, entities}) {
             {currentModal === "Project Delete" &&
               <ProjectDeleteModal />
             }
+            {currentModal === "Workspace Delete" &&
+              <WorkspaceDeleteModal />
+            }
             <div id="mainbox">
               <Route path="/" render={(props) => (
                 <TopBarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)} />

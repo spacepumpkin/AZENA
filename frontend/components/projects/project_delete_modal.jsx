@@ -6,8 +6,8 @@ import { setCurrentItems, setModal } from '../../actions/ui_actions';
 
 const mSP = function ({ entities, ui }) {
   return {
-    project: entities.projects[ui.items.projectId],
-    currentItems: ui.items
+    project: entities.projects[ui.currentItems.projectId],
+    currentItems: ui.currentItems
   };
 };
 

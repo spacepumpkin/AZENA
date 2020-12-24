@@ -3,16 +3,31 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { destroyWorkspace } from '../../actions/workspace_actions';
+import { setModal } from '../../actions/ui_actions';
+
+const mSP = function ({ entities, ui }) {
+  return {
+    workspace: entities.workspaces[ui.currentItems.workspaceId]
+  }
+}
 
 const mDP = function (dispatch) {
   return {
-    destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId))
+    destroyWorkspace: (workspaceId) => dispatch(destroyWorkspace(workspaceId)),
+    setModal: (modalType) => dispatch(setModal(modalType))
   }
 };
 
 function WorkspaceDeleteModal(props) {
 
-  const { workspace = { id: -1, name: "" }, closeModal, destroyWorkspace, history } = props;
+  // const { workspace = { id: -1, name: "" }, closeModal, destroyWorkspace, history } = props;
+  const { workspace = { id: -1, name: "" }, setModal, destroyWorkspace, history } = props;
+
+  const closeModal = function () {
+    // let items = Object.assign({}, currentItems, { projectId: -1 });
+    // setCurrentItems(items);
+    setModal(null);
+  };
 
   const deleteWorkspace = function (workspaceId) {
     closeModal();
@@ -41,4 +56,4 @@ function WorkspaceDeleteModal(props) {
   )
 }
 
-export default withRouter(connect(null, mDP)(WorkspaceDeleteModal));
+export default withRouter(connect(mSP, mDP)(WorkspaceDeleteModal));

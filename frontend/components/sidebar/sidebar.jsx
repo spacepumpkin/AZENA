@@ -18,10 +18,9 @@ export default class Sidebar extends React.Component {
 
     this.showPlusMenu = this.showPlusMenu.bind(this);
     this.openWkspDeleteModal = this.openWkspDeleteModal.bind(this);
-    this.closeWkspDeleteModal = this.closeWkspDeleteModal.bind(this);
+    // this.closeWkspDeleteModal = this.closeWkspDeleteModal.bind(this);
     this.openProjCreateModal = this.openProjCreateModal.bind(this);
     this.openProjDeleteModal = this.openProjDeleteModal.bind(this);
-    // this.closeProjDeleteModal = this.closeProjDeleteModal.bind(this);
     // this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
@@ -100,13 +99,14 @@ export default class Sidebar extends React.Component {
 
   openWkspDeleteModal(evt) {
     // Want to keep plusMenuWorkspaceId for deleting workspace or creating projects, but close the plus menu
-    this.setState({ showWkspDelModal: true, plusMenuShow: false });
+    // this.setState({ showWkspDelModal: true, plusMenuShow: false });
+    this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+    let items = Object.assign({}, this.props.currentItems, { workspaceId: this.state.plusMenuWorkspaceId });
+    this.props.setCurrentItems(items);
+    this.props.setModal("Workspace Delete");
   }
 
-  closeWkspDeleteModal(evt) {
-    // Want to reset plusMenuWorkspaceId when closing the modal
-    this.setState({ showWkspDelModal: false, plusMenuWorkspaceId: -1 });
-  }
+  // ! Refactor closeWkspDeleteModal to WorkspaceDeleteModal
 
   openProjCreateModal(evt) {
     this.props.setCurrentWorkspaceId(this.state.plusMenuWorkspaceId);
@@ -115,27 +115,13 @@ export default class Sidebar extends React.Component {
 
   openProjDeleteModal(projectId) {
     return (evt) => {
-      // console.log("Opening ProjDelModal...", "activeProjectId: ", projectId, "showProjDelModal: ", this.state.showProjDelModal);
-      // this.setState({ activeProjectId: projectId, showProjDelModal: true }, () => {
-      // });
-      // this.setState({ activeProjectId: projectId });
       let project = this.props.projects[projectId];
-      // let workspaceId = project.workspaceId;
-      // const { currentWorkspaceId, currentProjectId } = this.props.currentItems;
       this.props.setCurrentItems({ workspaceId: project.workspaceId, projectId: projectId });
       this.props.setModal("Project Delete");
     }
   }
 
-  // ! Refactored into ProjectDeleteModal
-  // closeProjDeleteModal() {
-  //   // console.log("Closing ProjDelModal...", "activeProjectId: ", this.state.activeProjectId, "showProjDelModal: ", this.state.showProjDelModal);
-  //   // this.setState({ activeProjectId: -1, showProjDelModal: false });
-  //   // this.setState({ activeProjectId: -1 });
-  //   let items = Object.assign({}, this.props.currentItems, { projectId: -1 });
-  //   this.props.setCurrentItems(items);
-  //   this.props.setModal(null);
-  // }
+  // ! closeProjDeleteModal refactored into ProjectDeleteModal
 
   // handleDestroyWorkspace(workspaceId) {
   //   this.props.destroyWorkspace(workspaceId);
@@ -148,16 +134,13 @@ export default class Sidebar extends React.Component {
       projects = {},
       toggleSidebar,
       sidebarCollapse,
-      currentUserId,
-      currentItems,
-      currentModal
+      currentUserId
     } = this.props;
 
     const {
       activeWorkspaceId,
       plusMenuWorkspaceId,
       plusMenuShow,
-      showWkspDelModal,
     } = this.state;
     // 
 
@@ -266,24 +249,6 @@ export default class Sidebar extends React.Component {
             <Link to="/workspaces/new"><button type="button">Create New Workspace</button></Link>
           </div>
         </div >
-        { showWkspDelModal &&
-          <WorkspaceDeleteModal
-            workspace={workspaces[plusMenuWorkspaceId]}
-            closeModal={this.closeWkspDeleteModal} />
-          // destroyWorkspace={this.props.destroyWorkspace} />
-        }
-        {/* { showProjDelModal &&
-          <ProjectDeleteModal
-            project={projects[activeProjectId]}
-            closeModal={this.closeProjDeleteModal}
-          />
-        } */}
-        {/* { currentModal === "Project Delete" &&
-          <ProjectDeleteModal
-            project={projects[currentItems.projectId]}
-            closeModal={this.closeProjDeleteModal}
-          />
-        } */}
       </>
     )
   }

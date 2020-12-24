@@ -7,7 +7,7 @@ import {
 const _defaultUI = {
   sidebarCollapse: false,
   darkTheme: false,
-  items: { workspaceId: -1, projectId: -1},
+  currentItems: { workspaceId: -1, projectId: -1},
   currentModal: null
 };
 
@@ -20,7 +20,7 @@ const uiReducer = function (oldState = _defaultUI, action) {
       return Object.assign({}, oldState, { sidebarCollapse: !oldState.sidebarCollapse });
     case SET_CURRENT_ITEMS:
       const newState = Object.assign({}, oldState);
-      Object.assign(newState.items, { workspaceId: action.workspaceId, projectId: action.projectId });
+      Object.assign(newState.currentItems, { workspaceId: action.workspaceId, projectId: action.projectId });
       return newState;
     case SET_MODAL:
       return Object.assign({}, oldState, { currentModal: action.modalType });

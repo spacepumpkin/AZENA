@@ -12,7 +12,6 @@ export default class TopBar extends React.Component {
       showTitleMenu: false,
       showUserMenu: false,
       titleFlash: false,
-      currentModal: null
     }
 
     // Controlling title blur event
@@ -33,7 +32,6 @@ export default class TopBar extends React.Component {
     this.handleMenuBlur = this.handleMenuBlur.bind(this);
 
     this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -109,16 +107,15 @@ export default class TopBar extends React.Component {
       if (modalType === "Project Delete") {
         let project = this.props.item;
         this.props.setCurrentItems({ workspaceId: project.workspaceId, projectId: project.id });
-        this.props.setModal("Project Delete");
-      } else {
-        this.setState({ currentModal: modalType, showTitleMenu: false });
+        this.props.setModal(modalType);
+      } else if (modalType === "Workspace Delete") {
+        // this.setState({ currentModal: modalType, showTitleMenu: false });
+        let workspace = this.props.item;
+        this.props.setCurrentItems({ workspaceId: workspace.id, projectId: -1 });
+        this.props.setModal(modalType);
       }
 
     }
-  }
-
-  closeModal() {
-    this.setState({ currentModal: null });
   }
 
   render() {
@@ -175,18 +172,6 @@ export default class TopBar extends React.Component {
                   </>
                 }
               </div>
-              {(pageType === "Workspace" && this.state.currentModal === "Workspace Delete") &&
-                <WorkspaceDeleteModal
-                  workspace={item}
-                  closeModal={this.closeModal} />
-                // destroyWorkspace={this.props.destroyWorkspace} />
-              }
-              {/* {(pageType === "Project" && this.state.currentModal === "Project Delete") &&
-                <ProjectDeleteModal
-                  project={item}
-                  closeModal={this.closeModal}
-                />
-              } */}
             </div>
           }
 

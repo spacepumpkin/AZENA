@@ -4,17 +4,24 @@ import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from "react-router-dom";
 import { AuthRoute, AuthLayout, ProtectedRoute, ProtectedLayout } from "../util/route_util";
 
-// Component Imports associated with Routes
+// import { } from '../actions/ui_actions'
+
+// * USER AUTH & SPLASH
 import SignupFormContainer from "./session/signup_form_container";
 import LoginFormContainer from "./session/login_form_container";
 import SplashContainer from "./splash/splash_container";
 // import MainContainer from "./main/main_container";
 
+// * OVERLAY COMPONENTS
 import SidebarContainer from "./sidebar/sidebar_container"; // always there
 import TopBarContainer from "./topbar/topbar_container";    // always there
+
+// * MAIN CONTENT
 import HomeContainer from "./home/home_container";
 import WorkspaceContainer from "./workspace/workspace_container";
 import ProjectListContainer from './projects/project_list_container';
+
+// * MODALS
 import ProjectCreateModalContainer from './projects/project_create_modal_container';
 import WorkspaceCreateModalContainer from './workspace/workspace_create_modal_container';
 import WorkspaceDeleteModal from './workspace/workspace_delete_modal';
@@ -22,13 +29,13 @@ import ProjectDeleteModal from './projects/project_delete_modal';
 
 import Feedback from './main/feedback';
 
-// AuthRoute / PreAuth - current user should not access - redirect to /home
-// ProtectedRoute / PostAuth - only current user can access - redirect to /
+// AuthRoute / PreAuth - current user should not access - redirect to "/home"
+// ProtectedRoute / PostAuth - only current user can access - redirect to "/"
 
 const App = function ({ui, entities}) {
   // console.log("rendering App...")
-  const { sidebarCollapse } = ui;
-  const { workspaces } = entities;
+  const { currentModal, items } = ui;
+  const { workspaces, projects } = entities;
   
   const [currentWorkspaceId, setCurrentWorkspaceId] = useState(-1);
   const [showProjectModal, toggleProjectModal] = React.useState(false);
@@ -52,8 +59,9 @@ const App = function ({ui, entities}) {
   return (
     <div id="main-wrapper">
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}
-      {/* Protected Routes */}
+
       <Feedback />
+      {/* Protected Routes */}
       <ProtectedLayout
         component={
           <div id="main">
@@ -62,6 +70,9 @@ const App = function ({ui, entities}) {
             {showProjectModal &&
               <ProjectCreateModalContainer workspaceId={currentWorkspaceId} workspace={currentWorkspace}
                 setCurrentWorkspaceId={setCurrentWorkspaceId} />
+            }
+            {currentModal === "Project Delete" &&
+              <ProjectDeleteModal />
             }
             <div id="mainbox">
               <Route path="/" render={(props) => (
@@ -104,5 +115,10 @@ const App = function ({ui, entities}) {
 };
 
 const mSP = function (state) { return state };
+// const mDP = function (dispatch) {
+//   return {
+
+//   };
+// };
 
 export default connect(mSP)(App);

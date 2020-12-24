@@ -106,7 +106,14 @@ export default class TopBar extends React.Component {
 
   openModal(modalType) {
     return (evt) => {
-      this.setState({ currentModal: modalType, showTitleMenu: false });
+      if (modalType === "Project Delete") {
+        let project = this.props.item;
+        this.props.setCurrentItems({ workspaceId: project.workspaceId, projectId: project.id });
+        this.props.setModal("Project Delete");
+      } else {
+        this.setState({ currentModal: modalType, showTitleMenu: false });
+      }
+
     }
   }
 
@@ -174,12 +181,12 @@ export default class TopBar extends React.Component {
                   closeModal={this.closeModal} />
                 // destroyWorkspace={this.props.destroyWorkspace} />
               }
-              {(pageType === "Project" && this.state.currentModal === "Project Delete") &&
+              {/* {(pageType === "Project" && this.state.currentModal === "Project Delete") &&
                 <ProjectDeleteModal
                   project={item}
                   closeModal={this.closeModal}
                 />
-              }
+              } */}
             </div>
           }
 
@@ -201,7 +208,7 @@ export default class TopBar extends React.Component {
               value={renderedTitle}
               onAnimationEnd={() => this.setState({ titleFlash: false })}
             />
-            { (pageType !== "Home") && <div id="header-description">{item.description}</div>}
+            {(pageType !== "Home") && <div id="header-description">{item.description}</div>}
           </div>
         </div>
 

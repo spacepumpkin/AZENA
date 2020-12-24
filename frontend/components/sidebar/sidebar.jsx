@@ -12,8 +12,6 @@ export default class Sidebar extends React.Component {
       plusMenuWorkspaceId: -1,
       plusMenuShow: false,
       showWkspDelModal: false,
-      activeProjectId: -1,
-      showProjDelModal: false
     }
     this.sidebarRenderCount = 0;
     this.sidebarDropdownRef = React.createRef();
@@ -23,7 +21,7 @@ export default class Sidebar extends React.Component {
     this.closeWkspDeleteModal = this.closeWkspDeleteModal.bind(this);
     this.openProjCreateModal = this.openProjCreateModal.bind(this);
     this.openProjDeleteModal = this.openProjDeleteModal.bind(this);
-    this.closeProjDeleteModal = this.closeProjDeleteModal.bind(this);
+    // this.closeProjDeleteModal = this.closeProjDeleteModal.bind(this);
     // this.handleDestroyWorkspace = this.handleDestroyWorkspace.bind(this);
   }
 
@@ -117,16 +115,27 @@ export default class Sidebar extends React.Component {
 
   openProjDeleteModal(projectId) {
     return (evt) => {
-      this.setState({ activeProjectId: projectId, showProjDelModal: true }, () => {
-        console.log("Opening ProjDelModal...", "activeProjectId: ", projectId, "showProjDelModal: ", this.state.showProjDelModal);
-      });
+      // console.log("Opening ProjDelModal...", "activeProjectId: ", projectId, "showProjDelModal: ", this.state.showProjDelModal);
+      // this.setState({ activeProjectId: projectId, showProjDelModal: true }, () => {
+      // });
+      // this.setState({ activeProjectId: projectId });
+      let project = this.props.projects[projectId];
+      // let workspaceId = project.workspaceId;
+      // const { currentWorkspaceId, currentProjectId } = this.props.currentItems;
+      this.props.setCurrentItems({ workspaceId: project.workspaceId, projectId: projectId });
+      this.props.setModal("Project Delete");
     }
   }
 
-  closeProjDeleteModal() {
-    console.log("Closing ProjDelModal...", "activeProjectId: ", this.state.activeProjectId, "showProjDelModal: ", this.state.showProjDelModal);
-    this.setState({ activeProjectId: -1, showProjDelModal: false });
-  }
+  // ! Refactored into ProjectDeleteModal
+  // closeProjDeleteModal() {
+  //   // console.log("Closing ProjDelModal...", "activeProjectId: ", this.state.activeProjectId, "showProjDelModal: ", this.state.showProjDelModal);
+  //   // this.setState({ activeProjectId: -1, showProjDelModal: false });
+  //   // this.setState({ activeProjectId: -1 });
+  //   let items = Object.assign({}, this.props.currentItems, { projectId: -1 });
+  //   this.props.setCurrentItems(items);
+  //   this.props.setModal(null);
+  // }
 
   // handleDestroyWorkspace(workspaceId) {
   //   this.props.destroyWorkspace(workspaceId);
@@ -139,14 +148,17 @@ export default class Sidebar extends React.Component {
       projects = {},
       toggleSidebar,
       sidebarCollapse,
-      currentUserId } = this.props;
+      currentUserId,
+      currentItems,
+      currentModal
+    } = this.props;
+
     const {
       activeWorkspaceId,
       plusMenuWorkspaceId,
       plusMenuShow,
       showWkspDelModal,
-      activeProjectId,
-      showProjDelModal } = this.state;
+    } = this.state;
     // 
 
     this.sidebarRenderCount += 1;
@@ -260,43 +272,19 @@ export default class Sidebar extends React.Component {
             closeModal={this.closeWkspDeleteModal} />
           // destroyWorkspace={this.props.destroyWorkspace} />
         }
-        { showProjDelModal &&
+        {/* { showProjDelModal &&
           <ProjectDeleteModal
             project={projects[activeProjectId]}
             closeModal={this.closeProjDeleteModal}
           />
-        }
+        } */}
+        {/* { currentModal === "Project Delete" &&
+          <ProjectDeleteModal
+            project={projects[currentItems.projectId]}
+            closeModal={this.closeProjDeleteModal}
+          />
+        } */}
       </>
     )
   }
 }
-
-// function WorkspaceDeleteModal({ workspace = { id: -1, name: "" }, toggleModal, destroyWorkspace}) {
-
-//   const deleteWorkspace = function(workspaceId) {
-//     toggleModal;
-//     destroyWorkspace(workspaceId);
-//   };
-
-//   return (
-//     <div className="workspace-modal">
-//       <div className="modal-backdrop"></div>
-//       <div id="workspace-delete-modal-box">
-//         <div className={`modal-close`} onClick={toggleModal}><span>Close</span></div>
-//         <h1>Delete <span>{workspace.name}</span> ?</h1>
-//         <p>
-//           If you delete this workspace, <span>all associated projects and tasks</span> will also be deleted and other members
-//           will no longer be able to access it.
-//         </p>
-//         <p>
-//           Are you sure?
-//         </p>
-//         <div className="modal-buttons">
-//           <button type="button" onClick={() => deleteWorkspace(workspace.id)}>Yes</button>
-//           <button type="button" onClick={toggleModal}>Cancel</button>
-//         </div>
-
-//       </div>
-//     </div>
-//   )
-// }

@@ -4,11 +4,9 @@ import { withRouter } from "react-router-dom";
 import TopBar from "./topbar";
 
 import { logout } from "../../actions/session_actions";
-import { setCurrentWorkspace, toggleSidebar } from "../../actions/ui_actions";
+import { setCurrentItems, setModal, toggleSidebar } from "../../actions/ui_actions";
 
 import { updateWorkspace } from '../../actions/workspace_actions';
-
-// ! Not tested yet
 import { updateProject } from '../../actions/project_actions';
 
 function getTopBarInfo(entities, pathname, dispatch) {
@@ -97,8 +95,9 @@ const mDP = function (dispatch, ownProps) {
   return {
     logout: () => dispatch(logout()),
     toggleSidebar: () => dispatch(toggleSidebar),
-    setCurrentWorkspaceId: ownProps.setCurrentWorkspaceId
-    // updateItem: updateItem
+    setCurrentWorkspaceId: ownProps.setCurrentWorkspaceId,
+    setCurrentItems: (items) => dispatch(setCurrentItems(items)),
+    setModal: (modalType) => dispatch(setModal(modalType))
   };
 };
 

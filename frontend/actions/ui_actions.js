@@ -1,5 +1,5 @@
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
-export const SET_CURRENT_WORKSPACE = "SET_CURRENT_WORKSPACE";
+export const SET_CURRENT_ITEMS = "SET_CURRENT_ITEMS";
 export const SET_MODAL = "SET_MODAL";
 
 // Click Toggle Sidebar
@@ -7,10 +7,12 @@ export const toggleSidebar = {
   type: TOGGLE_SIDEBAR
 };
 
-export const setCurrentWorkspace = function (workspaceId) {
+export const setCurrentItems = function ({ workspaceId, projectId }) {
   return {
-    type: SET_CURRENT_WORKSPACE,
-    workspaceId: workspaceId
+    type: SET_CURRENT_ITEMS,
+    workspaceId: workspaceId,
+    projectId: projectId
+    // items: items
   }
 };
 

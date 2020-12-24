@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createProject } from '../../actions/project_actions';
-import ProjectForm from './project_form';
+import ProjectCreateModal from './project_create_modal';
 
 const mSP = function ({errors}, ownProps) {
   // const workspaceId = parseInt(ownProps.match.params.workspaceId);
@@ -16,4 +16,4 @@ const mDP = function (dispatch) {
   }
 };
 
-export default withRouter(connect(mSP, mDP)(ProjectForm));
+export default withRouter(connect(mSP, mDP)(ProjectCreateModal));

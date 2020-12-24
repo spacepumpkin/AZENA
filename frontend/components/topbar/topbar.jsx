@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import WorkspaceDeleteModal from '../workspace/workspace_delete_modal';
+import ProjectDeleteModal from '../projects/project_delete_modal';
+
 export default class TopBar extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +11,8 @@ export default class TopBar extends React.Component {
       title: props.title,
       showTitleMenu: false,
       showUserMenu: false,
-      titleFlash: false
+      titleFlash: false,
+      currentModal: null
     }
 
     // Controlling title blur event
@@ -27,7 +31,9 @@ export default class TopBar extends React.Component {
     this.handleTitleUpdate = this.handleTitleUpdate.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMenuBlur = this.handleMenuBlur.bind(this);
-    // this.openUserMenu = this.openUserMenu.bind(this);
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -77,30 +83,6 @@ export default class TopBar extends React.Component {
     }
   }
 
-  handleClickOutside(evt) {
-    if (!!evt.relatedTarget || !this.userMenuRef.current.contains(evt.relatedTarget)) {
-
-    }
-  }
-
-  openUserMenu(evt) {
-
-    this.setState({ showUserMenu: true });
-    // let that = this;
-    // document.addEventListener("click", function clickOutside(evt) {
-    //   if (!that.userMenuRef.current.contains(evt.target)) {
-    //     that.setState({ showUserMenu: false });
-    //   }
-    //   document.removeEventListener("click", clickOutside, false);
-    // });
-    // document.addEventListener("keydown", function escapeKey(evt) {
-    //   if (evt.key === "Escape") {
-    //     that.setState({ showUserMenu: false });
-    //   }
-    //   document.removeEventListener("keydown", escapeKey, false);
-    // });
-  }
-
   handleMenuBlur(evt) {
     // Will close the title menu and/or user menu dropdowns if we blur away or press Esc
     if (this.state.showUserMenu || this.state.showTitleMenu) {
@@ -109,17 +91,27 @@ export default class TopBar extends React.Component {
           !this.userMenuRef.current.contains(evt.relatedTarget) ||
           !this.titleMenuRef.current.contains(evt.relatedTarget) ||
           evt.relatedTarget.id !== "user-avatar-button" ||
-          evt.relatedTarget.id !== "title-menu-button" ) {
-          console.log("Blurred");
+          evt.relatedTarget.id !== "title-menu-button") {
+
           this.setState({ showUserMenu: false, showTitleMenu: false });
         }
       } else if (evt.nativeEvent.type === "keydown") {
         if (evt.key === "Escape") {
-          console.log("Escaped");
+
           this.setState({ showUserMenu: false, showTitleMenu: false });
         }
       }
     }
+  }
+
+  openModal(modalType) {
+    return (evt) => {
+      this.setState({ currentModal: modalType, showTitleMenu: false });
+    }
+  }
+
+  closeModal() {
+    this.setState({ currentModal: null });
   }
 
   render() {
@@ -131,14 +123,16 @@ export default class TopBar extends React.Component {
       title: propsTitle,
       item,
       user,
-      setCurrentWorkspaceId } = this.props;
+      setCurrentWorkspaceId
+    } = this.props;
     const { title: stateTitle, showUserMenu, showTitleMenu, titleFlash } = this.state; // Will change based on route
-    // console.log("propsTitle: ", propsTitle, "stateTitle: ", stateTitle);
     const renderedTitle = stateTitle;
 
+    // Adjusting class of title depending on whether it's editable
     const titleClassName = titleFlash ? ["header-title title-flash"] : ["header-title"];
     if (pageType !== "Home" && isCreator) titleClassName.push("title-editable");
 
+    // Counting Renders
     this.topbarRenderCount += 1;
     console.log("topbar render count: ", this.topbarRenderCount);
 
@@ -165,15 +159,27 @@ export default class TopBar extends React.Component {
                 {pageType === "Workspace" &&
                   <>
                     <div className="sliding-menu-item" onClick={() => setCurrentWorkspaceId(item.id)}>Create Project</div>
-                    <div className="sliding-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Workspace</Link></div>
+                    <div className="sliding-menu-item" onClick={this.openModal("Workspace Delete")}>Delete Workspace</div>
                   </>
                 }
                 {pageType === "Project" &&
                   <>
-                    <div className="sliding-menu-item" onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}><Link to="/home">Delete Project</Link></div>
+                    <div className="sliding-menu-item" onClick={this.openModal("Project Delete")}>Delete Project</div>
                   </>
                 }
               </div>
+              {(pageType === "Workspace" && this.state.currentModal === "Workspace Delete") &&
+                <WorkspaceDeleteModal
+                  workspace={item}
+                  closeModal={this.closeModal} />
+                // destroyWorkspace={this.props.destroyWorkspace} />
+              }
+              {(pageType === "Project" && this.state.currentModal === "Project Delete") &&
+                <ProjectDeleteModal
+                  project={item}
+                  closeModal={this.closeModal}
+                />
+              }
             </div>
           }
 
@@ -199,11 +205,10 @@ export default class TopBar extends React.Component {
         </div>
 
         <div id="topbar-user">
-          {/* User Settings + TaskSearch + Global Actions */}
+          {/* User Settings + Global Actions */}
           <div id="user-avatar">
             <button id="user-avatar-button" type="button"
               onClick={() => this.setState({ showUserMenu: !showUserMenu })}
-              // onClick={this.openUserMenu}
               onBlur={this.handleMenuBlur}
               onKeyDown={this.handleMenuBlur}
             >
@@ -215,7 +220,6 @@ export default class TopBar extends React.Component {
               <div className="sliding-menu-item" onClick={this.handleLogout}>Log Out</div>
             </div>
           </div>
-          {/* <button id="logout-button" type="button" onClick={this.handleLogout}>Log Out</button> */}
         </div>
       </div>
     )

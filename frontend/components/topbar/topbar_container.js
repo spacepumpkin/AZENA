@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import TopBar from "./topbar";
 
 import { logout } from "../../actions/session_actions";
-import { toggleSidebar } from "../../actions/ui_actions";
+import { setCurrentWorkspace, toggleSidebar } from "../../actions/ui_actions";
 
 import { updateWorkspace } from '../../actions/workspace_actions';
 
@@ -97,6 +97,7 @@ const mDP = function (dispatch, ownProps) {
   return {
     logout: () => dispatch(logout()),
     toggleSidebar: () => dispatch(toggleSidebar),
+    setCurrentWorkspaceId: ownProps.setCurrentWorkspaceId
     // updateItem: updateItem
   };
 };

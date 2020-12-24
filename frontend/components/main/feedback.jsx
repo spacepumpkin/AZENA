@@ -41,7 +41,7 @@ class Feedback extends React.Component {
         <div id="feedback-button" onClick={this.toggleModal}>Share Feedback <span>&#9787;</span></div>
         {showModal &&
           (
-            <div id="feedback-modal-wrapper" className={showModal ? "show" : undefined}>
+            <div className={`basic-modal-wrapper${showModal ? " show" : ""}`}>
               <div className="modal-backdrop"></div>
               <div id="feedback-modal-box">
                 <div className="modal-close" onClick={this.toggleModal}></div>

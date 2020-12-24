@@ -1,12 +1,14 @@
 import {
   TOGGLE_SIDEBAR,
-  SET_CURRENT_WORKSPACE
+  SET_CURRENT_WORKSPACE,
+  SET_MODAL
 } from "../../actions/ui_actions";
 
 const _defaultUI = {
   sidebarCollapse: false,
   darkTheme: false,
-  currentWorkspaceId: -1
+  currentWorkspaceId: -1,
+  modal: null
 };
 
 const uiReducer = function (oldState = _defaultUI, action) {
@@ -18,6 +20,8 @@ const uiReducer = function (oldState = _defaultUI, action) {
       return Object.assign({}, oldState, { sidebarCollapse: !oldState.sidebarCollapse });
     case SET_CURRENT_WORKSPACE:
       return Object.assign({}, oldState, { currentWorkspaceId: action.workspaceId });
+    case SET_MODAL:
+      return Object.assign({}, oldState, { modal: action.modalType });
     default:
       return oldState;
   }

@@ -216,7 +216,7 @@
   color: $primary;
 }
 
-@mixin basic-modal-wrapper {
+.basic-modal-wrapper {
   z-index        : 10;
   position       : fixed;
   display        : flex;
@@ -257,6 +257,7 @@
   top           : 25%;
   left          : 35%;
   animation     : show-modal 1s ease-in-out;
+  z-index: 2;
 }
 
 @mixin modal-text-input {
@@ -357,6 +358,7 @@
   left            : 0;
   right           : 0;
   background-color: rgba(128, 128, 128, 0.4);
+  z-index: 1;
 }
 
 @mixin sliding-menu {
@@ -364,7 +366,7 @@
   position        : absolute;
   background-color: white;
   color           : $surface--text;
-  border-radius   : 5%;
+  border-radius   : 10px;
   box-shadow      : 0 0 25px $lighter-gray;
   border          : 1px solid $light-gray;
   opacity         : 0;

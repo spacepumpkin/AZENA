@@ -15,8 +15,10 @@ import TopBarContainer from "./topbar/topbar_container";    // always there
 import HomeContainer from "./home/home_container";
 import WorkspaceContainer from "./workspace/workspace_container";
 import ProjectListContainer from './projects/project_list_container';
-import ProjectFormContainer from './projects/project_form_container';
+import ProjectCreateModalContainer from './projects/project_create_modal_container';
 import WorkspaceCreateModalContainer from './workspace/workspace_create_modal_container';
+import WorkspaceDeleteModal from './workspace/workspace_delete_modal';
+import ProjectDeleteModal from './projects/project_delete_modal';
 
 import Feedback from './main/feedback';
 
@@ -58,7 +60,7 @@ const App = function ({ui, entities}) {
             <Route path="/" render={(props) => (
               <SidebarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)}/>
             {showProjectModal &&
-              <ProjectFormContainer workspaceId={currentWorkspaceId} workspace={currentWorkspace}
+              <ProjectCreateModalContainer workspaceId={currentWorkspaceId} workspace={currentWorkspace}
                 setCurrentWorkspaceId={setCurrentWorkspaceId} />
             }
             <div id="mainbox">
@@ -68,7 +70,7 @@ const App = function ({ui, entities}) {
                 <Switch>
                   <ProtectedRoute exact path="/home" component={HomeContainer} />
                   <Route exact path="/workspaces/new" component={WorkspaceCreateModalContainer} />
-                  {/* <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectFormContainer} /> */}
+                  {/* <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectCreateModalContainer} /> */}
                   <ProtectedRoute exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
                   {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
                   <ProtectedRoute exact path="/projects/:projectId(\d+)/list" component={ProjectListContainer} />

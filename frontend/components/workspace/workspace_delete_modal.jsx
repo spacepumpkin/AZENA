@@ -20,7 +20,7 @@ function WorkspaceDeleteModal(props) {
   };
 
   return (
-    <div className="workspace-modal">
+    <div className="basic-modal-wrapper">
       <div className="modal-backdrop"></div>
       <div id="workspace-delete-modal-box">
         <div className={`modal-close`} onClick={closeModal}><span>Close</span></div>

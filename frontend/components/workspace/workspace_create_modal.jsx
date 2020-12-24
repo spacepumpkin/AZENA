@@ -106,7 +106,7 @@ class WorkspaceCreateModal extends React.Component {
     console.log("workspace modal renders: ", this.renderCount);
 
     return (
-      <div className="workspace-modal">
+      <div className="basic-modal-wrapper">
         <div className="modal-backdrop"></div>
         <div className="workspace-modal-box">
           <div className="modal-close" onClick={this.handleClose}><span>Close</span></div>

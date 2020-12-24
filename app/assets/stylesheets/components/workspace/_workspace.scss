@@ -10,13 +10,13 @@
 #workspace-description {
 
   >textarea {
-    height     : 200px;
-    padding    : 4px;
+    height       : 200px;
+    padding      : 4px;
     border-radius: 5px;
-    border     : 1px solid transparent;
-    line-height: 1.5;
-    opacity    : 80%;
-    transition: all 0.3s ease 0s;
+    border       : 1px solid transparent;
+    line-height  : 1.5;
+    opacity      : 80%;
+    transition   : all 0.3s ease 0s;
 
     &:hover {
       opacity: 100%;

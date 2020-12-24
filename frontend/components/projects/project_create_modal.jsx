@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 
-const ProjectForm = function (props) {
+const ProjectCreateModal = function (props) {
   const {
     workspace,
     workspaceId,
@@ -14,12 +14,6 @@ const ProjectForm = function (props) {
 
   // For checking if name input is blank
   // const nameRef = useRef(null);
-
-  // function handleFocus(inputId) {
-  //   return (evt) => {
-  //     activeInput(inputId);
-  //   }
-  // }
 
   function handleClose() {
     setCurrentWorkspaceId(-1);
@@ -61,8 +55,24 @@ const ProjectForm = function (props) {
     })
   }
 
+  // Trying to autofocus name input with useCallback
+  const focusRef = useCallback(inputElm => {
+    // debugger // only works with debugger??
+    if (inputElm) { inputElm.focus() };
+  }, []);
+
+
+  // Second try with useEffect
+  // const focusRef = useRef(null);
+  // useEffect(() => {
+  //   debugger // only works with debugger??
+  //   if (focusRef.current) {
+  //     focusRef.current.focus();
+  //   }
+  // }, []);
+
   return (
-    <div id="project-form-modal">
+    <div className="basic-modal-wrapper">
       <div className="modal-backdrop"></div>
       <div id="project-form-box">
         <div className="modal-close" onClick={handleClose}><span>Close</span></div>
@@ -70,7 +80,7 @@ const ProjectForm = function (props) {
         <form id="project-form" onSubmit={handleSubmit}>
           <label>
             Project Name
-              <input type="text" name="name" placeholder="e.g. World Domination" />
+              <input type="text" name="name" placeholder="e.g. World Domination" ref={focusRef} />
           </label>
           <div className="error-message">{nameErrors.join(", ")}</div>
 
@@ -90,4 +100,4 @@ const ProjectForm = function (props) {
   )
 }
 
-export default ProjectForm;
+export default ProjectCreateModal;

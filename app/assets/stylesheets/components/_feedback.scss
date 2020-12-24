@@ -34,15 +34,16 @@
   }
 }
 
-#feedback-modal-wrapper {
-  @include basic-modal-wrapper;
-  // display: none;
-  z-index: 2;
+// Use .basic-modal-wrapper now
+// #feedback-modal-wrapper {
+//   @include basic-modal-wrapper;
+//   // display: none;
+//   // z-index: 2;
 
-  // .show {
-  //   display: flex;
-  // }
-}
+//   // .show {
+//   //   display: flex;
+//   // }
+// }
 
 #feedback-modal-box {
   @include modal-box;

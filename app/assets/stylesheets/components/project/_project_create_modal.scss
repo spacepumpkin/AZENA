@@ -1,18 +1,19 @@
-#project-form-modal {
-  @include basic-modal-wrapper;
-  // position: absolute;
-  // height  : 100%;
-  // width   : 100%;
-  // z-index : 10;
-  // top     : 0;
-}
+// Use .basic-modal-wrapper now
+// #project-form-modal {
+//   @include basic-modal-wrapper;
+//   // position: absolute;
+//   // height  : 100%;
+//   // width   : 100%;
+//   // z-index : 10;
+//   // top     : 0;
+// }
 
 #project-form-box {
   @include modal-box;
-  margin    : 0 auto;
-  // padding: 20em;
   width: 320px;
-  animation : show-modal 1s ease-in-out;
+  // margin    : 0 auto;
+  // padding: 20em;
+  // animation : show-modal 1s ease-in-out;
 
   >h1 {
     color        : $darkgray;

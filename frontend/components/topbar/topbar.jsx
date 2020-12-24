@@ -201,6 +201,7 @@ export default class TopBar extends React.Component {
               value={renderedTitle}
               onAnimationEnd={() => this.setState({ titleFlash: false })}
             />
+            { (pageType !== "Home") && <div id="header-description">{item.description}</div>}
           </div>
         </div>
 

@@ -22,7 +22,7 @@ import WorkspaceContainer from "./workspace/workspace_container";
 import ProjectListContainer from './projects/project_list_container';
 
 // * MODALS
-import ProjectCreateModalContainer from './projects/project_create_modal_container';
+import ProjectCreateModal from './projects/project_create_modal';
 import WorkspaceCreateModalContainer from './workspace/workspace_create_modal_container';
 import WorkspaceDeleteModal from './workspace/workspace_delete_modal';
 import ProjectDeleteModal from './projects/project_delete_modal';
@@ -32,22 +32,22 @@ import Feedback from './main/feedback';
 // AuthRoute / PreAuth - current user should not access - redirect to "/home"
 // ProtectedRoute / PostAuth - only current user can access - redirect to "/"
 
-const App = function ({ui, entities}) {
+const App = function ({ ui, entities }) {
   // console.log("rendering App...")
   const { currentModal, items } = ui;
   const { workspaces, projects } = entities;
-  
+
   const [currentWorkspaceId, setCurrentWorkspaceId] = useState(-1);
   const [showProjectModal, toggleProjectModal] = React.useState(false);
   // let showProjectModal = false;
-  const [currentWorkspace, setCurrentWorkspace] = useState({name: ""});
+  const [currentWorkspace, setCurrentWorkspace] = useState({ name: "" });
 
   useEffect(() => {
     if (currentWorkspaceId !== -1) {
       setCurrentWorkspace(workspaces[currentWorkspaceId]);
       toggleProjectModal(true);
     } else {
-      setCurrentWorkspace({name: ""});
+      setCurrentWorkspace({ name: "" });
       toggleProjectModal(false);
     }
 
@@ -66,30 +66,24 @@ const App = function ({ui, entities}) {
         component={
           <div id="main">
             <Route path="/" render={(props) => (
-              <SidebarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)}/>
-            {showProjectModal &&
-              <ProjectCreateModalContainer workspaceId={currentWorkspaceId} workspace={currentWorkspace}
-                setCurrentWorkspaceId={setCurrentWorkspaceId} />
-            }
-            {currentModal === "Project Delete" &&
-              <ProjectDeleteModal />
-            }
-            {currentModal === "Workspace Delete" &&
-              <WorkspaceDeleteModal />
-            }
+              <SidebarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)} />
+
+            {/* MODALS */}
+            {currentModal === "Project Create" && <ProjectCreateModal />}
+            {currentModal === "Project Delete" && <ProjectDeleteModal />}
+            {currentModal === "Workspace Delete" && <WorkspaceDeleteModal />}
+
             <div id="mainbox">
               <Route path="/" render={(props) => (
                 <TopBarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)} />
               <div id="main-content">
                 <Switch>
-                  <ProtectedRoute exact path="/home" component={HomeContainer} />
+                  <Route exact path="/home" component={HomeContainer} />
                   <Route exact path="/workspaces/new" component={WorkspaceCreateModalContainer} />
                   {/* <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectCreateModalContainer} /> */}
-                  <ProtectedRoute exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
+                  <Route exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
                   {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
-                  <ProtectedRoute exact path="/projects/:projectId(\d+)/list" component={ProjectListContainer} />
-                  {/* <ProtectedRoute exact path="/test1" component={MainContainer} />
-        <ProtectedRoute exact path="/test2" component={MainContainer} /> */}
+                  <Route exact path="/projects/:projectId(\d+)/list" component={ProjectListContainer} />
                   <Redirect to="/home" />
                   {/* <Route path="/" render={() => <div>Page Not Found</div>} /> */}
                 </Switch>

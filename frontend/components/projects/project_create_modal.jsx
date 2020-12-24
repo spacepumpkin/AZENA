@@ -1,12 +1,35 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { createProject } from '../../actions/project_actions';
+import { setCurrentItems, setModal } from '../../actions/ui_actions';
+
+const mSP = function ({ entities, ui, errors }) {
+  // const workspaceId = parseInt(ownProps.match.params.workspaceId);
+  return {
+    projectErrors: errors.projects,
+    workspace: entities.workspaces[ui.currentItems.workspaceId]
+  }
+};
+
+const mDP = function (dispatch) {
+  return {
+    createProject: (project) => dispatch(createProject(project)),
+    setModal: (modalType) => dispatch(setModal(modalType)),
+    setCurrentItems: (items) => dispatch(setCurrentItems(items))
+  }
+};
+
 const ProjectCreateModal = function (props) {
   const {
     workspace,
-    workspaceId,
-    setCurrentWorkspaceId,
+    // workspaceId,
+    // setCurrentWorkspaceId,
     projectErrors,
     createProject,
+    setModal,
+    setCurrentItems,
     history
   } = props;
   // const [name, setName] = React.useState("");
@@ -15,23 +38,28 @@ const ProjectCreateModal = function (props) {
   // For checking if name input is blank
   // const nameRef = useRef(null);
 
-  function handleClose() {
-    setCurrentWorkspaceId(-1);
+  function closeModal() {
+    // setCurrentWorkspaceId(-1);
+    setModal(null);
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
     const data = new FormData(evt.target);
     for (let [inputName, inputValue] of data.entries()) {
       console.log(`${inputName}: "${inputValue}"`);
     }
+
     createProject({
       name: data.get("name"),
       description: data.get("description"),
-      workspaceId: workspaceId
+      workspaceId: workspace.id
     }).then(({ project }) => {
-      history.push(`/projects/${project.id}/list`)
-      setCurrentWorkspaceId(-1);
+      history.push(`/projects/${project.id}/list`);
+      setCurrentItems({ workspaceId: workspace.id, projectId: project.id });
+      setModal(null);
+      // setCurrentWorkspaceId(-1);
     }, ({errors}) => {
       console.log("Project has errors: ", errors);
     });
@@ -75,7 +103,7 @@ const ProjectCreateModal = function (props) {
     <div className="basic-modal-wrapper">
       <div className="modal-backdrop"></div>
       <div id="project-form-box">
-        <div className="modal-close" onClick={handleClose}><span>Close</span></div>
+        <div className="modal-close" onClick={closeModal}><span>Close</span></div>
         <h1>Create a New Project within <span>{workspace.name}</span></h1>
         <form id="project-form" onSubmit={handleSubmit}>
           <label>
@@ -100,4 +128,4 @@ const ProjectCreateModal = function (props) {
   )
 }
 
-export default ProjectCreateModal;
+export default withRouter(connect(mSP, mDP)(ProjectCreateModal));

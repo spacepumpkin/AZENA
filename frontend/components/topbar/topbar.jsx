@@ -104,17 +104,24 @@ export default class TopBar extends React.Component {
 
   openModal(modalType) {
     return (evt) => {
-      if (modalType === "Project Delete") {
-        let project = this.props.item;
-        this.props.setCurrentItems({ workspaceId: project.workspaceId, projectId: project.id });
-        this.props.setModal(modalType);
-      } else if (modalType === "Workspace Delete") {
-        // this.setState({ currentModal: modalType, showTitleMenu: false });
-        let workspace = this.props.item;
-        this.props.setCurrentItems({ workspaceId: workspace.id, projectId: -1 });
-        this.props.setModal(modalType);
+      switch (modalType) {
+        case "Project Delete":
+          let project = this.props.item;
+          this.props.setCurrentItems({ workspaceId: project.workspaceId, projectId: project.id });
+          this.props.setModal(modalType);
+          break;
+        case "Workspace Delete":
+          // this.setState({ currentModal: modalType, showTitleMenu: false });
+          this.props.setCurrentItems({ workspaceId: this.props.item.id, projectId: -1 });
+          this.props.setModal(modalType);
+          break;
+        case "Project Create":
+          this.props.setCurrentItems({ workspaceId: this.props.item.id, projectId: -1 });
+          this.props.setModal(modalType);
+        break;
+        default:
+          break;
       }
-
     }
   }
 
@@ -162,7 +169,7 @@ export default class TopBar extends React.Component {
               <div className={`title-sliding-menu${showTitleMenu ? " show-sliding-menu" : ""}`} ref={this.titleMenuRef}>
                 {pageType === "Workspace" &&
                   <>
-                    <div className="sliding-menu-item" onClick={() => setCurrentWorkspaceId(item.id)}>Create Project</div>
+                    <div className="sliding-menu-item" onClick={this.openModal("Project Create")}>Create Project</div>
                     <div className="sliding-menu-item" onClick={this.openModal("Workspace Delete")}>Delete Workspace</div>
                   </>
                 }

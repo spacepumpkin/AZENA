@@ -96,7 +96,7 @@ export default class SessionForm extends React.Component {
         count++;
       }
     };
-    this.demo = setInterval(() => demoAutoFill(demoUser, formType), 100);
+    this.demo = setInterval(() => demoAutoFill(demoUser, formType), 80);
   }
 
   render() {

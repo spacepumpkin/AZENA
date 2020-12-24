@@ -22,7 +22,7 @@ const mDP = function (dispatch) {
 function ProjectDeleteModal(props) {
 
   // const { project = { id: -1, name: "" }, closeModal, destroyProject } = props;
-  const { project = { id: -1, name: "" }, currentItems, setCurrentItems, setModal, destroyProject, match } = props;
+  const { project = { id: -1, name: "" }, currentItems, setCurrentItems, setModal, destroyProject, history, location } = props;
 
   const closeModal = function () {
     let items = Object.assign({}, currentItems, { projectId: -1 });
@@ -32,10 +32,13 @@ function ProjectDeleteModal(props) {
 
   const deleteProject = function (projectId) {
     closeModal();
-    destroyProject(projectId).then(() => {
+    destroyProject(projectId).then((res) => {
       console.log(`Project #${projectId} destroyed`);
-      console.log(`Currently at ${match.path}`);
-      debugger
+      let path = location.pathname;
+      let onProjectPage = path.split("/").includes("projects");
+      if (onProjectPage && parseInt(path.replace(/\D/g, '')) === res.project.id) {
+        history.push(`/workspaces/${res.project.workspaceId}`);
+      }
     });
   };
 

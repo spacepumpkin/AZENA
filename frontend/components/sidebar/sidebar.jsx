@@ -53,7 +53,7 @@ export default class Sidebar extends React.Component {
         // else stop and let click handler go
         if (evt.relatedTarget === null
           || (
-            evt.relatedTarget.classList[0] !== "sidebar-workspace-plus"
+            evt.relatedTarget.classList[0] !== "plus-button"
             && evt.relatedTarget.classList[0] !== "sidebar-workspace-title"
             && that.sidebarDropdownRef && that.sidebarDropdownRef.current && !that.sidebarDropdownRef.current.contains(evt.relatedTarget)
           )
@@ -153,7 +153,7 @@ export default class Sidebar extends React.Component {
               >
                 {workspace.name}
               </Link>
-              <button className={`workspace-plus ${(showMenu) ? "rotated-plus" : ""}`}
+              <button className={`plus-button ${(showMenu) ? "rotated-plus" : ""}`}
                 onClick={this.showPlusMenu(workspace.id)} type="button"
                 tabIndex="0"
                 onBlur={this.showPlusMenu()} />
@@ -168,7 +168,7 @@ export default class Sidebar extends React.Component {
                     (
                       <div className="sidebar-workspace-project" key={`project-${project.id}`}>
                         <Link to={`/projects/${project.id}/list`} ><span></span>&nbsp;{project.name}</Link>
-                        <button className={`workspace-plus`} type="button"
+                        <button className={`plus-button`} type="button"
                           onClick={this.openProjDeleteModal(project.id)}
                         />
                       </div>

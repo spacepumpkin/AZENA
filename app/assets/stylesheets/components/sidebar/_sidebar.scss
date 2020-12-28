@@ -163,7 +163,7 @@ button.collapsed {
 }
 
 // .sidebar-workspace-plus {
-//   @include workspace-plus;
+//   @include plus-button;
 // }
 
 .sidebar-workspace-plus-menu {
@@ -254,7 +254,7 @@ button.collapsed {
     }
   }
 
-  >.workspace-plus {
+  >.plus-button {
     float: right;
     display: none;
     transform: rotate(45deg);

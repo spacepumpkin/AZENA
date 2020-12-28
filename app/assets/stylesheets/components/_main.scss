@@ -5,6 +5,7 @@ $sidebar-padding : 15px;
 $sidebar-width   : 260px;
 // $mainbox-width: 100%;
 $mainbox-width   : calc(100vw - #{$sidebar-width});
+$main-content-padding : 50px;
 $main-padding-top: 15px;
 
 #main-wrapper {

@@ -29,9 +29,9 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators }) 
           <tr className="table-headings">
             <th>Task</th>
             <th>Description</th>
+            <th>Due Date</th>
             <th>Workspace</th>
             <th>Project</th>
-            <th>Due Date</th>
             <th>Created By</th>
           </tr>
         </thead>

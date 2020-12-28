@@ -49,7 +49,7 @@ export default class Home extends React.Component {
                     <Link to={`/workspaces/${workspace.id}`} className="home-workspace-title">
                       {workspace.name}
                     </Link>
-                    <button className={`workspace-plus ${(showMenu) ? "rotated-plus" : ""}`}
+                    <button className={`plus-button ${(showMenu) ? "rotated-plus" : ""}`}
                       onClick={this.showPlusMenu(workspace.id)} type="button" />
                   </div>
 

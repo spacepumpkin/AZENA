@@ -40,5 +40,6 @@ class Task < ApplicationRecord
   # A Task can belong to 1 Section (in 1 Project)
   belongs_to :section,
     foreign_key: :section_id,
-    class_name: :Section
+    class_name: :Section,
+    optional: true
 end

@@ -1,6 +1,7 @@
 import {
   RECEIVE_TASK,
-  REMOVE_TASK
+  REMOVE_TASK,
+  TOGGLE_DONE
 } from "../../actions/task_actions";
 import { RECEIVE_CURRENT_USER } from "../../actions/session_actions";
 import {
@@ -27,6 +28,9 @@ const tasksReducer = function (oldState = {}, action) {
       return newState;
     case UPDATE_SECTION_TASKS:
       action.tasks.forEach(task => newState[task.id].sectionId = null)
+      return newState;
+    case TOGGLE_DONE:
+      newState[action.task.id] = action.task;
       return newState;
     default:
       return oldState;

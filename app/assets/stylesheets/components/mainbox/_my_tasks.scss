@@ -27,8 +27,20 @@ td, th {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-td >span {
-  margin: 0 6px;
+// td >span {
+//   margin: 0 6px;
+// }
+
+.my-tasks-table-row > td:first-child {
+  display: flex;
+  align-items: center;
+
+}
+
+.task-check-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .task-name-input {

@@ -23,7 +23,7 @@ class Api::TasksController < ApplicationController
     if @task.update(task_params)
       render :show #, status: 200
     else
-      render json: ["Task could not be updated"], status: 422
+      render json: @task.errors.full_messages, status: 422
     end
   end
 
@@ -60,6 +60,6 @@ class Api::TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :due_date, :project_id)
+    params.require(:task).permit(:name, :description, :due_date, :project_id, :section_id, :order, :done)
   end
 end

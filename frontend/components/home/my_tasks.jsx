@@ -1,62 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
+import TaskRow from './task_row';
+
 function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators }) {
 
-  // const [] = useState()
-  const handleKeyDown = function(evt) {
-    if (evt.key === "Enter" || evt.keyCode === 13) {
-      evt.preventDefault();
-      evt.target.blur();
-    }
-  };
-
-  // const handleBlur = function(evt) {
-
-  // };
-  
   const taskRows = [];
   for (let i = 0; i < assignedTasks.length; i++) {
-    let assignedTask = assignedTasks[i];
 
     taskRows.push(
-      <tr className="my-tasks-table-row" key={`task-${assignedTask.id}`}>
-        <td>
-          <span>Done?</span>
-          <input className={`task-name-input`}
-            type="text"
-            onKeyDown={handleKeyDown}
-            // onChange={handleTitleChange}
-            // onBlur={handleTaskUpdate}
-            // ref={this.taskInput}
-            autoComplete="off" autoCorrect="off" autoCapitalize="off"
-            spellCheck="false"
-            disabled={false}
-            defaultValue={assignedTask.name}
-            // onAnimationEnd={() => this.setState({ titleFlash: false })}
-          />
-        </td>
-        <td><div>{assignedTask.description}</div></td>
-        <td><div>{taskWorkspaces[i].name}</div></td>
-        <td><div>{taskProjects[i].name}</div></td>
-        <td>{assignedTask.dueDate}</td>
-        <td>{taskCreators[i].username}</td>
-      </tr>
+      <TaskRow 
+        key={`task-${assignedTasks[i].id}`}
+        task={assignedTasks[i]}
+        workspaceName={taskWorkspaces[i].name}
+        projectName={taskProjects[i].name}
+        creatorName={taskCreators[i].username}
+      />
     )
   }
-
-  // const taskRows = assignedTasks.map( task => {
-  //   return (
-  //     <tr>
-  //       <td>{task.name}</td>
-  //       <td>{task.description}</td>
-  //       <td>workspace</td>
-  //       <td>{task.name}</td>
-  //       <td>{task.dueDate}</td>
-  //       <td>{users[task.creatorId]}</td>
-  //     </tr>
-  //   )
-  // })
 
   return (
     <div id="my-tasks">

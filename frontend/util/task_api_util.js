@@ -32,7 +32,7 @@ export const updateTask = (task) => {
   return $.ajax({
     url: `/api/tasks/${task.id}`,
     method: "PATCH",
-    data: { task: { name: task.name, description: task.description, due_date: task.dueDate } }
+    data: { task: { name: task.name, description: task.description, due_date: task.dueDate, done: task.done } }
   })
 }
 

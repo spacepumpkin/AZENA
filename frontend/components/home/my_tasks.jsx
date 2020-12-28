@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
 function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators }) {
 
+  // const [] = useState()
+  const handleKeyDown = function(evt) {
+    if (evt.key === "Enter" || evt.keyCode === 13) {
+      evt.preventDefault();
+      evt.target.blur();
+    }
+  };
+
+  // const handleBlur = function(evt) {
+
+  // };
+  
   const taskRows = [];
   for (let i = 0; i < assignedTasks.length; i++) {
     let assignedTask = assignedTasks[i];
 
     taskRows.push(
       <tr className="my-tasks-table-row" key={`task-${assignedTask.id}`}>
-        <td><span>Done?</span>{assignedTask.name}</td>
-        <td>{assignedTask.description}</td>
-        <td>{taskWorkspaces[i].name}</td>
-        <td>{taskProjects[i].name}</td>
+        <td>
+          <span>Done?</span>
+          <input className={`task-name-input`}
+            type="text"
+            onKeyDown={handleKeyDown}
+            // onChange={handleTitleChange}
+            // onBlur={handleTaskUpdate}
+            // ref={this.taskInput}
+            autoComplete="off" autoCorrect="off" autoCapitalize="off"
+            spellCheck="false"
+            disabled={false}
+            defaultValue={assignedTask.name}
+            // onAnimationEnd={() => this.setState({ titleFlash: false })}
+          />
+        </td>
+        <td><div>{assignedTask.description}</div></td>
+        <td><div>{taskWorkspaces[i].name}</div></td>
+        <td><div>{taskProjects[i].name}</div></td>
         <td>{assignedTask.dueDate}</td>
         <td>{taskCreators[i].username}</td>
       </tr>
@@ -49,14 +75,14 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators }) 
           </tr>
         </thead>
         <tbody>
-          { taskRows }
+          {taskRows}
         </tbody>
       </table>
     </div>
   )
 }
 
-const mSP = function ({entities, session}) {
+const mSP = function ({ entities, session }) {
   const { tasks, usersTasks, projects, workspaces, users } = entities;
   let assignedUsersTasks = Object.values(usersTasks).filter((usersTask) => usersTask.userId === session.id);
   let assignedTasks = [];
@@ -66,7 +92,7 @@ const mSP = function ({entities, session}) {
   let taskProjects = assignedTasks.map(task => projects[task.projectId]); // Array of respective projects
   let taskWorkspaces = taskProjects.map(project => workspaces[project.workspaceId]); // Array of respective workspaces
   let taskCreators = assignedTasks.map(task => users[task.creatorId]);
-  
+
   return {
     allTasks: tasks,
     assignedTasks: assignedTasks,

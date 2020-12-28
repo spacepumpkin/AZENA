@@ -57,12 +57,19 @@ function getTopBarInfo(entities, pathname, dispatch) {
         updateItem: (project) => dispatch(updateProject(project))
       }
     }
+  } else if (pathname === "/mytasks") {
+    return {
+      title: "My Tasks",
+      pageType: "Home",
+      item: { id: null, name: null, description: null, creatorId: null },
+      updateItem: () => console.log("Cannot update title, currently in My Tasks page.")
+    }
   } else {
     return {
       title: "Home",
       pageType: "Home",
       item: { id: null, name: null, description: null, creatorId: null },
-      updateItem: () => console.log("Cannot update, currently in Home page.")
+      updateItem: () => console.log("Cannot update title, currently in Home page.")
     }
   }
 }

@@ -210,7 +210,7 @@ export default class Sidebar extends React.Component {
           </div>
           <div id="sidebar-links">
             <Link to="/home"><img className="sidebar-icon" src={window.homeIcon} alt="homeicon" />&nbsp; Home </Link>
-            <Link to="/home"><img className="sidebar-icon" src={window.checkCircle} alt="taskicon" />&nbsp; My Tasks </Link>
+            <Link to="/mytasks"><img className="sidebar-icon" src={window.checkCircle} alt="taskicon" />&nbsp; My Tasks </Link>
           </div>
           <div id="sidebar-workspaces">
             <h1>My Workspaces</h1>

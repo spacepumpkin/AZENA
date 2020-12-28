@@ -18,7 +18,9 @@ export default function TaskRow({task, workspaceName, projectName, creatorName})
     }
   };
 
-  const checkIcon = task.done ? window.checkCircle : window.checkCircleOutline;
+  // const checkIcon = task.done ? window.checkCircle : window.checkCircleOutline;
+  const checkIconClasses = task.done ? "task-check-icon task-done" : "task-check-icon";
+  const taskNameClasses = task.done ? "task-name-input task-done" : "task-name-input";
 
   const toggleCheck = function() {
     const updatedTask = Object.assign({}, task, { done: !task.done });
@@ -29,8 +31,9 @@ export default function TaskRow({task, workspaceName, projectName, creatorName})
   return (
     <tr className="my-tasks-table-row">
       <td>
-        <img className="task-check-icon" src={checkIcon} onClick={toggleCheck} alt="task-check-icon" />
-        <input className={`task-name-input`}
+        {/* <img className={checkIconClasses} src={checkIcon} onClick={toggleCheck} alt="task-check-icon" /> */}
+        <button className={checkIconClasses} onClick={toggleCheck} type="button" />
+        <input className={taskNameClasses}
           type="text"
           onKeyDown={handleKeyDown}
           // onChange={handleTitleChange}
@@ -42,6 +45,8 @@ export default function TaskRow({task, workspaceName, projectName, creatorName})
           defaultValue={task.name}
         // onAnimationEnd={() => this.setState({ titleFlash: false })}
         />
+        {/* <button className={"task-delete"} type="button" /> */}
+        <div className="task-delete"></div>
       </td>
       <td><div>{task.description}</div></td>
       <td><div>{workspaceName}</div></td>

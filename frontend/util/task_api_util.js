@@ -31,7 +31,13 @@ export const createTask = (task) => {
 export const updateTask = (task) => {
   console.log(`updating task #${task.id}...`);
   let updatedTask = {};
-  for (let field in task) { updatedTask[field] = task[field] }
+  for (let field in task) { 
+    if (field === "dueDate") {
+      updatedTask["due_date"] = task[field]
+    } else {
+      updatedTask[field] = task[field] 
+    }
+  }
 
   return $.ajax({
     url: `/api/tasks/${task.id}`,

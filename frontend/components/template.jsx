@@ -43,7 +43,6 @@ export default connect(mSP, mDP)(Blank);
 */
 
 export const createBlank = (blank) => {
-  // console.log(`creating new blank...`);
   return $.ajax({
     url: `/api/blanks`,
     method: "POST",
@@ -71,7 +70,6 @@ export const RECEIVE_BLANK = "RECEIVE_BLANK";
 export const RECEIVE_BLANK_ERRORS = "RECEIVE_BLANK_ERRORS";
 
 const receiveBlank = function (blank) {
-  // console.log("receiving blank");
   return {
     type: RECEIVE_BLANK,
     blank
@@ -79,7 +77,6 @@ const receiveBlank = function (blank) {
 }
 
 const receiveBlankErrors = function (errors) {
-  // console.log("receiving blank errors");
   return {
     type: RECEIVE_BLANK_ERRORS,
     errors
@@ -90,7 +87,6 @@ const receiveBlankErrors = function (errors) {
 
 export const createBlank = function (blank) {
   return function (dispatch) {
-    // console.log("dispatching createBlank");
     return (
       BlankApiUtil.createBlank(blank)
         .then(
@@ -111,7 +107,6 @@ const blanksReducer = function (oldState = {}, action) {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_BLANK:
-      // console.log(`receiving blank (blanksReducer)`)
       return Object.assign({}, oldState, action.blank);
     default:
       return oldState;

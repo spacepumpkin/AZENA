@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // const applyTheme = function(theme) {
   //   if (document.body.className !== theme) { 
   //     document.body.className = theme;
-  //     console.log(`switched to ${theme}`);
   //   }
   // };
   

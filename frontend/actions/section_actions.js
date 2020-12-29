@@ -55,7 +55,6 @@ const updateSectionTasks = function (tasks) {
 // Test Status - 
 export const createSection = function (section) {
   return function (dispatch) {
-    // console.log("dispatching createSection");
     return (
       SectionApiUtil.createSection(section)
         .then(
@@ -69,7 +68,6 @@ export const createSection = function (section) {
 // Test Status - 
 export const updateSection = function (section) {
   return function (dispatch) {
-    // console.log("dispatching updateSection");
     return (
       SectionApiUtil.updateSection(section)
         .then(
@@ -83,7 +81,6 @@ export const updateSection = function (section) {
 // Test Status - 
 export const destroySection = function (sectionId, keepTasks) {
   return function (dispatch, getState) {
-    // console.log("dispatching destroySection");
     return (
       SectionApiUtil.destroySection(sectionId)
         .then(

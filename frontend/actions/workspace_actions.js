@@ -20,7 +20,6 @@ export const REMOVE_USERS_WORKSPACE = "REMOVE_USERS_WORKSPACE";
 // export const REMOVE_WORKSPACE_FROM_USER = "REMOVE_WORKSPACE_FROM_USER";
 
 const receiveUserWorkspaces = function(workspaces) {
-  // console.log("receiving user workspaces");
   return {
     type: RECEIVE_USER_WORKSPACES,
     workspaces
@@ -28,7 +27,6 @@ const receiveUserWorkspaces = function(workspaces) {
 }
 
 const receiveWorkspace = function(workspace) {
-  // console.log("receiving workspace");
   return {
     type: RECEIVE_WORKSPACE,
     workspace
@@ -36,7 +34,6 @@ const receiveWorkspace = function(workspace) {
 }
 
 export const receiveWorkspaceErrors = function(errors) {
-  // console.log("receiving workspace errors");
   return {
     type: RECEIVE_WORKSPACE_ERRORS,
     errors
@@ -71,7 +68,6 @@ const removeUsersWorkspace = function (usersWorkspace) {
 // PASS
 export const createWorkspace = function (workspace) {
   return function (dispatch) {
-    // console.log("dispatching createWorkspace");
     return (
       WorkspaceApiUtil.createWorkspace(workspace)
         .then(
@@ -85,7 +81,6 @@ export const createWorkspace = function (workspace) {
 // PASS
 export const fetchWorkspace = function (workspaceId) {
   return function (dispatch) {
-    // console.log("dispatching fetchWorkspace");
     return (
       WorkspaceApiUtil.fetchWorkspace(workspaceId)
         .then(
@@ -99,7 +94,6 @@ export const fetchWorkspace = function (workspaceId) {
 // PASS
 export const fetchUserWorkspaces = function () {
   return function (dispatch) {
-    // console.log("dispatching fetchUserWorkspaces");
     return (
       WorkspaceApiUtil.fetchUserWorkspaces()
         .then(
@@ -113,7 +107,6 @@ export const fetchUserWorkspaces = function () {
 // PASS
 export const updateWorkspace = function (workspace) {
   return function (dispatch) {
-    // console.log("dispatching updateWorkspace");
     return (
       WorkspaceApiUtil.updateWorkspace(workspace)
         .then(
@@ -127,7 +120,6 @@ export const updateWorkspace = function (workspace) {
 // PASS
 export const destroyWorkspace = function (workspaceId) {
   return function (dispatch) {
-    console.log("dispatching destroyWorkspace");
     return (
       WorkspaceApiUtil.destroyWorkspace(workspaceId)
         .then(
@@ -141,7 +133,6 @@ export const destroyWorkspace = function (workspaceId) {
 // Test Status - 
 export const assignUsersWorkspace = function (userId, workspaceId) {
   return function (dispatch) {
-    // console.log("dispatching assignUsersWorkspace");
     return (
       WorkspaceApiUtil.assignUsersWorkspace(userId, workspaceId)
         .then(
@@ -155,7 +146,6 @@ export const assignUsersWorkspace = function (userId, workspaceId) {
 // Test Status - 
 export const unassignUsersWorkspace = function (userId, workspaceId) {
   return function (dispatch) {
-    // console.log("dispatching unassignUsersWorkspace");
     return (
       WorkspaceApiUtil.unassignUsersWorkspace(userId, workspaceId)
         .then(
@@ -169,7 +159,6 @@ export const unassignUsersWorkspace = function (userId, workspaceId) {
 // ! Save for later
 export const removeWorkspaceFromUser = function (userId, workspaceId) {
   return function (dispatch) {
-    console.log("dispatching removeWorkspaceFromUser");
     return (
       WorkspaceApiUtil.removeWorkspaceFromUser(userId, workspaceId)
         .then(

@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     resources :projects, only: [:create, :update, :destroy]
     resources :sections, only: [:create, :update, :destroy]
     resources :tasks, only: [:create, :update, :destroy]
+    resource :feedback, only: [:create]
     # get "/users/:id/everything", to: "users#everything"
   end
 

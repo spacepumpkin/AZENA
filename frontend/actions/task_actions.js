@@ -76,7 +76,6 @@ const toggleTaskDone = function (task) {
 // Payload from backend now has task and usersTask, dispatch separate action for usersTask
 export const createTask = function (task) {
   return function (dispatch) {
-    // console.log("dispatching createTask");
     return (
       TaskApiUtil.createTask(task)
         .then(
@@ -93,7 +92,6 @@ export const createTask = function (task) {
 // Test Status - PASS
 export const updateTask = function (task) {
   return function (dispatch) {
-    // console.log("dispatching updateTask");
     return (
       TaskApiUtil.updateTask(task)
         .then(
@@ -107,7 +105,6 @@ export const updateTask = function (task) {
 // Test Status - PASS
 export const destroyTask = function (taskId) {
   return function (dispatch) {
-    // console.log("dispatching destroyTask");
     return (
       TaskApiUtil.destroyTask(taskId)
         .then(
@@ -124,7 +121,6 @@ export const destroyTask = function (taskId) {
 // Test Status - PASS
 export const assignUsersTask = function (userId, taskId) {
   return function (dispatch) {
-    // console.log("dispatching assignUsersTask");
     return (
       TaskApiUtil.assignUsersTask(userId, taskId)
         .then(
@@ -138,7 +134,6 @@ export const assignUsersTask = function (userId, taskId) {
 // Test Status - PASS
 export const unassignUsersTask = function (userId, taskId) {
   return function (dispatch) {
-    // console.log("dispatching unassignUsersTask");
     return (
       TaskApiUtil.unassignUsersTask(userId, taskId)
         .then(

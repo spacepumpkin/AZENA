@@ -21,7 +21,6 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 
 // For creating + logging in user (adds to users and session slices)
 // const receiveCurrentUser = function (user) {
-//   console.log("receiving current user...");
 //   return {
 //     type: RECEIVE_CURRENT_USER,
 //     user
@@ -30,7 +29,6 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 
 // ! Modified for user payload
 const receiveCurrentUser = function (payload) {
-  // console.log("receiving current user payload...");
   return {
     type: RECEIVE_CURRENT_USER,
     payload
@@ -39,7 +37,6 @@ const receiveCurrentUser = function (payload) {
 
 // remove currentUser from session slice
 const logoutCurrentUser = function () {
-  // console.log("logging out current user...");
   return {
     type: LOGOUT_CURRENT_USER,
   }
@@ -47,7 +44,6 @@ const logoutCurrentUser = function () {
 
 // accepts errors as array for errors slice
 export const receiveSessionErrors = function (errors) {
-  // console.log("receiving session errors...");
   return {
     type: RECEIVE_SESSION_ERRORS,
     errors
@@ -58,7 +54,6 @@ export const receiveSessionErrors = function (errors) {
 
 export const signup = function (user) {
   return function (dispatch) {
-    // console.log("dispatching signup");
     return (
       SessionApiUtil.signup(user)
         .then(
@@ -71,7 +66,6 @@ export const signup = function (user) {
 
 export const login = function (user) {
   return function (dispatch) {
-    // console.log("dispatching login");
     return (
       SessionApiUtil.login(user)
         .then(
@@ -84,7 +78,6 @@ export const login = function (user) {
 
 export const logout = function () {
   return function (dispatch) {
-    // console.log("dispatching logout");
     return (
       SessionApiUtil.logout()
         .then(

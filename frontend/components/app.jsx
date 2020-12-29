@@ -34,7 +34,6 @@ import Feedback from './main/feedback';
 // ProtectedRoute / PostAuth - only current user can access - redirect to "/"
 
 const App = function ({ ui, entities }) {
-  // console.log("rendering App...")
   const { currentModal, items } = ui;
   const { workspaces, projects } = entities;
 
@@ -53,7 +52,7 @@ const App = function ({ ui, entities }) {
     }
 
     return () => {
-      console.log(`New current workspace: ${currentWorkspaceId}`);
+      // console.log(`New current workspace: ${currentWorkspaceId}`);
     };
   }, [currentWorkspaceId])
 

@@ -65,9 +65,9 @@
   flex-direction: column;
 
   label {
-    font-size  : 15px;
+    font-size     : 15px;
     // font-weight: bold;
-    margin-top : 10px;
+    margin-top    : 10px;
   }
 
   input,
@@ -83,19 +83,25 @@
     height: 80px;
   }
 
-  button {
-    @include submit-button;
-    background-color: rgba(3, 218, 197, 0.6);
-    width           : 90%;
-    margin          : 15px auto;
+}
 
-    &:hover {
-      background-color: rgba(3, 218, 197, 1);
-      width           : 100%;
-    }
+.feedback-modal-submit {
+  @include submit-button;
+  background-color: rgba(3, 218, 197, 0.6);
+  width           : 90%;
+  margin          : 15px auto;
 
-    &:focus {
-      width: 100%;
-    }
+  &:hover {
+    background-color: rgba(3, 218, 197, 1);
+    width           : 100%;
   }
+
+  &:focus {
+    width: 100%;
+  }
+}
+
+.feedback-errors {
+  color     : $secondary;
+  align-self: center;
 }

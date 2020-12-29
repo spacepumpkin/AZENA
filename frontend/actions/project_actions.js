@@ -44,7 +44,6 @@ const removeProject = function (project) {
 // Test Status - PASS
 export const createProject = function (project) {
   return function (dispatch) {
-    // console.log("dispatching createProject");
     return (
       ProjectApiUtil.createProject(project)
         .then(
@@ -58,7 +57,6 @@ export const createProject = function (project) {
 // Test Status - PASS
 export const updateProject = function (project) {
   return function (dispatch) {
-    // console.log("dispatching updateProject");
     return (
       ProjectApiUtil.updateProject(project)
         .then(
@@ -72,7 +70,6 @@ export const updateProject = function (project) {
 // Test Status - PASS
 export const destroyProject = function (projectId) {
   return function (dispatch) {
-    // console.log("dispatching destroyProject");
     return (
       ProjectApiUtil.destroyProject(projectId)
         .then(

@@ -27,13 +27,22 @@ export const createTask = (task) => {
 }
 
 // Test Status - PASS
+// Retest Status (updating only given fields) - PASS
 export const updateTask = (task) => {
   console.log(`updating task #${task.id}...`);
+  let updatedTask = {};
+  for (let field in task) { updatedTask[field] = task[field] }
+
   return $.ajax({
     url: `/api/tasks/${task.id}`,
     method: "PATCH",
-    data: { task: { name: task.name, description: task.description, due_date: task.dueDate, done: task.done } }
+    data: { task: updatedTask }
   })
+  // return $.ajax({
+  //   url: `/api/tasks/${task.id}`,
+  //   method: "PATCH",
+  //   data: { task: { name: task.name, description: task.description, due_date: task.dueDate, done: task.done } }
+  // })
 }
 
 // Test Status - PASS

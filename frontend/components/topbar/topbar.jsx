@@ -86,8 +86,10 @@ export default class TopBar extends React.Component {
     if (this.state.showUserMenu || this.state.showTitleMenu) {
       if (evt.nativeEvent.type === "blur") {
         if (!evt.relatedTarget ||
-          !this.userMenuRef.current.contains(evt.relatedTarget) ||
-          !this.titleMenuRef.current.contains(evt.relatedTarget) ||
+          (this.userMenuRef &&
+            !this.userMenuRef.current.contains(evt.relatedTarget)) ||
+          (this.titleMenuRef &&
+            !this.titleMenuRef.current.contains(evt.relatedTarget)) ||
           evt.relatedTarget.id !== "user-avatar-button" ||
           evt.relatedTarget.id !== "title-menu-button") {
 
@@ -118,7 +120,7 @@ export default class TopBar extends React.Component {
         case "Project Create":
           this.props.setCurrentItems({ workspaceId: this.props.item.id, projectId: -1 });
           this.props.setModal(modalType);
-        break;
+          break;
         default:
           break;
       }

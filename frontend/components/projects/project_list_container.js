@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import ProjectList from './project_list';
-import { updateProject } from '../../actions/project_actions'
+import { updateProject } from '../../actions/project_actions';
+import { createTask, destroyTask, updateTask } from '../../actions/task_actions';
 
 const mSP = function ({ entities }, ownProps) {
   const projectId = parseInt(ownProps.match.params.projectId);
@@ -27,6 +28,9 @@ const mSP = function ({ entities }, ownProps) {
 const mDP = function (dispatch) {
   return {
     updateProject: (project) => dispatch(updateProject(project)),
+    createTask: (task) => dispatch(createTask(task)),
+    destroyTask: (taskId) => dispatch(destroyTask(taskId)),
+    updateTask: (task) => dispatch(updateTask(task))
   }
 };
 

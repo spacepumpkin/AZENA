@@ -1,0 +1,21 @@
+.project-tasks-list {
+  display       : flex;
+  flex-direction: column;
+}
+
+.project-task-row {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.project-task-check {
+  @include task-check-button;
+  width : 20px;
+  height: 20px;
+}
+
+.project-task-input {
+  width: 50%;
+  margin-right: 10px;
+}

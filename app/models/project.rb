@@ -12,7 +12,7 @@
 #
 class Project < ApplicationRecord
   validates :name, presence: true,
-                   length: { maximum: 25, too_long: "Name can't be over 25 characters" },
+                   length: { maximum: 25, too_long: "can't be over 25 characters" },
                    uniqueness: { scope: :workspace_id }
 
   validate :name_cannot_start_with_space

@@ -21,13 +21,13 @@ demo.workspaces << demo.created_workspaces # Add all created workspaces to assoc
 
 # Make Test Workspaces
 test_workspace1 = Workspace.create!(creator_id: test.id, name: "Build Testing Space", description: "This space is for testing tests that test tests")
-test_workspace2 = Workspace.create!(creator_id: test.id, name: "Build Testing Space Numba 2")
+test_workspace2 = Workspace.create!(creator_id: test.id, name: "Build Testing Space #2")
 test.workspaces << test.created_workspaces
 
 test_workspace2.users << demo # Add Demo user to test's 2nd workspace's users
 
 # Make Demo Projects
-demo_workspace1_project1 = Project.create!(name: "Sleepy Project", description: "Goal: Improve Sleep", workspace_id: demo_workspace1.id, creator_id: demo.id)
+demo_workspace1_project1 = Project.create!(name: "Sleepy Pr oject", description: "Goal: Improve Sleep", workspace_id: demo_workspace1.id, creator_id: demo.id)
 demo_workspace1_project2 = Project.create!(name: "User Auth", description: "Goal: Create Secure User Auth", workspace_id: demo_workspace1.id, creator_id: demo.id)
 demo_workspace1_project3 = Project.create!(name: "Backend Routes", description: "Goal: Wrangle Those API Endpoints", workspace_id: demo_workspace1.id, creator_id: demo.id)
 

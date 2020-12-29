@@ -14,6 +14,7 @@ export default class Workspace extends React.Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleDescriptionUpdate = this.handleDescriptionUpdate.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.openProjCreateModal = this.openProjCreateModal.bind(this);
     // this.handleFocus = this.handleFocus.bind(this);
   }
 
@@ -69,6 +70,12 @@ export default class Workspace extends React.Component {
   //   if (this.state.editMode === false) this.setState({ description: evt.target.value, editMode: true });
   // }
 
+  openProjCreateModal() {
+    let items = Object.assign({}, this.props.currentItems, { workspaceId: this.props.workspace.id });
+    this.props.setCurrentItems(items);
+    this.props.setModal("Project Create");
+  }
+
   render() {
     const { projects, users } = this.props.entities;
     const { description: stateDescription } = this.state;
@@ -122,7 +129,7 @@ export default class Workspace extends React.Component {
               )
             })
           }
-          <Link to={`/projects/new`}>New Project</Link>
+          <button className="create-project-button" onClick={this.openProjCreateModal}>New Project</button>
         </div>
       </div>
     )

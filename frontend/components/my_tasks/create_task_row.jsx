@@ -127,6 +127,9 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
 
   function addNewTask() {
     dispatch(createTask({ name: name, description: description, dueDate: dueDate, projectId: projectId }));
+    setname("");
+    if(description !== "") setdescription("");
+    if(dueDate !== "") setdueDate("");
   }
   
   return (

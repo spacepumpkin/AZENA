@@ -28,3 +28,8 @@
     }
   }
 }
+
+.create-project-button {
+  @include submit-button;
+  align-self: flex-start;
+}

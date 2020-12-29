@@ -11,7 +11,7 @@ table {
 
 td,
 th {
-  padding      : 6px;
+  // padding      : 6px;
   overflow     : hidden;
   white-space  : nowrap;
   text-overflow: ellipsis;
@@ -24,7 +24,7 @@ td {
 }
 
 th {
-  background   : $lightest-gray;
+  // background-color: $lightest-gray;
   color        : $primary;
   font-weight  : bold;
   font-size    : 16px;
@@ -35,27 +35,58 @@ th {
   border-bottom: 4px solid $light-gray;
 }
 
-.my-tasks-table-row {
-  opacity   : 75%;
-  transition: all 0.3s ease 0s;
+// ROW & FIRST CELL STYLING
 
-  &:hover {
-    opacity         : 100%;
+.my-tasks-table-row {
+  opacity     : 75%;
+  transition  : all 0.3s ease 0s;
+  border-left : 4px solid transparent;
+  box-sizing  : border-box;
+  height      : 50px;
+  // padding-left: 10px;
+
+  &:hover,
+  &:focus-within {
     background-color: $lighter-gray;
+    border-left     : 4px solid $primary;
+    opacity         : 100%;
   }
 
+  >div {
+    margin: 5px auto;
+  }
 }
 
 .my-tasks-table-row>td:first-child {
-  display      : flex;
-  align-items  : center;
-  margin-bottom: -1px; // get rid of extra flex borders
+  // margin-bottom: -1px; // get rid of extra flex borders
 }
 
 .my-tasks-table-row:first-child>td:first-child {
-  margin-top: -1px; // get rid of extra flex border in first cell
+  // margin-top: -1px; // get rid of extra flex border in first cell
 }
 
+.my-tasks-first-cell {
+  display           : flex;
+  // justify-content: ;
+  padding-top       : 5px;
+  align-items       : center;
+  // border-bottom: none;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  >.plus-button {
+    height     : 18px;
+    width      : 18px;
+    margin-left: 5px;
+    opacity    : 0%;
+  }
+
+  &:hover>.plus-button {
+    opacity: 100%;
+  }
+}
+
+// CHECKBOX
 @keyframes checked {
   0% {
     width : 16px;
@@ -82,12 +113,12 @@ th {
 }
 
 .task-check-icon {
-  box-sizing   : border-box;
-  width        : 20px;
-  height       : 20px;
-  box-sizing   : border-box;
-  background   : image-url('check-circle-outline.svg') no-repeat center;
-  align-self   : center;
+  box-sizing: border-box;
+  width     : 20px;
+  height    : 20px;
+  box-sizing: border-box;
+  background: image-url('check-circle-outline.svg') no-repeat center;
+  align-self: center;
 
   // Centers button
   margin       : 0;
@@ -97,8 +128,8 @@ th {
   -ms-transform: translate(-50%, -50%);
   transform    : translate(-50%, -50%);
 
-  filter       : invert(100%) sepia(0%) saturate(11%) hue-rotate(162deg) brightness(89%) contrast(77%); // start gray
-  transition   : all 0.3s ease 0s;
+  filter    : invert(100%) sepia(0%) saturate(11%) hue-rotate(162deg) brightness(89%) contrast(77%); // start gray
+  transition: all 0.3s ease 0s;
 
   &:hover {
     filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%); // turn to black
@@ -115,27 +146,9 @@ th {
   }
 }
 
-.my-tasks-first-cell {
+// TASK NAME
 
-  >.plus-button {
-    height     : 18px;
-    width      : 18px;
-    margin-left: 5px;
-    opacity    : 0%;
-  }
-
-  &:hover,
-  &:focus-within {
-    border-left: 4px solid $primary;
-    opacity    : 100%;
-  }
-
-  &:hover>.plus-button {
-    opacity: 100%;
-  }
-}
-
-.task-name-input {
+.task-input {
   color           : black;
   border          : 1px solid transparent;
   padding         : 2px 6px;
@@ -155,11 +168,11 @@ th {
   }
 
   &:focus {
-    border          : 1px solid $primary;
-    box-shadow      : inset 0 2px 4px $lighter-gray, 0 2px 4px $lighter-gray;
-    color           : $primary;
-    background-color: white;
-    opacity         : 100%;
+    border             : 1px solid $primary;
+    box-shadow         : inset 0 2px 4px $lighter-gray, 0 2px 4px $lighter-gray;
+    // color           : $primary;
+    background-color   : white;
+    opacity            : 100%;
 
     &+.plus-button {
       opacity: 100%;
@@ -172,4 +185,43 @@ th {
     text-decoration          : line-through $secondary;
     text-decoration-thickness: 3px;
   }
+}
+
+// TASK DUE DATE
+.my-tasks-date-cell {
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+}
+
+.my-tasks-date {
+  border       : 1px solid $light-gray;
+  border-radius: 5px;
+  padding      : 4px 6px;
+  margin       : 0 auto;
+  cursor       : text;
+
+  // width: 100%;
+
+  // margin       : 0;
+  // position     : absolute;
+  // top          : 50%;
+  // left         : 50%;
+  // -ms-transform: translate(-50%, -50%);
+  // transform    : translate(-50%, -50%);
+
+  &:focus {
+    background-color: white;
+  }
+}
+
+
+// CREATE TASK ROW
+.my-tasks-create-row {
+  height: 60px;
+}
+
+.add-task-button {
+  @include submit-button;
+
 }

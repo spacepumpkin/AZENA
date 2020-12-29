@@ -18,7 +18,7 @@ import TopBarContainer from "./topbar/topbar_container";    // always there
 
 // * MAIN CONTENT
 import HomeContainer from "./home/home_container";
-import MyTasks from "./home/my_tasks";
+import MyTasks from "./my_tasks/my_tasks";
 import WorkspaceContainer from "./workspace/workspace_container";
 import ProjectListContainer from './projects/project_list_container';
 

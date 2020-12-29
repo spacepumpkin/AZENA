@@ -1,15 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import TaskRow from './task_row';
+import CreateTaskRow from './create_task_row';
 
-function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators }) {
+function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, allWorkspaces, allProjects }) {
 
   const taskRows = [];
   for (let i = 0; i < assignedTasks.length; i++) {
 
     taskRows.push(
-      <TaskRow 
+      <TaskRow
         key={`task-${assignedTasks[i].id}`}
         task={assignedTasks[i]}
         workspaceName={taskWorkspaces[i].name}
@@ -21,22 +22,20 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators }) 
 
   return (
     <div id="my-tasks">
-      <div id="my-tasks-top">
-        Add Tasks
-      </div>
       <table id="my-tasks-table">
         <thead>
           <tr className="table-headings">
             <th>Task</th>
             <th>Description</th>
             <th>Due Date</th>
-            <th>Workspace</th>
+            {/* <th>Workspace</th> */}
             <th>Project</th>
             <th>Created By</th>
           </tr>
         </thead>
         <tbody>
           {taskRows}
+          <CreateTaskRow allWorkspaces={allWorkspaces} allProjects={allProjects} />
         </tbody>
       </table>
     </div>
@@ -59,7 +58,9 @@ const mSP = function ({ entities, session }) {
     assignedTasks: assignedTasks,
     taskProjects: taskProjects,
     taskWorkspaces: taskWorkspaces,
-    taskCreators: taskCreators
+    taskCreators: taskCreators,
+    allWorkspaces: workspaces,
+    allProjects: projects
   }
 };
 

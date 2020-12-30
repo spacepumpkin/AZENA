@@ -236,6 +236,10 @@ export default class TopBar extends React.Component {
         </div>
 
         <div id="topbar-user">
+          <div className="profile-links">
+            <a href="https://github.com/spacepumpkin/AZENA"><img src={window.github} alt="github profile" /></a>
+            <a href="https://www.linkedin.com/in/gary-w-269749ba/"><img src={window.linkedin} alt="linkedin profile" /></a>
+          </div>
           {/* User Settings + Global Actions */}
           <div id="user-avatar">
             <button id="user-avatar-button" type="button"

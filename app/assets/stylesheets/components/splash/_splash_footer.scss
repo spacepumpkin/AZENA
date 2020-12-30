@@ -8,6 +8,48 @@
   }
 }
 
+@keyframes rotation-fast {
+  0% {
+    // filter   : hue-rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    // filter: hue-rotate(180deg);
+  }
+
+  100% {
+    // filter : hue-rotate(360deg);
+    transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes pop {
+  to {
+    -webkit-transform: scale(1.2);
+  }
+}
+
+@-moz-keyframes pop {
+  to {
+    -moz-transform: scale(1.2);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5)
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 #splash-footer {
   width           : 100%;
   height          : 100%;
@@ -33,6 +75,10 @@
   display        : flex;
   align-items    : center;
   justify-content: center;
+
+  // &:active {
+  //   animation: pop 1s ease;
+  // }
 }
 
 .footer-logo {
@@ -49,7 +95,24 @@
     // width: 49px;
     // transform: rotate(360deg);
   }
+
+  &:active {
+    // filter           : hue-rotate(360deg);
+    animation           : rotation-fast 0.5s infinite linear;
+    // animation: pop 0.3s ease;
+    // transform: scale(0.8);
+    // -webkit-animation: pop .1s infinite alternate;
+    // -moz-animation   : pop .1s infinite alternate;
+    // animation        : pop .1s infinite alternate;
+    // height : 90%;
+    // width: 90%;
+  }
 }
+
+// .footer-logo-pop {
+//   animation: pop 1s ease-in-out;
+//   animation : rotation 5s infinite linear;
+// }
 
 .footer-greeting {
   margin-top : 20px;
@@ -66,11 +129,8 @@
   width          : 200px;
   margin-top     : 20px;
 
-  a {
-    box-shadow: 0 0 10px $darkgray;
-  }
-
   img {
+    box-shadow      : 0 0 10px $darkgray;
     background-color: $primary--med;
     border-radius   : 5px;
     //  filter: invert(100%);

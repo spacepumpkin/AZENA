@@ -139,7 +139,8 @@
   // width                : 50%;
   // border            : 1px dotted purple;
   position                : relative;
-  justify-content         : flex-end;
+  // justify-content         : flex-end;
+  justify-content: space-between;
 
   >#logout-button {
     // background-color   : $primary;
@@ -261,3 +262,10 @@
 //   display: block;
 //   height : 0;
 // }
+
+.topbar-profile-links {
+  display: flex;
+  justify-content: space-around;
+
+  width: 200px;
+}

@@ -11,7 +11,7 @@
 
 // Test Status - PASS
 export const createTask = (task) => {
-  console.log(`creating new task ("${task.name}")...`);
+  // console.log(`creating new task ("${task.name}")...`);
   return $.ajax({
     url: `/api/tasks`,
     method: "POST",
@@ -29,7 +29,7 @@ export const createTask = (task) => {
 // Test Status - PASS
 // Retest Status (updating only given fields) - PASS
 export const updateTask = (task) => {
-  console.log(`updating task #${task.id}...`);
+  // console.log(`updating task #${task.id}...`);
   let updatedTask = {};
   for (let field in task) { 
     if (field === "dueDate") {
@@ -53,7 +53,7 @@ export const updateTask = (task) => {
 
 // Test Status - PASS
 export const destroyTask = (taskId) => {
-  console.log(`destroying task #${taskId}...`);
+  // console.log(`destroying task #${taskId}...`);
   return $.ajax({
     url: `/api/tasks/${taskId}`,
     method: "DELETE"
@@ -62,7 +62,7 @@ export const destroyTask = (taskId) => {
 
 // Test Status - PASS
 export const assignUsersTask = (userId, taskId) => {
-  console.log(`assigning task #${taskId} to user #${userId}...`);
+  // console.log(`assigning task #${taskId} to user #${userId}...`);
   return $.ajax({
     url: `/api/users/${userId}/tasks`,
     method: "POST",
@@ -72,7 +72,7 @@ export const assignUsersTask = (userId, taskId) => {
 
 // Test Status - PASS
 export const unassignUsersTask = (userId, taskId) => {
-  console.log(`unassigning task #${taskId} from user #${userId}...`);
+  // console.log(`unassigning task #${taskId} from user #${userId}...`);
   return $.ajax({
     url: `/api/users/${userId}/tasks`,
     method: "DELETE",

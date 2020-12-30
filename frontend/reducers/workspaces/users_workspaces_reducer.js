@@ -11,7 +11,6 @@ const userWorkspacesReducer = function (oldState = {}, action) {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      // console.log("receiving current user (userWorkspacesReducer");
       return Object.assign(newState, action.payload.usersWorkspaces);
     case RECEIVE_USERS_WORKSPACE:
       // Assign workspace to user

@@ -6,7 +6,7 @@
 
 // Test Status - 
 export const createSection = (section) => {
-  console.log(`creating new section (${section.name})...`);
+  // console.log(`creating new section (${section.name})...`);
   return $.ajax({
     url: `/api/sections`,
     method: "POST",
@@ -22,7 +22,7 @@ export const createSection = (section) => {
 
 // Test Status - 
 export const updateSection = (section) => {
-  console.log(`updating section #${section.id}...`);
+  // console.log(`updating section #${section.id}...`);
   return $.ajax({
     url: `/api/sections/${section.id}`,
     method: "PATCH",
@@ -35,7 +35,7 @@ export const updateSection = (section) => {
 
 // Test Status - 
 export const destroySection = (sectionId, keepTasks) => {
-  console.log(`destroying section #${sectionId}...`);
+  // console.log(`destroying section #${sectionId}...`);
   return $.ajax({
     url: `/api/sections/${sectionId}`,
     method: "DELETE",

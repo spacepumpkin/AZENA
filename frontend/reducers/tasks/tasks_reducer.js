@@ -14,13 +14,10 @@ const tasksReducer = function (oldState = {}, action) {
   const newState = Object.assign({}, oldState);
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      // console.log("receiving current user (tasksReducer");
       return Object.assign(newState, action.payload.tasks);
     case RECEIVE_TASK:
-      // console.log("receiving task (tasksReducer)");
       return Object.assign(newState, { [action.task.id]: action.task });
     case REMOVE_TASK:
-      // console.log(`removing task (tasksReducer)`)
       delete newState[action.task.id];
       return newState;
     case REMOVE_SECTION_TASKS:

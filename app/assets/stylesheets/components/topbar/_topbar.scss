@@ -114,8 +114,9 @@
   }
 
   &:focus {
-    opacity: 100%;
-    border : 2px solid $primary;
+    opacity   : 100%;
+    border    : 2px solid $primary;
+    box-shadow: inset 0 2px 4px $lighter-gray, 0 2px 4px $lighter-gray;
   }
 }
 
@@ -124,8 +125,8 @@
 }
 
 #header-description {
-  padding      : 4px 0 2px 6px;
-  max-width    : 450px;
+  padding         : 4px 4px 2px 6px;
+  max-width       : 450px;
   // opacity      : 80%;
   // font-style: italic;
 }

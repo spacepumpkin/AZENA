@@ -12,7 +12,6 @@ const usersTasksReducer = function (oldState = {}, action) {
   
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      // console.log("receiving current user (usersTasksReducer");
       return Object.assign(newState, action.payload.usersTasks);
     case RECEIVE_USERS_TASK:
       return Object.assign(newState, { [action.usersTask.id]: action.usersTask })

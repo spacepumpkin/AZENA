@@ -41,7 +41,7 @@ export const fetchWorkspace = (workspaceId) => {
 
 // PASS
 export const createWorkspace = (workspace) => {
-  console.log(`creating new workspace (${workspace.name}) ...`);
+  // console.log(`creating new workspace (${workspace.name}) ...`);
   return $.ajax({
     url: `/api/workspaces`,
     method: "POST",
@@ -51,7 +51,7 @@ export const createWorkspace = (workspace) => {
 
 // PASS
 export const updateWorkspace = (workspace) => {
-  console.log(`updating workspace #${workspace.id} ...`);
+  // console.log(`updating workspace #${workspace.id} ...`);
   return $.ajax({
     url: `/api/workspaces/${workspace.id}`,
     method: "PATCH",
@@ -61,7 +61,7 @@ export const updateWorkspace = (workspace) => {
 
 // PASS
 export const destroyWorkspace = (workspaceId) => {
-  console.log(`deleting workspace #${workspaceId} ...`);
+  // console.log(`deleting workspace #${workspaceId} ...`);
   return $.ajax({
     url: `/api/workspaces/${workspaceId}`,
     method: "DELETE"
@@ -70,7 +70,7 @@ export const destroyWorkspace = (workspaceId) => {
 
 // Test Status - 
 export const assignUsersWorkspace = (userId, workspaceId) => {
-  console.log(`assigning workspace #${workspaceId} to user #${userId}...`);
+  // console.log(`assigning workspace #${workspaceId} to user #${userId}...`);
   return $.ajax({
     url: `/api/users/${userId}/workspaces`,
     method: "POST",
@@ -80,7 +80,7 @@ export const assignUsersWorkspace = (userId, workspaceId) => {
 
 // Test Status - 
 export const unassignUsersWorkspace = (userId, workspaceId) => {
-  console.log(`unassigning workspace #${workspaceId} from user #${userId}...`);
+  // console.log(`unassigning workspace #${workspaceId} from user #${userId}...`);
   return $.ajax({
     url: `/api/users/${userId}/workspaces`,
     method: "DELETE",

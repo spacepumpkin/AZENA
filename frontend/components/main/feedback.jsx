@@ -28,11 +28,11 @@ class Feedback extends React.Component {
     }
     let that = this;
     this.createFeedback(feedback)
-    .then(
-      res => {
+      .then(
+        res => {
           console.log("Feedback submitted!");
-          that.setState({ success: true })
-          setTimeout(that.toggleModal, 5000);
+          that.setState({ success: true, errors: [], activeInput: -1 });
+          // setTimeout(that.toggleModal, 5000);
         }, errors => {
           that.setState({ errors: errors.responseJSON })
         });
@@ -51,9 +51,7 @@ class Feedback extends React.Component {
   }
 
   handleFocus(inputId) {
-    return (evt) => {
-      this.setState({ activeInput: inputId });
-    }
+    return (evt) => this.setState({ activeInput: inputId });
   }
 
   render() {
@@ -71,10 +69,10 @@ class Feedback extends React.Component {
                 <h1>Feedback Form</h1>
 
                 {success ? (
-                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                    <h2> Thank you for taking the time to provide feedback! </h2>
-                    <button className={"feedback-modal-submit"} onClick={() => this.setState({ success: false })} type="button">Submit another entry?</button>
+                  <div id="feedback-modal-success">
+                    <div>
+                      <h2> Thank you for taking the time to provide feedback! </h2>
+                      <button className={"feedback-modal-submit"} onClick={() => this.setState({ success: false })} type="button">Submit another entry?</button>
                     </div>
                   </div>
                 ) :
@@ -86,10 +84,10 @@ class Feedback extends React.Component {
                           1-3 Potential Improvements:</label>
                         <textarea id="feedback-modal-form-1" type="text" name="improvements" onFocus={this.handleFocus(1)} />
                         <label htmlFor="feedback-modal-form-2" className={activeInput === 2 ? "label-input-focused" : undefined} >
-                          Likes/Dislikes, Death Threats, or Other Comments:</label>
+                          Likes/Dislikes, Death Threats, or Other Comments (opt.):</label>
                         <textarea id="feedback-modal-form-2" type="text" name="other_comments" onFocus={this.handleFocus(2)} />
                         <label htmlFor="feedback-modal-form-3" className={activeInput === 3 ? "label-input-focused" : undefined} >
-                          Name (optional):</label>
+                          Name (opt.):</label>
                         <input id="feedback-modal-form-3" type="text" name="name" onFocus={this.handleFocus(3)} />
                         {/* <label htmlFor="feedback-modal-form-4" className={activeInput === 4 ? "label-input-focused" : undefined} >
                     Other Comments:</label>
@@ -101,7 +99,8 @@ class Feedback extends React.Component {
                   )}
               </div>
             </div>
-          )}
+          )
+        }
       </>
     )
   }

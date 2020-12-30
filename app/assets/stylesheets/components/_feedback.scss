@@ -4,17 +4,17 @@
 
   display    : inline-block;
   position   : fixed;
-  bottom     : 15px;
-  right      : 15px;
+  bottom     : 25px;
+  right      : 25px;
   z-index    : 1;
-  height     : 35px;
-  width      : 35px;
+  height     : 45px;
+  width      : 45px;
   overflow   : hidden;
   white-space: nowrap;
   line-height: 35px;
   cursor     : pointer;
 
-  padding         : 0px 12px;
+  padding         : 5px 12px 0 12px;
   box-sizing      : border-box;
   border-radius   : 10000px; // 25%/50%;
   background-color: $primary;
@@ -52,8 +52,9 @@
   background-color: white;
 
   h1 {
+    text-align   : center;
     font-family  : $font-heading;
-    font-size    : 22px;
+    font-size    : 26px;
     border-bottom: 3px solid $secondary;
     padding      : 5px 0;
     margin-bottom: 15px;
@@ -104,4 +105,23 @@
 .feedback-errors {
   color     : $secondary;
   align-self: center;
+}
+
+#feedback-modal-success {
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  height         : 100%;
+
+  >div {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+  }
+
+  h2 {
+    font-size : 30px;
+    text-align: center;
+    animation : flashPrimary 2s ease;
+  }
 }

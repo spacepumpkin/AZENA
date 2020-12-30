@@ -11,11 +11,9 @@ export default class Splash extends React.Component {
 
   componentDidMount() {
     if (document.title !== "azena") { document.title = "azena" };
-    // console.log("routed to Splash page");
   }
 
   render() {
-    // console.log("rendering Splash...");
     return (
       <div id="splash">
         <SplashNav />

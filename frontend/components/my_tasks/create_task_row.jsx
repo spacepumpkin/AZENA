@@ -110,7 +110,6 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
       //   // changeProjectOptions(newValue);
       // }
       eval(`set${field}`)(newValue);
-      console.log(newValue);
     }
   }
 
@@ -123,7 +122,7 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
     }
   },[projectRef])
   
-  console.log({ name: name, description: description, dueDate: dueDate, projectId: projectId });
+  // console.log({ name: name, description: description, dueDate: dueDate, projectId: projectId });
 
   function addNewTask() {
     dispatch(createTask({ name: name, description: description, dueDate: dueDate, projectId: projectId }));
@@ -135,15 +134,12 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
   return (
     <tr className="my-tasks-create-row">
       <td><input type="text" className="task-input" value={name} placeholder="Add New Task"
-        // onChange={(evt) => setname(evt.target.value) && console.log("name: ", evt.target.value)} 
         onChange={handleChange("name")}
       /></td>
       <td><input type="text" className="task-input" value={description} placeholder="Add Description"
-        // onChange={(evt) => setdescription(evt.target.value) && console.log("description: ", evt.target.value)} 
         onChange={handleChange("description")}
       /></td>
       <td><input type="date" className="my-tasks-date" value={dueDate}
-        // onChange={(evt) => setdueDate(evt.target.value) && console.log("dueDate: ", evt.target.value)} 
         onChange={handleChange("dueDate")}
       /></td>
       {/* <td>
@@ -157,7 +153,6 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
       <td>
         <select
           ref={projectRef}
-          // onChange={(evt) => setprojectId(evt.target.value) && console.log("project: ", evt.target.value)}
           onChange={handleChange("projectId")}
         >
           {/* <option value="project-0" disabled>Select a Project</option> */}

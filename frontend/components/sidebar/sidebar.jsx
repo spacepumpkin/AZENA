@@ -23,7 +23,6 @@ export default class Sidebar extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(`mounted Sidebar`);
     // document.addEventListener('mousedown', this.handleClickOutside);
   }
   componentWillUnmount() {
@@ -31,7 +30,6 @@ export default class Sidebar extends React.Component {
   }
 
   // handleClickOutside(evt) {
-  //   console.log("handleClickOutside");
   //   // Only react if a plusMenu dropdown is open & if click target is not something 
   //   // on which we already have a listener, otherwise do nothing
   //   if (this.state.plusMenuWorkspaceId !== -1
@@ -124,7 +122,7 @@ export default class Sidebar extends React.Component {
     } = this.state;
 
     this.sidebarRenderCount += 1;
-    console.log("sidebar render count: ", this.sidebarRenderCount);
+    // console.log("sidebar render count: ", this.sidebarRenderCount);
 
     // Separate user's workspaces into own and other workspaces
     const ownWorkspaces = [];
@@ -217,8 +215,12 @@ export default class Sidebar extends React.Component {
             {mappedWorkspaces(ownWorkspaces)}
           </div>
           <div id="sidebar-workspaces">
-            <h1>Other Workspaces</h1>
-            {mappedWorkspaces(otherWorkspaces)}
+            {(otherWorkspaces !== undefined && otherWorkspaces.length !== 0) && (
+              <>
+                <h1>Other Workspaces</h1>
+                {mappedWorkspaces(otherWorkspaces)}
+              </>
+            )}
           </div>
           <div id="sidebar-bottom">
             {/* <p>Organize your projects here!</p> */}

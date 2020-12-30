@@ -47,9 +47,6 @@ const ProjectCreateModal = function (props) {
     evt.preventDefault();
 
     const data = new FormData(evt.target);
-    for (let [inputName, inputValue] of data.entries()) {
-      console.log(`${inputName}: "${inputValue}"`);
-    }
 
     createProject({
       name: data.get("name"),
@@ -61,7 +58,6 @@ const ProjectCreateModal = function (props) {
       setModal(null);
       // setCurrentWorkspaceId(-1);
     }, ({errors}) => {
-      console.log("Project has errors: ", errors);
     });
   }
 

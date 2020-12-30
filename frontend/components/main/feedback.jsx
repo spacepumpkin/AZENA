@@ -20,29 +20,26 @@ class Feedback extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log("Feedback submitted!");
     const data = new FormData(evt.target); // this can be submitted directly to BE?
     // FormData.entries(), FormData.keys(), FormData.get("name"), FormData.set("name", value)
     const feedback = {};
     for (let [inputName, inputValue] of data.entries()) {
-      console.log(`${inputName}: "${inputValue}"`);
       feedback[inputName] = inputValue;
     }
     let that = this;
     this.createFeedback(feedback)
-      .then(
-        res => {
-          console.log("res: ", res)
+    .then(
+      res => {
+          console.log("Feedback submitted!");
           that.setState({ success: true })
           setTimeout(that.toggleModal, 5000);
         }, errors => {
-          console.log("errors: ", errors.responseJSON);
           that.setState({ errors: errors.responseJSON })
         });
   }
 
   createFeedback(feedback) {
-    console.log(`submitting feedback...`);
+    console.log(`Submitting feedback...`);
 
     return $.ajax({
       url: `/api/feedback`,

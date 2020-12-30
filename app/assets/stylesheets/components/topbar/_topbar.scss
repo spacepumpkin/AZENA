@@ -49,14 +49,14 @@
     vertical-align: middle;
     padding       : 20% 10px;
 
-    display         : inline-block;
+    display            : inline-block;
     // box-sizing: border-box;
-    width           : 40px;
-    height          : 40px;
-    background-color: rgb(random(255), random(255), random(255));
-    border-radius   : 8px;
+    width              : 40px;
+    height             : 40px;
+    background-color   : rgb(random(255), random(255), random(255));
+    border-radius      : 8px;
     // cursor          : pointer;
-    transition      : all 0.3s ease 0s;
+    transition         : all 0.3s ease 0s;
 
     &:hover {
       // margin-top: -4px;
@@ -83,21 +83,26 @@
 // width: fit-content;
 // }
 
-.header-title {
-  font-size        : 30px;
-  vertical-align   : middle;
-  overflow         : hidden;
-  white-space      : nowrap;
-  text-overflow    : ellipsis;
-  font-weight      : bold;
-  padding          : 4px;
-  border-radius    : 5px;
-  border           : 2px solid transparent;
-  opacity          : 85%;
-  transition       : all 0.3s ease 0s;
+#header-title {
+  font-size: 30px;
+
+  font-weight: bold;
+  padding    : 4px;
+
   // width: 100%;
   // max-width     : 350px;
-  display          : inline-block;
+  display: inline-block;
+}
+
+.header-input {
+  vertical-align: middle;
+  overflow      : hidden;
+  white-space   : nowrap;
+  text-overflow : ellipsis;
+  border-radius : 5px;
+  border        : 2px solid transparent;
+  opacity       : 85%;
+  transition    : all 0.3s ease 0s;
 }
 
 .title-editable {
@@ -119,12 +124,9 @@
 }
 
 #header-description {
-  padding: 4px 0 0 6px;
-  max-width: 450px;
-  opacity: 80%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  padding      : 4px 0 2px 6px;
+  max-width    : 450px;
+  // opacity      : 80%;
   // font-style: italic;
 }
 
@@ -247,7 +249,7 @@
   }
 
   &:last-child:hover {
-    color : $secondary;
+    color           : $secondary;
     background-color: $lightest-gray;
   }
 }

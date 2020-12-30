@@ -5,7 +5,6 @@ import Main from "./main";
 // import { fetchUserWorkspaces } from "../../actions/workspace_actions";
 
 const mSP = function (store) {
-  // console.log(store);
   return {
     payload: store
   };

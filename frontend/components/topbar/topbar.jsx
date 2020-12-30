@@ -9,13 +9,14 @@ export default class TopBar extends React.Component {
     super(props);
     this.state = {
       title: props.title,
+      itemDescription: props.item.description ? props.item.description : "Add Description...",
       showTitleMenu: false,
       showUserMenu: false,
       titleFlash: false,
     }
 
     // Controlling title blur event
-    this.titleInput = React.createRef();
+    // this.titleInput = React.createRef();
     this.userMenuRef = React.createRef();
     this.titleMenuRef = React.createRef();
 
@@ -28,21 +29,19 @@ export default class TopBar extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleTitleUpdate = this.handleTitleUpdate.bind(this);
+    this.handleDescriptionUpdate = this.handleDescriptionUpdate.bind(this);
+    this.handleDescriptionFocus = this.handleDescriptionFocus.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMenuBlur = this.handleMenuBlur.bind(this);
 
     this.openModal = this.openModal.bind(this);
   }
 
-  componentDidMount() {
-    // console.log(`mounted Topbar (${this.props.page})`);
-  }
-
   componentDidUpdate(prevProps) {
-    // Reset title if we changed pages
-    // console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
+    // Reset title & description if we changed pages
     if (prevProps.title !== this.props.title) {
-      this.setState({ title: this.props.title, titleFlash: true });
+      let description = this.props.item.description ? this.props.item.description : "Add Description...";
+      this.setState({ title: this.props.title, titleFlash: true, itemDescription: description });
     }
   }
 
@@ -54,8 +53,6 @@ export default class TopBar extends React.Component {
   // Remove all tabs, new lines + check if we're within allowable char range
   handleTitleChange(evt) {
     const editedTitle = evt.target.value.replace(/[\r\n\v\t]+/g, '');
-    // console.log(`evt.target.value: "${evt.target.value}"`)
-    // console.log(`old title: "${this.state.title}", new title: "${editedTitle}", length: ${editedTitle.length}, changed?: ${editedTitle !== this.state.title}`);
 
     // Avoid re-rendering if title hasn't changed
     if (editedTitle === this.state.title) return;
@@ -67,17 +64,39 @@ export default class TopBar extends React.Component {
     const { title: currentTitle, pageType, isCreator } = this.props;
 
     if (pageType !== "Home" && isCreator && this.state.title !== currentTitle) {
-      // console.log(`title has changed from "${currentTitle}" to "${this.state.title}"`);
       const { updateItem, item } = this.props;
-      if (item.id !== undefined && item.id !== null) updateItem({ id: item.id, name: this.state.title })
+      if (item.id !== undefined && item.id !== null) {
+        updateItem({ id: item.id, name: this.state.title });
+      }
     }
   }
 
-  // Catch any enter presses within title input textarea to defocus instead of adding \n
+  handleDescriptionFocus(evt) {
+    // Replacement for placeholder functionality in contentEditable div
+    if (this.state.itemDescription === "Add Description...") {
+      this.setState({ itemDescription: "" });
+    }
+  }
+
+  handleDescriptionUpdate(evt) {
+    // Updates description on blur; description hel
+    let updatedDescription = evt.target.innerText;
+
+    // Replacement for placeholder functionality in contentEditable div
+    if (updatedDescription === "") this.setState({ itemDescription: "Add Description..." });
+
+    if (this.props.item.description !== updatedDescription) {
+      const { updateItem, item } = this.props;
+      updateItem({ id: item.id, description: updatedDescription });
+    }
+  }
+
   handleKeyDown(evt) {
+    // Catch any enter presses within title input textarea to defocus instead of adding \n
     if (evt.key === "Enter" || evt.keyCode === 13) {
       evt.preventDefault();
-      this.titleInput.current.blur();
+      evt.target.blur();
+      // this.titleInput.current.blur();
     }
   }
 
@@ -138,16 +157,16 @@ export default class TopBar extends React.Component {
       user,
       setCurrentWorkspaceId
     } = this.props;
-    const { title: stateTitle, showUserMenu, showTitleMenu, titleFlash } = this.state; // Will change based on route
+    const { title: stateTitle, showUserMenu, showTitleMenu, titleFlash, itemDescription } = this.state; // Will change based on route
     const renderedTitle = stateTitle;
 
     // Adjusting class of title depending on whether it's editable
-    const titleClassName = titleFlash ? ["header-title title-flash"] : ["header-title"];
+    const titleClassName = titleFlash ? ["header-input title-flash"] : ["header-input"];
     if (pageType !== "Home" && isCreator) titleClassName.push("title-editable");
 
     // Counting Renders
     this.topbarRenderCount += 1;
-    console.log("topbar render count: ", this.topbarRenderCount);
+    // console.log("topbar render count: ", this.topbarRenderCount);
 
     return (
       <div id="topbar">
@@ -186,12 +205,12 @@ export default class TopBar extends React.Component {
 
           {/* WorkspaceHeader or HomeHeader or ProjectHeader */}
           <div className="header-title-wrapper">
-            <input className={titleClassName.join(" ")}
+            <input id="header-title" className={titleClassName.join(" ")}
               type="text"
               onKeyDown={this.handleKeyDown}
               onChange={this.handleTitleChange}
               onBlur={this.handleTitleUpdate}
-              ref={this.titleInput}
+              // ref={this.titleInput}
               // minLength={this.titleMin}
               // maxLength={this.titleMax}
               // cols={this.titleMax}
@@ -202,7 +221,17 @@ export default class TopBar extends React.Component {
               value={renderedTitle}
               onAnimationEnd={() => this.setState({ titleFlash: false })}
             />
-            {(pageType !== "Home") && <div id="header-description">{item.description}</div>}
+            {(pageType !== "Home") &&
+              <div id="header-description" className={"header-input title-editable"} contentEditable
+                onFocus={this.handleDescriptionFocus}
+                onKeyDown={this.handleKeyDown}
+                onBlur={this.handleDescriptionUpdate}
+                disabled={pageType === "Home" || !isCreator}
+                dangerouslySetInnerHTML={{ __html: itemDescription }}
+              // value={description}
+              >
+                {/* {item.description} */}
+              </div>}
           </div>
         </div>
 

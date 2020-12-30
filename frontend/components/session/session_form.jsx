@@ -21,17 +21,14 @@ export default class SessionForm extends React.Component {
   componentDidMount() {
     document.title = `azena - ${this.props.formType}`;
     document.body.classList.add("gray");
-    // console.log(`routed to ${this.props.formType} form`);
     // if (this.props.demo !== undefined && this.props.demo === "demo") { this.demoLogin() } // ! Ryan's method for demologin
   }
 
   componentDidUpdate() {
-    // console.log(`Updated ${this.props.formType} form`);
     // if (this.state.email === "" && this.props.demo !== undefined && this.props.demo === "demo") { this.demoLogin() } // ! Ryan's method for demologin
   }
 
   componentWillUnmount() {
-    // console.log(`Unmounting ${this.props.formType} form`);
     document.body.classList.remove("gray");
     this.props.receiveSessionErrors([]);
   }
@@ -68,7 +65,6 @@ export default class SessionForm extends React.Component {
   }
 
   demoLogin() {
-    // console.log("logging in demo user...");
     this.setState(Object.assign(this._nullState, {disabled: true})); // disable form when demoUser is being entered
 
     // Method 3 - iterate through demoUser object based on fields we want to fill
@@ -101,7 +97,6 @@ export default class SessionForm extends React.Component {
 
   render() {
     const { formType, sessionErrors } = this.props;
-    // console.log(`rendering session form (${formType})...`);
 
     // ! will have to optimize later
     let emailErrors = [], usernameErrors = [], passwordErrors = [];

@@ -35,7 +35,7 @@ class WorkspaceCreateModal extends React.Component {
       let that = this;
       this.setState({ [field]: evt.currentTarget.value }, () => {
         if (field === "name" && this.state.name.length >= 25) {
-          console.log("Name character max is 25");
+          // console.log("Name character max is 25");
         }
       })
     }
@@ -43,20 +43,13 @@ class WorkspaceCreateModal extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log(`Test submit of creating workspace "${this.state.name}"`)
     let that = this;
     this.props.createWorkspace({
       name: this.state.name,
       description: this.state.description
     }).then((passRes) => {
-      console.log("Passed, errors: ", that.props.workspaceErrors);
-      // if (that.props.workspaceErrors && that.props.workspaceErrors.length === 0) {
-      //   console.log("No errors");
       that.props.history.push(`/workspaces/${passRes.workspace.id}`)
-      // }
     }, (failRes) => {
-      console.log("Failed, errors: ", that.props.workspaceErrors);
-      // console.log("fail result: ", failRes);
     })
   }
 
@@ -103,7 +96,7 @@ class WorkspaceCreateModal extends React.Component {
       })
     }
     this.renderCount += 1;
-    console.log("workspace modal renders: ", this.renderCount);
+    // console.log("workspace modal renders: ", this.renderCount);
 
     return (
       <div className="basic-modal-wrapper">

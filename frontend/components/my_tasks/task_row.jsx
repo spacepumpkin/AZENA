@@ -39,11 +39,10 @@ export default function TaskRow({ task, workspaceName, projectName, creatorName 
 
   function deleteTask() {
     dispatch(destroyTask(task.id));
-    console.log(`Destroying task: "${task.name}"`);
   }
 
   function updateDate(evt) {
-    console.log("New date: ", evt.target.value);
+    // console.log("New date: ", evt.target.value);
   }
 
   // Adjust styling based on whether task is done

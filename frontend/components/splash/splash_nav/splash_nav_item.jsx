@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function SplashNavItem(props) {
-  // console.log(props)
   const { paths, type, children } = props;
   const title = props.title.replace(/\s+/g, '').toLowerCase();
   let dropdown = false;

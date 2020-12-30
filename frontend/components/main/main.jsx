@@ -14,7 +14,6 @@ export default class Main extends React.Component {
 
   componentDidMount() {
     document.title = `azena - Main`;
-    // console.log(`mounted Main (${this.props.page})`);
 
     // Testing fetch for workspaces -> will be removed when we have fetchEverything
     // this.props.payload.workspaces !== {} && this.props.fetchUserWorkspaces();

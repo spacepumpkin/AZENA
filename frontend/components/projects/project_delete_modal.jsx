@@ -33,7 +33,6 @@ function ProjectDeleteModal(props) {
   const deleteProject = function (projectId) {
     closeModal();
     destroyProject(projectId).then((res) => {
-      console.log(`Project #${projectId} destroyed`);
       let path = location.pathname;
       let onProjectPage = path.split("/").includes("projects");
       if (onProjectPage && parseInt(path.replace(/\D/g, '')) === res.project.id) {

@@ -25,7 +25,6 @@ export default class Workspace extends React.Component {
 
   componentDidUpdate(prevProps) {
     // Reset title if we changed pages
-    // console.log(`prev title: "${prevProps.title}", new title: "${this.props.title}"`);
     if (this.props.workspace === undefined) return;
     if (document.title !== this.props.workspace.name) { document.title = this.props.workspace.name };
     if (prevProps.description !== this.props.description) {
@@ -52,7 +51,6 @@ export default class Workspace extends React.Component {
     const { description: propsDescription, workspaceId, updateWorkspace } = this.props;
 
     if (stateDescription !== propsDescription) {
-      console.log(`description has changed from "${propsDescription}" to "${stateDescription}"`);
       updateWorkspace({ id: workspaceId, description: stateDescription });
     }
   }

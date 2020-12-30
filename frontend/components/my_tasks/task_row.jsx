@@ -8,7 +8,7 @@ import { updateTask, toggleDone, destroyTask } from '../../actions/task_actions'
 // }
 
 
-export default function TaskRow({ task, workspaceName, projectName, creatorName }) {
+export default function TaskRow({ task, workspaceName, projectName, creatorName, todayDate }) {
 
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ export default function TaskRow({ task, workspaceName, projectName, creatorName 
   }
 
   function updateDate(evt) {
-    // console.log("New date: ", evt.target.value);
+    // console.log("New date: ", evt.target.value); 
   }
 
   // Adjust styling based on whether task is done
@@ -73,20 +73,21 @@ export default function TaskRow({ task, workspaceName, projectName, creatorName 
         </div>
       </td>
       <td>
-        <div>
-          <input className="task-input"
-            type="text"
-            autoComplete="off" autoCorrect="off" autoCapitalize="off"
-            spellCheck="false"
-            onKeyDown={handleKeyDown}
-            onBlur={handleBlur("description")}
-            defaultValue={task.description} />
-        </div>
+        <input className="task-input"
+          type="text"
+          autoComplete="off" autoCorrect="off" autoCapitalize="off"
+          spellCheck="false"
+          onKeyDown={handleKeyDown}
+          onBlur={handleBlur("description")}
+          defaultValue={task.description} />
       </td>
-      <td><div className="my-tasks-date-cell">{task.dueDate ? <input className="my-tasks-date" type="date" defaultValue={task.dueDate} onChange={updateDate} /> : null}</div></td>
-      {/* <td><div>{workspaceName}</div></td> */}
-      <td><div>{projectName}</div></td>
-      <td><div>{creatorName}</div></td>
+      <td><div className="my-tasks-date-cell">{task.dueDate ?
+        <input className="my-tasks-date" type="date" defaultValue={task.dueDate} onChange={updateDate} />
+        : <input className="my-tasks-date" type="date" min={todayDate} onChange={updateDate} />
+      }</div></td>
+      {/* <td>{workspaceName}</div></td> */}
+      <td>{projectName}</td>
+      <td>{creatorName}</td>
     </tr>
   )
 }

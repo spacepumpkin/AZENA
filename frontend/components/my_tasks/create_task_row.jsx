@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../actions/task_actions';
 
-export default function CreateTaskRow({ allWorkspaces, allProjects }) {
+export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate }) {
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -24,7 +24,7 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
 
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
-  const [dueDate, setdueDate] = useState("");
+  const [dueDate, setdueDate] = useState(todayDate);
   // const [workspaceId, setworkspaceId] = useState(-1);
   const [projectId, setprojectId] = useState(-1);
   // const [itemIds, setitemIds] = useState({
@@ -104,7 +104,7 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
       if (field === "projectId") {
         newValue = parseInt(newValue);
         // changeWorkspaceOptions(newValue); 
-      } 
+      }
       // else if (field === "workspaceId") {
       //   newValue = parseInt(newValue);
       //   // changeProjectOptions(newValue);
@@ -113,35 +113,36 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
     }
   }
 
-  
+
   useEffect(() => {
     if (projectRef !== null) {
       // setworkspaceId(parseInt(workspaceRef.current.value));
       setprojectId(parseInt(projectRef.current.value));
       // console.log("workspaceRef: ", workspaceRef.current.value, "; ","projectRef: ", projectRef.current.value);
     }
-  },[projectRef])
-  
+  }, [projectRef])
+
   // console.log({ name: name, description: description, dueDate: dueDate, projectId: projectId });
 
   function addNewTask() {
     dispatch(createTask({ name: name, description: description, dueDate: dueDate, projectId: projectId }));
     setname("");
-    if(description !== "") setdescription("");
-    if(dueDate !== "") setdueDate("");
+    if (description !== "") setdescription("");
+    if (dueDate !== "") setdueDate("");
   }
-  
+
   return (
     <tr className="my-tasks-create-row">
-      <td><input type="text" className="task-input" value={name} placeholder="Add New Task"
+      <td><input type="text" className="task-input" value={name} placeholder="+ Add New Task"
         onChange={handleChange("name")}
       /></td>
       <td><input type="text" className="task-input" value={description} placeholder="Add Description"
         onChange={handleChange("description")}
       /></td>
-      <td><input type="date" className="my-tasks-date" value={dueDate}
+      <td><div className="my-tasks-date-cell"><input type="date" className="my-tasks-date" value={dueDate}
+        min={todayDate}
         onChange={handleChange("dueDate")}
-      /></td>
+      /></div></td>
       {/* <td>
         <select
           ref={workspaceRef}
@@ -160,7 +161,13 @@ export default function CreateTaskRow({ allWorkspaces, allProjects }) {
           {projectOptions}
         </select>
       </td>
-      <td>{!!name ? <button type="button" className="add-task-button" onClick={addNewTask}>Add New Task</button> : null}</td>
+      <td>
+        <button type="button" className="add-task-button"
+          onClick={addNewTask}
+          disabled={!name}
+        >Add New Task
+      </button>
+      </td>
     </tr>
   )
 }

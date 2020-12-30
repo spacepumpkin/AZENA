@@ -6,6 +6,7 @@
 table {
   width          : 100%;
   border-collapse: collapse;
+  table-layout   : fixed; // fixes any overlap of the next table cell over the current
   // border: 1px solid $light-gray;
 }
 
@@ -15,12 +16,15 @@ th {
   overflow     : hidden;
   white-space  : nowrap;
   text-overflow: ellipsis;
+  width        : 1px;
 }
 
 td {
-  opacity      : 75%;
-  border-top   : 1px solid $light-gray;
-  border-bottom: 1px solid $light-gray;
+  opacity         : 75%;
+  border-top      : 1px solid $light-gray;
+  border-bottom   : 1px solid $light-gray;
+  white-space     : nowrap;
+  // width        : 1px;
 }
 
 th {
@@ -59,6 +63,9 @@ th {
 
 .my-tasks-table-row>td:first-child {
   // margin-bottom: -1px; // get rid of extra flex borders
+  // min-width: 270px;
+  width            : 100%;
+  // vertical-align: middle; // centers first column, but other colunn cells get shifted
 }
 
 .my-tasks-table-row:first-child>td:first-child {
@@ -66,15 +73,19 @@ th {
 }
 
 .my-tasks-first-cell {
-  display           : flex;
+  position             : relative;
+  // width             : 100%;
+  vertical-align       : middle;
+  display              : flex;
   // justify-content: ;
-  padding-top       : 5px;
-  align-items       : center;
+  padding-top          : 5px;
+  align-items          : center;
   // border-bottom: none;
-  margin-left       : 10px;
-  margin-right      : 10px;
+  margin-left          : 10px;
+  margin-right         : 10px;
 
   >.plus-button {
+    // float: right;
     height     : 18px;
     width      : 18px;
     margin-left: 5px;
@@ -84,15 +95,23 @@ th {
   &:hover>.plus-button {
     opacity: 100%;
   }
+
+  // &::after {
+  //   content: "";
+  //   clear  : both;
+  //   display: table;
+  // }
 }
 
 // CHECKBOX
 .task-check-wrapper {
-  position  : relative;
-  box-sizing: border-box;
-  width     : 24px;
-  height    : 24px;
-  flex      : 0 0 auto; // To stop flex auto-sizing
+  // float     : left;
+  // display: inline-block;
+  position     : relative;
+  box-sizing   : border-box;
+  width        : 24px;
+  height       : 24px;
+  // flex      : 0 0 auto; // To stop flex auto-sizing
 }
 
 .task-check-icon {
@@ -111,9 +130,10 @@ th {
   border-radius   : 5px;
   font-weight     : bold;
   font-size       : larger;
-  width           : 100%;
+  width           : 90%;
   opacity         : 90%;
   position        : relative;
+  text-overflow   : ellipsis;
   // transition   : all 0.3s ease 0s;
 
   &:hover {
@@ -156,7 +176,7 @@ th {
   margin       : 0 auto;
   cursor       : text;
 
-  // width: 100%;
+  // mwidth: 90%;
 
   // margin       : 0;
   // position     : absolute;
@@ -166,6 +186,7 @@ th {
   // transform    : translate(-50%, -50%);
 
   &:focus {
+    border          : 1px solid $primary;
     background-color: white;
   }
 }
@@ -173,10 +194,47 @@ th {
 
 // CREATE TASK ROW
 .my-tasks-create-row {
-  height: 60px;
+  transition    : all 0.3s ease 0s;
+  border-left   : 4px solid transparent;
+  box-sizing    : border-box;
+  // height     : 50px;
+  height        : 60px;
+
+  >td {
+    width: 1px;
+  }
+
+  input {
+    // width: 90%;
+  }
+
+  select {
+    padding              : 4px;
+    border-radius        : 5px;
+    border               : 1px solid $light-gray;
+    box-shadow           : none;
+    // -webkit-appearance: none;
+    // -moz-appearance   : none;
+    // appearance        : none;
+    outline              : none;
+
+    &:focus {
+      // outline   : 1px solid $primary;
+      border    : 1px solid $primary;
+      // box-shadow: 0 0 0 1px $primary;
+    }
+  }
 }
 
 .add-task-button {
   @include submit-button;
 
+  &:disabled {
+    cursor: default;
+  }
+  &:enabled {
+    opacity: 70%;
+  }
+
+  // max-height: 30px;
 }

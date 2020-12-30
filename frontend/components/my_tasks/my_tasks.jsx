@@ -7,12 +7,20 @@ import CreateTaskRow from './create_task_row';
 function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, allWorkspaces, allProjects }) {
 
   const taskRows = [];
+
+  const todayDay = new Date().toDateString().slice(8, 10);
+  const todayMonth = new Date().getMonth() + 1;
+  const todayYear = new Date().toDateString().slice(11);
+  const todayDate = `${todayYear}-${todayMonth}-${todayDay}`;
+
+
   for (let i = 0; i < assignedTasks.length; i++) {
 
     taskRows.push(
       <TaskRow
         key={`task-${assignedTasks[i].id}`}
         task={assignedTasks[i]}
+        todayDate={todayDate}
         workspaceName={taskWorkspaces[i].name}
         projectName={taskProjects[i].name}
         creatorName={taskCreators[i].username}
@@ -35,7 +43,7 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, al
         </thead>
         <tbody>
           {taskRows}
-          <CreateTaskRow allWorkspaces={allWorkspaces} allProjects={allProjects} />
+          <CreateTaskRow todayDate={todayDate} allWorkspaces={allWorkspaces} allProjects={allProjects} />
         </tbody>
       </table>
     </div>

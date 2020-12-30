@@ -159,12 +159,16 @@
   opacity         : 60%;
   transition      : all 0.3s ease 0s;
 
-  &:hover {
+  &:disabled {
+    opacity: 40%;
+  }
+
+  &:hover:enabled {
     opacity         : 100%;
     background-color: $primary;
   }
 
-  &:focus {
+  &:focus:enabled {
     opacity   : 100%;
     box-shadow: 0 0 8px $lighter-gray;
   }

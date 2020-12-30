@@ -226,6 +226,7 @@ export default class TopBar extends React.Component {
                 onFocus={this.handleDescriptionFocus}
                 onKeyDown={this.handleKeyDown}
                 onBlur={this.handleDescriptionUpdate}
+                autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
                 disabled={pageType === "Home" || !isCreator}
                 dangerouslySetInnerHTML={{ __html: itemDescription }}
               // value={description}

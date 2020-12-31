@@ -64,7 +64,8 @@ export default class Sidebar extends React.Component {
       if (this.state.plusMenuWorkspaceId === workspaceId) {
         this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
       } else {
-        this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId, plusMenuShow: true })
+        // this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId, plusMenuShow: true })
+        this.setState({ plusMenuWorkspaceId: workspaceId, plusMenuShow: true })
       }
     }
   }

@@ -83,7 +83,7 @@ export default function TaskRow({ task, workspace, project, creatorName, todayDa
           defaultValue={task.description} />
       </td>
       <td><div className="my-tasks-date-cell">{task.dueDate ?
-        <input className="my-tasks-date" type="date" defaultValue={task.dueDate} onChange={updateDate} />
+        <input className="my-tasks-date" type="date" defaultValue={task.dueDate} min={task.dueDate} onChange={updateDate} />
         : <input className="my-tasks-date" type="date" min={todayDate} onChange={updateDate} />
       }</div></td>
       <td><Link to={`/workspaces/${workspace.id}`}>{workspace.name}</Link></td>

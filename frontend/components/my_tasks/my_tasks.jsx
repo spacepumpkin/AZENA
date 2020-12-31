@@ -8,11 +8,10 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, al
 
   const taskRows = [];
 
-  const todayDay = new Date().toDateString().slice(8, 10);
-  const todayMonth = new Date().getMonth() + 1;
-  const todayYear = new Date().toDateString().slice(11);
-  const todayDate = `${todayYear}-${todayMonth}-${todayDay}`;
-
+  // const todayDay = new Date().toDateString().slice(8, 10);
+  // const todayMonth = new Date().getMonth() + 1;
+  // const todayYear = new Date().toDateString().slice(11);
+  const todayDate = new Date().toISOString().substr(0,10);
 
   for (let i = 0; i < assignedTasks.length; i++) {
 

@@ -58,27 +58,31 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
 
 
   // Get project dropdown list depending on whether a workspace was selected
-  const defaultProjectOptions = Object.values(allProjects).map(project => {
-    return (<option key={project.id} value={project.id}>{project.name}</option>);
+  let firstWorkspace = Object.values(allWorkspaces)[0];
+  const defaultProjectOptions = [];
+  Object.values(allProjects).forEach(project => {
+    if (project.workspaceId === firstWorkspace.id) {
+      defaultProjectOptions.push(<option key={project.id} value={project.id}>{project.name}</option>);
+    }
   });
 
   const [projectOptions, setProjectOptions] = useState(defaultProjectOptions);
 
-  // useEffect(() => {
-  //   if (workspaceId !== -1) {
-  //     let newProjectOptions = [];
-  //     for (let projectId in allProjects) {
-  //       let project = allProjects[projectId];
-  //       if (project.workspaceId === workspaceId) {
-  //         newProjectOptions.push(
-  //           <option key={projectId} value={projectId}>{project.name}</option>
-  //         );
-  //       }
-  //     }
-  //     // setworkspaceId(workspaceId);
-  //     setProjectOptions(newProjectOptions);
-  //   }
-  // }, [workspaceId])
+  useEffect(() => {
+    if (workspaceId !== -1) {
+      let newProjectOptions = [];
+      for (let projectId in allProjects) {
+        let project = allProjects[projectId];
+        if (project.workspaceId === workspaceId) {
+          newProjectOptions.push(
+            <option key={projectId} value={projectId}>{project.name}</option>
+          );
+        }
+      }
+      // setworkspaceId(workspaceId);
+      setProjectOptions(newProjectOptions);
+    }
+  }, [workspaceId])
 
   // function changeWorkspaceOptions(selectedProjectId) {
   //   let projectWorkspaceId = allProjects[selectedProjectId].workspaceId;

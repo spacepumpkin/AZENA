@@ -3,20 +3,6 @@ import { useDispatch } from 'react-redux';
 import { createTask } from '../../actions/task_actions';
 
 export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate }) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     task: {
-  //       name: "",
-  //       description: "",
-  //       dueDate: "",
-  //       workspaceId: -1,
-  //       projectId: -1
-  //     },
-  //     selectedWorkspaceId: null,
-  //     selectedProjectId: null
-  //   }
-  // }
   const dispatch = useDispatch();
 
   const workspaceRef = useRef(null);
@@ -32,32 +18,14 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   //   projectId: -1
   // });
 
-  // Get workspace dropdown list depending on whether a project was selected
+  // Get workspace dropdown list (eliminate workspaces that don't have projects)
   const defaultWorkspaceOptions = Object.values(allWorkspaces).map(workspace => {
     return (<option key={workspace.id} value={workspace.id}>{workspace.name}</option>);
   });
 
   const [workspaceOptions, setWorkspaceOptions] = useState(defaultWorkspaceOptions);
 
-  // useEffect(() => {
-  //   if (projectId !== -1) {
-  //     let newWorkspaceOptions = [];
-  //     let projectWorkspaceId = allProjects[projectId].workspaceId;
-  //     // debugger
-  //     // for (let workspaceId in allWorkspaces) {
-  //     //   if (workspaceId === projectWorkspaceId) {
-  //     newWorkspaceOptions.push(
-  //       <option key={projectWorkspaceId} value={projectWorkspaceId}>{allWorkspaces[projectWorkspaceId].name}</option>
-  //     );
-  //     //   }
-  //     // }
-  //     // setprojectId(projectId);
-  //     setWorkspaceOptions(newWorkspaceOptions);
-  //   }
-  // }, [projectId])
-
-
-  // Get project dropdown list depending on whether a workspace was selected
+  // Get project dropdown list depending on workspace selected
   let firstWorkspace = Object.values(allWorkspaces)[0];
   const defaultProjectOptions = [];
   Object.values(allProjects).forEach(project => {
@@ -71,15 +39,18 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   useEffect(() => {
     if (workspaceId !== -1) {
       let newProjectOptions = [];
+      let firstProjectOptionId = -1;
       for (let projectId in allProjects) {
         let project = allProjects[projectId];
         if (project.workspaceId === workspaceId) {
+          if (firstProjectOptionId === -1) firstProjectOptionId = projectId;
           newProjectOptions.push(
             <option key={projectId} value={projectId}>{project.name}</option>
           );
         }
       }
       // setworkspaceId(workspaceId);
+      setprojectId(firstProjectOptionId);
       setProjectOptions(newProjectOptions);
     }
   }, [workspaceId])
@@ -113,11 +84,13 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
       //   newValue = parseInt(newValue);
       //   // changeProjectOptions(newValue);
       // }
-      eval(`set${field}`)(newValue);
+      // console.log("newValue: ", newValue);
+      eval(`set${field}`)(newValue); // dynamic variable invokation
     }
   }
 
 
+  // Set initial projectId and workspaceId on Mount
   useEffect(() => {
     if (projectRef !== null) {
       // setworkspaceId(parseInt(workspaceRef.current.value));
@@ -168,8 +141,6 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
           ref={projectRef}
           onChange={handleChange("projectId")}
         >
-          {/* <option value="project-0" disabled>Select a Project</option> */}
-          {/* <option value="" disabled selected hidden>Select a Project</option> */}
           {projectOptions}
         </select>
       </td>

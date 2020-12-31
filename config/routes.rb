@@ -27,6 +27,7 @@
 #                  api_task PATCH  /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>:json}
 #                           PUT    /api/tasks/:id(.:format)                                                                 api/tasks#update {:format=>:json}
 #                           DELETE /api/tasks/:id(.:format)                                                                 api/tasks#destroy {:format=>:json}
+#              api_feedback POST   /api/feedback(.:format)                                                                  api/feedbacks#create {:format=>:json}
 #                      root GET    /                                                                                        static_pages#root
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show

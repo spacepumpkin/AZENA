@@ -12,6 +12,7 @@
 #  updated_at  :datetime         not null
 #  section_id  :integer
 #  order       :integer
+#  done        :boolean          default(FALSE)
 #
 require 'test_helper'
 

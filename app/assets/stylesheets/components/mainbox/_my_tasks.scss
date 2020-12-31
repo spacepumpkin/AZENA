@@ -238,3 +238,16 @@ th {
 
   // max-height: 30px;
 }
+
+input[value=""]::-webkit-datetime-edit {
+  color: transparent;
+}
+
+.past-due {
+  font-weight: bold;
+  color: red;
+}
+
+.today-tomorrow {
+  color: $primary;
+}

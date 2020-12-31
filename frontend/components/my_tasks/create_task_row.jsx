@@ -148,7 +148,7 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
         onChange={handleChange("description")}
       /></td>
       <td><div className="my-tasks-date-cell"><input type="date" className="my-tasks-date" value={dueDate}
-        min={todayDate}
+        // min={todayDate}
         onChange={handleChange("dueDate")}
       /></div></td>
       <td>

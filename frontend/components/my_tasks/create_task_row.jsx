@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createTask } from '../../actions/task_actions';
 
 export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate }) {
+  // Fields are React-controlled here (not in TaskRow)
   const dispatch = useDispatch();
 
   const workspaceRef = useRef(null);
@@ -13,14 +14,18 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   const [dueDate, setdueDate] = useState(todayDate);
   const [workspaceId, setworkspaceId] = useState(-1);
   const [projectId, setprojectId] = useState(-1);
-  // const [itemIds, setitemIds] = useState({
-  //   workspaceId: -1,
-  //   projectId: -1
-  // });
 
   // Get workspace dropdown list (eliminate workspaces that don't have projects)
-  const defaultWorkspaceOptions = Object.values(allWorkspaces).map(workspace => {
-    return (<option key={workspace.id} value={workspace.id}>{workspace.name}</option>);
+  const workspaceIds = {};
+
+  for (let projectId in allProjects) {
+    let project = allProjects[projectId];
+    if (!workspaceIds[project.workspaceId]) workspaceIds[project.workspaceId] = true;
+  };
+
+  const defaultWorkspaceOptions = Object.keys(workspaceIds).map((workspaceId) => {
+    let workspaceName = allWorkspaces[workspaceId].name;
+    return (<option key={workspaceId} value={workspaceId}>{workspaceName}</option>);
   });
 
   const [workspaceOptions, setWorkspaceOptions] = useState(defaultWorkspaceOptions);
@@ -49,42 +54,17 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
           );
         }
       }
-      // setworkspaceId(workspaceId);
       setprojectId(firstProjectOptionId);
       setProjectOptions(newProjectOptions);
     }
   }, [workspaceId])
-
-  // function changeWorkspaceOptions(selectedProjectId) {
-  //   let projectWorkspaceId = allProjects[selectedProjectId].workspaceId;
-  //   setWorkspaceOptions([<option key={projectWorkspaceId} value={projectWorkspaceId}>{allWorkspaces[projectWorkspaceId].name}</option>]);
-  // }
-
-  // function changeProjectOptions(selectedWorkspaceId) {
-  //   let newProjectOptions = [];
-  //   for (let projectId in allProjects) {
-  //     let project = allProjects[projectId];
-  //     if (project.workspaceId === selectedWorkspaceId) {
-  //       newProjectOptions.push(
-  //         <option key={projectId} value={projectId}>{project.name}</option>
-  //       );
-  //     }
-  //   }
-  //   setProjectOptions(newProjectOptions);
-  // }
 
   function handleChange(field) {
     return (evt) => {
       let newValue = evt.target.value;
       if (field === "projectId" || field === "workspaceId") {
         newValue = parseInt(newValue);
-        // changeWorkspaceOptions(newValue); 
       }
-      // else if (field === "workspaceId") {
-      //   newValue = parseInt(newValue);
-      //   // changeProjectOptions(newValue);
-      // }
-      // console.log("newValue: ", newValue);
       eval(`set${field}`)(newValue); // dynamic variable invokation
     }
   }
@@ -93,27 +73,21 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   // Set initial projectId and workspaceId on Mount
   useEffect(() => {
     if (projectRef !== null) {
-      // setworkspaceId(parseInt(workspaceRef.current.value));
       setprojectId(parseInt(projectRef.current.value));
-      // console.log("workspaceRef: ", workspaceRef.current.value, "; ","projectRef: ", projectRef.current.value);
     }
   }, [projectRef])
 
   useEffect(() => {
     if (workspaceRef !== null) {
-      // setworkspaceId(parseInt(workspaceRef.current.value));
       setworkspaceId(parseInt(workspaceRef.current.value));
-      // console.log("workspaceRef: ", workspaceRef.current.value, "; ","projectRef: ", projectRef.current.value);
     }
   }, [workspaceRef])
-
-  // console.log({ name: name, description: description, dueDate: dueDate, projectId: projectId });
 
   function addNewTask() {
     dispatch(createTask({ name: name, description: description, dueDate: dueDate, projectId: projectId }));
     setname("");
     if (description !== "") setdescription("");
-    if (dueDate !== "") setdueDate("");
+    if (dueDate !== "") setdueDate(todayDate);
   }
 
   return (

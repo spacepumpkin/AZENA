@@ -239,9 +239,9 @@ th {
   // max-height: 30px;
 }
 
-input[value=""]::-webkit-datetime-edit {
-  color: transparent;
-}
+// input[value=""]::-webkit-datetime-edit {
+//   color: transparent;
+// }
 
 .past-due {
   font-weight: bold;
@@ -250,4 +250,13 @@ input[value=""]::-webkit-datetime-edit {
 
 .today-tomorrow {
   color: $primary;
+}
+
+.empty-date {
+  color: transparent;
+  transition: color 0.3s ease 0s;
+
+  &:hover, &:focus {
+    color: inherit;
+  }
 }

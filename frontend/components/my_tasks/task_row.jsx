@@ -43,7 +43,8 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
   }
 
   function updateDate(evt) {
-    console.log("New date: ", evt.target.value); 
+    console.log("New date: ", evt.target.value);
+    dispatch(updateTask({ id: task.id, dueDate: evt.target.value }));
   }
 
   // Adjust styling based on whether task is done
@@ -55,13 +56,6 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
     let todayDate = new Date().toISOString().substr(0, 10); // to avoid closure
     let dateDifference = new Date(date) - new Date(todayDate); // positive if date is ahead of today
     return (dateDifference / 86400000);
-    // if (daysAway < 0) {
-    //   return "past-due";
-    // } else if (daysAway < 2) {
-    //   return "{color: " "}"
-    //   return null;
-    // }
-    // if (daysAway >= ) { return { color: "orange" }
   };
 
   const dueDateColorClass = function(date) {
@@ -120,7 +114,7 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
       <td><div className="my-tasks-date-cell">{task.dueDate ?
         <input className={"my-tasks-date" + dueDateColorClass(task.dueDate)} type="date" 
         defaultValue={task.dueDate} onChange={updateDate} />
-        : <input className="my-tasks-date" type="date" onChange={updateDate} />
+        : <input className={"my-tasks-date" + " empty-date"} type="date" onChange={updateDate} />
       }</div></td>
       <td><Link to={`/workspaces/${workspace.id}`}>{workspace.name}</Link></td>
       <td><Link to={`/projects/${project.id}/list`}>{project.name}</Link></td>

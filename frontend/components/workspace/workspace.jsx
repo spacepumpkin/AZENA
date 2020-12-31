@@ -98,7 +98,7 @@ export default class Workspace extends React.Component {
               autoComplete="off" autoCorrect="off" autoCapitalize="off"
               spellCheck="false"
               value={stateDescription}
-              placeholder={"Click to add a description of your workspace..."}
+              placeholder={"Click to add a description of the workspace..."}
             ></textarea>
           </div>
           <div id="workspace-members">

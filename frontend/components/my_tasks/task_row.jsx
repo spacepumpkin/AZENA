@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { updateTask, toggleDone, destroyTask } from '../../actions/task_actions';
 
@@ -8,7 +9,7 @@ import { updateTask, toggleDone, destroyTask } from '../../actions/task_actions'
 // }
 
 
-export default function TaskRow({ task, workspaceName, projectName, creatorName, todayDate }) {
+export default function TaskRow({ task, workspace, project, creatorName, todayDate }) {
 
   const dispatch = useDispatch();
 
@@ -85,8 +86,8 @@ export default function TaskRow({ task, workspaceName, projectName, creatorName,
         <input className="my-tasks-date" type="date" defaultValue={task.dueDate} onChange={updateDate} />
         : <input className="my-tasks-date" type="date" min={todayDate} onChange={updateDate} />
       }</div></td>
-      {/* <td>{workspaceName}</div></td> */}
-      <td>{projectName}</td>
+      <td><Link to={`/workspaces/${workspace.id}`}>{workspace.name}</Link></td>
+      <td><Link to={`/projects/${project.id}/list`}>{project.name}</Link></td>
       <td>{creatorName}</td>
     </tr>
   )

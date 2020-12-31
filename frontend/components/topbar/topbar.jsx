@@ -105,9 +105,9 @@ export default class TopBar extends React.Component {
     if (this.state.showUserMenu || this.state.showTitleMenu) {
       if (evt.nativeEvent.type === "blur") {
         if (!evt.relatedTarget ||
-          (this.userMenuRef &&
+          (this.userMenuRef && this.userMenuRef.current &&
             !this.userMenuRef.current.contains(evt.relatedTarget)) ||
-          (this.titleMenuRef &&
+          (this.titleMenuRef && this.titleMenuRef.current &&
             !this.titleMenuRef.current.contains(evt.relatedTarget)) ||
           evt.relatedTarget.id !== "user-avatar-button" ||
           evt.relatedTarget.id !== "title-menu-button") {

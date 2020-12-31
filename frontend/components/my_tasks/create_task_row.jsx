@@ -19,13 +19,13 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   // }
   const dispatch = useDispatch();
 
-  // const workspaceRef = useRef(null);
+  const workspaceRef = useRef(null);
   const projectRef = useRef(null);
 
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [dueDate, setdueDate] = useState(todayDate);
-  // const [workspaceId, setworkspaceId] = useState(-1);
+  const [workspaceId, setworkspaceId] = useState(-1);
   const [projectId, setprojectId] = useState(-1);
   // const [itemIds, setitemIds] = useState({
   //   workspaceId: -1,
@@ -33,11 +33,11 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   // });
 
   // Get workspace dropdown list depending on whether a project was selected
-  // const defaultWorkspaceOptions = Object.values(allWorkspaces).map(workspace => {
-  //   return (<option key={workspace.id} value={workspace.id}>{workspace.name}</option>);
-  // });
+  const defaultWorkspaceOptions = Object.values(allWorkspaces).map(workspace => {
+    return (<option key={workspace.id} value={workspace.id}>{workspace.name}</option>);
+  });
 
-  // const [workspaceOptions, setWorkspaceOptions] = useState(defaultWorkspaceOptions);
+  const [workspaceOptions, setWorkspaceOptions] = useState(defaultWorkspaceOptions);
 
   // useEffect(() => {
   //   if (projectId !== -1) {
@@ -101,7 +101,7 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   function handleChange(field) {
     return (evt) => {
       let newValue = evt.target.value;
-      if (field === "projectId") {
+      if (field === "projectId" || field === "workspaceId") {
         newValue = parseInt(newValue);
         // changeWorkspaceOptions(newValue); 
       }
@@ -121,6 +121,14 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
       // console.log("workspaceRef: ", workspaceRef.current.value, "; ","projectRef: ", projectRef.current.value);
     }
   }, [projectRef])
+
+  useEffect(() => {
+    if (workspaceRef !== null) {
+      // setworkspaceId(parseInt(workspaceRef.current.value));
+      setworkspaceId(parseInt(workspaceRef.current.value));
+      // console.log("workspaceRef: ", workspaceRef.current.value, "; ","projectRef: ", projectRef.current.value);
+    }
+  }, [workspaceRef])
 
   // console.log({ name: name, description: description, dueDate: dueDate, projectId: projectId });
 
@@ -143,14 +151,14 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
         min={todayDate}
         onChange={handleChange("dueDate")}
       /></div></td>
-      {/* <td>
+      <td>
         <select
           ref={workspaceRef}
           onChange={handleChange("workspaceId")}
         >
           {workspaceOptions}
         </select>
-      </td> */}
+      </td>
       <td>
         <select
           ref={projectRef}

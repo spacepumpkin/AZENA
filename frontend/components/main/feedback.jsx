@@ -84,7 +84,7 @@ class Feedback extends React.Component {
                           1-3 Potential Improvements:</label>
                         <textarea id="feedback-modal-form-1" type="text" name="improvements" onFocus={this.handleFocus(1)} />
                         <label htmlFor="feedback-modal-form-2" className={activeInput === 2 ? "label-input-focused" : undefined} >
-                          Likes/Dislikes, Death Threats, or Other Comments (opt.):</label>
+                          Likes/Dislikes, Angry Messages, or Other Comments (opt.):</label>
                         <textarea id="feedback-modal-form-2" type="text" name="other_comments" onFocus={this.handleFocus(2)} />
                         <label htmlFor="feedback-modal-form-3" className={activeInput === 3 ? "label-input-focused" : undefined} >
                           Name (opt.):</label>

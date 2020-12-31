@@ -21,8 +21,8 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, al
         key={`task-${assignedTasks[i].id}`}
         task={assignedTasks[i]}
         todayDate={todayDate}
-        workspaceName={taskWorkspaces[i].name}
-        projectName={taskProjects[i].name}
+        workspace={taskWorkspaces[i]}
+        project={taskProjects[i]}
         creatorName={taskCreators[i].username}
       />
     )
@@ -36,7 +36,7 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, al
             <th>Task</th>
             <th>Description</th>
             <th>Due Date</th>
-            {/* <th>Workspace</th> */}
+            <th>Workspace</th>
             <th>Project</th>
             <th>Created By</th>
           </tr>

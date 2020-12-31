@@ -32,11 +32,12 @@ export const updateTask = (task) => {
   // console.log(`updating task #${task.id}...`);
   let updatedTask = {};
   for (let field in task) { 
-    if (field === "dueDate") {
-      updatedTask["due_date"] = task[field]
-    } else {
-      updatedTask[field] = task[field] 
-    }
+    updatedTask[field.toSnakeCase()] = task[field];
+    // if (field === "dueDate") {
+    //   updatedTask["due_date"] = task[field]
+    // } else {
+    //   updatedTask[field] = task[field] 
+    // }
   }
 
   return $.ajax({
@@ -79,3 +80,16 @@ export const unassignUsersTask = (userId, taskId) => {
     data: { users_task: { user_id: userId, task_id: taskId } }
   })
 }
+
+String.prototype.toSnakeCase = function() {
+  return this.replace(/[A-Z]/g, (match) => `_${match.toLowerCase()}`);
+
+  // Non-Regex Way
+  // this.split("").map(char => {
+  //   if (char === char.toLowerCase()) {
+  //     return char;
+  //   } else {
+  //     return `_${char.toLowerCase()}`;
+  //   }
+  // }).join("");
+};

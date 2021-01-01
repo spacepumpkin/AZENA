@@ -122,7 +122,25 @@
   }
 }
 
-@mixin plus-menu {
+@mixin plus-menu-two-option {
+  @include list-menu;
+
+  >a,
+  >button,
+  div {
+    &:first-child:hover {
+      background: whitesmoke;
+      color     : $primary;
+    }
+
+    &:last-child:hover {
+      color     : $secondary;
+      background: $lightest-gray;
+    }
+  }
+}
+
+@mixin list-menu {
   display      : block;
   position     : absolute;
   transition   : all 0.3s ease 0s;
@@ -141,18 +159,7 @@
     width      : 100%;
     white-space: nowrap;
     cursor     : pointer;
-
-    &:first-child:hover {
-      font-weight: bold;
-      background : whitesmoke;
-      color      : $primary;
-    }
-
-    &:nth-child(2):hover {
-      font-weight: bold;
-      color      : $secondary;
-      background : $lightest-gray;
-    }
+    font-weight: bold;
   }
 }
 

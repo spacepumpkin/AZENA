@@ -167,7 +167,7 @@ button.collapsed {
 // }
 
 .sidebar-workspace-plus-menu {
-  @include plus-menu;
+  @include plus-menu-two-option;
   left         : 250px;
 
   // &.show-menu {

@@ -281,16 +281,16 @@ th {
 //   color: transparent;
 // }
 
-.past-due {
+.date-past-due {
   font-weight: bold;
   color      : red;
 }
 
-.today-tomorrow {
+.date-today-tomorrow {
   color: $primary;
 }
 
-.empty-date {
+.date-empty {
   color     : transparent;
   transition: color 0.3s ease 0s;
 

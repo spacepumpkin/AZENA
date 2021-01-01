@@ -60,11 +60,11 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
   const dueDateColorClass = function(date) {
     let daysAway = calcDaysAway(date);
     if (daysAway < 0) {
-      return " past-due"; // Corresponds to red/$secondary color
+      return " date-past-due"; // Corresponds to red/$secondary color
     } else if (daysAway > 1) {
       return ""; // No need to change color
     } else {
-      return " today-tomorrow"; // Corresponds to green/$primary color
+      return " date-today-tomorrow"; // Corresponds to green/$primary color
     }
   };
 
@@ -113,7 +113,7 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
       <td><div className="my-tasks-date-cell">{task.dueDate ?
         <input className={"my-tasks-date" + dueDateColorClass(task.dueDate)} type="date" 
         defaultValue={task.dueDate} onChange={updateDate} />
-        : <input className={"my-tasks-date" + " empty-date"} type="date" onChange={updateDate} />
+        : <input className={"my-tasks-date" + " date-empty"} type="date" onChange={updateDate} />
       }</div></td>
       <td><Link to={`/workspaces/${workspace.id}`}>{workspace.name}</Link></td>
       <td><Link to={`/projects/${project.id}/list`}>{project.name}</Link></td>

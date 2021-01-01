@@ -62,11 +62,17 @@ export default class TopBar extends React.Component {
   // If edited title differs from original, update in BE
   handleTitleUpdate(evt) {
     const { title: currentTitle, pageType, isCreator } = this.props;
+    const { title: stateTitle } = this.state;
+    const updatedTitle = stateTitle.replace(/^ +|[\r\n\v\t]+/g, '');
 
-    if (pageType !== "Home" && isCreator && this.state.title !== currentTitle) {
-      const { updateItem, item } = this.props;
-      if (item.id !== undefined && item.id !== null) {
-        updateItem({ id: item.id, name: this.state.title });
+    if (pageType !== "Home" && isCreator) {
+      if (updatedTitle !== currentTitle) {
+        const { updateItem, item } = this.props;
+        if (item.id !== undefined && item.id !== null) {
+          updateItem({ id: item.id, name: updatedTitle });
+        }
+      } else {
+        this.setState({ title: updatedTitle });
       }
     }
   }

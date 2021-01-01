@@ -6,6 +6,7 @@
 .project-task-row {
   display        : flex;
   justify-content: flex-start;
+  align-items    : center;
   position       : relative;
 
   >.plus-button {
@@ -18,18 +19,47 @@
     height  : 16px;
   }
 
-  &:hover>.plus-button {
-    opacity: 100%;
+  &:hover,
+  &:focus-within {
+    >.plus-button {
+      opacity: 100%;
+    }
   }
 
-  .project-task-input {
+  >.project-task-input {
+
     // width       : 50%;
     // margin-right: 10px;
     &:first-of-type {
       max-width: 30%;
     }
+
     &:nth-of-type(2) {
       max-width: 50%;
+    }
+  }
+}
+
+.project-task-check-wrapper {
+  position          : relative;
+  box-sizing        : border-box;
+  width             : 24px;
+  height            : 24px;
+  display           : flex;
+  align-items       : center;
+  justify-content   : center;
+  // flex           : 0 0 auto; // To stop flex auto-sizing
+
+  >.plus-button {
+    width : 20px;
+    height: 20px;
+    transition: all 0.3s ease 0s;
+
+    // &:hover {
+    //   transform: rotate(360deg);
+    // }
+    &:focus {
+      animation: checked 0.5s ease;
     }
   }
 }
@@ -38,10 +68,5 @@
   @include task-check-button;
   width     : 20px;
   height    : 20px;
-  margin-top: 3px;
-}
-
-.project-task-input {
-  // width       : 50%;
-  // margin-right: 10px;
+  // margin-top: 3px;
 }

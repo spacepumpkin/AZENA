@@ -13,17 +13,25 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
 
   const dispatch = useDispatch();
 
-  // Updates task once we blur away from task name input
-  function handleBlur(field) {
+  // Updates task once we blur away from task input
+  function handleUpdate(field) {
     return (evt) => {
-      if (evt.target.value !== task[field]) {
-        const updatedTask = Object.assign({}, task, { [field]: evt.target.value });
+      let updatedValue = evt.target.value;
+      if (field === 'name') {
+        // Replace all leading spaces or tab/newline chars
+        updatedValue = updatedValue.replace(/^ +|[\r\n\v\t]+/g, '');
+        if (updatedValue === '') {
+          updatedValue = 'Untitled Task';
+        }
+      }
+      if (updatedValue !== task[field]) {
+        const updatedTask = Object.assign({}, task, { [field]: updatedValue });
         dispatch(updateTask(updatedTask));
       }
     }
   }
 
-  // Blurs from task name input when enter is pressed
+  // Blurs from task input when enter is pressed
   function handleKeyDown(evt) {
     if (evt.key === "Enter" || evt.keyCode === 13) {
       evt.preventDefault();
@@ -42,9 +50,9 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
     dispatch(destroyTask(task.id));
   }
 
-  function updateDate(evt) {
-    dispatch(updateTask({ id: task.id, dueDate: evt.target.value }));
-  }
+  // function updateDate(evt) {
+  //   dispatch(updateTask({ id: task.id, dueDate: evt.target.value }));
+  // }
 
   // Adjust styling based on whether task is done
   // const checkIcon = task.done ? window.checkCircle : window.checkCircleOutline;
@@ -89,7 +97,7 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
             type="text"
             onKeyDown={handleKeyDown}
             // onChange={handleTitleChange}
-            onBlur={handleBlur("name")}
+            onBlur={handleUpdate("name")}
             // ref={this.taskInput}
             autoComplete="off" autoCorrect="off" autoCapitalize="off"
             spellCheck="false"
@@ -107,13 +115,13 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
           autoComplete="off" autoCorrect="off" autoCapitalize="off"
           spellCheck="false"
           onKeyDown={handleKeyDown}
-          onBlur={handleBlur("description")}
+          onBlur={handleUpdate("description")}
           defaultValue={task.description} />
       </td>
       <td><div className="my-tasks-date-cell">{task.dueDate ?
         <input className={"my-tasks-date" + dueDateColorClass(task.dueDate)} type="date" 
-        defaultValue={task.dueDate} onChange={updateDate} />
-        : <input className={"my-tasks-date" + " date-empty"} type="date" onChange={updateDate} />
+        defaultValue={task.dueDate} onChange={handleUpdate("dueDate")} />
+        : <input className={"my-tasks-date" + " date-empty"} type="date" onChange={handleUpdate("dueDate")} />
       }</div></td>
       <td><Link to={`/workspaces/${workspace.id}`}>{workspace.name}</Link></td>
       <td><Link to={`/projects/${project.id}/list`}>{project.name}</Link></td>

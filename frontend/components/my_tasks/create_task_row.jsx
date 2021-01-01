@@ -84,7 +84,11 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
   }, [workspaceRef])
 
   function addNewTask() {
-    dispatch(createTask({ name: name, description: description, dueDate: dueDate, projectId: projectId }));
+    let filteredName = name.replace(/^ +|[\r\n\v\t]+/g, '');
+    if (filteredName === '') {
+      filteredName = 'Untitled Task';
+    }
+    dispatch(createTask({ name: filteredName, description: description, dueDate: dueDate, projectId: projectId }));
     setname("");
     if (description !== "") setdescription("");
     if (dueDate !== "") setdueDate(todayDate);

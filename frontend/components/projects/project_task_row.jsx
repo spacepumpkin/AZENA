@@ -6,15 +6,15 @@ class ProjectTaskRow extends React.Component {
 
     this.state = {
       name: props.task.name,
-      // description: props.task.description,
-      // dueDate: props.task.dueDate,
+      description: props.task.description,
+      dueDate: props.task.dueDate,
       // done: props.task.done,
       // projectId: props.task.projectId
     }
 
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.toggleCheck = this.toggleCheck.bind(this);
   }
 
@@ -31,16 +31,26 @@ class ProjectTaskRow extends React.Component {
     }
   }
 
-  // handleChange(field) {
-  //   return (evt) => {
-  //     this.setState({ [field]: evt.target.value });
-  //   };
-  // }
-
-  handleBlur(field) {
+  handleChange(field) {
     return (evt) => {
-      if (evt.target.value !== this.props.task[field]) {
-        this.props.updateTask({ id: this.props.task.id, [field]: evt.target.value });
+      this.setState({ [field]: evt.target.value });
+    };
+  }
+
+  handleUpdate(field) {
+    return (evt) => {
+      let updatedValue = evt.target.value;
+      if (field === 'name') {
+        // Replace all leading spaces or tab/newline chars
+        updatedValue = updatedValue.replace(/^ +|[\r\n\v\t]+/g, '');
+        if (updatedValue === '') {
+          updatedValue = 'Untitled Task';
+        }
+      }
+      if (updatedValue !== this.props.task[field]) {
+        this.props.updateTask({ id: this.props.task.id, [field]: updatedValue });
+      } else {
+        this.setState({ [field]: updatedValue });
       }
     };
   }
@@ -61,6 +71,7 @@ class ProjectTaskRow extends React.Component {
 
   render() {
     const { task, destroyTask } = this.props;
+    const { name, description, dueDate } = this.state;
 
     return (
       <div className="project-task-row" >
@@ -70,25 +81,27 @@ class ProjectTaskRow extends React.Component {
             onClick={this.toggleCheck}
           />
         </div>
-        <input className={`project-task-input task-input${task.done ? " task-done" : ""}`} defaultValue={task.name} type="text"
+        <input className={`project-task-input task-input${task.done ? " task-done" : ""}`} type="text"
+          value={name}
           onKeyDown={this.handleKeyDown}
-          // onChange={this.handleChange("name")}
-          onBlur={this.handleBlur("name")}
+          onChange={this.handleChange("name")}
+          onBlur={this.handleUpdate("name")}
           autoComplete="off" autoCorrect="off" autoCapitalize="off"
           spellCheck="false"
         />
-        <input className={`project-task-input task-input`} defaultValue={task.description} type="text"
+        <input className={`project-task-input task-input`} type="text"
+          value={description}
           onKeyDown={this.handleKeyDown}
-          // onChange={this.handleChange("name")}
-          onBlur={this.handleBlur("description")}
+          onChange={this.handleChange("description")}
+          onBlur={this.handleUpdate("description")}
           placeholder="Add Task Description..."
           autoComplete="off" autoCorrect="off" autoCapitalize="off"
           spellCheck="false"
         />
         {task.dueDate ?
           <input className={"my-tasks-date" + this.dueDateColorClass(task.dueDate)} type="date"
-            defaultValue={task.dueDate} onChange={this.handleBlur("dueDate")} />
-          : <input className={"my-tasks-date" + " date-empty"} type="date" onChange={this.handleBlur("dueDate")} />
+            defaultValue={task.dueDate} onChange={this.handleUpdate("dueDate")} />
+          : <input className={"my-tasks-date" + " date-empty"} type="date" onChange={this.handleUpdate("dueDate")} />
         }
         <div>
           {/* <input disabled defaultValue={task.dueDate} type="text" /> */}

@@ -66,12 +66,12 @@ class Feedback extends React.Component {
               <div className="modal-backdrop"></div>
               <div id="feedback-modal-box">
                 <div className="modal-close" onClick={this.toggleModal}></div>
-                <h1>Feedback Form</h1>
+                <h1><span>&#10023;</span> Feedback <span>&#10023;</span></h1>
 
                 {success ? (
                   <div id="feedback-modal-success">
                     <div>
-                      <h2> Thank you for taking the time to provide feedback! </h2>
+                      <h2> Thank you for taking the time to provide feedback! <span>&#9786;</span> </h2>
                       <button className={"feedback-modal-submit"} onClick={() => this.setState({ success: false })} type="button">Submit another entry?</button>
                     </div>
                   </div>

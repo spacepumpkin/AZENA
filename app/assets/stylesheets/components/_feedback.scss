@@ -71,6 +71,10 @@
     margin-top    : 10px;
   }
 
+  label:not(.label-input-focused) {
+    color: $gray;
+  }
+
   input,
   textarea {
     @include modal-text-input;

@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskContextMenu from '../main/task_context_menu';
 
 class ProjectTaskRow extends React.Component {
   constructor(props) {
@@ -8,15 +9,40 @@ class ProjectTaskRow extends React.Component {
       name: props.task.name,
       description: props.task.description,
       dueDate: props.task.dueDate,
+      // showContextMenu: false
       // done: props.task.done,
       // projectId: props.task.projectId
     }
+
+    // this.contextMenuRef = React.createRef();
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.toggleCheck = this.toggleCheck.bind(this);
+    // this.openContextMenu = this.openContextMenu.bind(this);
+    // this.handleClickOutside = this.handleClickOutside.bind(this);
   }
+
+  // componentDidMount() {
+  //   let that = this;
+  //   document.addEventListener("mousedown", that.handleClickOutside, false);
+  // }
+
+  // componentWillUnmount() {
+  //   let that = this;
+  //   document.removeEventListener("mousedown", that.handleClickOutside, false);
+  // }
+
+  // For Context Menu
+  // handleClickOutside(evt) {
+  //   // debugger
+  //   if (evt.relatedTarget === null || (this.contextMenuRef && this.contextMenuRef.current &&
+  //     !this.contextMenuRef.contains(evt.relatedTarget))) {
+  //       // debugger
+  //       this.setState({ showContextMenu: false });
+  //   }
+  // }
 
   toggleCheck() {
     this.props.updateTask({ id: this.props.task.id, done: !this.props.task.done });
@@ -67,9 +93,14 @@ class ProjectTaskRow extends React.Component {
     }
   };
 
+  // openContextMenu(evt) {
+  //   evt.preventDefault();
+  //   this.setState({ showContextMenu: true });
+  // }
+
   render() {
     const { task, destroyTask } = this.props;
-    const { name, description, dueDate } = this.state;
+    const { name, description, dueDate, showContextMenu } = this.state;
 
     return (
       <div className="project-task-row" >
@@ -101,9 +132,9 @@ class ProjectTaskRow extends React.Component {
             defaultValue={task.dueDate} onChange={this.handleUpdate("dueDate")} />
           : <input className={"my-tasks-date" + " date-empty"} type="date" onChange={this.handleUpdate("dueDate")} />
         }
-        <div>
-          {/* <input disabled defaultValue={task.dueDate} type="text" /> */}
-        </div>
+        {/* {showContextMenu &&
+          <TaskContextMenu contextMenuRef={el => this.contextMenuRef = el} task={task} />
+        } */}
       </div>
     )
   }

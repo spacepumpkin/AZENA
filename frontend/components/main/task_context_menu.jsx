@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createTask, updateTask, destroyTask } from '../../actions';
+import { createTask, updateTask, destroyTask } from '../../actions/task_actions';
 import ContextMenu from './context_menu';
 
-export default function TaskContextMenu({ task }) {
+export default function TaskContextMenu({ task, contextMenuRef }) {
   /* Menu options:
   * Mark as Done
   * Duplicate Task
@@ -35,6 +35,6 @@ export default function TaskContextMenu({ task }) {
   };
 
   return (
-    <ContextMenu buttonInfo={buttonInfo} />
+    <ContextMenu buttonInfo={buttonInfo} contextMenuRef={contextMenuRef} />
   )
 }

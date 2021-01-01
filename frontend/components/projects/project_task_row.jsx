@@ -19,8 +19,6 @@ class ProjectTaskRow extends React.Component {
   }
 
   toggleCheck() {
-    // const updatedTask = Object.assign({}, task, { done: !task.done });
-    // dispatch(toggleDone(updatedTask));
     this.props.updateTask({ id: this.props.task.id, done: !this.props.task.done });
   }
 

@@ -4,17 +4,24 @@ import Home from "./home";
 
 // import { fetchUserWorkspaces } from "../../actions/workspace_actions";
 // import { logout } from "../../actions/session_actions";
+import { setCurrentItems, setModal } from '../../actions/ui_actions';
 
-const mSP = function(state) {
+const mSP = function({ entities, session, ui }) {
+  const { users, workspaces, projects } = entities;
+
   return {
-    reduxState: state
+    users,
+    workspaces,
+    projects,
+    session,
+    currentItems: ui.currentItems
   };
 };
 
 const mDP = function(dispatch) {
   return {
-    // logout: () => dispatch(logout()),
-    // fetchUserWorkspaces: () => dispatch(fetchUserWorkspaces())
+    setCurrentItems: (items) => dispatch(setCurrentItems(items)),
+    setModal: (modalType) => dispatch(setModal(modalType))
   };
 };
 

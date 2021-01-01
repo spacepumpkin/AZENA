@@ -11,40 +11,10 @@
 // }
 
 .home-workspace-plus-menu {
-  display      : block;
-  position     : absolute;
-  transition   : all 0.3s ease 0s;
-  left         : 250px;
+  @include plus-menu;
+  right         : 0px;
+  margin-top: 25px;
   // z-index      : 5;
-  overflow-x   : hidden;
-  overflow-y   : hidden;
-  border-radius: 5px;
-  border       : 1px solid $lighter-gray;
-  box-shadow   : 0 0 10px $lighter-gray;
-
-  >a,
-  >button {
-    display    : block;
-    padding    : 5px 6px;
-    width      : 100%;
-    white-space: nowrap;
-
-    &:first-child:hover {
-      font-weight: bold;
-      background : whitesmoke;
-      color      : $primary;
-    }
-
-    &:nth-child(2):hover {
-      font-weight: bold;
-      color      : $secondary;
-      background : $lightest-gray;
-    }
-  }
-
-  // &.show-menu {
-  //   display: block;
-  // }
 }
 
 

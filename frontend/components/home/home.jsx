@@ -5,30 +5,77 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      plusMenuWorkspaceId: -1
+      plusMenuWorkspaceId: -1,
+      plusMenuShow: false
     }
-    this.showPlusMenu = this.showPlusMenu.bind(this);
+    this.plusMenuRef = React.createRef();
+
+    this.togglePlusMenu = this.togglePlusMenu.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.blurPlusMenu = this.blurPlusMenu.bind(this);
+    this.openWkspDeleteModal = this.openWkspDeleteModal.bind(this);
+    this.openProjCreateModal = this.openProjCreateModal.bind(this);
+    this.openProjDeleteModal = this.openProjDeleteModal.bind(this);
   }
 
   componentDidMount() {
     if (document.title !== "azena") { document.title = "azena" };
   }
 
-  showPlusMenu(workspaceId) {
+  togglePlusMenu(workspaceId) {
     return (evt) => {
       if (this.state.plusMenuWorkspaceId === workspaceId) {
-        this.setState({ plusMenuWorkspaceId: -1 });
+        this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
       } else {
-        this.setState({ plusMenuWorkspaceId: workspaceId });
+        this.setState({ plusMenuShow: true, plusMenuWorkspaceId: workspaceId });
       }
     }
   }
 
-  render() {
-    const { entities, session } = this.props.reduxState;
-    const { users, workspaces, projects } = entities;
+  blurPlusMenu(evt) {
+    if (evt.relatedTarget === null
+      || (
+        this.plusMenuRef && this.plusMenuRef.current &&
+        !this.plusMenuRef.current.contains(evt.relatedTarget)
+      )
+    ) {
+      this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+    }
+  }
 
-    const { plusMenuWorkspaceId } = this.state;
+  openWkspDeleteModal(evt) {
+    // Want to keep plusMenuWorkspaceId for deleting workspace or creating projects, but close the plus menu
+    let items = Object.assign({}, this.props.currentItems, { workspaceId: this.state.plusMenuWorkspaceId });
+    this.props.setCurrentItems(items);
+    this.props.setModal("Workspace Delete");
+    this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+  }
+
+  openProjCreateModal(evt) {
+    let items = Object.assign({}, this.props.currentItems, { workspaceId: this.state.plusMenuWorkspaceId });
+    this.props.setCurrentItems(items);
+    this.props.setModal("Project Create");
+    this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+  }
+
+  openProjDeleteModal(projectId) {
+    return (evt) => {
+      let project = this.props.projects[projectId];
+      this.props.setCurrentItems({ workspaceId: project.workspaceId, projectId: projectId });
+      this.props.setModal("Project Delete");
+    }
+  }
+
+  handleKeyDown(evt) {
+    if (evt.key === "Escape") {
+      this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+    }
+  }
+
+  render() {
+    const { users, workspaces, projects, session } = this.props;
+
+    const { plusMenuWorkspaceId, plusMenuShow } = this.state;
 
     let that = this;
     return (
@@ -39,7 +86,8 @@ export default class Home extends React.Component {
           <h1>My Workspaces</h1>
           {
             Object.values(workspaces).map((workspace) => {
-              const showMenu = (workspace.id === plusMenuWorkspaceId);
+              // const showMenu = (workspace.id === plusMenuWorkspaceId);
+              let showMenu = (plusMenuWorkspaceId === workspace.id) && plusMenuShow;
 
               return (
 
@@ -50,7 +98,10 @@ export default class Home extends React.Component {
                       {workspace.name}
                     </Link>
                     <button className={`plus-button ${(showMenu) ? "rotated-plus" : ""}`}
-                      onClick={this.showPlusMenu(workspace.id)} type="button" />
+                      onClick={this.togglePlusMenu(workspace.id)} type="button"
+                      onBlur={this.blurPlusMenu}
+                      onKeyDown={this.handleKeyDown}
+                    />
                   </div>
 
                   <div className="home-workspace-projects">
@@ -68,6 +119,21 @@ export default class Home extends React.Component {
                     }
                   </div>
 
+                  {showMenu && (
+                    <div className={`home-workspace-plus-menu`} ref={this.plusMenuRef}>
+
+                      <button onClick={this.openProjCreateModal}>
+                        Create New Project
+                      </button>
+
+                      {(session.id === workspace.creatorId) ? (
+                        <button type="button" onClick={this.openWkspDeleteModal}>Delete Workspace</button>
+                      ) : (
+                          <Link to={`/home`}>Leave Workspace</Link>
+                        )}
+
+                    </div>
+                  )}
                 </div>
               )
             })

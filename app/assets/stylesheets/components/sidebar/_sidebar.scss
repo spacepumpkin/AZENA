@@ -167,38 +167,8 @@ button.collapsed {
 // }
 
 .sidebar-workspace-plus-menu {
-  display      : block;
-  position     : absolute;
-  transition   : all 0.3s ease 0s;
+  @include plus-menu;
   left         : 250px;
-  z-index      : 5;
-  overflow-x   : hidden;
-  overflow-y   : hidden;
-  border-radius: 5px;
-  border       : 1px solid $lighter-gray;
-  box-shadow   : 0 0 10px $lighter-gray;
-
-  >a,
-  >button,
-  div {
-    display    : block;
-    padding    : 5px 6px;
-    width      : 100%;
-    white-space: nowrap;
-    cursor     : pointer;
-
-    &:first-child:hover {
-      font-weight: bold;
-      background : whitesmoke;
-      color      : $primary;
-    }
-
-    &:nth-child(2):hover {
-      font-weight: bold;
-      color      : $secondary;
-      background : $lightest-gray;
-    }
-  }
 
   // &.show-menu {
   //   display: block;

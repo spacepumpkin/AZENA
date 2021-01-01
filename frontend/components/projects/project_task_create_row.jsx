@@ -4,10 +4,12 @@ class ProjectTaskCreateRow extends React.Component {
   constructor(props) {
     super(props);
 
+    let todayDate = new Date().toISOString().substr(0, 10);
+
     this._nullState = {
       name: "",
       description: "",
-      dueDate: ""
+      dueDate: todayDate
     };
 
     this.state = Object.assign({}, this._nullState);

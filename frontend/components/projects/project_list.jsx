@@ -72,6 +72,11 @@ export default class ProjectList extends React.Component {
       <div id="project-list">
         <h1>Project Tasks</h1>
         <div className="project-tasks-list">
+          <div className="project-tasks-head">
+            <div className="project-task-title" > {"Task Name"} </div>
+            <div className="project-task-title" > {"Description"} </div>
+            <div className="project-task-title" > {"Due Date"} </div>
+          </div>
           { ProjectTaskRows }
           <ProjectTaskCreateRow projectId={projectId} createTask={createTask} />
         </div>

@@ -43,7 +43,6 @@ export default function TaskRow({ task, workspace, project, creatorName }) {
   }
 
   function updateDate(evt) {
-    console.log("New date: ", evt.target.value);
     dispatch(updateTask({ id: task.id, dueDate: evt.target.value }));
   }
 

@@ -220,11 +220,42 @@ th {
 
     &:focus {
       // outline   : 1px solid $primary;
-      border    : 1px solid $primary;
+      border       : 1px solid $primary;
       // box-shadow: 0 0 0 1px $primary;
     }
   }
 }
+
+
+// Unable to change default browser option styling
+// select option {
+//   background-color: $primary !important;
+//   color           : $secondary !important;
+//   box-shadow      : inset 20px 20px $primary !important;
+
+//   &:hover,
+//   &:checked,
+//   &:focus,
+//   &:active {
+//     background-color: $primary !important;
+//     color           : $secondary !important;
+//     box-shadow      : inset 0 0 20px 20px $primary !important;
+
+//     &:after {
+//       content   : attr(title);
+//       background: #666;
+//       color     : #fff;
+//       position  : absolute;
+//       width     : 100%;
+//       left      : 0;
+//       border    : none;
+//     }
+//   }
+// }
+
+// select:focus > option:checked {
+//   background-color: $primary !important;
+// }
 
 .add-task-button {
   @include submit-button;
@@ -232,6 +263,7 @@ th {
   &:disabled {
     cursor: default;
   }
+
   &:enabled {
     opacity: 70%;
   }
@@ -245,7 +277,7 @@ th {
 
 .past-due {
   font-weight: bold;
-  color: red;
+  color      : red;
 }
 
 .today-tomorrow {
@@ -253,10 +285,11 @@ th {
 }
 
 .empty-date {
-  color: transparent;
+  color     : transparent;
   transition: color 0.3s ease 0s;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: inherit;
   }
 }

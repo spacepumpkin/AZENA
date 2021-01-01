@@ -14,7 +14,7 @@ export default class Sidebar extends React.Component {
       showWkspDelModal: false,
     }
     this.sidebarRenderCount = 0;
-    this.sidebarDropdownRef = React.createRef();
+    this.sidebarPlusMenuRef = React.createRef();
 
     this.showPlusMenu = this.showPlusMenu.bind(this);
     this.openWkspDeleteModal = this.openWkspDeleteModal.bind(this);
@@ -35,7 +35,7 @@ export default class Sidebar extends React.Component {
   //   if (this.state.plusMenuWorkspaceId !== -1
   //     && !evt.target.classList.contains("sidebar-workspace-plus")
   //     && !evt.target.classList.contains("sidebar-workspace-title")) {
-  //     if (this.sidebarDropdownRef && !this.sidebarDropdownRef.current.contains(evt.target)) {
+  //     if (this.sidebarPlusMenuRef && !this.sidebarPlusMenuRef.current.contains(evt.target)) {
   //       // alert("You clicked outside the sidebar dropdown menu!");
   //       this.setState({ plusMenuWorkspaceId: -1 });
   //     }
@@ -53,7 +53,7 @@ export default class Sidebar extends React.Component {
           || (
             evt.relatedTarget.classList[0] !== "plus-button"
             && evt.relatedTarget.classList[0] !== "sidebar-workspace-title"
-            && that.sidebarDropdownRef && that.sidebarDropdownRef.current && !that.sidebarDropdownRef.current.contains(evt.relatedTarget)
+            && that.sidebarPlusMenuRef && that.sidebarPlusMenuRef.current && !that.sidebarPlusMenuRef.current.contains(evt.relatedTarget)
           )
         ) {
           this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
@@ -179,7 +179,7 @@ export default class Sidebar extends React.Component {
 
             { showMenu && (
               <div className={`sidebar-workspace-plus-menu`}
-                ref={this.sidebarDropdownRef}>
+                ref={this.sidebarPlusMenuRef}>
 
                 <button onClick={this.openProjCreateModal}>
                   Create New Project

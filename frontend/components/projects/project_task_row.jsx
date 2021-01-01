@@ -44,11 +44,27 @@ class ProjectTaskRow extends React.Component {
       }
     };
   }
+
+  dueDateColorClass(date) {
+    let todayDate = new Date().toISOString().substr(0, 10); // to avoid closure
+    let dateDifference = new Date(date) - new Date(todayDate); // positive if date is ahead of today
+    let daysAway = (dateDifference / 86400000);
+
+    if (daysAway < 0) {
+      return " date-past-due"; // Corresponds to red/$secondary color
+    } else if (daysAway > 1) {
+      return ""; // No need to change color
+    } else {
+      return " date-today-tomorrow"; // Corresponds to green/$primary color
+    }
+  };
+
   render() {
     const { task, destroyTask } = this.props;
 
     return (
       <div className="project-task-row" >
+        <button className={"plus-button rotated-plus"} type="button" onClick={() => destroyTask(task.id)} />
         <div className="task-check-wrapper">
           <button className={`project-task-check${task.done ? " task-done" : ""}`} type="button"
             onClick={this.toggleCheck}
@@ -61,7 +77,19 @@ class ProjectTaskRow extends React.Component {
           autoComplete="off" autoCorrect="off" autoCapitalize="off"
           spellCheck="false"
         />
-        <button className={"plus-button rotated-plus"} type="button" onClick={() => destroyTask(task.id)} />
+        <input className={`project-task-input task-input`} defaultValue={task.description} type="text"
+          onKeyDown={this.handleKeyDown}
+          // onChange={this.handleChange("name")}
+          onBlur={this.handleBlur("description")}
+          placeholder="Add Task Description..."
+          autoComplete="off" autoCorrect="off" autoCapitalize="off"
+          spellCheck="false"
+        />
+        {task.dueDate ?
+          <input className={"my-tasks-date" + this.dueDateColorClass(task.dueDate)} type="date"
+            defaultValue={task.dueDate} onChange={this.handleBlur("dueDate")} />
+          : <input className={"my-tasks-date" + " date-empty"} type="date" onChange={this.handleBlur("dueDate")} />
+        }
         <div>
           {/* <input disabled defaultValue={task.dueDate} type="text" /> */}
         </div>

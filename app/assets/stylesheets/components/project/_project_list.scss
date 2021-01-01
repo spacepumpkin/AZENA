@@ -4,18 +4,44 @@
 }
 
 .project-task-row {
-  display: flex;
+  display        : flex;
   justify-content: flex-start;
-  position: relative;
+  position       : relative;
+
+  >.plus-button {
+    position: absolute;
+    left    : -35px;
+    z-index : 5;
+    margin  : 0 10px;
+    opacity : 0;
+    width   : 16px;
+    height  : 16px;
+  }
+
+  &:hover>.plus-button {
+    opacity: 100%;
+  }
+
+  .project-task-input {
+    // width       : 50%;
+    // margin-right: 10px;
+    &:first-of-type {
+      max-width: 30%;
+    }
+    &:nth-of-type(2) {
+      max-width: 50%;
+    }
+  }
 }
 
 .project-task-check {
   @include task-check-button;
-  width : 20px;
-  height: 20px;
+  width     : 20px;
+  height    : 20px;
+  margin-top: 3px;
 }
 
 .project-task-input {
-  width: 50%;
-  margin-right: 10px;
+  // width       : 50%;
+  // margin-right: 10px;
 }

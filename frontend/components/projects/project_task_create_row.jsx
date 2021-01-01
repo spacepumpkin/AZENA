@@ -20,7 +20,8 @@ class ProjectTaskCreateRow extends React.Component {
   handleKeyDown(evt) {
     if (evt.key === "Enter" || evt.keyCode === 13) {
       evt.preventDefault();
-      evt.target.blur();
+      // evt.target.blur();
+      this.addNewTask();
     }
   }
 
@@ -31,7 +32,6 @@ class ProjectTaskCreateRow extends React.Component {
   }
 
   addNewTask() {
-    // debugger
     const { name, description, dueDate } = this.state;
     // Replace initial spaces or newline/tab chars
     let filteredName = name.replace(/^ +|[\r\n\v\t]+/g, '');
@@ -69,6 +69,7 @@ class ProjectTaskCreateRow extends React.Component {
         <input className={"my-tasks-date"} type="date"
           value={this.state.dueDate}
           onChange={this.handleChange("dueDate")}
+          onKeyDown={this.handleKeyDown}
         />
       </div>
     )

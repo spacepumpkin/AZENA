@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { updateTask, toggleDone, destroyTask } from '../../actions/task_actions';
 
-// const mDP = function(dispatch) {
-
-// }
-
-
 export default function TaskRow({ task, workspace, project, creatorName }) {
 
   const dispatch = useDispatch();

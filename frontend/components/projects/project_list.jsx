@@ -69,7 +69,7 @@ export default class ProjectList extends React.Component {
             })
           }
           <div className="project-task-row">
-            <input className={`project-task-input task-input`} placeholder="Add New Task..." type="text"
+            <input className={`project-task-input task-input`} placeholder="+ Add New Task..." type="text"
               value={this.state.name}
               onChange={this.handleChange("name")}
               onKeyDown={this.handleKeyDown}

@@ -56,6 +56,11 @@ th {
     opacity         : 100%;
   }
 
+  &:hover .plus-button {
+    opacity: 100%;
+    // filter : invert(80%) sepia(0%) saturate(11%) hue-rotate(162deg) brightness(89%) contrast(77%);
+  }
+
   >div {
     margin: 5px auto;
   }
@@ -92,9 +97,9 @@ th {
     opacity    : 0%;
   }
 
-  &:hover>.plus-button {
-    opacity: 100%;
-  }
+  // &:hover>.plus-button {
+  //   opacity: 100%;
+  // }
 
   // &::after {
   //   content: "";
@@ -149,8 +154,9 @@ th {
     background-color   : white;
     opacity            : 100%;
 
-    &+.plus-button {
+    +.plus-button {
       opacity: 100%;
+      filter : sepia(20%);
     }
   }
 

@@ -117,13 +117,16 @@ export default class Workspace extends React.Component {
             </div>
           </div>
         </div>
-        <div className="sidebar-workspace-projects">
+        <div id="workspace-projects">
           <h1>Projects</h1>
           {
             Object.values(projects).map((project) => {
               return (
                 (project.workspaceId === workspaceId) &&
-                <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`} className="sidebar-workspace-project"><span></span>&nbsp;{project.name}</Link>
+                <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`} 
+                className="sidebar-workspace-project">
+                  <span></span>&nbsp;{project.name}
+                </Link>
               )
             })
           }

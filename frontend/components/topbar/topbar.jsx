@@ -243,9 +243,13 @@ export default class TopBar extends React.Component {
         </div>
 
         <div id="topbar-user">
-          <div className="topbar-profile-links">
-            <a href="https://github.com/spacepumpkin/AZENA"><img src={window.github} alt="github profile" /></a>
-            <a href="https://www.linkedin.com/in/gary-w-269749ba/"><img src={window.linkedin} alt="linkedin profile" /></a>
+          <div className="profile-links">
+            <a className="profile-icon-link" href="https://github.com/spacepumpkin/AZENA">
+              <img className="profile-icon" src={window.github} alt="github profile" />
+            </a>
+            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/">
+              <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />
+            </a>
           </div>
           {/* User Settings + Global Actions */}
           <div id="user-avatar">
@@ -254,7 +258,8 @@ export default class TopBar extends React.Component {
               onBlur={this.handleMenuBlur}
               onKeyDown={this.handleMenuBlur}
             >
-              {user.username[0].toUpperCase()}
+              {user.username[0].concat(user.username[1]).toLowerCase()}
+              {/* <img className={"avatar-logo"} src={window.logoIcon1} alt="small azena icon" /> */}
             </button>
             <div id="user-menu-arrow" className={`${showUserMenu ? "show-sliding-menu" : ""}`}></div>
             <div className={`user-sliding-menu${showUserMenu ? " show-sliding-menu" : ""}`} ref={this.userMenuRef}>

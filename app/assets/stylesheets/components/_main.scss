@@ -1,12 +1,12 @@
 // Wraps Sidebar + MainBox
 
-$header-height   : 60px;
-$sidebar-padding : 15px;
-$sidebar-width   : 260px;
+$header-height        : 60px;
+$sidebar-padding      : 15px;
+$sidebar-width        : 280px;
 // $mainbox-width: 100%;
-$mainbox-width   : calc(100vw - #{$sidebar-width});
+$mainbox-width        : calc(100vw - #{$sidebar-width});
 $main-content-padding : 50px;
-$main-padding-top: 15px;
+$main-padding-top     : 15px;
 
 #main-wrapper {
   width        : 100%;
@@ -14,7 +14,7 @@ $main-padding-top: 15px;
   min-width    : 100%;
   max-width    : 100%;
   min-height   : 100%;
-  max-height   : 100%;
+  max-height   : 100vh;
 }
 
 #main {
@@ -31,7 +31,52 @@ $main-padding-top: 15px;
   // Prevent sidebar from scrolling by preventing rest of page from scrolling
   overflow-y: hidden;
   overflow-x: hidden;
+
+  scrollbar-width: auto;
+  scrollbar-color: #9be9e1 $lightest-gray;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+
+    &:hover ::-webkit-scrollbar-thumb {
+      background-color: $primary;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9be9e1;
+    border-radius   : 10px;
+    transition      : background-color 0.3s ease 0s;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $lighter-gray;
+  }
 }
+
+// Scrollbar
+// * {
+//   scrollbar-width: auto;
+//   scrollbar-color: #9be9e1 $lightest-gray;
+
+//   &::-webkit-scrollbar {
+//     width: 10px;
+//   }
+
+//   &::-webkit-scrollbar-thumb {
+//     background-color: #9be9e1;
+//     border-radius   : 10px;
+//     transition: background-color 0.3s ease 0s;
+
+//     &:hover {
+//       background-color: $primary;
+//     }
+//   }
+
+//   &::-webkit-scrollbar-track {
+//     background-color: $lighter-gray;
+//   }
+// }
 
 .context-menu {
   @include list-menu;

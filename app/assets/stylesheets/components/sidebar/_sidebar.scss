@@ -10,6 +10,7 @@
   // flex               : 0 1 avwuto;
   color                    : $gray;
   font-family              : $font-other;
+  max-height               : 100vh;
   // Keep position fixed to side (also adjust mainbox left margin)
   // position              : fixed;
   min-width                : $sidebar-width;
@@ -30,7 +31,7 @@
     // width   : 0;
     // overflow: hidden;
     // opacity : 0.0;
-    margin-left: -$sidebar-width;
+    margin-left : -$sidebar-width;
     // transform: translateX(-$sidebar-width); // Faster but can't get mainbox to match without shifting
     // position: absolute;
     // left: -$sidebar-width;
@@ -47,15 +48,17 @@
 }
 
 #sidebar-logo {
-  height : 100%;
-  width  : 100%;
-  padding: 0 10px;
+  height       : 100%;
+  width        : 100%;
+  padding      : 0 10px;
+  margin-left  : 10px;
   border-radius: 10px;
-  transition: background 0.3s ease;
+  transition   : background 0.3s ease;
 
   img {
     height: 100%;
   }
+
   &:hover {
     background: $lightest-gray;
   }
@@ -101,6 +104,7 @@ button.collapsed {
   font-size     : 20px;
 
   a {
+    border-radius : 5px;
     padding       : 10px $sidebar-padding;
     vertical-align: baseline;
     line-height   : initial;
@@ -130,15 +134,30 @@ button.collapsed {
   float  : left;
 }
 
+#sidebar-workspaces-wrapper {
+  overflow-y   : auto;
+  overflow-x   : hidden;
+  padding-right: 10px;
+  width        : calc($sidebar-width - 10px);
+
+  >h1 {
+    margin-top: 10px;
+  }
+}
+
 #sidebar-workspaces {
-  display          : flex;
-  flex-direction   : column;
-  width            : 100%;
-  height           : 100%;
+  display             : flex;
+  flex-direction      : column;
+  width               : 100%;
+  // height           : 100%;
   // overflow      : scroll; // ! how can we make this work?
-  padding          : $sidebar-padding 0;
-  box-sizing       : border-box;
-  position         : relative;
+  padding             : $sidebar-padding 0;
+  box-sizing          : border-box;
+
+  // For overflow hidden, plus menu showed after taking away position relative here and on workspace-box
+  // overflow-y          : auto;
+  // overflow-x          : hidden;
+  // position            : relative;
 
   >a {
     font-family: $font-body;
@@ -168,11 +187,21 @@ button.collapsed {
 
 .sidebar-workspace-plus-menu {
   @include plus-menu-two-option;
-  left         : 250px;
 
-  // &.show-menu {
-  //   display: block;
-  // }
+  // Option #1 - position absolute on the outside of sidebar
+  // left: 250px;
+
+  // Option #2 - position non-absolute inside sidebar
+  // position    : -webkit-sticky; // keeps menu with workspace as we scroll
+  // position    : sticky; // but it's not able to flow above anything anymore
+  position  : relative;
+  box-shadow: none;
+  border    : none;
+  border-top: 1px dashed $lighter-gray;
+
+  >button {
+    padding-left: 20px;
+  }
 }
 
 
@@ -185,11 +214,11 @@ button.collapsed {
   overflow-y    : auto;
   overflow-x    : hidden;
 
-  @for $i from 1 to 6 {
-    :nth-child(#{$i}) span {
-      background-color: rgb(random(255), random(255), random(255));
-    }
-  }
+  // @for $i from 1 to 6 {
+  //   :nth-child(#{$i}) span {
+  //     background-color: rgb(random(255), random(255), random(255));
+  //   }
+  // }
 }
 
 .sidebar-workspace-project {
@@ -199,34 +228,59 @@ button.collapsed {
   transition  : all 0.3s ease 0s;
   height      : 18px;
   border-right: 4px solid transparent;
-  transition: all 0.3s ease;
+  transition  : all 0.3s ease;
+
+  // flex-wrap: nowrap;
+  overflow     : hidden;
+  text-overflow: ellipsis;
+  white-space  : nowrap;
+
+  >a {
+    // flex: 0 1 auto;
+    // max-width: 60%;
+    // flex-wrap: nowrap;
+    overflow     : hidden;
+    text-overflow: ellipsis;
+    white-space  : nowrap;
+    padding-left : 10px;
+  }
 
   // display: flex;
   // justify-content: space-between;
 
+  // Gives each project a random color "icon"
+  @for $i from 1 to 6 {
+    &:nth-child(#{$i}) span {
+      background-color: rgb(random(255), random(255), random(255));
+    }
+  }
+
   span {
-    height        : 10px;
-    width         : 10px;
+    height        : 13px;
+    width         : 13px;
+    border-radius : 5px;
     display       : inline-block;
     // position: relative;
     vertical-align: middle;
-
   }
 
   &:hover {
     color           : $primary;
-    font-size       : 17px;
+    font-size       : 16px;
+    overflow        : hidden;
+    text-overflow   : ellipsis;
+    white-space     : nowrap;
     border-right    : 4px solid $primary;
     background-color: $lightest-gray;
 
-    > button {
+    >button {
       display: block;
     }
   }
 
   >.plus-button {
-    float: right;
-    display: none;
+    float    : right;
+    display  : none;
     transform: rotate(45deg);
   }
 
@@ -239,16 +293,12 @@ button.collapsed {
 
 #sidebar-bottom {
   // padding        : $sidebar-padding $sidebar-padding;
-  padding        : 20px 0;
-  justify-self   : flex-end;
-  display        : flex;
-  flex-direction : column;
-  justify-content: center;
-
-  >p {
-    text-align   : center;
-    // align-self: center;
-  }
+  padding           : 20px 0;
+  justify-self      : flex-end;
+  display           : flex;
+  flex-direction    : column;
+  justify-content   : center;
+  // height         : 100%;
 
   >a {
     display        : flex;
@@ -277,4 +327,10 @@ button.collapsed {
       width  : 100%;
     }
   }
+}
+
+#sidebar>.profile-links {
+  // height       : 100%;
+  align-items  : flex-end;
+  margin-bottom: 50px;
 }

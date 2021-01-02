@@ -56,16 +56,18 @@ export default class Sidebar extends React.Component {
             && that.sidebarPlusMenuRef && that.sidebarPlusMenuRef.current && !that.sidebarPlusMenuRef.current.contains(evt.relatedTarget)
           )
         ) {
-          this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
+          // this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
+          this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false, activeWorkspaceId: -1 });
         }
         return;
       }
       // if this is the click event
       if (this.state.plusMenuWorkspaceId === workspaceId) {
-        this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
+        // this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false });
+        this.setState({ plusMenuWorkspaceId: -1, plusMenuShow: false, activeWorkspaceId: -1 });
       } else {
-        // this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId, plusMenuShow: true })
-        this.setState({ plusMenuWorkspaceId: workspaceId, plusMenuShow: true })
+        this.setState({ plusMenuWorkspaceId: workspaceId, activeWorkspaceId: workspaceId, plusMenuShow: true })
+        // this.setState({ plusMenuWorkspaceId: workspaceId, plusMenuShow: true })
       }
     }
   }
@@ -75,7 +77,8 @@ export default class Sidebar extends React.Component {
       if (this.state.activeWorkspaceId === workspaceId) {
         this.setState({ activeWorkspaceId: -1, plusMenuWorkspaceId: -1, plusMenuShow: false })
       } else {
-        this.setState({ activeWorkspaceId: workspaceId, plusMenuWorkspaceId: -1, plusMenuShow: false })
+        // this.setState({ activeWorkspaceId: workspaceId, plusMenuWorkspaceId: -1, plusMenuShow: false })
+        this.setState({ activeWorkspaceId: workspaceId, plusMenuWorkspaceId: workspaceId, plusMenuShow: true })
       }
     }
   }
@@ -155,7 +158,8 @@ export default class Sidebar extends React.Component {
               <button className={`plus-button ${(showMenu) ? "rotated-plus" : ""}`}
                 onClick={this.showPlusMenu(workspace.id)} type="button"
                 tabIndex="0"
-                onBlur={this.showPlusMenu()} />
+              // onBlur={this.showPlusMenu()} 
+              />
               {/* Had to remove z-index on sidebar-workspace-projects to get this to show */}
             </div>
             <div className="sidebar-workspace-projects">
@@ -204,28 +208,38 @@ export default class Sidebar extends React.Component {
       <>
         <div id="sidebar" className={`${sidebarCollapse ? "collapsed" : ""}`} >
           <div id="sidebar-top">
-            <Link id="sidebar-logo" to="/home" > <img src={window.logoMainURL} /> </Link>
+            <Link id="sidebar-logo" to="/home" > <img src={window.logoTextURL} /> </Link>
             <button onClick={toggleSidebar} className={`sidebar-menu-button chevron-left`} type="button" />
           </div>
           <div id="sidebar-links">
             <Link to="/home"><img className="sidebar-icon" src={window.homeIcon} alt="homeicon" />&nbsp; Home </Link>
             <Link to="/mytasks"><img className="sidebar-icon" src={window.checkCircle} alt="taskicon" />&nbsp; My Tasks </Link>
           </div>
-          <div id="sidebar-workspaces">
+          <div id="sidebar-workspaces-wrapper">
             <h1>My Workspaces</h1>
-            {mappedWorkspaces(ownWorkspaces)}
-          </div>
-          <div id="sidebar-workspaces">
+            <div id="sidebar-workspaces">
+              {mappedWorkspaces(ownWorkspaces)}
+            </div>
             {(otherWorkspaces !== undefined && otherWorkspaces.length !== 0) && (
               <>
                 <h1>Other Workspaces</h1>
-                {mappedWorkspaces(otherWorkspaces)}
+                <div id="sidebar-workspaces">
+                  {mappedWorkspaces(otherWorkspaces)}
+                </div>
               </>
             )}
           </div>
           <div id="sidebar-bottom">
             {/* <p>Organize your projects here!</p> */}
             <Link to="/workspaces/new"><button type="button">Create New Workspace</button></Link>
+          </div>
+          <div className="profile-links">
+            <a className="profile-icon-link" href="https://github.com/spacepumpkin/AZENA">
+              <img className="profile-icon" src={window.github} alt="github profile" />
+            </a>
+            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/">
+              <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />
+            </a>
           </div>
         </div >
       </>

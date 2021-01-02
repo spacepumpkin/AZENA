@@ -30,6 +30,15 @@
   }
 }
 
+#workspace-projects {
+  display       : flex;
+  flex-direction: column;
+  width         : 100%;
+  // padding       : 5px 0;
+  overflow-y    : auto;
+  overflow-x    : hidden;
+}
+
 .create-project-button {
   @include submit-button;
   align-self: flex-start;

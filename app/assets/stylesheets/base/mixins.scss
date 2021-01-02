@@ -61,15 +61,15 @@
 // * WORKSPACE BOX (Sidebar & Home) ----------------------------------------
 
 @mixin workspace-box {
-  width         : 100%;
-  box-sizing    : content-box;
-  display       : flex;
-  flex-direction: column;
-  overflow-y    : visible;
-  overflow-x    : visible;
-  margin        : 5px 0;
-  border-bottom : 1px solid $lighter-gray;
-  position      : relative;
+  width            : 100%;
+  box-sizing       : content-box;
+  display          : flex;
+  flex-direction   : column;
+  // overflow-y    : visible;
+  // overflow-x    : visible;
+  margin           : 5px 0;
+  border-bottom    : 1px solid $lighter-gray;
+  // position      : relative;
 }
 
 .workspace-title-wrapper {
@@ -141,8 +141,9 @@
 }
 
 @mixin list-menu {
-  display      : block;
-  position     : absolute;
+  display : block;
+  position: absolute;
+
   transition   : all 0.3s ease 0s;
   z-index      : 5;
   overflow-x   : hidden;
@@ -159,15 +160,15 @@
     width      : 100%;
     white-space: nowrap;
     cursor     : pointer;
-    font-weight: bold;
-    
+    // font-weight: bold; // looks shoddy on Firefox
+
     &:hover {
       background-color: $lightest-gray;
     }
   }
 }
 
-// * TITLE FLASH ------------------------------------------------------------
+// * FLASHY ANIMATIONS ------------------------------------------------------------
 @keyframes flashBlack {
   0% {
     color: black;
@@ -185,6 +186,20 @@
 
   100% {
     color: black;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5)
+  }
+
+  50% {
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1.5);
   }
 }
 
@@ -472,4 +487,44 @@
       filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%); // turn to black
     }
   }
+}
+
+
+// * PROFILE LINKS ------------------------------------------------------------
+
+.profile-links {
+  display        : flex;
+  justify-content: space-around;
+  align-items    : center;
+}
+
+.profile-icon-link {
+  width        : 60px;
+  height       : 60px;
+  border       : 5px solid $primary;
+  border-radius: 50%;
+  box-shadow   : 2px 2px 2px 2px $lighter-gray;
+  overflow     : hidden;
+  box-sizing   : border-box;
+  z-index      : 2;
+
+  &:hover>.profile-icon {
+    animation: pop 0.3s ease-in-out;
+    transform: scale(1.5);
+    filter   : invert(1);
+  }
+}
+
+.profile-icon {
+  width                 : 60px;
+  height                : 60px;
+  // border: 1px solid $primary;
+  // margin: -10px;
+  object-fit            : cover;
+  object-position       : 50% 60%;
+  // filter             : invert(1) hue-rotate(180deg);
+  // background-color: black;
+  // filter: brightness(0) saturate(100%) invert(85%) sepia(28%) saturate(7453%) hue-rotate(122deg) brightness(94%) contrast(98%);
+  // filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+
 }

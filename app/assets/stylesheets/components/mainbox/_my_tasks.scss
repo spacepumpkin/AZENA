@@ -57,7 +57,7 @@ th {
   }
 
   &:hover .plus-button {
-    opacity: 100%;
+    opacity   : 100%;
     // filter : invert(80%) sepia(0%) saturate(11%) hue-rotate(162deg) brightness(89%) contrast(77%);
   }
 
@@ -128,18 +128,23 @@ th {
 // TASK NAME
 
 .task-input {
-  color           : black;
-  border          : 1px solid transparent;
-  padding         : 2px 6px;
-  margin-left     : 5px;
-  border-radius   : 5px;
-  font-weight     : bold;
-  font-size       : larger;
-  width           : 90%;
-  opacity         : 90%;
-  position        : relative;
-  text-overflow   : ellipsis;
+  color              : black;
+  border             : 1px solid transparent;
+  padding            : 2px 6px;
+  margin-left        : 5px;
+  border-radius      : 5px;
+  // font-weight     : bold;
+  font-size          : larger;
+  width              : 90%;
+  opacity            : 90%;
+  position           : relative;
+  text-overflow      : ellipsis;
+
   // transition   : all 0.3s ease 0s;
+  &:first-of-type {
+    opacity    : 100%;
+    font-weight: bold;
+  }
 
   &:hover {
     border          : 1px solid $light-gray;

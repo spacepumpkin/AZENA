@@ -108,12 +108,12 @@
   overflow-x    : hidden;
 
   span {
-    height        : 13px;
-    width         : 13px;
-    border-radius : 5px;
-    display       : inline-block;
+    height          : 13px;
+    width           : 13px;
+    border-radius   : 5px;
+    display         : inline-block;
     // position: relative;
-    vertical-align: middle;
+    vertical-align  : middle;
   }
 
   @for $i from 1 to 6 {

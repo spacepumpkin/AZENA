@@ -208,12 +208,6 @@ button.collapsed {
 
 .sidebar-workspace-projects {
   @include project-list;
-
-  // @for $i from 1 to 6 {
-  //   :nth-child(#{$i}) span {
-  //     background-color: rgb(random(255), random(255), random(255));
-  //   }
-  // }
 }
 
 .sidebar-workspace-project {

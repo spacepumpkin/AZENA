@@ -18,10 +18,10 @@ class Api::ProjectsController < ApplicationController
       render json: ["Project was not found"], status: 404
       return
     end
-    if @project.creator_id != current_user.id
-      render json: ["Project can only be updated by its creator"], status: 422
-      return
-    end
+    # if @project.creator_id != current_user.id
+    #   render json: ["Project can only be updated by its creator"], status: 422
+    #   return
+    # end
     if @project.update(project_params)
       render :show, status: 200
     else
@@ -65,6 +65,6 @@ class Api::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :description, :workspace_id)
+    params.require(:project).permit(:name, :description, :workspace_id, :icon)
   end
 end

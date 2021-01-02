@@ -17,9 +17,21 @@ class Project < ApplicationRecord
 
   validate :name_cannot_start_with_space
 
+  attr_reader :icon
+  before_create :randomize_icon_color
+
   def name_cannot_start_with_space
     if name.present? && name.starts_with?(" ")
       errors.add(:name, "cannot start with a space")
+    end
+  end
+
+  # Randomly pick color for new project
+  def randomize_icon_color
+    if icon
+      self.icon = icon
+    else
+      self.icon = "a".concat(rand(0..9).to_s)
     end
   end
 

@@ -86,7 +86,7 @@ export default class Sidebar extends React.Component {
   openWkspDeleteModal(evt) {
     // Want to keep plusMenuWorkspaceId for deleting workspace or creating projects, but close the plus menu
     // this.setState({ showWkspDelModal: true, plusMenuShow: false });
-    this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+    // this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
     let items = Object.assign({}, this.props.currentItems, { workspaceId: this.state.plusMenuWorkspaceId });
     this.props.setCurrentItems(items);
     this.props.setModal("Workspace Delete");
@@ -97,7 +97,7 @@ export default class Sidebar extends React.Component {
     let items = Object.assign({}, this.props.currentItems, { workspaceId: this.state.plusMenuWorkspaceId });
     this.props.setCurrentItems(items);
     this.props.setModal("Project Create");
-    this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
+    // this.setState({ plusMenuShow: false, plusMenuWorkspaceId: -1 });
   }
 
   openProjDeleteModal(projectId) {

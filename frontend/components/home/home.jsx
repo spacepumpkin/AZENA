@@ -97,11 +97,11 @@ export default class Home extends React.Component {
                     <Link to={`/workspaces/${workspace.id}`} className="home-workspace-title">
                       {workspace.name}
                     </Link>
-                    <button className={`plus-button ${(showMenu) ? "rotated-plus" : ""}`}
+                    {/* <button className={`plus-button ${(showMenu) ? "rotated-plus" : ""}`}
                       onClick={this.togglePlusMenu(workspace.id)} type="button"
                       onBlur={this.blurPlusMenu}
                       onKeyDown={this.handleKeyDown}
-                    />
+                    /> */}
                   </div>
 
                   <div className="home-workspace-projects">
@@ -119,7 +119,7 @@ export default class Home extends React.Component {
                     }
                   </div>
 
-                  {showMenu && (
+                  {/* {showMenu && (
                     <div className={`home-workspace-plus-menu`} ref={this.plusMenuRef}>
 
                       <button onClick={this.openProjCreateModal}>
@@ -133,7 +133,7 @@ export default class Home extends React.Component {
                         )}
 
                     </div>
-                  )}
+                  )} */}
                 </div>
               )
             })

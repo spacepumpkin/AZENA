@@ -99,6 +99,30 @@
   }
 }
 
+@mixin project-list {
+  display       : flex;
+  flex-direction: column;
+  width         : 100%;
+  padding       : 5px 0;
+  overflow-y    : auto;
+  overflow-x    : hidden;
+
+  span {
+    height        : 13px;
+    width         : 13px;
+    border-radius : 5px;
+    display       : inline-block;
+    // position: relative;
+    vertical-align: middle;
+  }
+
+  @for $i from 1 to 6 {
+    :nth-child(#{$i}) span {
+      background-color: rgb(random(255), random(255), random(255));
+    }
+  }
+}
+
 .plus-button {
   width     : 14px;
   height    : 14px;
@@ -155,11 +179,11 @@
   >a,
   >button,
   div {
-    display    : block;
-    padding    : 5px 6px;
-    width      : 100%;
-    white-space: nowrap;
-    cursor     : pointer;
+    display       : block;
+    padding       : 5px 6px;
+    width         : 100%;
+    white-space   : nowrap;
+    cursor        : pointer;
     // font-weight: bold; // looks shoddy on Firefox
 
     &:hover {

@@ -12,36 +12,37 @@
 
 .home-workspace-plus-menu {
   @include plus-menu-two-option;
-  right         : 0px;
-  margin-top: 25px;
+  right           : 0px;
+  margin-top      : 25px;
   // z-index      : 5;
 }
 
 
 
 .home-workspace-projects {
-  display       : flex;
-  flex-direction: column;
-  width         : 100%;
-  padding       : 5px 0;
-  overflow-y    : auto;
-  overflow-x    : hidden;
+  @include project-list;
+  // display       : flex;
+  // width         : 100%;
+  // padding       : 5px 0;
+  // overflow-y    : auto;
+  // overflow-x    : hidden;
+  flex-direction: row;
 
-  :nth-child(1)>span {
-    background-color: rgb(random(255), random(255), random(255));
-  }
+  // :nth-child(1)>span {
+  //   background-color: rgb(random(255), random(255), random(255));
+  // }
 
-  :nth-child(2)>span {
-    background-color: rgb(random(255), random(255), random(255));
-  }
+  // :nth-child(2)>span {
+  //   background-color: rgb(random(255), random(255), random(255));
+  // }
 
-  :nth-child(3)>span {
-    background-color: rgb(random(255), random(255), random(255));
-  }
+  // :nth-child(3)>span {
+  //   background-color: rgb(random(255), random(255), random(255));
+  // }
 
-  :nth-child(4)>span {
-    background-color: rgb(random(255), random(255), random(255));
-  }
+  // :nth-child(4)>span {
+  //   background-color: rgb(random(255), random(255), random(255));
+  // }
 }
 
 .home-workspace-project {
@@ -52,14 +53,15 @@
   height      : 18px;
   border-right: 4px solid transparent;
 
-  >span {
-    height        : 10px;
-    width         : 10px;
-    display       : inline-block;
-    // position: relative;
-    vertical-align: middle;
+  // >span {
+  //   height        : 10px;
+  //   width         : 10px;
+  //   border-radius : 5px;
+  //   display       : inline-block;
+  //   // position: relative;
+  //   vertical-align: middle;
 
-  }
+  // }
 
   &:hover {
     color           : $primary;

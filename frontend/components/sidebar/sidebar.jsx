@@ -12,6 +12,7 @@ export default class Sidebar extends React.Component {
       plusMenuWorkspaceId: -1,
       plusMenuShow: false,
       showWkspDelModal: false,
+
     }
     this.sidebarRenderCount = 0;
     this.sidebarPlusMenuRef = React.createRef();
@@ -25,6 +26,13 @@ export default class Sidebar extends React.Component {
   componentDidMount() {
     // document.addEventListener('mousedown', this.handleClickOutside);
   }
+
+  componentDidUpdate(prevProps) {
+    // if (prevProps.workspaces !== this.props.workspaces) {
+
+    // }
+  }
+
   componentWillUnmount() {
     // document.removeEventListener('mousedown', this.handleClickOutside)
   }
@@ -192,7 +200,7 @@ export default class Sidebar extends React.Component {
                 {(currentUserId === workspace.creatorId) ? (
                   <button type="button" onClick={this.openWkspDeleteModal}>Delete Workspace</button>
                 ) : (
-                    <Link to={`/home`}>Leave Workspace</Link>
+                    <button type="button" onClick={() => this.props.unassignUsersWorkspace(currentUserId, workspace.id)}>Leave Workspace</button>
                   )}
 
               </div>

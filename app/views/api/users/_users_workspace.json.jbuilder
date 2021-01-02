@@ -1,0 +1,1 @@
+json.extract! users_workspace, :id, :user_id, :workspace_id

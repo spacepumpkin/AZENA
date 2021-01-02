@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show] do 
       member do 
         get 'everything' # users/:user_id/everything
-        delete 'remove_workspace' # users/:user_id/remove_workspace, with params[:id]
+        delete 'workspaces', to: 'users#remove_workspace' # users/:user_id/workspaces
         post 'tasks', to: 'users#assign_task' # users/:user_id/tasks
         delete 'tasks', to: 'users#unassign_task' # users/:user_id/tasks
       end

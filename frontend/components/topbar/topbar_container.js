@@ -26,8 +26,8 @@ function getTopBarInfo(entities, pathname, dispatch) {
     const workspace = entities.workspaces[workspaceId];
     if (workspace === undefined) {
       return {
-        title: "This workspace does not exist",
-        pageType: "Workspace",
+        title: "Workspace Not Found",
+        pageType: "Home",
         item: { id: null, name: null, description: null, creatorId: null },
         updateItem: () => console.log("Cannot update, workspace does not exist.")
       }
@@ -44,8 +44,8 @@ function getTopBarInfo(entities, pathname, dispatch) {
     const project = entities.projects[projectId];
     if (project === undefined) {
       return {
-        title: "This project does not exist",
-        pageType: "Project",
+        title: "Project Not Found",
+        pageType: "Home",
         item: { id: null, name: null, description: null, creatorId: null },
         updateItem: () => console.log("Cannot update, project does not exist.")
       }

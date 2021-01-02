@@ -33,28 +33,6 @@ class Api::UsersController < ApplicationController
     render :everything
   end
 
-  # Remove a workspace NOT owned by user from their associated workspaces
-  def remove_workspace
-    # @workspace = Workspace.find_by(id: params[:id])
-    # if @workspace.nil?
-    #   render json: ["Workspace could not be found"], status: 404
-    #   return
-    # end
-
-    @users_workspace = UsersWorkspace.find_by(user_id: current_user.id, workspace_id: params[:id])
-
-    if @users_workspace.nil?
-      render json: ["Workspace could not be found for current user"], status: 404
-      return
-    end
-
-    if @users_workspace.destroy
-      render template: 'api/workspaces/show', status: 200
-    else
-      render json: ["Workspace could not be removed for current user"], status: 422
-    end
-  end
-
   def assign_task
     @users_task = UsersTask.includes(:user, :task).find_by(users_task_params)
     if @users_task
@@ -64,7 +42,7 @@ class Api::UsersController < ApplicationController
 
     @users_task = UsersTask.new(users_task_params)
     if @users_task.save
-      render template: "api/users/_users_task", locals: {users_task: @users_task} #, status: 200
+      render template: "api/users/_users_task", locals: { users_task: @users_task } #, status: 200
 
       # ! Backup that works:
       # render :show_users_task, status: 200
@@ -81,12 +59,28 @@ class Api::UsersController < ApplicationController
       return
     end
     if @users_task.destroy
-      render template: "api/users/_users_task", locals: { users_task: @users_task } #, status: 20
+      render template: "api/users/_users_task", locals: { users_task: @users_task } #, status: 200
       # ! Backup that works:
       # render :show_users_task, status: 200
     else
       # render json: ["Task could not be unassigned from #{@users_task.user.username}"], status: 422
       render json: @users_task.errors.full_messages, status: 422
+    end
+  end
+
+  # Remove a workspace NOT owned by user from their associated workspaces
+  def remove_workspace
+    @users_workspace = UsersWorkspace.includes(:user, :workspace).find_by(users_workspace_params)
+
+    if @users_workspace.nil?
+      render json: ["Workspace '#{@users_workspace.workspace.name}' is not assigned to #{@users_workspace.user.username}"], status: 404
+      return
+    end
+
+    if @users_workspace.destroy
+      render template: "api/users/_users_workspace", locals: { users_workspace: @users_workspace } #, status: 200
+    else
+      render json: @users_workspace.errors.full_messages, status: 422
     end
   end
 
@@ -98,5 +92,9 @@ class Api::UsersController < ApplicationController
 
   def users_task_params
     params.require(:users_task).permit(:user_id, :task_id)
+  end
+
+  def users_workspace_params
+    params.require(:users_workspace).permit(:user_id, :workspace_id)
   end
 end

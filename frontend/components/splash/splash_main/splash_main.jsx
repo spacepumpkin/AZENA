@@ -10,7 +10,7 @@ const SplashMain = function (props) {
           <div id="splash-top-left-content">
             <p> Work on <span className="highlight">big ideas</span>, without the busywork.</p>
             <div className="separator"></div>
-            <p>Streamline your project workflow, track milestones, and bring it all together <span className="highlight">with</span> <span className="highlight">Azena.</span></p>
+            <p>Streamline your project workflow, track deadlines, and bring it all together <span className="highlight">with</span> <span className="highlight">Azena.</span></p>
             <div>
               <Link to="/signup"><button id="splash-signup-btn" type="button"> Try for free </button></Link>
             </div>

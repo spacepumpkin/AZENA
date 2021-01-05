@@ -105,6 +105,11 @@
       width: 105%;
     }
 
+    &:active {
+      border : 1px solid $secondary;
+      width: 105%;
+    }
+
     // button {
     //   background-color: $primary;
     //   color           : $text;

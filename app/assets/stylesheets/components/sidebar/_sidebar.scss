@@ -59,7 +59,7 @@
     height: 100%;
   }
 
-  &:hover {
+  &:hover, &:focus, &:active {
     background: $lightest-gray;
   }
 }
@@ -84,7 +84,7 @@
     background: image-url('chevron-right.svg') no-repeat center;
   }
 
-  &:hover {
+  &:hover, &:focus {
     filter             : invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%);
     // background-color: $lightest-gray;
   }
@@ -120,7 +120,7 @@ button.collapsed {
       display: block;
     }
 
-    &:hover {
+    &:hover, &:focus, &:active {
       background-color: $lightest-gray;
       color           : $secondary;
     }
@@ -253,7 +253,7 @@ button.collapsed {
   //   vertical-align: middle;
   // }
 
-  &:hover {
+  &:hover, &:focus {
     color           : $primary;
     font-size       : 16px;
     overflow        : hidden;
@@ -311,7 +311,7 @@ button.collapsed {
     font-weight        : bold;
     transition         : all 0.3s ease 0s;
 
-    &:hover {
+    &:hover, &:focus, &:active {
       opacity: 1.0;
       width  : 100%;
     }

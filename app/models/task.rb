@@ -18,15 +18,21 @@ class Task < ApplicationRecord
 
   validates :name, :project_id, :creator_id, presence: true
 
-  # Join Table for Users and their Tasks on their Workspaces' Projects
+  # Join Table for Users and their !ASSIGNED Tasks on their Workspaces' Projects
   has_many :users_tasks,
     foreign_key: :task_id,
     class_name: :UsersTask,
     dependent: :destroy # ! necessary?
   
-  has_many :users,
+  # ! Attempt to associate tasks through projects
+  # For user's assigned tasks
+  has_many :assigned_users, # :users,
     through: :users_tasks,
     source: :user
+  # Regular tasks (assigned/unassigned) on projects under workspaces assigned to user
+  has_many :users,
+    through: :project,
+    source: :users
   
   # A Task has 1 creator
   belongs_to :task_creator,

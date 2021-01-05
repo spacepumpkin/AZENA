@@ -69,7 +69,7 @@ class Api::UsersController < ApplicationController
   end
 
   # Remove a workspace NOT owned by user from their associated workspaces
-  def remove_workspace
+  def unassign_workspace
     @users_workspace = UsersWorkspace.includes(:user, :workspace).find_by(users_workspace_params)
 
     if @users_workspace.nil?

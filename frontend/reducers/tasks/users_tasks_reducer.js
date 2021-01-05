@@ -4,6 +4,7 @@ import {
   RECEIVE_USERS_TASK,
   REMOVE_USERS_TASK
 } from "../../actions/task_actions";
+import { REMOVE_USERS_WORKSPACE } from "../../actions/workspace_actions";
 import { RECEIVE_CURRENT_USER } from "../../actions/session_actions";
 
 const usersTasksReducer = function (oldState = {}, action) {

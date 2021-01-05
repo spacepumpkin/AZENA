@@ -39,6 +39,7 @@ user_projects.each do |project|
   end
 end
 
+# ! Change to user.tasks?
 json.tasks do
   json.partial! "api/tasks/tasks.json.jbuilder", tasks: all_tasks
 end
@@ -54,7 +55,7 @@ json.sections do
   json.partial! "api/sections/sections.json.jbuilder", sections: project_sections
 end
 
-# ! Mainly for when we have member users
+
 json.users_workspaces do
   # json.partial! "api/users/users_workspaces.json.jbuilder", user: user # for current_user only
   UsersWorkspace.all.each do |users_workspace|
@@ -64,17 +65,17 @@ json.users_workspaces do
   end
 end
 
-# ! Mainly for when we have member users
-json.users_projects do
-  # json.partial! "api/users/users_projects.json.jbuilder", user: user # for current_user only
-  UsersProject.all.each do |users_project|
-    json.set! users_project.id do
-      json.extract! users_project, :user_id, :project_id
-    end
-  end
-end
+# ! Disable if we can associate projects through workspaces
+# json.users_projects do
+#   # json.partial! "api/users/users_projects.json.jbuilder", user: user # for current_user only
+#   UsersProject.all.each do |users_project|
+#     json.set! users_project.id do
+#       json.extract! users_project, :user_id, :project_id
+#     end
+#   end
+# end
 
-# ! Mainly for when we have member users, multiple assignees for tasks
+# ! To get user's ASSIGNED tasks, and tasks with other assignees
 # json.users_tasks({})
 json.users_tasks do
   json.partial! "api/users/users_tasks.json.jbuilder", users_tasks: UsersTask.all

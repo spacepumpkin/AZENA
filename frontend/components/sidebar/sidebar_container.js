@@ -5,8 +5,18 @@ import { toggleSidebar, setCurrentItems, setModal } from "../../actions/ui_actio
 import { destroyWorkspace, unassignUsersWorkspace } from '../../actions/workspace_actions';
 
 const mSP = function ({ ui, entities, session }) {
+
+  // Separate user's assigned workspaces (given by usersWorkspaces) from all workspaces
+  const allWorkspaces = entities.workspaces;
+  const workspaces = {};
+  Object.values(entities.usersWorkspaces).forEach(usersWorkspace => {
+    if (usersWorkspace.userId === session.id) {
+      workspaces[usersWorkspace.workspaceId] = allWorkspaces[usersWorkspace.workspaceId];
+    }
+  })
+
   return {
-    workspaces: entities.workspaces,
+    workspaces: workspaces,
     projects: entities.projects,
     sidebarCollapse: ui.sidebarCollapse,
     currentItems: ui.currentItems,

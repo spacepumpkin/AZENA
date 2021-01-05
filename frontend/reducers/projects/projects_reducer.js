@@ -18,7 +18,6 @@ const projectsReducer = function (oldState = {}, action) {
     default:
       return oldState;
   }
-
 }
 
 export default projectsReducer;

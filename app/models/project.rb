@@ -38,14 +38,19 @@ class Project < ApplicationRecord
   # * BUILT-IN ASSOCIATIONS ----------------------------------------
 
   # Join Table for Users and their Projects on their Workspaces
-  has_many :users_projects,
-    foreign_key: :project_id,
-    class_name: :UsersProject,
-    dependent: :destroy # ! necessary?
+  # ! Remove if we're able to associate projects through workspaces
+  # has_many :users_projects,
+  #   foreign_key: :project_id,
+  #   class_name: :UsersProject,
+  #   dependent: :destroy # ! necessary?
 
+  # ! Attempt to associate projects through workspace
+  # has_many :users,
+  #   through: :users_projects,
+  #   source: :user
   has_many :users,
-    through: :users_projects,
-    source: :user
+    through: :workspace,
+    source: :users
 
   # A Project has 1 creator
   belongs_to :project_creator,

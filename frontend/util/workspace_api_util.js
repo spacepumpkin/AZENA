@@ -92,7 +92,7 @@ export const unassignUsersWorkspace = (userId, workspaceId) => {
 export const removeWorkspaceFromUser = (userId, workspaceId) => {
   // console.log(`removing workspace #${workspaceId} from user #${userId} ...`);
   return $.ajax({
-    url: `/api/users/${userId}/remove_workspace/${workspaceId}`,
+    url: `/api/users/${userId}/unassign_workspace/${workspaceId}`,
     method: "DELETE"
   })
 }

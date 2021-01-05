@@ -4,7 +4,7 @@
 #               api_session DELETE /api/session(.:format)                                                                   api/sessions#destroy {:format=>:json}
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
 #       everything_api_user GET    /api/users/:id/everything(.:format)                                                      api/users#everything {:format=>:json}
-# remove_workspace_api_user DELETE /api/users/:id/remove_workspace(.:format)                                                api/users#remove_workspace {:format=>:json}
+#       workspaces_api_user DELETE /api/users/:id/workspaces(.:format)                                                      api/users#unassign_workspace {:format=>:json}
 #            tasks_api_user POST   /api/users/:id/tasks(.:format)                                                           api/users#assign_task {:format=>:json}
 #                           DELETE /api/users/:id/tasks(.:format)                                                           api/users#unassign_task {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show] do 
       member do 
         get 'everything' # users/:user_id/everything
-        delete 'workspaces', to: 'users#remove_workspace' # users/:user_id/workspaces
+        delete 'workspaces', to: 'users#unassign_workspace' # users/:user_id/workspaces
         post 'tasks', to: 'users#assign_task' # users/:user_id/tasks
         delete 'tasks', to: 'users#unassign_task' # users/:user_id/tasks
       end

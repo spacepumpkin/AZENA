@@ -41,15 +41,20 @@ class User < ApplicationRecord
     
   # * Projects
   # Join Table for Users and their Projects on their Workspaces
-  has_many :users_projects,
-    foreign_key: :user_id,
-    class_name: :UsersProject,
-    dependent: :destroy # ! necessary?
+  # ! Remove if we're able to associate projects through workspaces
+  # has_many :users_projects,
+  #   foreign_key: :user_id,
+  #   class_name: :UsersProject,
+  #   dependent: :destroy # ! necessary?
   
   # All of a user's created + projects from member workspaces
+  # has_many :projects,
+  #   through: :users_projects,
+  #   source: :project
+  # ! Attempt to associate projects through workspaces
   has_many :projects,
-    through: :users_projects,
-    source: :project
+    through: :workspaces,
+    source: :projects
   
   # A User might have 0 or many own (created) projects
   has_many :created_projects,
@@ -58,16 +63,20 @@ class User < ApplicationRecord
     dependent: :destroy # ! necessary?
 
   # * Tasks
-  # Join Table for Users and their Tasks on their Projects
+  # Join Table for Users and their !ASSIGNED Tasks on their Projects
   has_many :users_tasks,
     foreign_key: :user_id,
     class_name: :UsersTask,
     dependent: :destroy
   
   # All of a user's assigned tasks (not necessarily created)
-  has_many :tasks,
+  has_many :assigned_tasks, # :tasks
     through: :users_tasks,
     source: :task
+  # ! Attempt to associate all tasks through projects under user's workspaces
+  has_many :tasks,
+    through: :projects,
+    source: :tasks
 
   # A User might have 0 or many own (created) tasks
   has_many :created_tasks,

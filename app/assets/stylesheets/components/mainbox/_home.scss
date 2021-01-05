@@ -1,9 +1,13 @@
 .home-workspace-box {
   @include workspace-box;
+  margin: 10px 0;
 }
 
 .home-workspace-title {
   @include workspace-title;
+  font-size: 24px;
+  max-width: none;
+  width: 100%;
 }
 
 // .home-workspace-plus {

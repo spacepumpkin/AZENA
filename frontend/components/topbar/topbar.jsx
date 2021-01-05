@@ -198,9 +198,10 @@ export default class TopBar extends React.Component {
           {pageType !== "Home" &&
             <div className="header-icon">
               <button id="title-menu-button" type="button"
-                onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}
+                onClick={() => this.setState({ showTitleMenu: true })}
                 onBlur={this.handleMenuBlur}
                 onKeyDown={this.handleMenuBlur}
+                tabIndex="0"
               ></button>
               {/* <div id="user-menu-arrow" className={`${showUserMenu ? "show-sliding-menu" : ""}`}></div> */}
               <div className={`title-sliding-menu${showTitleMenu ? " show-sliding-menu" : ""}`} ref={this.titleMenuRef}>
@@ -263,19 +264,20 @@ export default class TopBar extends React.Component {
 
         <div id="topbar-user">
           <div className="profile-links">
-            <a className="profile-icon-link" href="https://github.com/spacepumpkin/AZENA">
+            <a className="profile-icon-link" tabIndex="0" href="https://github.com/spacepumpkin/AZENA">
               <img className="profile-icon" src={window.github} alt="github profile" />
             </a>
-            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/">
+            <a className="profile-icon-link" tabIndex="0" href="https://www.linkedin.com/in/gary-w-269749ba/">
               <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />
             </a>
           </div>
           {/* User Settings + Global Actions */}
           <div id="user-avatar">
             <button id="user-avatar-button" type="button"
-              onClick={() => this.setState({ showUserMenu: !showUserMenu })}
+              onClick={() => this.setState({ showUserMenu: true })}
               onBlur={this.handleMenuBlur}
               onKeyDown={this.handleMenuBlur}
+              tabIndex="0"
             >
               {user.username[0].concat(user.username[1]).toLowerCase()}
               {/* <img className={"avatar-logo"} src={window.logoIcon1} alt="small azena icon" /> */}

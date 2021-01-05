@@ -30,6 +30,49 @@
   }
 }
 
+.workspace-member {
+  >div:first-child {
+    font-weight: bold;
+    transition : color 0.3s ease;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  >div:nth-child(2) {
+    color: gray;
+  }
+}
+
+.member-button {
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  width          : 20px;
+  height         : 20px;
+  // padding: 10px;
+  border-radius  : 50%;
+  border         : 2px dashed $secondary;
+  margin-right   : 10px;
+
+  &:hover>.plus-button,
+  &:focus>.plus-button {
+    filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%);
+  }
+
+  >.plus-button {
+    width : 13px;
+    height: 13px;
+  }
+}
+
+#workspace-members-add {
+  display    : flex;
+  align-items: center;
+  margin     : 10px 0;
+}
+
 #workspace-projects {
   @include project-list;
   padding: 0;

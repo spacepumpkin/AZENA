@@ -223,6 +223,17 @@
   }
 }
 
+@-webkit-keyframes pop {
+  to {
+    -webkit-transform: scale(1.2);
+  }
+}
+
+@-moz-keyframes pop {
+  to {
+    -moz-transform: scale(1.2);
+  }
+}
 
 // * BUTTONS ------------------------------------------------------------
 @mixin submit-button {

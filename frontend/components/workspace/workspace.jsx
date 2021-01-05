@@ -106,14 +106,36 @@ export default class Workspace extends React.Component {
             <div>
               {
                 members.map((user) => {
-                  return (
-                    <div key={`user-${user.id}`}>
-                      <div style={{ fontWeight: "bold" }}>{user.username}</div>
-                      <div style={{ color: "gray" }}>{user.email}</div>
-                    </div>
-                  )
+                  if (workspace.creatorId === user.id) {
+                    return (
+                      <div key={`user-${user.id}`} className="workspace-member">
+                        <div>{user.username}<span style={{ color: "black" }}> (creator)</span></div>
+                        <div>{user.email}</div>
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div key={`user-${user.id}`} className="workspace-member">
+                        <div>{user.username}</div>
+                        <div>{user.email}</div>
+                      </div>
+                    )
+                  }
                 })
               }
+              <div id="workspace-members-add">
+                  <button className="member-button" type="button"
+                    // onClick={() => this.setState({ showUserMenu: true })}
+                    // onBlur={this.handleMenuBlur}
+                    // onKeyDown={this.handleMenuBlur}
+                    tabIndex="0"
+                  >
+                    <div className="plus-button"></div>
+                  </button>
+                <div>
+                  Add Member
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -123,8 +145,8 @@ export default class Workspace extends React.Component {
             Object.values(projects).map((project) => {
               return (
                 (project.workspaceId === workspaceId) &&
-                <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`} 
-                className="sidebar-workspace-project">
+                <Link to={`/projects/${project.id}/list`} key={`project-${project.id}`}
+                  className="sidebar-workspace-project">
                   <span></span>&nbsp;{project.name}
                 </Link>
               )

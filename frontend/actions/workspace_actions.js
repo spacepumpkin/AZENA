@@ -150,15 +150,15 @@ export const unassignUsersWorkspace = function (userId, workspaceId) {
       WorkspaceApiUtil.unassignUsersWorkspace(userId, workspaceId)
         .then(
           (usersWorkspace) => { 
-            // let workspaceId = usersWorkspace.workspaceId;
-            // let userId = usersWorkspace.userId;
-            // const workspaceProjects = Object.values(getState().entities.projects).filter(project => {
-            //   return project.workspaceId === workspaceId;
-            // });
-            // let allTasks = Object.values(getState().entities.tasks);
-            // for (let task of allTasks) {
-
-            // }
+            let workspaceId = usersWorkspace.workspaceId;
+            let userId = usersWorkspace.userId;
+            const workspaceProjects = Object.values(getState().entities.projects).filter(project => {
+              return project.workspaceId === workspaceId;
+            });
+            let allTasks = Object.values(getState().entities.tasks);
+            for (let task of allTasks) {
+              
+            }
             dispatch(removeUsersWorkspace(usersWorkspace))
           },
           (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))

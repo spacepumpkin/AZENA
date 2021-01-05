@@ -79,14 +79,16 @@ class Api::UsersController < ApplicationController
 
     if @users_workspace.destroy
       # Remove all associated tasks from user's assigned tasks; let frontend handle finding & sorting tasks to delete
-      @workspace = Workspace.find_by(id: @users_workspace.workspace_id)
-      workspace_tasks = @workspace.projects_tasks
-      @user = User.find_by(id: @users_workspace.user_id)
-      workspace_tasks.each |task| do 
-        @user.assigned_tasks.delete(task)
+      workspace = Workspace.find_by(id: @users_workspace.workspace_id)
+      users_tasks = workspace.projects_tasks
+      user = User.find_by(id: @users_workspace.user_id)
+      users_tasks.each |task| do 
+        user.assigned_tasks.delete(task)
       end
+      @users_task_ids = user.users_task_ids
 
-      render template: "api/users/_users_workspace", locals: { users_workspace: @users_workspace } #, status: 200
+      render template: "api/users/_unassign_users_workspace", locals: { users_workspace: @users_workspace, users_task_ids: @users_task_ids } #, status: 200
+      # render template: "api/users/_users_workspace", locals: { users_workspace: @users_workspace } #, status: 200
     else
       render json: @users_workspace.errors.full_messages, status: 422
     end

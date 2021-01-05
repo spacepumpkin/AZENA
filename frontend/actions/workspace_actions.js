@@ -56,10 +56,12 @@ const receiveUsersWorkspace = function (usersWorkspace) {
 }
 
 // Remove workspace from single user
-const removeUsersWorkspace = function (usersWorkspace) {
+const removeUsersWorkspace = function (usersWorkspace, usersTaskIds) {
   return {
     type: REMOVE_USERS_WORKSPACE,
-    usersWorkspace
+    usersWorkspace,
+    // userId,
+    usersTaskIds
   }
 }
 
@@ -149,17 +151,26 @@ export const unassignUsersWorkspace = function (userId, workspaceId) {
     return (
       WorkspaceApiUtil.unassignUsersWorkspace(userId, workspaceId)
         .then(
-          (usersWorkspace) => { 
-            let workspaceId = usersWorkspace.workspaceId;
-            let userId = usersWorkspace.userId;
-            const workspaceProjects = Object.values(getState().entities.projects).filter(project => {
-              return project.workspaceId === workspaceId;
-            });
-            let allTasks = Object.values(getState().entities.tasks);
-            for (let task of allTasks) {
-              
-            }
-            dispatch(removeUsersWorkspace(usersWorkspace))
+          // (usersWorkspace) => { 
+            // Filter out list of user's assigned tasks that were associated with workspace
+            // * METHOD 1 - Filter in FE
+            // let workspaceId = usersWorkspace.workspaceId;
+            // let userId = usersWorkspace.userId;
+            // let workspaceProjectsIds = [];
+            // Object.values(getState().entities.projects).forEach(project => {
+            //   if (project.workspaceId === workspaceId) workspaceProjectIds.push(project.id);
+            // });
+            // let allTasks = Object.values(getState().entities.tasks);
+            // let usersTasksIds = []
+            // for (let task of allTasks) {
+            //   if (workspaceProjectsIds.includes(task.projectId)) usersTasksIds.push(task.id);
+            // }
+
+            // dispatch(removeUsersWorkspace(usersWorkspace, userId, usersTasksIds))
+          ({ usersWorkspace, usersTaskIds }) => { 
+            // * METHOD 2 - Get pre-made array of task ids from BE
+            dispatch(removeUsersWorkspace(usersWorkspace, usersTaskIds))
+
           },
           (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
         )

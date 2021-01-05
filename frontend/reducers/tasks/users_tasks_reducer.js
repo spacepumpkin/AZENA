@@ -24,6 +24,16 @@ const usersTasksReducer = function (oldState = {}, action) {
         if (newState[id].taskId === action.task.id) { delete newState[id] }
       }
       return newState;
+    case REMOVE_USERS_WORKSPACE:
+      // Object.values(newState).forEach(usersTask => {
+      //   if (usersTask.userId === action.userId && action.usersTasksIds.includes(usersTask.taskId)) {
+      //     delete newState[usersTask.id];
+      //   }
+      // })
+      action.usersTaskIds.forEach(usersTaskId => {
+        delete newState[usersTaskId];
+      })
+      return newState;
     default:
       return oldState;
   }

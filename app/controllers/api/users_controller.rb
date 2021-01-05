@@ -87,6 +87,7 @@ class Api::UsersController < ApplicationController
       end
       @users_task_ids = user.users_task_ids
 
+      # Custom view to send back users_workspace & users_task_ids
       render template: "api/users/_unassign_users_workspace", locals: { users_workspace: @users_workspace, users_task_ids: @users_task_ids } #, status: 200
       # render template: "api/users/_users_workspace", locals: { users_workspace: @users_workspace } #, status: 200
     else

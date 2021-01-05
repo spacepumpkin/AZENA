@@ -52,7 +52,7 @@
   overflow     : hidden;
   transition   : all 0.3s ease 0s;
 
-  &:hover {
+  &:hover, &:focus, &:active {
     background-color      : rgba(56, 165, 154, 1);
     // background-color   : $primary--med;
   }
@@ -129,6 +129,7 @@
   transition: all 0.3s ease 0s;
 
   &:hover, &:focus {
+    display: block;
     filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%);
   }
 

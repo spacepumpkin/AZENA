@@ -180,6 +180,7 @@ export default class Sidebar extends React.Component {
                       <div className="sidebar-workspace-project" key={`project-${project.id}`}>
                         <Link to={`/projects/${project.id}/list`} ><span></span>&nbsp;{project.name}</Link>
                         <button className={`plus-button`} type="button"
+                          tabIndex="0"
                           onClick={this.openProjDeleteModal(project.id)}
                         />
                       </div>
@@ -242,10 +243,14 @@ export default class Sidebar extends React.Component {
             <Link to="/workspaces/new"><button type="button">Create New Workspace</button></Link>
           </div>
           <div className="profile-links">
-            <a className="profile-icon-link" href="https://github.com/spacepumpkin/AZENA">
+            <a className="profile-icon-link" href="https://github.com/spacepumpkin/AZENA" target={"_blank"} rel="noreferrer noopener"
+              onClick={(evt) => evt.currentTarget.blur()}
+            >
               <img className="profile-icon" src={window.github} alt="github profile" />
             </a>
-            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/">
+            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/" target={"_blank"} rel="noreferrer noopener"
+              onClick={(evt) => evt.currentTarget.blur()}
+            >
               <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />
             </a>
           </div>

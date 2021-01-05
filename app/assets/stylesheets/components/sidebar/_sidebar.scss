@@ -232,6 +232,10 @@ button.collapsed {
     text-overflow: ellipsis;
     white-space  : nowrap;
     padding-left : 10px;
+
+    // &:focus {
+    //   color: $primary;
+    // }
   }
 
   // display: flex;
@@ -253,9 +257,9 @@ button.collapsed {
   //   vertical-align: middle;
   // }
 
-  &:hover, &:focus {
+  &:hover, &:focus-within {
     color           : $primary;
-    font-size       : 16px;
+    font-size       : 15px;
     overflow        : hidden;
     text-overflow   : ellipsis;
     white-space     : nowrap;

@@ -123,19 +123,18 @@ export default class Workspace extends React.Component {
                   }
                 })
               }
-              <div id="workspace-members-add">
-                  <button className="member-button" type="button"
-                    // onClick={() => this.setState({ showUserMenu: true })}
-                    // onBlur={this.handleMenuBlur}
-                    // onKeyDown={this.handleMenuBlur}
-                    tabIndex="0"
-                  >
-                    <div className="plus-button"></div>
-                  </button>
+              {/* <div id="workspace-members-add" tabIndex="0">
+                <div className="member-button"
+                onClick={() => this.setState({ showUserMenu: true })}
+                // onBlur={this.handleMenuBlur}
+                // onKeyDown={this.handleMenuBlur}
+                >
+                  <div className="plus-button"></div>
+                </div>
                 <div>
                   Add Member
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

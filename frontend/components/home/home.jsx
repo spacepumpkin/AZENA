@@ -82,8 +82,8 @@ export default class Home extends React.Component {
       <div id="home">
         {/* <div id="mainbox"> */}
         {/* Hello I'm home! */}
-        <div>
-          <h1>My Workspaces</h1>
+        <div id="home-workspaces">
+          <h1 style={{ fontSize: "18px" }}>My Workspaces</h1>
           {
             Object.values(workspaces).map((workspace) => {
               // const showMenu = (workspace.id === plusMenuWorkspaceId);

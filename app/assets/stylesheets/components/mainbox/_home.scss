@@ -1,3 +1,16 @@
+#home-workspaces {
+  // Didn't get random colors for all spans, but all spans under the same workspace now have the same color
+  @for $i from 1 to 10 {
+    .home-workspace-box:nth-of-type(#{$i}) {
+      @for $j from 1 to 6 {
+        .home-workspace-project:nth-child(#{$j}) span {
+          background-color: rgb(random(255), random(255), random(255));
+        }
+      }
+    }
+  }
+}
+
 .home-workspace-box {
   @include workspace-box;
   margin: 10px 0;
@@ -7,7 +20,7 @@
   @include workspace-title;
   font-size: 24px;
   max-width: none;
-  width: 100%;
+  width    : 100%;
 }
 
 // .home-workspace-plus {
@@ -26,7 +39,7 @@
 .home-workspace-projects {
   @include project-list;
   flex-direction: row;
-  margin-left: 10px;
+  margin-left   : 10px;
 
   // span {
   //   height          : 50px;
@@ -50,14 +63,14 @@
 
 .home-workspace-project {
   // width     : 100%;
-  padding         : 5px 5px;
-  overflow-x      : hidden;
-  transition      : all 0.3s ease 0s;
-  height          : 18px;
-  border-right    : 4px solid transparent;
+  padding            : 5px 5px;
+  overflow-x         : hidden;
+  transition         : all 0.3s ease 0s;
+  height             : 18px;
+  border-right       : 4px solid transparent;
   // background-color: transparent;
 
-  &:hover {
+  &:hover, &:focus {
     color           : $primary;
     font-size       : 17px;
     border-right    : 4px solid $primary;
@@ -67,7 +80,7 @@
 
 // .icon-a {
 //   position: relative;
-  
+
 //   &::after {
 //     content: '~';
 //     position: absolute;

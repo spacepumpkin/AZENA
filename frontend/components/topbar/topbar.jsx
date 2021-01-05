@@ -264,10 +264,14 @@ export default class TopBar extends React.Component {
 
         <div id="topbar-user">
           <div className="profile-links">
-            <a className="profile-icon-link" tabIndex="0" href="https://github.com/spacepumpkin/AZENA">
+            <a className="profile-icon-link" href="https://github.com/spacepumpkin/AZENA" target={"_blank"} rel="noreferrer noopener"
+              onClick={(evt) => evt.currentTarget.blur()}
+            >
               <img className="profile-icon" src={window.github} alt="github profile" />
             </a>
-            <a className="profile-icon-link" tabIndex="0" href="https://www.linkedin.com/in/gary-w-269749ba/">
+            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/" target={"_blank"} rel="noreferrer noopener"
+              onClick={(evt) => evt.currentTarget.blur()}
+            >
               <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />
             </a>
           </div>

@@ -77,7 +77,7 @@ export default class Workspace extends React.Component {
   render() {
     const { projects, users } = this.props.entities;
     const { description: stateDescription } = this.state;
-    const { workspaceId, workspace } = this.props;
+    const { workspaceId, workspace, members } = this.props;
     if (typeof workspaceId !== 'number' || workspace === undefined) return null;
 
     return (
@@ -105,7 +105,7 @@ export default class Workspace extends React.Component {
             <h1>Members</h1>
             <div>
               {
-                Object.values(users).map((user) => {
+                members.map((user) => {
                   return (
                     <div key={`user-${user.id}`}>
                       <div style={{ fontWeight: "bold" }}>{user.username}</div>

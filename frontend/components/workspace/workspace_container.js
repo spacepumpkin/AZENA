@@ -9,8 +9,18 @@ const mSP = function ({ entities, ui }, ownProps) {
   const workspace = entities.workspaces[workspaceId];
   const description = (workspace === undefined || workspace.description === null) ? "" : workspace.description;
 
+  const workspaceMembers = [];
+  const users = entities.users;
+  const usersWorkspaces = entities.usersWorkspaces;
+  for (let id in usersWorkspaces) {
+    if (usersWorkspaces[id].workspaceId === workspaceId) {
+      workspaceMembers.push(users[usersWorkspaces[id].userId]);
+    }
+  }
+
   return {
     entities: entities,
+    members: workspaceMembers,
     workspace: workspace,
     description: description,
     workspaceId: workspaceId,

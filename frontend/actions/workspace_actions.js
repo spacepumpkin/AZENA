@@ -168,9 +168,8 @@ export const unassignUsersWorkspace = function (userId, workspaceId) {
 
             // dispatch(removeUsersWorkspace(usersWorkspace, userId, usersTasksIds))
           ({ usersWorkspace, usersTaskIds }) => { 
-            // * METHOD 2 - Get pre-made array of task ids from BE
+            // * METHOD 2 - Get pre-made array of usersTask ids from BE
             dispatch(removeUsersWorkspace(usersWorkspace, usersTaskIds))
-
           },
           (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
         )

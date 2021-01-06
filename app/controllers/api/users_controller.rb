@@ -33,10 +33,11 @@ class Api::UsersController < ApplicationController
     render :everything
   end
 
+  # Test Status -- PASS
   def assign_task
-    @users_task = UsersTask.includes(:user, :task).find_by(users_task_params)
-    if @users_task
-      render json: ["Task '#{@users_task.task.name}' is already assigned to #{@users_task.user.username}"], status: 422
+    users_task = UsersTask.includes(:user, :task).find_by(users_task_params)
+    if users_task
+      render json: ["Task '#{users_task.task.name}' is already assigned to #{users_task.user.username}"], status: 422
       return
     end
 
@@ -52,10 +53,11 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  # Test Status -- PASS
   def unassign_task
     @users_task = UsersTask.includes(:user, :task).find_by(users_task_params)
     if @users_task.nil?
-      render json: ["Task '#{@users_task.task.name}' is not assigned to #{@users_task.user.username}"], status: 404
+      render json: ["Task is not assigned to user"], status: 404
       return
     end
     if @users_task.destroy
@@ -68,28 +70,53 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  # Remove a workspace NOT owned by user from their associated workspaces
+  # Test Status -- PASS - Remove a workspace NOT owned by user from their associated workspaces
   def unassign_workspace
     @users_workspace = UsersWorkspace.includes(:user, :workspace).find_by(users_workspace_params)
 
     if @users_workspace.nil?
-      render json: ["Workspace '#{@users_workspace.workspace.name}' is not assigned to #{@users_workspace.user.username}"], status: 404
+      render json: ["Workspace is not assigned to user"], status: 404
       return
     end
 
     if @users_workspace.destroy
       # Remove all associated tasks from user's assigned tasks; let frontend handle finding & sorting tasks to delete
-      workspace = Workspace.find_by(id: @users_workspace.workspace_id)
-      users_tasks = workspace.projects_tasks
+      # workspace = Workspace.includes(:users, :tasks).find_by(id: @users_workspace.workspace_id)
+      # users_tasks = workspace.projects_tasks
+
+      users_tasks = Workspace.includes(:users, :projects_tasks).find_by(id: @users_workspace.workspace_id).projects_tasks
       user = User.find_by(id: @users_workspace.user_id)
-      users_tasks.each |task| do 
+
+      # Array of unassigned task ids
+      task_ids = users_tasks.ids
+      @users_task_ids = UsersTask.where(user_id: user.id, task_id: task_ids).ids
+
+      users_tasks.each do |task|
         user.assigned_tasks.delete(task)
       end
-      @users_task_ids = user.users_task_ids
+
+      # Array of remaining task ids
+      # @users_task_ids = user.users_task_ids
 
       # Custom view to send back users_workspace & users_task_ids
-      render template: "api/users/_unassign_users_workspace", locals: { users_workspace: @users_workspace, users_task_ids: @users_task_ids } #, status: 200
+      render template: "api/users/_unassigned_users_workspace", locals: { users_workspace: @users_workspace, users_task_ids: @users_task_ids } #, status: 200
       # render template: "api/users/_users_workspace", locals: { users_workspace: @users_workspace } #, status: 200
+    else
+      render json: @users_workspace.errors.full_messages, status: 422
+    end
+  end
+
+  # Test Status -- PASS
+  def assign_workspace
+    # @workspace = Workspace.find_by(id: users_workspace_params[:workspace_id])
+    # @user = User.find_by(id: users_workspace_params[:user_id])
+    @users_workspace = UsersWorkspace.new(
+      user_id: params[:users_workspace][:user_id],
+      workspace_id: params[:users_workspace][:workspace_id],
+    )
+
+    if @users_workspace.save
+      render template: "api/users/_users_workspace", locals: { users_workspace: @users_workspace } #, status: 200
     else
       render json: @users_workspace.errors.full_messages, status: 422
     end

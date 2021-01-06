@@ -10,7 +10,7 @@
 #
 class UsersWorkspace < ApplicationRecord
 
-  validates :user_id, uniqueness: {scope: :workspace_id}
+  validates :user_id, uniqueness: {scope: :workspace_id, message: "is already assigned this workspace"}
 
   belongs_to :user,
     foreign_key: :user_id,

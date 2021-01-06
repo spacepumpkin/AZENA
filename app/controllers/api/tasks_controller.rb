@@ -5,7 +5,7 @@ class Api::TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.creator_id = current_user.id
     if @task.save
-      current_user.tasks << @task # * Add to current user's tasks by default when created
+      current_user.tasks << @task # * Add to current user's tasks by default when created; temporary
       @users_task = UsersTask.find_by(task_id: @task.id) # Also send back users_task when task is created
       # @users_task = UsersTask.create(user_id: current_user.id, task_id: @task.id) # Alternative method, same queries
       render :show #, status: 200

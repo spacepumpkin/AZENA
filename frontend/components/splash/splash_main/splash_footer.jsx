@@ -13,8 +13,12 @@ const SplashFooter = function (props) {
           Thank you for visiting Azena!
         </div>
         <div className="splash-profile-links">
-          <a href="https://github.com/spacepumpkin/AZENA"><img src={window.github} alt="github profile" /></a>
-          <a href="https://www.linkedin.com/in/gary-w-269749ba/"><img src={window.linkedin} alt="linkedin profile" /></a>
+          <a href="https://github.com/spacepumpkin/AZENA" target={"_blank"} rel="noreferrer noopener">
+            <img src={window.github} alt="github profile" />
+          </a>
+          <a href="https://www.linkedin.com/in/gary-w-269749ba/" target={"_blank"} rel="noreferrer noopener">
+            <img src={window.linkedin} alt="linkedin profile" />
+          </a>
         </div>
       </div>
     </footer>

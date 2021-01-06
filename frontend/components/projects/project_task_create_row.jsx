@@ -9,7 +9,8 @@ class ProjectTaskCreateRow extends React.Component {
     this._nullState = {
       name: "",
       description: "",
-      dueDate: todayDate
+      dueDate: todayDate,
+      disableFields: false
     };
 
     this.state = Object.assign({}, this._nullState);
@@ -40,17 +41,20 @@ class ProjectTaskCreateRow extends React.Component {
     if (filteredName === '') {
       filteredName = 'Untitled Task';
     }
-    this.props.createTask({ name: filteredName, description, dueDate, projectId: this.props.projectId });
-    this.setState(this._nullState);
+    let that = this;
+    this.props.createTask({ name: filteredName, description, dueDate, projectId: this.props.projectId })
+    .then(() => that.setState(that._nullState));
+    this.setState({ disableFields: true });
   }
 
   render() {
     const { task, destroyTask } = this.props;
+    const { disableFields } = this.state;
 
     return (
       <div className="project-task-row" >
         <div className="project-task-check-wrapper">
-          <button className={"plus-button"} type="button" onClick={this.addNewTask} />
+          <button className={"plus-button"} type="button" disabled={disableFields} onClick={this.addNewTask} />
         </div>
         <input className={`project-task-input task-input`} placeholder="Add New Task..." type="text"
           value={this.state.name}
@@ -59,6 +63,7 @@ class ProjectTaskCreateRow extends React.Component {
           // onBlur={this.handleBlur("name")}
           autoComplete="off" autoCorrect="off" autoCapitalize="off"
           spellCheck="false"
+          disabled={disableFields}
         />
         <input className={`project-task-input task-input`} placeholder="Add Task Description..." type="text"
           value={this.state.description}
@@ -67,11 +72,13 @@ class ProjectTaskCreateRow extends React.Component {
           // onBlur={this.handleBlur("description")}
           autoComplete="off" autoCorrect="off" autoCapitalize="off"
           spellCheck="false"
+          disabled={disableFields}
         />
         <input className={"my-tasks-date"} type="date"
           value={this.state.dueDate}
           onChange={this.handleChange("dueDate")}
           onKeyDown={this.handleKeyDown}
+          disabled={disableFields}
         />
       </div>
     )

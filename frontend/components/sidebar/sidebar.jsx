@@ -139,7 +139,6 @@ export default class Sidebar extends React.Component {
     // Separate user's workspaces into own and other workspaces
     const ownWorkspaces = [];
     const otherWorkspaces = [];
-
     Object.values(workspaces).forEach((workspace) => {
       if (workspace.creatorId === currentUserId) {
         ownWorkspaces.push(workspace);

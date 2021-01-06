@@ -48,7 +48,11 @@ class WorkspaceCreateModal extends React.Component {
       name: this.state.name,
       description: this.state.description
     }).then((passRes) => {
-      that.props.history.push(`/workspaces/${passRes.workspace.id}`)
+      if (passRes && passRes.workspace) {
+        that.props.history.push(`/workspaces/${passRes.workspace.id}`);
+      } else {
+        that.props.history.push(`/home`);
+      }
     }, (failRes) => {
     })
   }

@@ -14,7 +14,7 @@ const userWorkspacesReducer = function (oldState = {}, action) {
       return Object.assign(newState, action.payload.usersWorkspaces);
     case RECEIVE_USERS_WORKSPACE:
       // Assign workspace to user
-      return Object.assign(newState, { [action.usersWorkspace.id]: action.usersWorkspace })
+      return Object.assign(newState, { [action.usersWorkspace.id]: action.usersWorkspace });
     case REMOVE_USERS_WORKSPACE:
       // Remove workspace from user
       delete newState[action.usersWorkspace.id];
@@ -39,3 +39,10 @@ export default userWorkspacesReducer;
 //     workspaceId: 1,
 //   },
 // }
+
+// * New and Improved version for later
+// usersWorkspaces: {
+//   1: [1,2,3],
+//   2: [1]
+// }
+// userId: [workspaceIds]

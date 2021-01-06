@@ -5,7 +5,7 @@ class Api::ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.creator_id = current_user.id
     if @project.save
-      current_user.projects << @project
+      # current_user.projects << @project # take out if we stop using UsersProject table
       render :show, status: 200
     else
       render json: @project.errors.full_messages, status: 422

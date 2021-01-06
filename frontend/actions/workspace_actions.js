@@ -73,7 +73,15 @@ export const createWorkspace = function (workspace) {
     return (
       WorkspaceApiUtil.createWorkspace(workspace)
         .then(
-          (workspace) => dispatch(receiveWorkspace(workspace)),
+          // Temporarily add usersWorkspace until we refactor usersWorkspaces reducer
+          ({workspace, usersWorkspace}) => {
+            // Major issue here is that the redux state gets updated separately
+            // and any renders that depend on it won't see the 2nd update until after
+            // the first one, causing multiple rerenders and/or having one undefined
+            dispatch(receiveWorkspace(workspace))
+            dispatch(receiveUsersWorkspace(usersWorkspace)); 
+            return receiveWorkspace(workspace); // return here to provide promise res (e.g. for workspace create modal)
+          },
           (errors) => dispatch(receiveWorkspaceErrors(errors.responseJSON))
         )
     );

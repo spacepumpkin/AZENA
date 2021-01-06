@@ -21,7 +21,7 @@ export default class TopBar extends React.Component {
     this.titleMenuRef = React.createRef();
 
     // Title min and max char count
-    this.titleMin = 1;
+    // this.titleMin = 1;
     this.titleMax = 25;
 
     this.topbarRenderCount = 0;
@@ -60,7 +60,8 @@ export default class TopBar extends React.Component {
       if (updatedValue === this.state[field]) return;
       if (field === "title") {
         updatedValue = updatedValue.replace(/[\r\n\v\t]+/g, '');
-        if (updatedValue.length < this.titleMin || updatedValue.length > this.titleMax) {
+        // if (updatedValue.length < this.titleMin || updatedValue.length > this.titleMax) {
+        if (updatedValue.length > this.titleMax) {
           // this.setState({ title: editedTitle });
           return;
         }
@@ -76,7 +77,10 @@ export default class TopBar extends React.Component {
     const updatedTitle = stateTitle.replace(/^ +|[\r\n\v\t]+/g, '');
 
     if (pageType !== "Home" && isCreator) {
-      if (updatedTitle !== currentTitle) {
+      if (!updatedTitle) {
+        // If title is blank, reset with previous title
+        this.setState({ title: currentTitle });
+      } else if (updatedTitle !== currentTitle) {
         const { updateItem, item } = this.props;
         if (item.id !== undefined && item.id !== null) {
           updateItem({ id: item.id, name: updatedTitle });

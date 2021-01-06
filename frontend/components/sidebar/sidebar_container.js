@@ -10,7 +10,7 @@ const mSP = function ({ ui, entities, session }) {
   const allWorkspaces = entities.workspaces;
   const workspaces = {};
   Object.values(entities.usersWorkspaces).forEach(usersWorkspace => {
-    if (usersWorkspace.userId === session.id) {
+    if (usersWorkspace.userId === session.id && allWorkspaces[usersWorkspace.workspaceId]) {
       workspaces[usersWorkspace.workspaceId] = allWorkspaces[usersWorkspace.workspaceId];
     }
   })

@@ -39,7 +39,8 @@ class Api::WorkspacesController < ApplicationController
     @workspace = Workspace.new(workspace_params)
     @workspace.creator_id = current_user.id
     if @workspace.save
-      current_user.workspaces << @workspace
+      # current_user.workspaces << @workspace
+      @users_workspace = UsersWorkspace.create(user_id: current_user.id, workspace_id: @workspace.id)
       render :show, status: 200
     else
       render json: @workspace.errors.full_messages, status: 422

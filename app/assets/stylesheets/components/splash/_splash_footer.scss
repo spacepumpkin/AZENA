@@ -103,6 +103,14 @@
   width          : 200px;
   margin-top     : 20px;
 
+  a:hover,
+  a:focus {
+    img {
+      filter : hue-rotate(180deg);
+      opacity: 1.0;
+    }
+  }
+
   img {
     box-shadow      : 0 0 10px $darkgray;
     background-color: $primary--med;
@@ -113,10 +121,10 @@
     opacity         : 0.5;
     transition      : opacity 0.3s ease 0s;
 
-    &:hover {
-      //  filter: invert(90%);
-      filter : hue-rotate(180deg);
-      opacity: 1.0;
-    }
+    // &:hover {
+    //   //  filter: invert(90%);
+    //   filter : hue-rotate(180deg);
+    //   opacity: 1.0;
+    // }
   }
 }

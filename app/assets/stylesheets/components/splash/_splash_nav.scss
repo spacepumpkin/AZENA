@@ -29,7 +29,7 @@
   transition : all 1s ease 0s;
 
   // -webkit-transition: content 2s ease-in-out;
-  &:hover {
+  &:hover, &:focus {
     // transform            : rotate(180deg);
     // background-image    : image-url('azena-logo-blue-white-zen.png');
     // background-repeat: no-repeat;
@@ -200,7 +200,7 @@
     white-space: nowrap;
   }
 
-  &:hover {
+  &:hover, &:focus {
     color: $secondary;
   }
 }

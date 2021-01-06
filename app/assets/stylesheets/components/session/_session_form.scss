@@ -8,6 +8,14 @@
   margin-top     : 50px;
   // align-self: center;
   // background: $spacecadet;
+
+  .profile-links {
+    margin-top: 20px;
+
+    .profile-icon-link {
+      margin: 0 20px;
+    }
+  }
 }
 
 .session-box {
@@ -239,7 +247,8 @@
 
 .session-alternate {
   margin           : 15px 0;
-  // height: 35px;
+  padding: auto 0;
+  height: 35px;
   // vertical-align: middle;
 
   button {

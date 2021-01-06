@@ -30,7 +30,7 @@ class Feedback extends React.Component {
     this.createFeedback(feedback)
       .then(
         res => {
-          console.log("Feedback submitted!");
+          console.log("Feedback submitted! Thank you!");
           that.setState({ success: true, errors: [], activeInput: -1 });
           // setTimeout(that.toggleModal, 5000);
         }, errors => {

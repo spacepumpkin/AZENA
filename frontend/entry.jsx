@@ -95,11 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ------------------------------ TESTING START ------------------------------
-  if (process.env.NODE_ENV !== "production") {
-    // Only allow in development
-
-    window.getState = store.getState;
-    window.dispatch = store.dispatch;
+    // window.getState = store.getState;
+    // window.dispatch = store.dispatch;
 
     // * SessionApiUtil
     // window.sessionSignUp = SessionApiUtil.signup; // PASS - user should be able to sign up and login in BE
@@ -130,9 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
     // window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
     // * Section Actions
-    window.createSection = createSection; // PASS - should be able to create new section under a project
-    window.updateSection = updateSection; // PASS - should be able to update a section
-    window.destroySection = destroySection; // Half pass - should be able to destroy a section and handle section tasks
-  }
+    // window.createSection = createSection; // PASS - should be able to create new section under a project
+    // window.updateSection = updateSection; // PASS - should be able to update a section
+    // window.destroySection = destroySection; // Half pass - should be able to destroy a section and handle section tasks
   // ------------------------------ TESTING END --------------------------------
 })

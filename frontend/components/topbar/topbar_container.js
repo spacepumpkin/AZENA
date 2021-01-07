@@ -93,35 +93,39 @@ const mSP = function ({ entities, ui, session }, ownProps) {
     pageType: pageType,
     item: item,
     isCreator: (item.creatorId === session.id),
-    user: entities.users[session.id]
+    user: entities.users[session.id],
+    entities: entities
   };
 };
 
 const mDP = function (dispatch, ownProps) {
-  // const { updateItem } = getTopBarInfo(ownProps.entities, ownProps.location.pathname, dispatch)
   return {
     logout: () => dispatch(logout()),
     toggleSidebar: () => dispatch(toggleSidebar),
     setCurrentWorkspaceId: ownProps.setCurrentWorkspaceId,
     setCurrentItems: (items) => dispatch(setCurrentItems(items)),
-    setModal: (modalType) => dispatch(setModal(modalType))
+    setModal: (modalType) => dispatch(setModal(modalType)),
+    dispatch: dispatch
   };
 };
 
-// ! Pass down specific update method while keeping DRY -- 2nd way (mergeProps) -- IT WORKS
+// ! Pass down specific update method while keeping DRY -- 2nd way (mergeProps) -- It works?
 const mergeProps = function (stateProps, dispatchProps, ownProps) {
-
-  switch (stateProps.pageType) {
-    case "Workspace":
-      dispatchProps["updateItem"] = (item) => dispatch(updateWorkspace(item));
-      break;
-    case "Project":
-      dispatchProps["updateItem"] = (item) => dispatch(updateProject(item));
-      break;
-    default:
-      dispatchProps["updateItem"] = () => console.log("updateItem didn't work");
-      break;
-  }
+  const { updateItem } = getTopBarInfo(stateProps.entities, ownProps.location.pathname, dispatchProps.dispatch)
+  // switch (stateProps.pageType) {
+  //   case "Workspace":
+  //     dispatchProps["updateItem"] = (item) => dispatch(updateWorkspace(item));
+  //     break;
+  //   case "Project":
+  //     dispatchProps["updateItem"] = (item) => dispatch(updateProject(item));
+  //     break;
+  //   default:
+  //     dispatchProps["updateItem"] = () => console.log("updateItem didn't work");
+  //     break;
+  // }
+  dispatchProps.updateItem = updateItem;
+  delete dispatchProps.dispatch;
+  delete dispatchProps.entities;
   return { ...stateProps, ...dispatchProps }
 }
 // ! 3rd way (pass down both methods)

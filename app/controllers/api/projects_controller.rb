@@ -30,7 +30,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find_by(id: params[:id])
+    @project = Project.includes(:users, :tasks).find_by(id: params[:id])
     if @project.nil?
       render json: ["Project was not found"], status: 404
       return

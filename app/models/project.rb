@@ -34,6 +34,11 @@ class Project < ApplicationRecord
 
   # * BUILT-IN ASSOCIATIONS ----------------------------------------
 
+  # A Project can belong to only 1 workspace
+  belongs_to :workspace,
+    foreign_key: :workspace_id,
+    class_name: :Workspace
+
   # Join Table for Users and their Projects on their Workspaces
   # ! Remove if we're able to associate projects through workspaces
   # has_many :users_projects,
@@ -53,11 +58,6 @@ class Project < ApplicationRecord
   belongs_to :project_creator,
     foreign_key: :creator_id,
     class_name: :User
-
-  # A Project can belong to only 1 workspace
-  belongs_to :workspace,
-    foreign_key: :workspace_id,
-    class_name: :Workspace
 
   # A Project have 0 or more tasks
   has_many :tasks,

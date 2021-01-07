@@ -18,7 +18,7 @@ class Project < ApplicationRecord
 
   validate :name_cannot_start_with_space
 
-  # attr_reader :icon
+  attr_accessor :icon
   before_create :randomize_icon_color
 
   def name_cannot_start_with_space

@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import WorkspaceDeleteModal from '../workspace/workspace_delete_modal';
 import ProjectDeleteModal from '../projects/project_delete_modal';
 
+const getRandomColor = function () {
+  const randomRGB = () => Math.floor(Math.random() * 256);
+  return (`rgb(${randomRGB()}, ${randomRGB()}, ${randomRGB()})`);
+}
+
 export default class TopBar extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +18,7 @@ export default class TopBar extends React.Component {
       showTitleMenu: false,
       showUserMenu: false,
       titleFlash: false,
+      headerIconColor: getRandomColor() // temporarily until we can get icon colors from BE
     }
 
     // Controlling title blur event
@@ -38,10 +44,15 @@ export default class TopBar extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // Reset title & description if we changed pages
-    if (prevProps.title !== this.props.title) {
-      let description = this.props.item.description ? this.props.item.description : "";
+    // Reset title & description if we changed pages; don't change header icon color if it's the same item
+    let description = this.props.item.description ? this.props.item.description : "";
+
+    if (prevProps.title !== this.props.title &&
+      prevProps.pageType === this.props.pageType &&
+      prevProps.item && this.props.item && prevProps.item.id === this.props.item.id) {
       this.setState({ title: this.props.title, titleFlash: true, itemDescription: description });
+    } else if (prevProps.title !== this.props.title) {
+      this.setState({ title: this.props.title, titleFlash: true, itemDescription: description, headerIconColor: getRandomColor() });
     } else if (prevProps.item.description !== this.props.item.description) {
       this.setState({ itemDescription: this.props.item.description });
     }
@@ -177,7 +188,7 @@ export default class TopBar extends React.Component {
       user,
       setCurrentWorkspaceId
     } = this.props;
-    const { title: stateTitle, showUserMenu, showTitleMenu, titleFlash, itemDescription } = this.state; // Will change based on route
+    const { title: stateTitle, showUserMenu, showTitleMenu, titleFlash, itemDescription, headerIconColor } = this.state; // Will change based on route
     const renderedTitle = stateTitle;
 
     // Adjusting class of title depending on whether it's editable
@@ -202,7 +213,8 @@ export default class TopBar extends React.Component {
           {pageType !== "Home" &&
             <div className="header-icon">
               <button id="title-menu-button" type="button"
-                onClick={() => this.setState({ showTitleMenu: true })}
+                style={{ backgroundColor: headerIconColor }}
+                onClick={() => this.setState({ showTitleMenu: !showTitleMenu })}
                 onBlur={this.handleMenuBlur}
                 onKeyDown={this.handleMenuBlur}
                 tabIndex="0"
@@ -282,7 +294,7 @@ export default class TopBar extends React.Component {
           {/* User Settings + Global Actions */}
           <div id="user-avatar">
             <button id="user-avatar-button" type="button"
-              onClick={() => this.setState({ showUserMenu: true })}
+              onClick={() => this.setState({ showUserMenu: !showUserMenu })}
               onBlur={this.handleMenuBlur}
               onKeyDown={this.handleMenuBlur}
               tabIndex="0"

@@ -6,16 +6,18 @@ import CreateTaskRow from './create_task_row';
 
 function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, allWorkspaces, allProjects }) {
 
-  const taskRows = [];
+  // const taskRows = [];
+  const doneTaskRows = [];
+  const restTaskRows = [];
 
   // const todayDay = new Date().toDateString().slice(8, 10);
   // const todayMonth = new Date().getMonth() + 1;
   // const todayYear = new Date().toDateString().slice(11);
-  const todayDate = new Date().toISOString().substr(0,10);
+  const todayDate = new Date().toISOString().substr(0, 10);
 
+  // Separate based on task.done
   for (let i = 0; i < assignedTasks.length; i++) {
-
-    taskRows.push(
+    let taskRow = (
       <TaskRow
         key={`task-${assignedTasks[i].id}`}
         task={assignedTasks[i]}
@@ -24,7 +26,12 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, al
         project={taskProjects[i]}
         creatorName={taskCreators[i].username}
       />
-    )
+    );
+    if (assignedTasks[i].done) {
+      doneTaskRows.push(taskRow);
+    } else {
+      restTaskRows.push(taskRow);
+    }
   }
 
   return (
@@ -41,7 +48,9 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, al
           </tr>
         </thead>
         <tbody>
-          {taskRows}
+          {/* {taskRows} */}
+          {doneTaskRows}
+          {restTaskRows}
           <CreateTaskRow todayDate={todayDate} allWorkspaces={allWorkspaces} allProjects={allProjects} />
         </tbody>
       </table>

@@ -59,13 +59,30 @@ export default class ProjectList extends React.Component {
     const { project, projectId, projectTasks, usersTasks, createTask } = this.props;
     if (typeof projectId !== 'number' || project === undefined) return null;
 
-    const ProjectTaskRows = Object.values(projectTasks).map((task) => {
-      return (
+    // const ProjectTaskRows = Object.values(projectTasks).map((task) => {
+    //   return (
+    //     <ProjectTaskRow task={task} key={`task-${task.id}`}
+    //       destroyTask={this.props.destroyTask}
+    //       updateTask={this.props.updateTask}
+    //     />
+    //   )
+    // });
+
+    // Separate based on task.done
+    const ProjectDoneTaskRows = [];
+    const ProjectRestTaskRows = [];
+    Object.values(projectTasks).forEach((task) => {
+      let taskRow = (
         <ProjectTaskRow task={task} key={`task-${task.id}`}
           destroyTask={this.props.destroyTask}
           updateTask={this.props.updateTask}
         />
       )
+      if (task.done) {
+        ProjectDoneTaskRows.push(taskRow);
+      } else {
+        ProjectRestTaskRows.push(taskRow);
+      }
     });
 
     return (
@@ -77,7 +94,8 @@ export default class ProjectList extends React.Component {
             <div className="project-task-title" > {"Description"} </div>
             <div className="project-task-title" > {"Due Date"} </div>
           </div>
-          { ProjectTaskRows }
+          {ProjectDoneTaskRows}
+          {ProjectRestTaskRows}
           <ProjectTaskCreateRow projectId={projectId} createTask={createTask} />
         </div>
       </div>

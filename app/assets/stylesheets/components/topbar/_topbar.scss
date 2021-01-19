@@ -16,6 +16,7 @@
   padding-right            : 50px;
   border-bottom            : 1px solid $lighter-gray;
   box-shadow               : 5px 0 $gray;
+  z-index                  : 2;
 }
 
 // MainHeader (Workspace, Project, etc.)
@@ -50,16 +51,17 @@
     vertical-align: middle;
     padding       : 20% 10px;
 
-    display            : inline-block;
+    display               : inline-block;
     // box-sizing: border-box;
-    width              : 40px;
-    height             : 40px;
+    width                 : 40px;
+    height                : 40px;
     // background-color   : rgb(random(255), random(255), random(255));
-    border-radius      : 8px;
+    border-radius         : 8px;
     // cursor          : pointer;
-    transition         : all 0.3s ease 0s;
+    transition            : all 0.3s ease 0s;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       // margin-top: -4px;
       // margin-left: -4px;
       transform : translateY(-3px);
@@ -192,7 +194,8 @@
     justify-content          : center;
     align-items              : center;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       opacity      : 100%;
       // color     : $primary;
       // font-size: 30px;
@@ -301,7 +304,8 @@
   .profile-icon-link {
     box-shadow: 1px 1px 2px 2px $lighter-gray;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       border: 5px solid $secondary;
     }
   }

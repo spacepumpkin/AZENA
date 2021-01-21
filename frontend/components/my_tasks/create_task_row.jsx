@@ -94,10 +94,18 @@ export default function CreateTaskRow({ allWorkspaces, allProjects, todayDate })
     if (dueDate !== "") setdueDate(todayDate);
   }
 
+  function handleKeyDown(evt) {
+    if (evt.key === "Enter" || evt.keyCode === 13) {
+      evt.preventDefault();
+      addNewTask();
+    }
+  }
+
   return (
     <tr className="my-tasks-create-row">
       <td><input type="text" className="task-input" value={name} placeholder="+ Add New Task"
         onChange={handleChange("name")}
+        onKeyDown={handleKeyDown}
       /></td>
       <td><input type="text" className="task-input" value={description} placeholder="Add Description"
         onChange={handleChange("description")}

@@ -18,6 +18,10 @@
   }
 }
 
+:disabled {
+  cursor: default;
+}
+
 .session-box {
   display            : flex;
   flex-direction     : column;
@@ -44,7 +48,7 @@
     margin    : 20px 0;
 
     // height: 
-    #session-logo {
+    img {
       width: 100%;
     }
   }
@@ -62,7 +66,7 @@
     border-radius  : 5px;
     transition     : all 0.3s ease 0s;
 
-    &:hover, &:focus {
+    &:enabled:hover, &:enabled:focus {
       filter             : invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%);
       // background-color: $lightest-gray;
     }
@@ -258,7 +262,7 @@
     // vertical-align: middle;
     // padding: 10px 0;
 
-    &:hover, &:focus {
+    &:enabled:hover, &:enabled:focus {
       font-size      : 20px;
       text-decoration: underline;
     }

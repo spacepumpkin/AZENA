@@ -37,9 +37,9 @@ export default class SessionForm extends React.Component {
     return (evt) => {
       // if (field === "password-verify") {
       //   let verifyInput = document.getElementById("session-password-verification");
-        
+
       // }
-      this.setState({[field]: evt.currentTarget.value })
+      this.setState({ [field]: evt.currentTarget.value })
     }
   }
 
@@ -60,23 +60,23 @@ export default class SessionForm extends React.Component {
     this.props.formType === "Sign Up" ? (
       this.props.history.push("/login")
     ) : (
-      this.props.history.push("/signup")
-    );
+        this.props.history.push("/signup")
+      );
   }
 
   demoLogin() {
-    this.setState(Object.assign(this._nullState, {disabled: true})); // disable form when demoUser is being entered
+    this.setState(Object.assign({}, this._nullState, { disabled: true })); // disable form when demoUser is being entered
 
     // Method 3 - iterate through demoUser object based on fields we want to fill
     const login = this.props.login || this.props.processForm;
-    const demoUser = { 
+    const demoUser = {
       email: "welcometo@azena", password: "demopass", username: "demo"
     };
     let that = this;
     let count = 0, field = "email", done = false;
 
-    const {formType} = this.props;
-    
+    const { formType } = this.props;
+
     let demoAutoFill = (user, formType) => {
       if (count === user[field]["length"]) {
         if (field === "password") {
@@ -84,9 +84,9 @@ export default class SessionForm extends React.Component {
           setTimeout(() => login(user), 1000);
           done = true;
         }
-        field = (formType === "Log In" || field === "username") ? "password" : "username"; 
+        field = (formType === "Log In" || field === "username") ? "password" : "username";
         count = 0;
-      } 
+      }
       if (done !== true) {
         that.setState({ [field]: that.state[field].concat(user[field][count]) })
         count++;
@@ -102,7 +102,7 @@ export default class SessionForm extends React.Component {
     let emailErrors = [], usernameErrors = [], passwordErrors = [];
     if (!this.state.disabled && (sessionErrors !== undefined || sessionErrors.length !== 0)) {
       sessionErrors.forEach((error) => {
-        switch(error.split(" ")[0]) {
+        switch (error.split(" ")[0]) {
           case ("Email"):
             emailErrors.push(error);
             break;
@@ -126,16 +126,22 @@ export default class SessionForm extends React.Component {
           </Link>
 
           <div className="session-logo">
-            <Link to="/" style={(this.state.disabled) ? { pointerEvents: 'none' } : {}} >
-              <img id="session-logo" src={window.logoMainURL} />
-            </Link>
+            {(this.state.disabled) ? (
+              <Link to="/" onClick={(evt) => evt.preventDefault()} style={{ pointerEvents: 'none', cursor: 'default' }}>
+                <img src={window.logoMainURL} />
+              </Link>
+            ) : (
+              <Link to="/" >
+                <img src={window.logoMainURL} />
+              </Link>
+            )}
           </div>
 
           <h1>{formType}</h1>
 
           {/* <div className="session-demo"> */}
           <button className="session-demo-btn" type="button" onClick={this.demoLogin} disabled={this.state.disabled}>
-              {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> // ! Ryan's method for demologin */}
+            {/* <button type="button" onClick={() => this.props.history.push("/demologin")}> DEMO </button> // ! Ryan's method for demologin */}
             <h3>Login automatically with a<span>&nbsp;DEMO </span> </h3>
           </button>
           {/* </div> */}
@@ -159,56 +165,56 @@ export default class SessionForm extends React.Component {
 
           <form className="session-form" onSubmit={this.handleSubmit}>
             <fieldset disabled={this.state.disabled}>
-            <label> Email address{" "}
-              {formType === "Sign Up" && <span>(this will be your login)</span> }
-              <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
-              <div className="error-message">{emailErrors.join(", ")}</div>
-            </label>
-            
-            {
-              formType === "Sign Up" &&
-              <label> Username{" "}<span>(required)</span>
-                <input id="session-username" type="text" value={this.state.username} 
-                onChange={this.handleChange("username")} />
-                <div className="error-message">{usernameErrors.join(", ")}</div>
+              <label> Email address{" "}
+                {formType === "Sign Up" && <span>(this will be your login)</span>}
+                <input id="session-email" type="email" value={this.state.email} onChange={this.handleChange("email")} />
+                <div className="error-message">{emailErrors.join(", ")}</div>
               </label>
-            }
-            
-            <label> Password{" "}
-              {formType === "Sign Up" && <span>(minimum 6 characters)</span>} 
-              <input id="session-password" type="password" value={this.state.password} 
-              onChange={this.handleChange("password")} autoComplete="off"/>
-              <div className="error-message">{passwordErrors.join(", ")}</div>
-            </label>
 
-            {/* {
+              {
+                formType === "Sign Up" &&
+                <label> Username{" "}<span>(required)</span>
+                  <input id="session-username" type="text" value={this.state.username}
+                    onChange={this.handleChange("username")} />
+                  <div className="error-message">{usernameErrors.join(", ")}</div>
+                </label>
+              }
+
+              <label> Password{" "}
+                {formType === "Sign Up" && <span>(minimum 6 characters)</span>}
+                <input id="session-password" type="password" value={this.state.password}
+                  onChange={this.handleChange("password")} autoComplete="off" />
+                <div className="error-message">{passwordErrors.join(", ")}</div>
+              </label>
+
+              {/* {
               formType === "Sign Up" &&
               <label> Verify Password{" "}
                 <input id="session-password-verification" type="password" onChange={this.handleChange("password-verify")}/>
               </label>
             } */}
 
-            <button> {formType} </button>
+              <button> {formType} </button>
             </fieldset>
           </form>
         </div>
 
         <div className="session-alternate">
-            {
-              formType === "Sign Up" ? (
+          {
+            formType === "Sign Up" ? (
               <span>Already have an account?&nbsp;&nbsp;
-                  {/* <Link to="/login"> */}
-                  <button type="button" onClick={this.switchForm} disabled={this.state.disabled}> Log In </button>
-                  {/* </Link> */}
-                </span>
-              ) : (
+                {/* <Link to="/login"> */}
+                <button type="button" onClick={this.switchForm} disabled={this.state.disabled}> Log In </button>
+                {/* </Link> */}
+              </span>
+            ) : (
                 <span>Don't have an account?&nbsp;&nbsp;
                   {/* <Link to="/signup"> */}
                   <button type="button" onClick={this.switchForm} disabled={this.state.disabled}> Sign Up </button>
                   {/* </Link> */}
                 </span>
               )
-            }
+          }
         </div>
         <div className="profile-links">
           <a className="profile-icon-link" href="https://github.com/spacepumpkin/AZENA" target={"_blank"} rel="noreferrer noopener"
@@ -222,7 +228,7 @@ export default class SessionForm extends React.Component {
             <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />
           </a>
         </div>
-      </div>
+      </div >
     )
   }
 };

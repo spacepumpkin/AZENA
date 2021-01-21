@@ -109,6 +109,13 @@ th {
   // }
 }
 
+.my-tasks-table-row>td a {
+  transition: color 0.3s ease 0s;
+  &:hover, &:focus {
+    color: $primary;
+  }
+}
+
 // CHECKBOX
 .task-check-wrapper {
   // float     : left;

@@ -98,17 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //   localStorage.setItem("theme", switchedTheme);
   // })
 
-  // CLOSING DROPDOWNS ---------------------------------------------------------
-  // closes dropdown menus if user clicks outside
-  // function closeDropDowns() {
-  //   Array.from(document.querySelectorAll("[id$=-'dropdown']"))
-  //     .forEach((dropdown) => {
-  //       dropdown.classList.add("hide")
-  //     });
-  // } 
-  // ---------------------------------------------------------------------------
-
-
   // ------------------------------ TESTING START ------------------------------
   // window.getState = store.getState;
   // window.dispatch = store.dispatch;

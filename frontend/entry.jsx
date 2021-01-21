@@ -66,9 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(<Root store={store} />, rootEl);
 
   // Pretty-print welcome message to console
-  console.log("%cwelcome to %cazena ~",
-    "font-family: serif; font-size: 20px; color: white",
-    "font-family: sans-serif; font-size: 20px; color: #03dac5"
+  const consoleStyle = [
+    'font: 12px bold, Courier',
+    'background: black',
+    'padding: 10px 0',
+    'border-top: 3px solid white',
+    'border-bottom: 3px solid white'
+  ].join(';');
+
+  console.log('%ccoded with %c❤',
+    consoleStyle.concat(';font-style: italic;padding-left: 10px;border-left: 3px solid white'),
+    consoleStyle.concat(';padding-right: 10px;border-right: 3px solid white;color: #03dac5'),
+    '\n\nthanks for stopping by!!'
   );
 
   // THEME SWITCH --------------------------------------------------------------

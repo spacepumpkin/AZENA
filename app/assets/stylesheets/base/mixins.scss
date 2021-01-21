@@ -52,7 +52,9 @@
   overflow     : hidden;
   transition   : all 0.3s ease 0s;
 
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
     background-color      : rgba(56, 165, 154, 1);
     // background-color   : $primary--med;
   }
@@ -90,7 +92,9 @@
   white-space  : nowrap;
   transition   : all 0.3s ease 0s;
 
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
     color: $primary;
   }
 }
@@ -131,10 +135,11 @@
   &:disabled {
     cursor: default;
   }
-  
-  &:hover:enabled, &:focus:enabled {
+
+  &:hover:enabled,
+  &:focus:enabled {
     display: block;
-    filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%);
+    filter : invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%);
   }
 
   &.rotated-plus {
@@ -153,12 +158,15 @@
   >a,
   >button,
   div {
-    &:first-child:hover, &:first-child:focus {
+
+    &:first-child:hover,
+    &:first-child:focus {
       background: whitesmoke;
       color     : $primary;
     }
 
-    &:last-child:hover, &:last-child:focus {
+    &:last-child:hover,
+    &:last-child:focus {
       color     : $secondary;
       background: $lightest-gray;
     }
@@ -187,7 +195,8 @@
     cursor        : pointer;
     // font-weight: bold; // looks shoddy on Firefox
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-color: $lightest-gray;
     }
   }
@@ -285,7 +294,8 @@
   >button:first-child {
     background-color: $primary;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       width: 45%;
     }
   }
@@ -293,7 +303,8 @@
   >button:last-child {
     background-color: $light-gray;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       width: 45%;
     }
   }
@@ -335,11 +346,12 @@
   }
 
   70% {
-    top    : 18%;
+    top    : 10vh;
     opacity: 1;
   }
 
   100% {
+    top             : 12vh;
     display         : flex;
     visibility      : visible;
     // opacity      : 1;
@@ -354,7 +366,7 @@
   position      : fixed;
   padding       : 40px 50px;
   box-shadow    : 0 0 25px $spacecadet;
-  top           : 20%;
+  top           : 12vh;
   left          : 35%;
   animation     : show-modal 1s ease-in-out;
   z-index       : 2;
@@ -427,7 +439,8 @@
     transform: rotate(-45deg);
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: rgb(238, 238, 238);
     opacity         : 100%;
 
@@ -510,7 +523,8 @@
   filter    : invert(100%) sepia(0%) saturate(11%) hue-rotate(162deg) brightness(89%) contrast(77%); // start gray
   transition: all 0.3s ease 0s;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%); // turn to black
   }
 
@@ -519,7 +533,8 @@
     background: image-url('check-circle.svg') no-repeat center;
     filter    : invert(64%) sepia(86%) saturate(1574%) hue-rotate(124deg) brightness(97%) contrast(98%); // turn to #03dac5
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       filter: invert(0%) sepia(100%) saturate(3227%) hue-rotate(173deg) brightness(92%) contrast(96%); // turn to black
     }
   }

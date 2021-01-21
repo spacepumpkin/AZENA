@@ -59,7 +59,6 @@ function MyTasks({ assignedTasks, taskProjects, taskWorkspaces, taskCreators, al
 }
 
 const mSP = function ({ entities, session }) {
-  debugger
   const { tasks, usersTasks, projects, workspaces, users } = entities;
   let assignedUsersTasks = Object.values(usersTasks).filter((usersTask) => usersTask.userId === session.id);
   let assignedTasks = [];

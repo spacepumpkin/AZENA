@@ -195,7 +195,7 @@
     align-items              : center;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       opacity      : 100%;
       // color     : $primary;
       // font-size: 30px;

@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const consoleStyle = [
     'font: 12px bold, Courier',
     'background: black',
+    'margin-top: 10px',
     'padding: 10px 0',
     'border-top: 3px solid white',
     'border-bottom: 3px solid white'

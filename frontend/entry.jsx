@@ -65,6 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const store = configureStore(preloadedState);
   ReactDOM.render(<Root store={store} />, rootEl);
 
+  // Pretty-print welcome message to console
+  console.log("%cwelcome to %cazena ~",
+    "font-family: serif; font-size: 20px; color: white",
+    "font-family: sans-serif; font-size: 20px; color: #03dac5"
+  );
+
   // THEME SWITCH --------------------------------------------------------------
   // saved theme on localStorage (can also save to State)
 
@@ -95,40 +101,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ------------------------------ TESTING START ------------------------------
-    // window.getState = store.getState;
-    // window.dispatch = store.dispatch;
+  // window.getState = store.getState;
+  // window.dispatch = store.dispatch;
 
-    // * SessionApiUtil
-    // window.sessionSignUp = SessionApiUtil.signup; // PASS - user should be able to sign up and login in BE
-    // window.sessionLogin = SessionApiUtil.login; // PASS - user should be able to login in BE
-    // window.sessionLogout = SessionApiUtil.logout; // PASS - user should be able to logout in BE
-    // * SessionActions
-    // window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
-    // window.login = login; // PASS - user should be able to login in BE/FE and be saved to state, or errors shown
-    // window.logout = logout; // PASS - clears session: id: null
-    // * WorkspaceApiUtil
-    // window.createWorkspaceApi = WorkspaceApiUtil.createWorkspace; // PASS - in BE user should be able to create a workspace unique to them
-    // window.createWorkspace = createWorkspace; // PASS - FE State should be updated with new workspace or errors
-    // window.fetchUserWorkspacesApi = WorkspaceApiUtil.fetchUserWorkspaces; // PASS - should be able to GET current users workspaces
-    // window.fetchWorkspaceApi = WorkspaceApiUtil.fetchWorkspace; // PASS - should be able to GET specific workspace
-    // window.fetchWorkspace = fetchWorkspace; // PASS - should be able to GET specific workspace
-    // window.updateWorkspaceApi = WorkspaceApiUtil.updateWorkspace; // PASS - can update own workspaces
-    // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
-    // window.destroyWorkspaceApi = WorkspaceApiUtil.destroyWorkspace; // PASS - should be able to destroy workspace in BE
-    // window.destroyWorkspace = destroyWorkspace; // PASS - should be able to destroy workspace in BE and FE
-    // * Project Actions
-    // window.createProject = createProject; // PASS - should be able to create project in BE and FE
-    // window.updateProject = updateProject; // PASS - should be able to update project in BE and FE
-    // window.destroyProject = destroyProject; // PASS - should be able to destroy project in BE and FE
-    // * Task Actions
-    // window.createTask = createTask; // PASS - should be able to create task in BE and FE + assign task to user (create usersTask)
-    // window.updateTask = updateTask; // PASS - should be able to update task in BE and FE
-    // window.destroyTask = destroyTask; // PASS - should be able to destroy task in BE and FE + unassign all users from task (delete usersTask)
-    // window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
-    // window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
-    // * Section Actions
-    // window.createSection = createSection; // PASS - should be able to create new section under a project
-    // window.updateSection = updateSection; // PASS - should be able to update a section
-    // window.destroySection = destroySection; // Half pass - should be able to destroy a section and handle section tasks
+  // * SessionApiUtil
+  // window.sessionSignUp = SessionApiUtil.signup; // PASS - user should be able to sign up and login in BE
+  // window.sessionLogin = SessionApiUtil.login; // PASS - user should be able to login in BE
+  // window.sessionLogout = SessionApiUtil.logout; // PASS - user should be able to logout in BE
+  // * SessionActions
+  // window.signup = signup; // PASS - user should be able to sign up and login in BE/FE and be saved to state
+  // window.login = login; // PASS - user should be able to login in BE/FE and be saved to state, or errors shown
+  // window.logout = logout; // PASS - clears session: id: null
+  // * WorkspaceApiUtil
+  // window.createWorkspaceApi = WorkspaceApiUtil.createWorkspace; // PASS - in BE user should be able to create a workspace unique to them
+  // window.createWorkspace = createWorkspace; // PASS - FE State should be updated with new workspace or errors
+  // window.fetchUserWorkspacesApi = WorkspaceApiUtil.fetchUserWorkspaces; // PASS - should be able to GET current users workspaces
+  // window.fetchWorkspaceApi = WorkspaceApiUtil.fetchWorkspace; // PASS - should be able to GET specific workspace
+  // window.fetchWorkspace = fetchWorkspace; // PASS - should be able to GET specific workspace
+  // window.updateWorkspaceApi = WorkspaceApiUtil.updateWorkspace; // PASS - can update own workspaces
+  // window.updateWorkspace = updateWorkspace; // PASS - can update workspace in State quickly
+  // window.destroyWorkspaceApi = WorkspaceApiUtil.destroyWorkspace; // PASS - should be able to destroy workspace in BE
+  // window.destroyWorkspace = destroyWorkspace; // PASS - should be able to destroy workspace in BE and FE
+  // * Project Actions
+  // window.createProject = createProject; // PASS - should be able to create project in BE and FE
+  // window.updateProject = updateProject; // PASS - should be able to update project in BE and FE
+  // window.destroyProject = destroyProject; // PASS - should be able to destroy project in BE and FE
+  // * Task Actions
+  // window.createTask = createTask; // PASS - should be able to create task in BE and FE + assign task to user (create usersTask)
+  // window.updateTask = updateTask; // PASS - should be able to update task in BE and FE
+  // window.destroyTask = destroyTask; // PASS - should be able to destroy task in BE and FE + unassign all users from task (delete usersTask)
+  // window.assignUsersTask = assignUsersTask; // PASS - should be able to assign user to a specific task
+  // window.unassignUsersTask = unassignUsersTask; // PASS - should be able to unassign user from a specific tasks
+  // * Section Actions
+  // window.createSection = createSection; // PASS - should be able to create new section under a project
+  // window.updateSection = updateSection; // PASS - should be able to update a section
+  // window.destroySection = destroySection; // Half pass - should be able to destroy a section and handle section tasks
   // ------------------------------ TESTING END --------------------------------
 })

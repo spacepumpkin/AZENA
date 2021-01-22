@@ -78,7 +78,12 @@ class Feedback extends React.Component {
                 ) :
                   (
                     <>
-                      <h3 style={{ margin: "10px 0" }}>{"Thank you for taking the time! Any feedback is welcome."}</h3>
+                    <h3>
+                      Hey there, glad you could stop by! I'm constantly learning and would love to hear 
+                      more about where I can improve and any bugs that I may have missed. If you could take 
+                      a moment to leave a little feedback or just to say hi, I would greatly appreciate it! 
+                      Cheers 🍻
+                     </h3>
                       <form id="feedback-modal-form" onSubmit={this.handleSubmit}>
                         <label htmlFor="feedback-modal-form-1" className={activeInput === 1 ? "label-input-focused" : undefined} >
                           1-3 Potential Improvements:</label>

@@ -29,7 +29,9 @@ import WorkspaceCreateModalContainer from './workspace/workspace_create_modal_co
 import WorkspaceDeleteModal from './workspace/workspace_delete_modal';
 import ProjectDeleteModal from './projects/project_delete_modal';
 
+// * OTHER
 import Feedback from './main/feedback';
+import Loader from './main/loader';
 
 // AuthRoute / PreAuth - current user should not access - redirect to '/home'
 // ProtectedRoute / PostAuth - only current user can access - redirect to '/'
@@ -104,7 +106,7 @@ const App = function ({ ui, entities }) {
               <Redirect to="/" />
             </Switch>
             {loader &&
-              <Loader />
+              <Loader setLoader={setLoader} />
             }
           </>
         }

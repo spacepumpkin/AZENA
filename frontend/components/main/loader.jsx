@@ -12,6 +12,8 @@ export default function Loader ({ setLoader }) {
   }, [])
 
   return (
-    <div id="loader"></div>
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+    </div>
   )
 }

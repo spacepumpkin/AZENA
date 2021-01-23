@@ -7,7 +7,8 @@ const SplashFooter = function (props) {
     <footer id="splash-footer">
       <div id="splash-footer-content">
         <div className="footer-logo-wrapper">
-          <img className={"footer-logo"} src={window.logoIcon1} alt="small azena icon" />
+          {/* <img className={"footer-logo"} src={window.logoIcon1} alt="small azena icon" /> */}
+          <div className={"footer-logo"}></div>
         </div>
         <div className="footer-greeting">
           Thank you for visiting Azena!

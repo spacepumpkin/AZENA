@@ -60,7 +60,7 @@ export default class TopBar extends React.Component {
 
   handleLogout(evt) {
     evt.preventDefault();
-    this.props.logout() //.then(() => this.props.history.push("/"));
+    this.props.logout();
   }
 
   // Remove all tabs, new lines + check if we're within allowable char range

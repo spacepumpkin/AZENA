@@ -10,7 +10,7 @@
   justify-content: center;
   align-items    : center;
 
-  background-color: $light-gray;
+  background-color: $lighter-gray;
   opacity         : 0.5;
   transition: all 0.3s ease 0;
 
@@ -18,10 +18,10 @@
 }
 
 #loader {
-  opacity      : 1;
-  border       : 10px solid white;
-  border-top   : 10px solid $primary;
-  border-radius: 50%;
+  // border       : 10px solid white;
+  // border-top   : 10px solid $primary;
+  // border-radius: 50%;
+  background: image-url('azena-icon-teal-centered.svg') center no-repeat;
   width        : 120px;
   height       : 120px;
   animation    : spin 1.5s linear infinite;

@@ -6,11 +6,12 @@ import { AuthRoute, AuthLayout, ProtectedRoute, ProtectedLayout } from '../util/
 
 import { setLoader } from '../actions/ui_actions';
 
+// Main Components
+
 // * USER AUTH & SPLASH
 import SignupFormContainer from './session/signup_form_container';
 import LoginFormContainer from './session/login_form_container';
 import Splash from './splash/splash';
-// import MainContainer from './main/main_container';
 
 // * OVERLAY COMPONENTS
 import SidebarContainer from './sidebar/sidebar_container'; // always there
@@ -59,14 +60,13 @@ const App = function ({ ui, entities }) {
   return (
     <div id="main-wrapper">
       {/* <button id="theme-switch" type="button"> Change Theme </button> */}
-
       <Feedback />
+
       {/* Protected Routes */}
       <ProtectedLayout
         component={
           <div id="main">
-            <Route path="/" render={(props) => (
-              <SidebarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)} />
+            <SidebarContainer setCurrentWorkspaceId={setCurrentWorkspaceId} />
 
             {/* MODALS */}
             {currentModal === "Project Create" && <ProjectCreateModal />}
@@ -74,14 +74,12 @@ const App = function ({ ui, entities }) {
             {currentModal === "Workspace Delete" && <WorkspaceDeleteModal />}
 
             <div id="mainbox">
-              <Route path="/" render={(props) => (
-                <TopBarContainer {...props} setCurrentWorkspaceId={setCurrentWorkspaceId} />)} />
+              <TopBarContainer setCurrentWorkspaceId={setCurrentWorkspaceId} />
               <div id="main-content">
                 <Switch>
                   <Route exact path="/home" component={HomeContainer} />
                   <Route exact path="/mytasks" component={MyTasks} />
                   <Route exact path="/workspaces/new" component={WorkspaceCreateModalContainer} />
-                  {/* <Route exact path="/workspaces/:workspaceId(\d+)/projects/new" component={ProjectCreateModalContainer} /> */}
                   <Route exact path="/workspaces/:workspaceId(\d+)" component={WorkspaceContainer} />
                   {/* <ProtectedRoute exact path="/projects/:projectId/board" component={ProjectBoardContainer} /> */}
                   <Route exact path="/projects/:projectId(\d+)/list" component={ProjectListContainer} />
@@ -104,7 +102,6 @@ const App = function ({ ui, entities }) {
               {/* <AuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
               <AuthRoute exact path="/" component={Splash} />
               <Redirect to="/" />
-              {/* <AuthRoute path="/" component={Splash} /> */}
             </Switch>
             {loader &&
               <Loader />
@@ -118,10 +115,5 @@ const App = function ({ ui, entities }) {
 };
 
 const mSP = function (state) { return state };
-// const mDP = function (dispatch) {
-//   return {
-
-//   };
-// };
 
 export default connect(mSP)(App);

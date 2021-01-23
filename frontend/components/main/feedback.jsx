@@ -80,7 +80,7 @@ class Feedback extends React.Component {
                     <>
                     <h3>
                       Hey there, glad you could stop by! I'm constantly learning and would love to hear 
-                      more about where I can improve and any bugs that I may have missed. If you could take 
+                      about where I can improve, or any bugs I may have missed. If you could take 
                       a moment to leave a little feedback or just to say hi, I would greatly appreciate it! 
                       Cheers 🍻
                      </h3>

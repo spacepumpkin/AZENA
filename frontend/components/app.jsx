@@ -1,25 +1,25 @@
 // Functionality Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, Redirect } from "react-router-dom";
-import { AuthRoute, AuthLayout, ProtectedRoute, ProtectedLayout } from "../util/route_util";
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { AuthRoute, AuthLayout, ProtectedRoute, ProtectedLayout } from '../util/route_util';
 
-// import { } from '../actions/ui_actions'
+import { setLoader } from '../actions/ui_actions';
 
 // * USER AUTH & SPLASH
-import SignupFormContainer from "./session/signup_form_container";
-import LoginFormContainer from "./session/login_form_container";
-import SplashContainer from "./splash/splash_container";
-// import MainContainer from "./main/main_container";
+import SignupFormContainer from './session/signup_form_container';
+import LoginFormContainer from './session/login_form_container';
+import SplashContainer from './splash/splash_container';
+// import MainContainer from './main/main_container';
 
 // * OVERLAY COMPONENTS
-import SidebarContainer from "./sidebar/sidebar_container"; // always there
-import TopBarContainer from "./topbar/topbar_container";    // always there
+import SidebarContainer from './sidebar/sidebar_container'; // always there
+import TopBarContainer from './topbar/topbar_container';    // always there
 
 // * MAIN CONTENT
-import HomeContainer from "./home/home_container";
-import MyTasks from "./my_tasks/my_tasks";
-import WorkspaceContainer from "./workspace/workspace_container";
+import HomeContainer from './home/home_container';
+import MyTasks from './my_tasks/my_tasks';
+import WorkspaceContainer from './workspace/workspace_container';
 import ProjectListContainer from './projects/project_list_container';
 
 // * MODALS
@@ -30,24 +30,24 @@ import ProjectDeleteModal from './projects/project_delete_modal';
 
 import Feedback from './main/feedback';
 
-// AuthRoute / PreAuth - current user should not access - redirect to "/home"
-// ProtectedRoute / PostAuth - only current user can access - redirect to "/"
+// AuthRoute / PreAuth - current user should not access - redirect to '/home'
+// ProtectedRoute / PostAuth - only current user can access - redirect to '/'
 
 const App = function ({ ui, entities }) {
-  const { currentModal, items } = ui;
+  const { currentModal, items, loader } = ui;
   const { workspaces, projects } = entities;
 
   const [currentWorkspaceId, setCurrentWorkspaceId] = useState(-1);
   const [showProjectModal, toggleProjectModal] = React.useState(false);
   // let showProjectModal = false;
-  const [currentWorkspace, setCurrentWorkspace] = useState({ name: "" });
+  const [currentWorkspace, setCurrentWorkspace] = useState({ name: '' });
 
   useEffect(() => {
     if (currentWorkspaceId !== -1) {
       setCurrentWorkspace(workspaces[currentWorkspaceId]);
       toggleProjectModal(true);
     } else {
-      setCurrentWorkspace({ name: "" });
+      setCurrentWorkspace({ name: '' });
       toggleProjectModal(false);
     }
 
@@ -97,14 +97,19 @@ const App = function ({ ui, entities }) {
       {/* Auth Routes */}
       <AuthLayout
         component={
-          <Switch>
-            <AuthRoute exact path="/signup" component={SignupFormContainer} />
-            <AuthRoute exact path="/login" component={LoginFormContainer} />
-            {/* <AuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
-            <AuthRoute id="splash" exact path="/" component={SplashContainer} />
-            <Redirect to="/" />
-            {/* <AuthRoute path="/" component={SplashContainer} /> */}
-          </Switch>
+          <>
+            <Switch>
+              <AuthRoute exact path="/signup" component={SignupFormContainer} />
+              <AuthRoute exact path="/login" component={LoginFormContainer} />
+              {/* <AuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
+              <AuthRoute id="splash" exact path="/" component={SplashContainer} />
+              <Redirect to="/" />
+              {/* <AuthRoute path="/" component={SplashContainer} /> */}
+            </Switch>
+            {loader &&
+              <Loader />
+            }
+          </>
         }
       />
     </div>

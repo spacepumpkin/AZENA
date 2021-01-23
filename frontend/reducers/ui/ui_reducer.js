@@ -1,11 +1,13 @@
 import {
   TOGGLE_SIDEBAR,
+  SET_LOADER,
   SET_CURRENT_ITEMS,
   SET_MODAL
 } from "../../actions/ui_actions";
 
 const _defaultUI = {
   sidebarCollapse: false,
+  loader: false,
   darkTheme: false,
   currentItems: { workspaceId: -1, projectId: -1},
   currentModal: null
@@ -17,6 +19,8 @@ const uiReducer = function (oldState = _defaultUI, action) {
   switch (action.type) {
     case TOGGLE_SIDEBAR:
       return Object.assign({}, oldState, { sidebarCollapse: !oldState.sidebarCollapse });
+    case SET_LOADER:
+      return Object.assign({}, oldState, { loader: action.loaderStatus });
     case SET_CURRENT_ITEMS:
       const newState = Object.assign({}, oldState);
       Object.assign(newState.currentItems, { workspaceId: action.workspaceId, projectId: action.projectId });

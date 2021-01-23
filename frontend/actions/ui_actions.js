@@ -1,10 +1,19 @@
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
+export const SET_LOADER = "SET_LOADER";
 export const SET_CURRENT_ITEMS = "SET_CURRENT_ITEMS";
 export const SET_MODAL = "SET_MODAL";
 
 // Click Toggle Sidebar
 export const toggleSidebar = {
   type: TOGGLE_SIDEBAR
+};
+
+// Toggle Loader (after login)
+export const setLoader = function (loaderStatus) {
+  return {
+    type: SET_LOADER,
+    loaderStatus: loaderStatus
+  }
 };
 
 export const setCurrentItems = function ({ workspaceId, projectId }) {

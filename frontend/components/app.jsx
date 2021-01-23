@@ -9,7 +9,7 @@ import { setLoader } from '../actions/ui_actions';
 // * USER AUTH & SPLASH
 import SignupFormContainer from './session/signup_form_container';
 import LoginFormContainer from './session/login_form_container';
-import SplashContainer from './splash/splash_container';
+import Splash from './splash/splash';
 // import MainContainer from './main/main_container';
 
 // * OVERLAY COMPONENTS
@@ -102,9 +102,9 @@ const App = function ({ ui, entities }) {
               <AuthRoute exact path="/signup" component={SignupFormContainer} />
               <AuthRoute exact path="/login" component={LoginFormContainer} />
               {/* <AuthRoute exact path="/demologin" demo="demo" component={LoginFormContainer} /> // ! Ryan's method for demologin */}
-              <AuthRoute id="splash" exact path="/" component={SplashContainer} />
+              <AuthRoute exact path="/" component={Splash} />
               <Redirect to="/" />
-              {/* <AuthRoute path="/" component={SplashContainer} /> */}
+              {/* <AuthRoute path="/" component={Splash} /> */}
             </Switch>
             {loader &&
               <Loader />

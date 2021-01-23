@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import SessionForm from "./session_form";
 
 import { login, receiveSessionErrors } from "../../actions/session_actions";
+import { setLoader } from "../../actions/ui_actions";
 
 // class LoginSessionForm extends React.Component {
 //   constructor (props) {
@@ -24,6 +25,7 @@ const mapStateToProps = function (state, ownProps) {
 
 const mapDispatchToProps = function (dispatch) {
   return {
+    setLoader: (loaderState) => dispatch(setLoader(loaderState)),
     processForm: (user) => dispatch(login(user)),
     receiveSessionErrors: (errors) => dispatch(receiveSessionErrors(errors))
   };

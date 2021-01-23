@@ -238,12 +238,12 @@
     border-radius   : 5px;
     font-family     : $font-heading;
 
-    &:hover {
+    &:enabled:hover {
       // color           : $white;
       background-color: rgba(3, 218, 197, 1);
     }
 
-    &:focus {
+    &:enabled:focus {
       box-shadow: 0 0 8px $secondary;
     }
   }

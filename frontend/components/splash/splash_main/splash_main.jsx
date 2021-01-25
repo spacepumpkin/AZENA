@@ -6,6 +6,7 @@ const SplashMain = function (props) {
   // Change splash image every 10 seconds (1 -> 2 -> 3 ... -> 1)
   const [splashImg, setSplashImg] = React.useState(1);
 
+  // Holding off on this until we can preload images more smoothly
   React.useEffect(() => {
     const changeSplash = setInterval( () => {
       setSplashImg((splashImg % 3) + 1);

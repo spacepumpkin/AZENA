@@ -1,5 +1,5 @@
 # [AZENA](https://azena.herokuapp.com/) 
-<p align="center"> <img src="./app/assets/images/azena-logo-blue-black-zen.png" /> </p>
+<p align="center"> <img src="./app/assets/images/azena-logo-blue-black-zen-onwhite.png" /> </p>
 
 
 (*note: project is on-going and not yet functional*)

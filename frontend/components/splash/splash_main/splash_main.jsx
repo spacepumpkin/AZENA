@@ -7,15 +7,15 @@ const SplashMain = function (props) {
   const [splashImg, setSplashImg] = React.useState(1);
 
   // Holding off on this until we can preload images more smoothly
-  React.useEffect(() => {
-    const changeSplash = setInterval( () => {
-      setSplashImg((splashImg % 3) + 1);
-    }, 10000);
+  // React.useEffect(() => {
+  //   const changeSplash = setInterval( () => {
+  //     setSplashImg((splashImg % 3) + 1);
+  //   }, 10000);
 
-    return () => {
-      clearInterval(changeSplash);
-    }
-  })
+  //   return () => {
+  //     clearInterval(changeSplash);
+  //   }
+  // })
   //
 
   return (

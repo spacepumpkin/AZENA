@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 const SplashMain = function (props) {
 
-  // Change splash image every 10 seconds
-  const [splashImg, setSplashImg] = React.useState('main');
+  // Change splash image every 10 seconds (1 -> 2 -> 3 ... -> 1)
+  const [splashImg, setSplashImg] = React.useState(1);
 
   React.useEffect(() => {
-    const changeSplash = setInterval( () => {
-      splashImg === 'main' ? setSplashImg('alt') : setSplashImg('main');
+    const changeSplash = setTimeout( () => {
+      setSplashImg((splashImg % 3) + 1);
     }, 10000);
 
     return () => {
-      clearInterval(changeSplash);
+      clearTimeout(changeSplash);
     }
   })
   //
@@ -32,7 +32,7 @@ const SplashMain = function (props) {
 
         </div>
         <div id="splash-top-right">
-          <div id="splash-top-img" className={splashImg === 'main' ? `splash-img-main` : `splash-img-alt`}></div>
+          <div id="splash-top-img" className={`splash-img-${splashImg}`}></div>
           {/* <img id="splash-top-img" src={window.splashImage} alt="employees working but fun" /> */}
           <span></span>
         </div>

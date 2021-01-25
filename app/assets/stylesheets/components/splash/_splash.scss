@@ -5,6 +5,12 @@
   flex          : 1;
   display       : flex;
   flex-direction: column;
+
+  // &:after {
+  //   content: image-url('unsplash-splash-1-gs.jpg'), image-url('unsplash-splash-2-gs.jpg'),
+  //   image-url('unsplash-splash-3-gs.jpg');
+  //   display: none;
+  // }
 }
 
 // Main

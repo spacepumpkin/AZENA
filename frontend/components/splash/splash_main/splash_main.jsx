@@ -7,12 +7,12 @@ const SplashMain = function (props) {
   const [splashImg, setSplashImg] = React.useState(1);
 
   React.useEffect(() => {
-    const changeSplash = setTimeout( () => {
+    const changeSplash = setInterval( () => {
       setSplashImg((splashImg % 3) + 1);
     }, 10000);
 
     return () => {
-      clearTimeout(changeSplash);
+      clearInterval(changeSplash);
     }
   })
   //

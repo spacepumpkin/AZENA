@@ -1,10 +1,7 @@
 # [AZENA](https://azena.herokuapp.com/) 
 <p align="center"> <img src="./app/assets/images/azena-logo-blue-black-zen-onwhite.png" /> </p>
 
-
-(*note: project is on-going and not yet functional*)
-
-Azena is a full-stack web application exercise that was inspired by Asana. The project will be built using Ruby on Rails with PostgreSQL and React/Redux.
+Azena is a full-stack web application exercise that was inspired by Asana. The project is built using Ruby on Rails with PostgreSQL and React/Redux.
 
 ## Target Features
 * User accounts: Sign up and stay connected with token authentication

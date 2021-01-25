@@ -9,7 +9,7 @@ const SplashMain = function (props) {
   React.useEffect(() => {
     const changeSplash = setInterval( () => {
       splashImg === 'main' ? setSplashImg('alt') : setSplashImg('main');
-    }, 5000);
+    }, 10000);
 
     return () => {
       clearInterval(changeSplash);

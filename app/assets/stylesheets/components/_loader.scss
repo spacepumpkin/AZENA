@@ -4,6 +4,8 @@
   left      : 0;
   min-width : 100vw;
   min-height: 100vh;
+  width     : 100%;
+  height    : 100%;
   z-index   : 5;
 
   display        : flex;
@@ -12,7 +14,7 @@
 
   background-color: $lighter-gray;
   opacity         : 0.5;
-  transition: all 0.3s ease 0;
+  transition      : all 0.3s ease 0;
 
   animation: fade-in 1s ease;
 }
@@ -22,16 +24,16 @@
   // border-top   : 10px solid $primary;
   // border-radius: 50%;
   background: image-url('azena-icon-teal-centered.svg') center no-repeat;
-  width        : 120px;
-  height       : 120px;
-  animation    : spin 1.5s linear infinite;
+  width     : 120px;
+  height    : 120px;
+  animation : spin 1.5s linear infinite;
 }
 
 @keyframes fade-in {
   0% {
     opacity: 0;
   }
-  
+
   100% {
     opacity: 0.5;
   }

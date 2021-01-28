@@ -285,7 +285,7 @@ export default class TopBar extends React.Component {
             >
               <img className="profile-icon" src={window.github} alt="github profile" />
             </a>
-            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/" target={"_blank"} rel="noreferrer noopener"
+            <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-wan" target={"_blank"} rel="noreferrer noopener"
               onClick={(evt) => evt.currentTarget.blur()}
             >
               <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />

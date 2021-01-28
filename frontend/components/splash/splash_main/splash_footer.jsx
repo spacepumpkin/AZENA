@@ -17,7 +17,7 @@ const SplashFooter = function (props) {
           <a href="https://github.com/spacepumpkin/AZENA" target={"_blank"} rel="noreferrer noopener">
             <img src={window.github} alt="github profile" />
           </a>
-          <a href="https://www.linkedin.com/in/gary-w-269749ba/" target={"_blank"} rel="noreferrer noopener">
+          <a href="https://www.linkedin.com/in/gary-wan" target={"_blank"} rel="noreferrer noopener">
             <img src={window.linkedin} alt="linkedin profile" />
           </a>
         </div>

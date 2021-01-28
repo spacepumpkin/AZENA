@@ -132,10 +132,10 @@ export default class SessionForm extends React.Component {
                 <img src={window.logoMainURL} />
               </Link>
             ) : (
-              <Link to="/" >
-                <img src={window.logoMainURL} />
-              </Link>
-            )}
+                <Link to="/" >
+                  <img src={window.logoMainURL} />
+                </Link>
+              )}
           </div>
 
           <h1>{formType}</h1>
@@ -223,7 +223,7 @@ export default class SessionForm extends React.Component {
           >
             <img className="profile-icon" src={window.github} alt="github profile" />
           </a>
-          <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-w-269749ba/" target={"_blank"} rel="noreferrer noopener"
+          <a className="profile-icon-link" href="https://www.linkedin.com/in/gary-wan" target={"_blank"} rel="noreferrer noopener"
             onClick={(evt) => evt.currentTarget.blur()}
           >
             <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />

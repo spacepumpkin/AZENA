@@ -2,7 +2,7 @@
   "name": "AZENA",
   "private": true,
   "version": "1.0.0",
-  "description": "(*note: project is on-going and not yet functional*)",
+  "description": "Azena is a full-stack project management app inspired by Asana. Built with React/Redux and Ruby on Rails.",
   "main": "index.js",
   "directories": {
     "lib": "lib",

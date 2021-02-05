@@ -252,6 +252,11 @@ export default class Sidebar extends React.Component {
             >
               <img className="profile-icon" src={window.linkedin} alt="linkedin profile" />
             </a>
+            <a className="profile-icon-link" href="https://angel.co/u/gary-wan-3" target={"_blank"} rel="noreferrer noopener"
+              onClick={(evt) => evt.currentTarget.blur()}
+            >
+              <img className="profile-icon" src={window.angellist} alt="angellist profile" />
+            </a>
           </div>
         </div >
       </>

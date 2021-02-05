@@ -20,6 +20,9 @@ const SplashFooter = function (props) {
           <a href="https://www.linkedin.com/in/gary-wan" target={"_blank"} rel="noreferrer noopener">
             <img src={window.linkedin} alt="linkedin profile" />
           </a>
+          <a href="https://angel.co/u/gary-wan-3" target={"_blank"} rel="noreferrer noopener">
+            <img src={window.angellist} alt="angellist profile" />
+          </a>
         </div>
       </div>
     </footer>

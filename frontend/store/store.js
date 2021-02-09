@@ -16,7 +16,6 @@ const thunk = function({dispatch, getState}) {
 
 const middlewares = [thunk];
 
-// ! Refactor later to ignore logger in production rather than hardcode out
 if (process.env.NODE_ENV !== "production") {
   // must use 'require' (import only allowed at top of file)
   const { logger } = require("redux-logger");

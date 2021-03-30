@@ -33,3 +33,8 @@ const uiReducer = function (oldState = _defaultUI, action) {
 };
 
 export default uiReducer;
+
+// ui: {
+//   sidebarCollapse: false,
+//   darkTheme: false
+// }

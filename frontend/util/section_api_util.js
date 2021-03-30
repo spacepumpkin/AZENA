@@ -4,7 +4,7 @@
   - destroySection(sectionId) 
 */
 
-// Test Status - 
+// Test Status - Untested
 export const createSection = (section) => {
   // console.log(`creating new section (${section.name})...`);
   return $.ajax({
@@ -20,7 +20,7 @@ export const createSection = (section) => {
   })
 }
 
-// Test Status - 
+// Test Status - Untested
 export const updateSection = (section) => {
   // console.log(`updating section #${section.id}...`);
   return $.ajax({
@@ -33,7 +33,7 @@ export const updateSection = (section) => {
   })
 }
 
-// Test Status - 
+// Test Status - Untested
 export const destroySection = (sectionId, keepTasks) => {
   // console.log(`destroying section #${sectionId}...`);
   return $.ajax({

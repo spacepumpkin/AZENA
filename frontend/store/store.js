@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
-// import logger from "redux-logger";
+// import logger from "redux-logger"; // use 'require' below
 import rootReducer from "../reducers/root_reducer";
 
 // thunk middleware

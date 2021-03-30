@@ -1,9 +1,6 @@
 import { connect } from "react-redux";
-// import { withRouter } from "react-router-dom";
 import Home from "./home";
 
-// import { fetchUserWorkspaces } from "../../actions/workspace_actions";
-// import { logout } from "../../actions/session_actions";
 import { setCurrentItems, setModal } from '../../actions/ui_actions';
 
 const mSP = function({ entities, session, ui }) {
@@ -26,4 +23,3 @@ const mDP = function(dispatch) {
 };
 
 export default connect(mSP, mDP)(Home);
-// export default withRouter(connect(mSP, mDP)(Home));

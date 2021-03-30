@@ -1,3 +1,5 @@
+// ! Not using this component anymore
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Main from "./main";

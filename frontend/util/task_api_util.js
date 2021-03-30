@@ -1,12 +1,12 @@
 /* Task API Util Functions:
-  - fetchTask(taskId)   // Probably not using
-  * createTask(task)
-  * updateTask(task)
-  * destroyTask(taskId)
-  * assignUsersTask(userId, taskId)
-  * unassignUsersTask(userId, taskId)
+* createTask(task)
+* updateTask(task)
+* destroyTask(taskId)
+* assignUsersTask(userId, taskId)
+* unassignUsersTask(userId, taskId)
 
-  - fetchTasks(userId) // fetch all tasks associated with user; no need anymore
+- fetchTask(taskId)   // Probably not using
+- fetchTasks(userId) // fetch all tasks associated with user; no need anymore
 */
 
 // Test Status - PASS
@@ -33,11 +33,6 @@ export const updateTask = (task) => {
   let updatedTask = {};
   for (let field in task) { 
     updatedTask[field.toSnakeCase()] = task[field];
-    // if (field === "dueDate") {
-    //   updatedTask["due_date"] = task[field]
-    // } else {
-    //   updatedTask[field] = task[field] 
-    // }
   }
 
   return $.ajax({
@@ -45,11 +40,6 @@ export const updateTask = (task) => {
     method: "PATCH",
     data: { task: updatedTask }
   })
-  // return $.ajax({
-  //   url: `/api/tasks/${task.id}`,
-  //   method: "PATCH",
-  //   data: { task: { name: task.name, description: task.description, due_date: task.dueDate, done: task.done } }
-  // })
 }
 
 // Test Status - PASS

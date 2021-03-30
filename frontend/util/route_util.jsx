@@ -21,7 +21,6 @@ const Auth = function ({ loggedIn, path, component: Component}) {
       />
   );
 };
-// removed demo prop;
 
 // Protected Route / PostAuth Route
 

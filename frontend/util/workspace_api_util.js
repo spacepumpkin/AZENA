@@ -3,11 +3,13 @@
   - fetchUserWorkspaces()             // fetch all workspaces that current user is member of
   - fetchWorkspaceMembers(workspace)  // ! Combine with fetchUserWorkspaces? fetch all members of a workspace excluding current user
   - fetchWorkspaceProjects(workspace) // fetch all projects belonging to workspace
+
   * createWorkspace(workspace)        // create new workspace
   * updateWorkspace(workspace)        // update workspace
   * destroyWorkspace(workspaceId)      // destroy workspace
   * assignUsersWorkspace(userId, workspaceId)   // add usersWorkspace
   * unassignUsersWorkspace(userId, workspaceId) // remove usersWorkspace
+
   removeWorkspaceFromUser(workspaceId)   // remove workspace from current user
 */
 

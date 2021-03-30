@@ -20,13 +20,6 @@ export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 
 // For creating + logging in user (adds to users and session slices)
-// const receiveCurrentUser = function (user) {
-//   return {
-//     type: RECEIVE_CURRENT_USER,
-//     user
-//   }
-// };
-
 // ! Modified for user payload
 const receiveCurrentUser = function (payload) {
   return {

@@ -52,7 +52,7 @@ const updateSectionTasks = function (tasks) {
 
 // THUNK ACTIONS --------------------------------------------------
 
-// Test Status - 
+// Test Status - Untested
 export const createSection = function (section) {
   return function (dispatch) {
     return (
@@ -65,7 +65,7 @@ export const createSection = function (section) {
   };
 };
 
-// Test Status - 
+// Test Status - Untested
 export const updateSection = function (section) {
   return function (dispatch) {
     return (
@@ -78,7 +78,7 @@ export const updateSection = function (section) {
   };
 };
 
-// Test Status - 
+// Test Status - Untested
 export const destroySection = function (sectionId, keepTasks) {
   return function (dispatch, getState) {
     return (

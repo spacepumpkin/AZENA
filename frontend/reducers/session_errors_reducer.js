@@ -4,10 +4,6 @@ import {
   RECEIVE_CURRENT_USER
 } from "../actions/session_actions";
 
-/* Write a sessionErrorsReducer that responds to these action types:
-  RECEIVE_CURRENT_USER - creates user by adding to users slice
-*/
-
 const sessionErrorsReducer = function (oldState = [], action) {
   Object.freeze(oldState);
 
@@ -24,7 +20,3 @@ const sessionErrorsReducer = function (oldState = [], action) {
 }
 
 export default sessionErrorsReducer;
-
-// errors: {
-//   session: []
-// }

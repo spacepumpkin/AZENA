@@ -20,7 +20,7 @@ prop passed in, inside the div with id 'root'.
 // * Tasks
 // import { createTask, updateTask, destroyTask, assignUsersTask, unassignUsersTask } from './actions/task_actions';
 // * Sections
-import { createSection, updateSection, destroySection } from './actions/section_actions';
+// import { createSection, updateSection, destroySection } from './actions/section_actions';
 
 // ------------------------------ TESTING END ---------------------------------
 
@@ -39,10 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       sections,
       tasks,
       usersWorkspaces,
-      // usersProjects,
       usersTasks } = currentUserPayload;
-    // const currentWorkspaces = (window.workspaces) ? window.workspaces : {} ;
-    // console.info("currentUser:", currentUser);
     preloadedState = {
       entities: {
         users: users,
@@ -51,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
         sections: sections,
         tasks: tasks,
         usersWorkspaces: usersWorkspaces,
-        // usersProjects: usersProjects,
         usersTasks: usersTasks,
       },
       session: {

@@ -1,9 +1,8 @@
-/*
-Session API Util functions with the specified parameters:
+/* Session API Util functions with the specified parameters:
 
-1. `signup(user)`
-2. `login(user)`
-3. `logout()`
+* signup(user)
+* login(user)
+* logout()
 
 */
 
@@ -35,14 +34,6 @@ export const logout = () => {
     method: "DELETE"
   })
 }
-
-// export const fetchEverything = () => {
-  // console.log("fetching everything for current user");
-//   return $.ajax({
-//     url: `/api/everything`,
-//     method: "GET"
-//   })
-// }
 
 // for login
 // this.state = user = {

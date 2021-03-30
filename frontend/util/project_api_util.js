@@ -1,10 +1,11 @@
 /* Project API Util Functions:
-  - fetchProject(projectId)   
-  - createProject(project)
-  - updateProject(project)
-  - destroyProject(projectId) 
 
-  - fetchProjects(userId) // fetch all projects associated with user
+* createProject(project)
+* updateProject(project)
+* destroyProject(projectId) 
+
+- fetchProject(projectId) // unnecessary
+- fetchProjects(userId) // fetch all projects associated with user
 */
 
 // Test Status - PASS

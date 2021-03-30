@@ -26,7 +26,9 @@ export default rootReducer;
 //   errors: {
 //     session: [],
 //     workspaces: [],
-//     projects: []
+//     projects: [],
+//     sections: [],
+//     tasks: []
 //   },
 //   ui: {
 //     sidebarCollapse: false,

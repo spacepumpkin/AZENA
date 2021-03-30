@@ -1,3 +1,5 @@
+// ! Not using this component anymore
+
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { ProtectedRoute } from "../../util/route_util";

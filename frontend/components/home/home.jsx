@@ -80,14 +80,11 @@ export default class Home extends React.Component {
     let that = this;
     return (
       <div id="home">
-        {/* <div id="mainbox"> */}
-        {/* Hello I'm home! */}
         <div id="home-workspaces">
           <h1 style={{ fontSize: "18px" }}>My Workspaces</h1>
           {
             Object.values(workspaces).map((workspace) => {
-              // const showMenu = (workspace.id === plusMenuWorkspaceId);
-              let showMenu = (plusMenuWorkspaceId === workspace.id) && plusMenuShow;
+              const showMenu = (plusMenuWorkspaceId === workspace.id) && plusMenuShow;
 
               return (
 
@@ -147,9 +144,8 @@ export default class Home extends React.Component {
 
         </div>
       </div>
-      // </div>
     )
   }
 }
 
-// recent changes: removed window.currentUser requirement for logout button after making it a protected route
+// ! important changes: removed window.currentUser requirement for logout button after making it a protected route

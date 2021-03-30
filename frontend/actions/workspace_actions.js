@@ -10,13 +10,13 @@ Export thunk action creators with the specified parameters:
 */
 
 // REGULAR ACTIONS --------------------------------------------------
-// export const RECEIVE_USER_WORKSPACES = "RECEIVE_USER_WORKSPACES";
 export const RECEIVE_WORKSPACE = "RECEIVE_WORKSPACE";
 export const RECEIVE_WORKSPACE_ERRORS = "RECEIVE_WORKSPACE_ERRORS";
 export const REMOVE_WORKSPACE = "REMOVE_WORKSPACE";
 
 export const RECEIVE_USERS_WORKSPACE = "RECEIVE_USERS_WORKSPACE";
 export const REMOVE_USERS_WORKSPACE = "REMOVE_USERS_WORKSPACE";
+// export const RECEIVE_USER_WORKSPACES = "RECEIVE_USER_WORKSPACES";
 // export const REMOVE_WORKSPACE_FROM_USER = "REMOVE_WORKSPACE_FROM_USER";
 
 const receiveUserWorkspaces = function(workspaces) {
@@ -67,7 +67,7 @@ const removeUsersWorkspace = function (usersWorkspace, usersTaskIds) {
 
 // THUNK ACTIONS --------------------------------------------------
 
-// PASS
+// Test Status - PASS
 export const createWorkspace = function (workspace) {
   return function (dispatch) {
     return (
@@ -88,7 +88,7 @@ export const createWorkspace = function (workspace) {
   };
 };
 
-// PASS
+// Test Status - PASS
 export const fetchWorkspace = function (workspaceId) {
   return function (dispatch) {
     return (
@@ -101,7 +101,7 @@ export const fetchWorkspace = function (workspaceId) {
   };
 };
 
-// PASS
+// Test Status - PASS
 export const fetchUserWorkspaces = function () {
   return function (dispatch) {
     return (
@@ -114,7 +114,7 @@ export const fetchUserWorkspaces = function () {
   };
 };
 
-// PASS
+// Test Status - PASS
 export const updateWorkspace = function (workspace) {
   return function (dispatch) {
     return (
@@ -127,7 +127,7 @@ export const updateWorkspace = function (workspace) {
   };
 };
 
-// PASS
+// Test Status - PASS
 export const destroyWorkspace = function (workspaceId) {
   return function (dispatch) {
     return (
@@ -140,7 +140,7 @@ export const destroyWorkspace = function (workspaceId) {
   }
 }
 
-// Test Status - 
+// Test Status - Untested
 export const assignUsersWorkspace = function (userId, workspaceId) {
   return function (dispatch) {
     return (
@@ -153,7 +153,7 @@ export const assignUsersWorkspace = function (userId, workspaceId) {
   };
 };
 
-// Test Status - 
+// Test Status - Untested
 export const unassignUsersWorkspace = function (userId, workspaceId) {
   return function (dispatch, getState) {
     return (

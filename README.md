@@ -1,5 +1,5 @@
 # [AZENA](https://azena.herokuapp.com/) 
-<p align="center"> <img src="./app/assets/images/azena-logo-blue-black-zen-onwhite.png" /> </p>
+<p align="center"> <a href="https://azena.herokuapp.com/"><img src="./app/assets/images/azena-logo-blue-black-zen-onwhite.png" /></a> </p>
 
 Azena is a full-stack web application exercise that was inspired by Asana. The project is built using Ruby on Rails with PostgreSQL and React/Redux.
 

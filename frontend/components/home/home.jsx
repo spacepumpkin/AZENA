@@ -94,11 +94,6 @@ export default class Home extends React.Component {
                     <Link to={`/workspaces/${workspace.id}`} className="home-workspace-title">
                       {workspace.name}
                     </Link>
-                    {/* <button className={`plus-button ${(showMenu) ? "rotated-plus" : ""}`}
-                      onClick={this.togglePlusMenu(workspace.id)} type="button"
-                      onBlur={this.blurPlusMenu}
-                      onKeyDown={this.handleKeyDown}
-                    /> */}
                   </div>
 
                   <div className="home-workspace-projects">
@@ -121,22 +116,6 @@ export default class Home extends React.Component {
                       })
                     }
                   </div>
-
-                  {/* {showMenu && (
-                    <div className={`home-workspace-plus-menu`} ref={this.plusMenuRef}>
-
-                      <button onClick={this.openProjCreateModal}>
-                        Create New Project
-                      </button>
-
-                      {(session.id === workspace.creatorId) ? (
-                        <button type="button" onClick={this.openWkspDeleteModal}>Delete Workspace</button>
-                      ) : (
-                          <Link to={`/home`}>Leave Workspace</Link>
-                        )}
-
-                    </div>
-                  )} */}
                 </div>
               )
             })
